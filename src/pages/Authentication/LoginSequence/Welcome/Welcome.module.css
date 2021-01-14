@@ -1,0 +1,74 @@
+.container {
+    height: 100%;
+    background-image: url("/assets/blobs/blob3-startscherm.svg");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+    justify-content: space-between;
+
+}
+
+.mainContentWrap {
+    background-image: url("/assets/illustraties/uiltjePointing-login.svg");
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+    padding-bottom: 6rem;
+}
+
+.mainContentText {
+    width: 50.7rem;
+    height: 26.2rem;
+    background-image: url("/assets/illustraties/loginTextBubbleLarge.svg");
+    overflow: visible;
+
+    color: white;
+    font-size: 3.6rem;
+    padding-top: 5.7rem;
+    padding: 5.7rem 11.5rem 0 5.5rem;
+    text-align: center;
+    margin-left: 7rem;
+
+    margin-bottom: 10rem;
+}
+
+.soundButton {
+    position: relative;
+    bottom: 14rem;
+    left: 10rem;
+}
+
+.nextButton {
+    margin-left: 10rem;
+    margin-top: -10rem;
+}
+
+.secretCube {
+    height: 2rem;
+    width: 35rem;
+    background-color: transparent;
+    position: absolute;
+    float: right;
+
+    bottom: 12.5rem;
+    right: 0;
+}
+
+.alreadyAnAccount {
+    margin-left: 10rem;
+    width: 34.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.alreadyAnAccount p {
+    color: var(--white);
+    font-size: 2.2rem;
+    padding-top: 2rem;
+    border-bottom: solid 2px var(--white);
+    line-height: 2.5rem;
+}

@@ -1,0 +1,43 @@
+.wrapper {
+    height: 100%;
+    background-image: url("/assets/blobs/blob3-startscherm.svg");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+}
+
+.mainContent {
+    margin-top: 6rem;
+    height: 40.6rem;
+    display: flex;
+    flex-flow: column;
+    margin-left: 10.2rem;
+}
+
+.label {
+    font-size: 3.6rem;
+    padding-bottom: 2.1rem;
+    color: var(--white);
+}
+
+.input {
+    width: 66.48rem;
+    height: 7.71rem;
+    background-color: var(--greyLighter);
+    border: none;
+    box-shadow: .3rem .5rem .5rem rgba(0, 0, 0, 0.15);
+    border-radius: 1.5rem;
+
+    margin-bottom: 3.75rem;
+    padding: .5rem 2rem;
+    font-size: 3.6rem;
+}
+
+.image {
+    position: absolute;
+    right: 4.4rem;
+    bottom: 0rem;
+}

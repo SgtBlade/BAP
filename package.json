@@ -1,0 +1,58 @@
+{
+  "name": "DevinePandas",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.10.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "firebase": "^7.13.1",
+    "mobx": "^5.15.4",
+    "mobx-react-lite": "^1.5.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-graph-vis": "^1.0.5",
+    "react-image-crop": "^8.6.4",
+    "react-image-file-resizer": "^0.3.1",
+    "react-modal-video": "^1.2.3",
+    "react-qr-code": "^1.0.2",
+    "react-qr-reader": "^2.2.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "react-simple-maps": "^2.1.2",
+    "uuid": "^3.4.0",
+    "video-react": "^0.14.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/(models|stores)/**.js",
+      "!<rootDir>/node_modules/"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

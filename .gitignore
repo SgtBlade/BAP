@@ -1,0 +1,30 @@
+
+public/assets/icons/route en haltes van de shuttles.pdf
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+
+# Dependency directories
+node_modules/
+build/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.envBackup
+
+.vscode/
+.DS_Store

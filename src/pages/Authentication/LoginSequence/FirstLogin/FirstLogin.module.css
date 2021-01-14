@@ -1,0 +1,50 @@
+.container {
+    background: url("/assets/illustraties/familyholdingtablet.svg"), url("/assets/blobs/blob7-darkBlueSwoosh.svg");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: left bottom, left bottom;
+}
+
+.mainContentWrapper {
+    text-align: left;
+    color: white;
+    font-size: 3.6rem;
+    width: 40rem;
+    height: 34rem;
+    position: absolute;
+    right: 3rem;
+    top: 34.8rem;
+
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}
+
+.nextButton {
+    display: flex;
+    justify-content: center;
+    padding-top: 3rem;
+}
+
+.permission__head {
+    font-size: 2.8rem;
+    color: var(--blueDark);
+
+}
+
+.permission__list {
+    padding: 1.5rem 0;
+}
+
+.persmission__list__item::before{
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: var(--blueDark); /* Change the color */
+    margin-right: 1.5rem;
+}
+
+.persmission__list__item{
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding: 1rem 0;
+    display: flex;
+}
