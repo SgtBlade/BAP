@@ -5,6 +5,7 @@ import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { ROUTES } from "../../consts/index.js";
 
 import LoginForm from "./LoginForm.js";
+import Testenv from "../TestEnv/testenv.js"
 
 const Authentication = () => {
   const { uiStore } = useStores();
@@ -22,7 +23,7 @@ const Authentication = () => {
           {uiStore.currentUser && uiStore.currentUser.name !== null ? (
             <Redirect to={ROUTES.home} />
           ) : (
-              <LoginForm />
+              <Testenv />
           )}
         </Route>
 
