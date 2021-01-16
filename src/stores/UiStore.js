@@ -8,6 +8,7 @@ class UiStore {
     this.firebase = rootStore.firebase;
     this.currentUser = undefined;
     this.verifiedUser = false;
+    this.isLoading = false;
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
   }
@@ -27,7 +28,7 @@ class UiStore {
   verifyLogin = async (email, password) => {
     
     if (this.firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      var email = window.localStorage.getItem('emailForSignIn');
+      email = window.localStorage.getItem('emailForSignIn');
       if (!email) {
         email = window.prompt('Please provide your email for confirmation');
       }
@@ -60,21 +61,25 @@ class UiStore {
           console.log('--------------')
         });
   
+  };
+
+  changeLoadingStatus = (status) =>  {
+    this.isLoading = status;
   }
 
-  createAccount = async (email, password) => {
+  updateCurrentUser = (user) => this.currentUser = user;
+
+  createAccount = async (email, password, data) => {
+    this.changeLoadingStatus(true)
     this.firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-          console.log('--Account created--')
-          console.log(user)
-          console.log('--END Account created--')
+        .then((result) => {
+          this.userService.addUser(result.user, data, this.changeLoadingStatus, this.updateCurrentUser)
+          
         })
         .catch((error) => {
-          console.log('--------------')
-          console.log('Error creating account')
           console.log(error)
-          console.log('--------------')
         });
+
   }
 
   logOut = () => {

@@ -7,6 +7,5 @@ class AuthService {
     this.auth.onAuthStateChanged((user) => onAuthStateChanged(user));
   }
 
-
 }
 export default AuthService;

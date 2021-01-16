@@ -16,3 +16,15 @@
 .red {
     color: red;
 }
+ 
+.form {
+    padding: 2rem;
+    margin: 3rem;
+    border: solid 1px black;
+    display: flex;
+    flex-flow: column;
+}
+
+.testObject {
+    max-width: 400px;
+}

@@ -1,23 +1,26 @@
-import { v4 } from "uuid";
 
 class User {
-  constructor(
-    { id = v4(), name, surname, picture, mail, statistics, unlockedBadges, bio, creationDate, interestedTags, admin = 0, originalOwner = 0, creationDate = Date.now() }) {
-    let id = id;
-    let name = name;
-    let surname = surname;
-    let picture = picture;
-    let mail = mail;
-    let statistics = statistics;
-    let unlockedBadges = unlockedBadges;
-    let bio = bio;
-    let creationDate = creationDate; 
-    let interestedTags = interestedTags;
-    let admin = admin;
-    let originalOwner = originalOwner;
+  
+  constructor({ id, name, surname, picture = './assets/profile/default.jpeg', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0 }) 
+  {
+    this.id = id;
+    this.name = name;
+    this.surname = surname;
+    this.picture = picture;
+    this.mail = mail;
+    this.statistics = statistics;
+    this.unlockedBadges = unlockedBadges;
+    this.bio = bio;
+    this.creationDate = creationDate; 
+    this.interestedTags = interestedTags;
+    this.role = role;
+    this.exp = exp;
+    this.level = level;
   }
 
   updateBio = (newBio) => this.bio = newBio;
+
+  updateImage = (imageUrl) => this.picture = imageUrl;
   
 
 
@@ -26,7 +29,6 @@ class User {
 const userConverter = {
   toFirestore: function(user) {
     return {
-      userID: user.id,
       name: user.name,
       surname: user.surname,
       picture: user.picture,
@@ -36,15 +38,15 @@ const userConverter = {
       bio: user.bio,
       creationDate: user.creationDate,
       interestedTags: user.interestedTags,
-      admin: user.admin,
-      originalOwner: user.originalOwner
+      role: user.role,
+      level: user.level,
+      exp: user.exp
 
     };
   },
   fromFirestore: function(snapshot, options) {
     const data = snapshot.data(options);
     return new User({
-      id: data.userID,
       name: data.name,
       surname: data.surname,
       picture: data.picture,
@@ -54,8 +56,9 @@ const userConverter = {
       bio: data.bio,
       creationDate: data.creationDate,
       interestedTags: data.interestedTags,
-      admin: data.admin,
-      originalOwner: data.originalOwner
+      role: data.role,
+      level: data.level,
+      exp: data.exp
     });
   }
 };
