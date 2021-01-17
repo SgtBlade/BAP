@@ -7,7 +7,7 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.firebase = rootStore.firebase;
-    this.currentUser = false//this.seed();
+    this.currentUser = this.seed();
     this.verifiedUser = false;
     this.isLoading = false;
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
