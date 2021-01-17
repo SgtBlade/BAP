@@ -1,7 +1,7 @@
 
 class User {
   
-  constructor({ id, name, surname, picture = './assets/profile/default.jpeg', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0 }) 
+  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = './assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0 }) 
   {
     this.id = id;
     this.name = name;
@@ -13,6 +13,9 @@ class User {
     this.bio = bio;
     this.creationDate = creationDate; 
     this.interestedTags = interestedTags;
+    this.publicMail = publicMail;
+    this.publicPhone = publicPhone;
+    this.phone = phone;
     this.role = role;
     this.exp = exp;
     this.level = level;
@@ -21,6 +24,8 @@ class User {
   updateBio = (newBio) => this.bio = newBio;
 
   updateImage = (imageUrl) => this.picture = imageUrl;
+
+  changeId = newId => {this.id = newId}
   
 
 
@@ -40,7 +45,10 @@ const userConverter = {
       interestedTags: user.interestedTags,
       role: user.role,
       level: user.level,
-      exp: user.exp
+      exp: user.exp,
+      publicMail: user.publicMail,
+      publicPhone: user.publicPhone,
+      phone: user.phone,
 
     };
   },
@@ -58,7 +66,10 @@ const userConverter = {
       interestedTags: data.interestedTags,
       role: data.role,
       level: data.level,
-      exp: data.exp
+      exp: data.exp,
+      publicMail: data.publicMail,
+      publicPhone: data.publicPhone,
+      phone: data.phone
     });
   }
 };
