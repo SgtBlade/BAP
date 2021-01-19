@@ -17,15 +17,15 @@ class UiStore {
   seed = () => {
     return new User({
       bio: "testing the fish in the pond when it is still hot",
-      creationDate: 1610836332668,
+      creationDate: 1611067622180,
       exp: 0,
-      id: 'vdqzNZUaqGYZr3LF6JflTPKjXQs1',
+      id: '8SzbHZQ7UygNou338Vks4KTPmf93',
       interestedTags: [],
       level: 0,
       mail: "migueleken@hotmail.com",
       name: "de pelsmaeker",
       phone: "+32 478 99 38 47",
-      picture: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2FvdqzNZUaqGYZr3LF6JflTPKjXQs1%2Fde%20pelsmaeker_miguel.jpg?alt=media&token=8a17b3a3-0c3a-4f9a-b149-421af7efaee6",
+      picture: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2F8SzbHZQ7UygNou338Vks4KTPmf93%2Fde%20pelsmaeker_miguel.jpg?alt=media&token=433024e8-d62a-4dba-8637-5b5e523dddc6",
       publicMail: true,
       publicPhone: true,
       role: 0,
@@ -40,67 +40,33 @@ class UiStore {
       console.log('--------------')
       console.log('User auth changed')
       console.log(user)
-      if(!this.currentUser)this.setCurrentUser(user.uid);
+      if(!this.currentUser){this.setCurrentUser(user.uid);console.log('getting user')}
       console.log('--------------')
     }
   };
 
   setCurrentUser = async (id) => {
-    this.currentUser = await (this.userService.getUserById(id));
+    await (this.userService.getUserById(id))
+    .then((usr)=> {
+      usr.changeId(id);
+      this.currentUser = usr;
+    })
   }
 
-  verifyLogin = async (email, password) => {
-    
-    if (this.firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      email = window.localStorage.getItem('emailForSignIn');
-      if (!email) {
-        email = window.prompt('Please provide your email for confirmation');
-      }
-      this.firebase.auth().signInWithEmailLink(email, window.location.href)
-        .then((result) => {
-          window.localStorage.removeItem('emailForSignIn');
-          console.log('--------------')
-          console.log('Succes signing in with email after verify')
-          console.log(result)
-          this.verifiedUser = result.user.emailVerified;
-          console.log('--------------')
-        })
-        .catch((error) => {
-          console.log('--------------')
-          console.log('error signing in with email')
-          console.log(error)
-          console.log('--------------')
-        });
-    }else 
-      this.firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(function(result) {
-          console.log('--logged in--')
-          console.log(result)
-          console.log('--END login message--')
-        })
-        .catch(function(error) {
-          console.log('--------------')
-          console.log('Error loging in')
-          if(error.message === "The password is invalid or the user does not have a password." && document.querySelector('.alertwindow')) document.querySelector('.alertwindow').textContent = RESPONSE.loginWrongPasswordError
-          if(error.message === "There is no user record corresponding to this identifier. The user may have been deleted." && document.querySelector('.alertwindow')) document.querySelector('.alertwindow').textContent = RESPONSE.loginNonExistingMail
-          console.log(error.message);
-          console.log('--------------')
-        });
-  
-  };
+  verifyLogin = async (email, password) => this.userService.loginUser(email, password)
 
   changeLoadingStatus = (status) =>  {
     this.isLoading = status;
   }
 
-  updateCurrentUser = (user) => this.currentUser = user;
+  updateCurrentUser = (user) => {this.currentUser = user; console.log('updateCurrentUserFunc')};
 
   createAccount = async (email, password, data) => {
     this.changeLoadingStatus(true)
     this.firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((result) => {
           this.userService.addUser(result.user, data, this.changeLoadingStatus, this.updateCurrentUser)
-          
+          this.userService.setRequest('createUserWithEmailAndPassword')
         })
         .catch((error) => {
           console.log('===========')
@@ -125,24 +91,9 @@ class UiStore {
     this.currentUser = undefined;
   }
 
-  verifyEmail = (email) => {
-    var actionCodeSettings = { url: RESPONSE.loginURL, handleCodeInApp: true, };
+  logUserStoreRequests = () => this.userService.logRequests();
 
-    this.firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(() => {
-        console.log('--------------')
-        window.localStorage.setItem('emailForSignIn', email);
-        console.log('Email set in local storage')
-        console.log('--------------')
-        // ...
-      })
-      .catch((error) => {
-        console.log('--------------')
-        console.log('error setting email')
-        console.log(error)
-        console.log('--------------')
-      });
-  }
+  verifyEmail = (email) => this.userService.requestVerificationMail(email)
 
   resetPassword = (email, func) => this.userService.sendPasswordResetMail(email, func)
 
@@ -150,11 +101,12 @@ class UiStore {
 
 decorate(UiStore, {
   currentUser: observable,
+  verifiedUser: observable,
+  updateCurrentUser: action,
+  logout: action,
   verifyLogin: action,
   onAuthStateChanged: action,
   createAccount: action,
-  logout: action,
-  verifiedUser: observable
 });
 
 export default UiStore;

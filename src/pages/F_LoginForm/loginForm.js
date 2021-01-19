@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./loginForm.module.css";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../consts";
 
 
 const LoginForm = () => {

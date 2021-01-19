@@ -18,6 +18,7 @@
 
 .testObject {
     max-width: 400px;
+    border-radius: 500px;
 }
 
 .negative {

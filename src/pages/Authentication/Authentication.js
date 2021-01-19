@@ -14,6 +14,7 @@ const Authentication = () => {
     uiStore.verifyLogin();
     history.push("login");
   }
+  
 
   return useObserver(() => (
     <>

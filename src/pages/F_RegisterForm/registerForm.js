@@ -21,16 +21,19 @@ const RegisterForm = () => {
     const target = e.currentTarget;
     const file = target.files.item(0);
     const fileSize =  target.files[0].size / 1024 / 1024;
+    const  fileType = file['type'];
+    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
     
-    if (!file.type.startsWith("image/") || fileSize > 2) {
-      alert("Dit is geen foto of is niet kleiner dan 2 Megabyte");
+    if (!validImageTypes.includes(fileType) ) {
+      alert("Dit is geen jpg/png foto bestand");
       e.currentTarget.value = "";
       return;
-    }else{
+    }else if(fileSize > 2) alert("De foto moet kleiner zijn dan 2 Megabyte");
+    else{
       new Compressor(file, {
         quality: 0.4,
-        maxWidth: 440,
-        maxHeight: 440,
+        maxWidth: 127,
+        maxHeight: 127,
         success(result) {
           setPicture(result);
           if (URL) {
@@ -100,7 +103,7 @@ const RegisterForm = () => {
          </label>
 
           <button type="submit">create</button> 
-         <img alt={'preview'} src={'./assets/profile/defaultProfileImage.png'} height='50' width='50' className={`testObject ${style.textObject}`}/>
+         <img alt={'preview'} src={'./assets/profile/defaultProfileImage.png'} height='50' width='50' className={`testObject ${style.testObject}`}/>
          </form>
       </div>
     </>

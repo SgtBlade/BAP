@@ -14,7 +14,9 @@ const Testenv = () => {
   const toggle = () => setLogin(!login);
 
   const testFunction = () => {
-    console.log(uiStore.currentUser);
+    uiStore.logUserStoreRequests();
+    console.log('*********')
+    console.log(uiStore.currentUser)
   }
 
 

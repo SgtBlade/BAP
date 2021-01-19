@@ -25,7 +25,7 @@ class User {
 
   updateImage = (imageUrl) => this.picture = imageUrl;
 
-  changeId = newId => {this.id = newId}
+  changeId = (newId) => {this.id = newId}
   
 
 

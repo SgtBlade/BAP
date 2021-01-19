@@ -9,6 +9,7 @@ class UserService {
     this.db = firebase.firestore();
     this.auth = firebase.auth();
     this.storage = firebase.storage();
+    this.requests = [];
   }
 
   getUserById = async (id) => {
@@ -18,8 +19,7 @@ class UserService {
     .withConverter(userConverter)
     .get();
     user = await user.data();
-    await user.changeId(id);
-    console.log('request sent')
+    this.requests['get user by id'] ? this.requests['get user by id']++ : this.requests['get user by id'] = 1;
     return user;
   }
 
@@ -49,29 +49,13 @@ class UserService {
       .doc(newUser.id)
       .withConverter(userConverter)
       .set(newUser)
-      .then(function () {
+      .then(() => {
         updateUser(newUser);
         console.log('new user created, sending verification')
-        
-        var actionCodeSettings = { url: RESPONSE.loginURL, handleCodeInApp: true, };
-        this.auth.sendSignInLinkToEmail(newUser.mail, actionCodeSettings)
-          .then(() => {
-            console.log('--------------')
-            window.localStorage.setItem('emailForSignIn', newUser.mail);
-            console.log('Email set in local storage')
-            console.log('--------------')
-            // ...
-          })
-          .catch((error) => {
-            console.log('--------------')
-            console.log('error setting email')
-            console.log(error)
-            console.log('--------------')
-          });
-
-        return true;
+        this.requestVerificationMail(newUser.mail);
+        this.requests['continueUserCreation'] ? this.requests['continueUserCreation']++ : this.requests['continueUserCreation'] = 1;
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error("Error writing document: ", error);
         return false;
       });
@@ -80,6 +64,48 @@ class UserService {
       console.log(result[2])
     }
     changeLoadingTo(false)
+  }
+
+  loginUser = (email, password) => {
+
+    if (this.auth.isSignInWithEmailLink(window.location.href)) {
+      email = window.localStorage.getItem('emailForSignIn');
+      if (!email) {
+        email = window.prompt('Please provide your email for confirmation');
+      }
+      this.auth.signInWithEmailLink(email, window.location.href)
+        .then((result) => {
+          window.localStorage.removeItem('emailForSignIn');
+          console.log('--------------')
+          console.log('Succes signing in with email after verify')
+          console.log(result)
+          this.verifiedUser = result.user.emailVerified;
+          this.requests['loginUser'] ? this.requests['loginUser']++ : this.requests['loginUser'] = 1;
+          console.log('--------------')
+        })
+        .catch((error) => {
+          console.log('--------------')
+          console.log('error signing in with email')
+          console.log(error)
+          console.log('--------------')
+        });
+    }else 
+    console.log('second login -- without link')
+      this.auth.signInWithEmailAndPassword(email, password)
+        .then(function(result) {
+          console.log('--logged in--')
+          console.log(result)
+          this.requests['loginUser'] ? this.requests['loginUser']++ : this.requests['loginUser'] = 1;
+          console.log('--END login message--')
+        })
+        .catch(function(error) {
+          console.log('--------------')
+          console.log('Error loging in')
+          if(error.message === "The password is invalid or the user does not have a password." && document.querySelector('.alertwindow')) document.querySelector('.alertwindow').textContent = RESPONSE.loginWrongPasswordError
+          if(error.message === "There is no user record corresponding to this identifier. The user may have been deleted." && document.querySelector('.alertwindow')) document.querySelector('.alertwindow').textContent = RESPONSE.loginNonExistingMail
+          console.log(error.message);
+          console.log('--------------')
+        });
   }
 
   addImageToStorage = async (user, file, changeLoadingTo, updateUser) => {
@@ -127,6 +153,7 @@ class UserService {
           words[i] = words[i][0].toUpperCase() + words[i].substr(1);
       }
   
+      this.requests['addImageToStorage'] ? this.requests['addImageToStorage']++ : this.requests['addImageToStorage'] = 1;
       this.auth.currentUser.updateProfile({
         photoURL: './assets/profile/defaultProfileImage.png',
         displayName: words.join(" "),
@@ -144,10 +171,41 @@ class UserService {
         mail, actionCodeSettings)
         .then(function() {
           sendResponse([true, 'positive', RESPONSE.resetPasswordSucces])
+          this.requests['sendPasswordResetMail'] ? this.requests['sendPasswordResetMail']++ : this.requests['sendPasswordResetMail'] = 1;
         })
         .catch(function(error) {
           sendResponse([true, 'negative', RESPONSE.resetPasswordFail])
         });
+  }
+
+  requestVerificationMail = (mail) => {
+    var actionCodeSettings = { url: RESPONSE.loginURL, handleCodeInApp: true, };
+    this.auth.sendSignInLinkToEmail(mail, actionCodeSettings)
+      .then(() => {
+        console.log('--------------')
+        window.localStorage.setItem('emailForSignIn', mail);
+        this.requests['requestVerificationMail'] ? this.requests['requestVerificationMail']++ : this.requests['requestVerificationMail'] = 1;
+        console.log('Email set in local storage')
+        console.log('--------------')
+        // ...
+      })
+      .catch((error) => {
+        console.log('--------------')
+        console.log('error setting email')
+        console.log(error)
+        console.log('--------------')
+      });
+  }
+  
+  setRequest = (value) => this.requests[value] ? this.requests[value]++ : this.requests[value] = 1
+
+  getRequests = () => {return this.requests};
+
+  logRequests = () => {
+    for (let key in this.requests) {
+      let value = this.requests[key];
+      console.log(`${key} => ${value}`);
+    }
   }
 
 }
