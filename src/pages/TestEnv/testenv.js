@@ -5,6 +5,7 @@ import style from "./testenv.module.css";
 import RegisterForm from "../F_RegisterForm/registerForm.js"
 import LoginForm from "../F_LoginForm/loginForm.js";
 import Profile from "../profile/profile";
+import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
 
@@ -22,6 +23,7 @@ const Testenv = () => {
 
   return useObserver(() => (
     <div className={style.wrap}>
+      <CreateProjectForm/>
     <div className={style.container}>
       <h1>Dit is de test environment</h1>
       <p className={style.toggleswitch} onClick={toggle}>{login ? 'register' : 'login'}</p>

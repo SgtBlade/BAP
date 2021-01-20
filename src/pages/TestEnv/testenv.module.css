@@ -1,9 +1,11 @@
 .wrap {
     display: flex;
+    flex-flow: column;
     height: 100%;
     width: 100%;
     justify-content:space-around;
     align-items:center;
+    background: linear-gradient( to right bottom, #12c2e9, #c471ed, #f64f59);
 }
 
 .container {

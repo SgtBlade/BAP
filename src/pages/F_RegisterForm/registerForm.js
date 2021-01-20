@@ -3,6 +3,7 @@ import Compressor from 'compressorjs';
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./registerForm.module.css";
+import { RESPONSE } from "../../consts/responses";
 
 
 const RegisterForm = () => {
@@ -25,10 +26,10 @@ const RegisterForm = () => {
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
     
     if (!validImageTypes.includes(fileType) ) {
-      alert("Dit is geen jpg/png foto bestand");
+      alert(RESPONSE.NotAnImage);
       e.currentTarget.value = "";
       return;
-    }else if(fileSize > 2) alert("De foto moet kleiner zijn dan 2 Megabyte");
+    }else if(fileSize > 2) alert(RESPONSE.fileSizeOver2MB);
     else{
       new Compressor(file, {
         quality: 0.4,

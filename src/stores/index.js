@@ -16,10 +16,24 @@ class RootStore {
     };
     // Initialize Firebase
     this.firebase = firebase.initializeApp(firebaseConfig);
-
     this.friendStore = new FriendStore(this);
     this.uiStore = new UiStore(this);
+    this.initFirebaseCaching();
   }
+
+
+  initFirebaseCaching = () => {
+    firebase.firestore().settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED });
+    firebase.firestore().enablePersistence()
+      .catch(function(err) {
+          if (err.code === 'failed-precondition') {
+  
+          } else if (err.code === 'unimplemented') {
+  
+          }
+      });
+  }
+
 }
 
 const getCurrenTimeStamp = () => {
