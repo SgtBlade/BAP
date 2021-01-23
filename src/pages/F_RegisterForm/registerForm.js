@@ -22,15 +22,20 @@ const RegisterForm = () => {
     const target = e.currentTarget;
     const file = target.files.item(0);
     const fileSize =  target.files[0].size / 1024 / 1024;
-    const  fileType = file['type'];
+    const fileType = file['type'];
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
     
+    //first if is to ensure the uploaded file is an image, if it's not -> clear the value to remove the image
+    //second if is to check if filesize is within bounds
     if (!validImageTypes.includes(fileType) ) {
       alert(RESPONSE.NotAnImage);
       e.currentTarget.value = "";
       return;
     }else if(fileSize > 2) alert(RESPONSE.fileSizeOver2MB);
     else{
+      //Creating a new compressor instance to compress the received image, compress by 60% to the set maxwidth and height.
+      //Once it's done it outputs a Blob which needs to be converted to Base64 in order to store in the firebase storage 
+      //Display the new image in the preview window and replace the old image in the picture parameter
       new Compressor(file, {
         quality: 0.4,
         maxWidth: 127,
@@ -51,6 +56,7 @@ const RegisterForm = () => {
     }
   }
 
+  //Basic conversion from blob to base64
   const blobToBase64 = blob => {
     const reader = new FileReader();
     reader.readAsDataURL(blob);
@@ -61,6 +67,8 @@ const RegisterForm = () => {
     });
   };
 
+  //On submitting the form an object gets made with the required data for the new user
+  //all data gets pushed to the uiStore after which it goes to the userService to create the account
   const handleCreateSubmit = async e => {
     e.preventDefault();
     const data = {

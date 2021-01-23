@@ -55,6 +55,7 @@ const userConverter = {
   fromFirestore: function(snapshot, options) {
     const data = snapshot.data(options);
     return new User({
+      id: snapshot.id,
       name: data.name,
       surname: data.surname,
       picture: data.picture,

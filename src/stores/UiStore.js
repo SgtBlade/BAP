@@ -7,7 +7,7 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.firebase = rootStore.firebase;
-    this.currentUser = this.seed();
+    this.currentUser = false//this.seed();
     this.verifiedUser = false;
     this.isLoading = false;
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
@@ -46,11 +46,7 @@ class UiStore {
   };
 
   setCurrentUser = async (id) => {
-    await (this.userService.getUserById(id))
-    .then((usr)=> {
-      usr.changeId(id);
-      this.currentUser = usr;
-    })
+    this.currentUser = await (this.userService.getUserById(id))
   }
 
   verifyLogin = async (email, password) => this.userService.loginUser(email, password)

@@ -68,6 +68,7 @@ class UserService {
 
   loginUser = (email, password) => {
 
+    //First part of the if is for when the user visits to verify his email
     if (this.auth.isSignInWithEmailLink(window.location.href)) {
       email = window.localStorage.getItem('emailForSignIn');
       if (!email) {
@@ -124,19 +125,23 @@ class UserService {
       const uploadTask = storageRef.child(`users/${userID}/${imageName}.jpg`).putString(file, 'data_url', metadata)
         uploadTask.on("state_changed", {
           error: error => {
-           this.continueUserCreation(user, [false, "Er is een fout opgetreden", error],changeLoadingTo, updateUser);
+            //to prevent issues later, set the default image and continue creating the account
+           this.continueUserCreation(user, [true, './assets/profile/defaultProfileImage.png', error],changeLoadingTo, updateUser);
           },
           complete: () => {
             return uploadTask.snapshot.ref.getDownloadURL()
               .then(downloadURL => {
+                //continueing to the user creation after the image has been uploaded
                 this.continueUserCreation(user, [true, user.updateImage(downloadURL)],changeLoadingTo, updateUser);
   
+                  //Small loop to capitalize first letter in case the user forgot
                   const mySentence = `${user.surname} ${user.name}`;
                   const words = mySentence.split(" ");
                   for (let i = 0; i < words.length; i++) {
                       words[i] = words[i][0].toUpperCase() + words[i].substr(1);
                   }
-  
+                
+                //Setting the basic information of the user in the firebase auth (not the user from firestore)
                 this.auth.currentUser.updateProfile({
                   photoURL: downloadURL,
                   displayName: words.join(" "),
