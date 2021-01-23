@@ -10,7 +10,8 @@ const RESPONSE = {
     createAccountDuplicateMail: "Er bestaat al een account met dit E-mail adres.",
     loginNonExistingMail: "Er bestaat nog geen account met dit E-mail adres.",
     fileSizeOver2MB: "De foto moet kleiner zijn dan 2 Megabyte",
-    NotAnImage: "Dit is geen jpg/png foto bestand"
+    NotAnImage: "Dit is geen jpg/png foto bestand",
+    emailVerificationPrompt: "Gelieve uw email opnieuw in te voeren ter bevestiging",
   };
   
   export { RESPONSE };

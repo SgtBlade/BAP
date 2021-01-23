@@ -1,0 +1,25 @@
+.wrap {
+    display: flex;
+    
+}
+
+.codeBlok {
+    display: block;
+    white-space: pre-wrap;
+    max-width: 50vw;
+    overflow:scroll;
+    word-wrap: break-word;
+    padding: 3rem;
+    max-height: 500px;
+  }
+
+  .stringSize {
+      margin-top: -1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid white;
+      margin-bottom: 1.5rem;
+  }
+
+  .quill {
+      max-width: 50vw;
+  }

@@ -22,6 +22,7 @@ class RootStore {
   }
 
 
+  //cache data to lessen requests required
   initFirebaseCaching = () => {
     firebase.firestore().settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED });
     firebase.firestore().enablePersistence()

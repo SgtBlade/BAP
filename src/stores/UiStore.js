@@ -7,7 +7,7 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.firebase = rootStore.firebase;
-    this.currentUser = false//this.seed();
+    this.currentUser = this.seed();
     this.verifiedUser = false;
     this.isLoading = false;
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
@@ -40,33 +40,43 @@ class UiStore {
       console.log('--------------')
       console.log('User auth changed')
       console.log(user)
+      //If there's no current user, set a new user
       if(!this.currentUser){this.setCurrentUser(user.uid);console.log('getting user')}
       console.log('--------------')
     }
   };
 
+  //Function used to set a new user as current user
   setCurrentUser = async (id) => {
     this.currentUser = await (this.userService.getUserById(id))
   }
 
+  //First function of login sequence that goes to UserService.js
   verifyLogin = async (email, password) => this.userService.loginUser(email, password)
 
+  //Simple function in order to know if the app is doing something
   changeLoadingStatus = (status) =>  {
     this.isLoading = status;
   }
 
+  //Update current user to new object
   updateCurrentUser = (user) => {this.currentUser = user; console.log('updateCurrentUserFunc')};
 
+  //Create an account
   createAccount = async (email, password, data) => {
+    //Set to true to tell that the app is doing something
     this.changeLoadingStatus(true)
+    //Firebase create function
     this.firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((result) => {
+          //Continue to the userService with the given data
           this.userService.addUser(result.user, data, this.changeLoadingStatus, this.updateCurrentUser)
           this.userService.setRequest('createUserWithEmailAndPassword')
         })
         .catch((error) => {
           console.log('===========')
           console.log('createUserWithEmailAndPassword ERROR:')
+          //Show error message
           if(error.message === "The email address is already in use by another account." && document.querySelector('.alertwindow')) document.querySelector('.alertwindow').textContent = RESPONSE.createAccountDuplicateMail
           console.log(error)
           console.log('===========')
@@ -74,6 +84,7 @@ class UiStore {
 
   }
 
+  //Simple function to log out
   logOut = () => {
     this.firebase.auth().signOut().then(function() {
       console.log('Logged out')
@@ -83,14 +94,18 @@ class UiStore {
       console.log(error)
       console.log('--------------')
     });
+    //reset to initial state
     this.verifiedUser = false;
     this.currentUser = undefined;
   }
 
+  //log amount of requests sent to server
   logUserStoreRequests = () => this.userService.logRequests();
 
+  //First function of email verification sequence that goes to UserService.js
   verifyEmail = (email) => this.userService.requestVerificationMail(email)
 
+  //First function of password reset sequence that goes to UserService.js
   resetPassword = (email, func) => this.userService.sendPasswordResetMail(email, func)
 
   }

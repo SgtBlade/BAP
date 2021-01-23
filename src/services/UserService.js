@@ -9,21 +9,27 @@ class UserService {
     this.db = firebase.firestore();
     this.auth = firebase.auth();
     this.storage = firebase.storage();
+    //Array to track amount of requests I sent to the database
+    //Could be useful for further development
     this.requests = [];
   }
 
   getUserById = async (id) => {
+    //Basic database query to get user and convert to user object
     let user = await this.db
     .collection("users")
     .doc(id)
     .withConverter(userConverter)
     .get();
+    //await for the data of the query above and take the data
     user = await user.data();
+    //Update requests of this type
     this.requests['get user by id'] ? this.requests['get user by id']++ : this.requests['get user by id'] = 1;
     return user;
   }
 
   addUser = async (user, data, changeLoadingTo, updateUser) => {
+    //create new user object to prepare for pushing to the firestore
     const newUser = new User({
       id: user.uid, 
       name: data.name, 
@@ -34,14 +40,13 @@ class UserService {
       publicPhone: data.publicPhone,
       phone: data.phone,
     })
-
+    //Continue to the next phase of adding a user
     this.addImageToStorage(newUser, data.image, changeLoadingTo, updateUser);
   };
 
   continueUserCreation = (newUser, result, updateUser, changeLoadingTo) => {
 
-    console.log(newUser)
-    
+    //if the previous action was succesful, continue to create the new user
     if(result[0])
     {
     this.db
@@ -50,8 +55,10 @@ class UserService {
       .withConverter(userConverter)
       .set(newUser)
       .then(() => {
+        //activate external function to set the new user
         updateUser(newUser);
         console.log('new user created, sending verification')
+        //Send an email to verify the mail of the new user
         this.requestVerificationMail(newUser.mail);
         this.requests['continueUserCreation'] ? this.requests['continueUserCreation']++ : this.requests['continueUserCreation'] = 1;
       })
@@ -70,10 +77,12 @@ class UserService {
 
     //First part of the if is for when the user visits to verify his email
     if (this.auth.isSignInWithEmailLink(window.location.href)) {
+      //check if there's an email stored in the storage, if not request the user for it
       email = window.localStorage.getItem('emailForSignIn');
       if (!email) {
-        email = window.prompt('Please provide your email for confirmation');
+        email = window.prompt(RESPONSE.emailVerificationPrompt);
       }
+      //Continue with the signin with the email
       this.auth.signInWithEmailLink(email, window.location.href)
         .then((result) => {
           window.localStorage.removeItem('emailForSignIn');
@@ -111,17 +120,18 @@ class UserService {
 
   addImageToStorage = async (user, file, changeLoadingTo, updateUser) => {
 
+    //Look if there's a file, if not -> set a default image
     if(file !== ''){
       const storageRef = this.storage.ref();
       const imageName = `${user.name}_${user.surname.replace(' ', '_')}`;
       const userID = user.id;
-  
+      //create the metadata for the image
       const metadata = {
-        contentType: 'image/jpeg',
         creator: `${user.name}_${user.surname}`,
         creationDate: Date.now()
       };
-  
+      
+      //Begin upload to the cloud storage of firebase
       const uploadTask = storageRef.child(`users/${userID}/${imageName}.jpg`).putString(file, 'data_url', metadata)
         uploadTask.on("state_changed", {
           error: error => {
@@ -141,6 +151,7 @@ class UserService {
                       words[i] = words[i][0].toUpperCase() + words[i].substr(1);
                   }
                 
+                this.requests['addImageToStorage'] ? this.requests['addImageToStorage']++ : this.requests['addImageToStorage'] = 1;
                 //Setting the basic information of the user in the firebase auth (not the user from firestore)
                 this.auth.currentUser.updateProfile({
                   photoURL: downloadURL,
@@ -151,6 +162,7 @@ class UserService {
           }
         });
     }else {
+      //Set the default image and continue
       this.continueUserCreation(user, [true, './assets/profile/defaultProfileImage.png'],changeLoadingTo, updateUser);
       const mySentence = `${user.surname} ${user.name}`;
       const words = mySentence.split(" ");
@@ -158,6 +170,7 @@ class UserService {
           words[i] = words[i][0].toUpperCase() + words[i].substr(1);
       }
   
+      //Setting the basic information of the user in the firebase auth (not the user from firestore)
       this.requests['addImageToStorage'] ? this.requests['addImageToStorage']++ : this.requests['addImageToStorage'] = 1;
       this.auth.currentUser.updateProfile({
         photoURL: './assets/profile/defaultProfileImage.png',
@@ -171,10 +184,12 @@ class UserService {
   }
 
   sendPasswordResetMail = (mail, sendResponse) => {
+    //Basic action settings for where the mail should redirect you to
     var actionCodeSettings = { url: RESPONSE.resetPasswordURL, handleCodeInApp: true, };
     this.auth.sendPasswordResetEmail(
         mail, actionCodeSettings)
         .then(function() {
+          //Once finished send a response that it was successful
           sendResponse([true, 'positive', RESPONSE.resetPasswordSucces])
           this.requests['sendPasswordResetMail'] ? this.requests['sendPasswordResetMail']++ : this.requests['sendPasswordResetMail'] = 1;
         })
@@ -184,10 +199,12 @@ class UserService {
   }
 
   requestVerificationMail = (mail) => {
+    //Basic action settings for where the mail should redirect you to
     var actionCodeSettings = { url: RESPONSE.loginURL, handleCodeInApp: true, };
     this.auth.sendSignInLinkToEmail(mail, actionCodeSettings)
       .then(() => {
         console.log('--------------')
+        //Set email in local storage to check later
         window.localStorage.setItem('emailForSignIn', mail);
         this.requests['requestVerificationMail'] ? this.requests['requestVerificationMail']++ : this.requests['requestVerificationMail'] = 1;
         console.log('Email set in local storage')
@@ -202,10 +219,11 @@ class UserService {
       });
   }
   
+  //In case a request gets sent from outside this class
   setRequest = (value) => this.requests[value] ? this.requests[value]++ : this.requests[value] = 1
-
+  //Get requests
   getRequests = () => {return this.requests};
-
+  //loop to log all requests sent
   logRequests = () => {
     for (let key in this.requests) {
       let value = this.requests[key];
