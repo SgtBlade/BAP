@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useObserver } from "mobx-react-lite";
+import globalStyle from '../globalStyles/main.module.css'
 import style from "./createProjectForm.module.css";
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../consts';
@@ -35,15 +36,15 @@ const CreateProjectForm = () => {
   const returnPage = (number) => {
     switch (number) {
       case 1:
-        return <CreateProjectFormStepOne projectName={[projectName, setProjectName]} budget={[requiredAmount, setrequiredAmount]} tags={[tags, setTags]} owner={[Owner, setOwner]} pictures={[pictures, setPictures]} preview={[preview, setPreview]}/>;
+        return <CreateProjectFormStepOne projectName={{ value: projectName, func:   setProjectName}} budget={{ value: requiredAmount, func:   setrequiredAmount}} tags={{ value: tags, func:   setTags}} owner={{ value: Owner, func:   setOwner}} pictures={{ value: pictures, func:   setPictures}} preview={{ value: preview, func:   setPreview}}/>;
       case 2:
-         return <CreateProjectFormStepTwo impact={[impact, setimpact]} about={[about, setAbout]} contact={[contactOptions, setContactOptions]}/>;
+         return <CreateProjectFormStepTwo impact={{ value: impact, func:   setimpact}} about={{ value: about, func:   setAbout}} contact={{ value: contactOptions, func:   setContactOptions}}/>;
       case 3:
-        return <CreateProjectFormStepThree description={[description, setdescription]}/>;
+        return <CreateProjectFormStepThree description={{ value: description, func:   setdescription}}/>;
       case 4:
-        return <CreateProjectFormStepFour questions={[questions, setQuestions]}/>;
+        return <CreateProjectFormStepFour questions={{ value: questions, func:   setQuestions}}/>;
       case 5:
-        return <CreateProjectFormStepFive deadline={[deadline, setdeadline]} allowQuestions={[allowQuestions, setAllowQuestions]} allowComments={[allowComments, setAllowComments]} />;
+        return <CreateProjectFormStepFive deadline={{ value: deadline, func:   setdeadline}} allowQuestions={{ value: allowQuestions, func:   setAllowQuestions}} allowComments={{ value: allowComments, func:   setAllowComments}} />;
       case 6:
          return <CreateProjectFormStepSix/>;
       default:
@@ -52,20 +53,20 @@ const CreateProjectForm = () => {
   }
   return useObserver(() => (
     <div className={style.wrap}>
-      <div className={style.progressbar}>
-      <progress id="file" value={currentStep} max="5"></progress>
+      <div className={style.progressbarWrap}>
+      <progress className={style.progress} id="file" value={currentStep} max="5"></progress>
       </div>
       {returnPage(currentStep)}
 
 
     <div className={style.buttons}>
     {currentStep !== 1 ? 
-    <p onClick={() => setCurrentStep(currentStep-1)} className={`${style.button} ${style.previousButton}`}>Terug naar vorige stap</p>: ''}
+    <p onClick={() => setCurrentStep(currentStep-1)} className={`${globalStyle.mainButton} ${globalStyle.previousButton}`}>Terug naar vorige stap</p>: ''}
 
     {currentStep === 5 ?
-    <p onClick={() => {alert('final')}} className={`${style.button}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep]} </Link></p>
+    <p onClick={() => {alert('final')}} className={`${globalStyle.mainButton}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep]} </Link></p>
     :
-    <p onClick={() => {setCurrentStep(currentStep+1)}} className={`${style.button}`}>{STEPS[currentStep]}</p>
+    <p onClick={() => {setCurrentStep(currentStep+1)}} className={`${globalStyle.mainButton}`}>{STEPS[currentStep]}</p>
     }
     
 

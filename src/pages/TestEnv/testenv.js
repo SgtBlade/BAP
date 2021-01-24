@@ -24,7 +24,15 @@ const Testenv = () => {
   return useObserver(() => (
     <div className={style.wrap}>
       <CreateProjectForm/>
-    <div className={style.container}>
+    
+    </div>
+  ));
+};
+
+export default Testenv;
+
+/*
+<div className={style.container}>
       <h1>Dit is de test environment</h1>
       <p className={style.toggleswitch} onClick={toggle}>{login ? 'register' : 'login'}</p>
       <div>
@@ -44,8 +52,4 @@ const Testenv = () => {
       }
       
     </div>
-    </div>
-  ));
-};
-
-export default Testenv;
+    */

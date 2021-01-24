@@ -1,6 +1,39 @@
 @import "./pages/globalStyles/reset.css";
 @import "./pages/globalStyles/vars.css";
-@import url("https://use.typekit.net/rtc0faf.css");
+
+@font-face {
+  font-family:"Montserrat";
+  src: url("/assets/fonts/Montserrat/Montserrat-Light.ttf") format("opentype");
+  font-display:auto;
+  font-style:normal;
+  font-weight:200;
+  }
+
+@font-face {
+  font-family:"Montserrat";
+  src: url("/assets/fonts/Montserrat/Montserrat-Regular.ttf") format("opentype");
+  font-display:auto;
+  font-style:normal;
+  font-weight:500;
+  }
+  @font-face {
+    font-family:"Montserrat-semiBold";
+    src: url("/assets/fonts/Montserrat/Montserrat-SemiBold.ttf") format("opentype");
+    font-display:auto;
+    font-style:normal;
+    font-weight:700;
+    }
+
+@font-face {
+  font-family:"Montserrat-black";
+  src: url("/assets/fonts/Montserrat/Montserrat-Black") format("opentype");
+  font-display:auto;
+  font-style:normal;
+  font-weight:500;
+  }
+  
+
+
 
 
 html {
@@ -10,9 +43,9 @@ html {
 }
 
 *, body, html {
-  font-family: sofia-pro-soft, sans-serif;
-  font-weight: 700;
+  font-family: Montserrat, sans-serif;
   font-style: normal;
+  font-weight:200;
 }
 
 /* stylelint-disable */
@@ -58,9 +91,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
 
-  font-family: sofia-pro-soft, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;;
-  font-weight: 700;
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight:200;
 }
 
 #root {
