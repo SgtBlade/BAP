@@ -10,8 +10,12 @@ import CreateProjectFormStepThree from './C_stepThree/stepThree';
 import CreateProjectFormStepFour from './D_stepFour/stepFour';
 import CreateProjectFormStepFive from './E_stepFive/stepFive';
 import CreateProjectFormStepSix from './F_stepSix/stepSix';
+import { useStores } from '../../hooks/useStores';
 
 const CreateProjectForm = () => {
+  const {uiStore} = useStores();
+  const [errors, setErrors] = useState({});
+
   //control of which page you are on
   const STEPS = { 1: 'Naar de volgende stap 2/5', 2: 'Naar de volgende stap 3/5', 3: 'Naar de volgende stap 4/5', 4: 'Naar de volgende stap 5/5', 5: 'Creatie voltooien 👍', 6: 'Bekijk de pagina', }
 
@@ -21,11 +25,11 @@ const CreateProjectForm = () => {
   const [projectName, setProjectName] = useState('')
   const [description, setdescription] = useState('')
   const [impact, setimpact] = useState('')
-  const [requiredAmount, setrequiredAmount] = useState('')
+  const [budget, setBudget] = useState('')
   const [tags, setTags] = useState([])
-  const [pictures, setPictures] = useState('')
+  const [pictures, setPictures] = useState([])
   const [deadline, setdeadline] = useState('')
-  const [Owner, setOwner] = useState('')  
+  const [owner, setOwner] = useState(`${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)  
   const [preview, setPreview] = useState('')  
   const [contactOptions, setContactOptions] = useState('')
   const [about, setAbout] = useState('')
@@ -33,14 +37,31 @@ const CreateProjectForm = () => {
   const [allowQuestions, setAllowQuestions] = useState(false)
   const [allowComments, setAllowComments] = useState(false)
 
+
+  const removeFromErrorArray = (keyName) => {
+    console.log(`removing ${keyName}`)
+    const tmpError = errors;
+    delete tmpError[keyName];
+    setErrors({...tmpError});
+    return true;
+  }
+  const addToErrorArray = (keyName, response) => {
+    console.log(`adding ${keyName}`)
+    let tmpError = errors;
+    tmpError[keyName] = response;
+    setErrors({...tmpError});
+    return true;
+  }
+
+
   const returnPage = (number) => {
     switch (number) {
       case 1:
-        return <CreateProjectFormStepOne projectName={{ value: projectName, func:   setProjectName}} budget={{ value: requiredAmount, func:   setrequiredAmount}} tags={{ value: tags, func:   setTags}} owner={{ value: Owner, func:   setOwner}} pictures={{ value: pictures, func:   setPictures}} preview={{ value: preview, func:   setPreview}}/>;
+        return <CreateProjectFormStepOne navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}} projectName={{ value: projectName, func:   setProjectName}} budget={{ value: budget, func:   setBudget}} tags={{ value: tags, func:   setTags}} owner={{ value: owner, func:   setOwner}} pictures={{ value: pictures, func:   setPictures}} preview={{ value: preview, func:   setPreview}}/>;
       case 2:
-         return <CreateProjectFormStepTwo impact={{ value: impact, func:   setimpact}} about={{ value: about, func:   setAbout}} contact={{ value: contactOptions, func:   setContactOptions}}/>;
+         return <CreateProjectFormStepTwo description={{ value: description, func:   setdescription}}/>;
       case 3:
-        return <CreateProjectFormStepThree description={{ value: description, func:   setdescription}}/>;
+        return <CreateProjectFormStepThree impact={{ value: impact, func:   setimpact}} about={{ value: about, func:   setAbout}} contact={{ value: contactOptions, func:   setContactOptions}}/>;
       case 4:
         return <CreateProjectFormStepFour questions={{ value: questions, func:   setQuestions}}/>;
       case 5:
@@ -57,20 +78,6 @@ const CreateProjectForm = () => {
       <progress className={style.progress} id="file" value={currentStep} max="5"></progress>
       </div>
       {returnPage(currentStep)}
-
-
-    <div className={style.buttons}>
-    {currentStep !== 1 ? 
-    <p onClick={() => setCurrentStep(currentStep-1)} className={`${globalStyle.mainButton} ${globalStyle.previousButton}`}>Terug naar vorige stap</p>: ''}
-
-    {currentStep === 5 ?
-    <p onClick={() => {alert('final')}} className={`${globalStyle.mainButton}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep]} </Link></p>
-    :
-    <p onClick={() => {setCurrentStep(currentStep+1)}} className={`${globalStyle.mainButton}`}>{STEPS[currentStep]}</p>
-    }
-    
-
-    </div>
     </div>
   ));
 };

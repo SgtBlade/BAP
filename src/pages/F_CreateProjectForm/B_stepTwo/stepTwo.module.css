@@ -1,0 +1,12 @@
+.wrap {
+    min-height: 80vh;
+}
+
+.checkbox {
+    display: flex;
+    flex-flow: column;
+}
+
+.checkbox label {
+    margin-top: 1rem;
+}

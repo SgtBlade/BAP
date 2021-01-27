@@ -15,7 +15,10 @@
     max-width: 90%;
 }
 
-/* Select box */
+.projectUser {
+    text-transform: capitalize;
+}
+
 .tagSelectBox {
     -webkit-appearance: none;
     outline: none;
@@ -94,7 +97,8 @@
     content: '#'
 }
 
-.tag span {
+
+.tag span, .previewImage span {
     position: absolute;
     top: -1rem;
     right: -.5rem;
@@ -116,8 +120,64 @@
     transition: all .15s;
 }
 
-.tag:hover span {
+.tag:hover span, .previewImage:hover span {
     visibility: visible;
     opacity: 1;
     transition: all .15s;
+}
+
+.projectOwner {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+}
+
+.projectOwner label:first-of-type {
+    margin-top: 1rem;
+}
+
+.projectOwner label {
+    margin-bottom: 1.5rem;
+}
+
+/* Image picker, some css is share with tags */
+
+.imagesWrapper {
+    flex-flow: row;
+    overflow-y: scroll;
+    height: 36rem;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.imagesWrapper p {
+    min-width: 42.6rem;
+    min-height: 24rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.previewImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+
+    width: 42.6rem;
+    height: 24rem;
+    margin-right: 1rem;
+}
+.previewImage span{
+    font-size: 2rem;
+    height: 3rem;
+    width: 3rem;
+    font-family: Montserrat-black;
+    border-radius: 5rem;
+
 }

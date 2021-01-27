@@ -13,6 +13,10 @@
     background-color: var(--light);
 }
 
+.error {
+    color: var(--durfRed) !important;
+}
+
 .white {
     color: var(--light) !important;
 }
@@ -82,4 +86,9 @@
       justify-content: flex-end;
       align-items: center;
 
+  }
+
+  .inputDetail {
+    font-size: 1.4rem;
+    margin-top: .5rem;
   }

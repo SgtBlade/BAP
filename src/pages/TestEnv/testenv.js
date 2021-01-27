@@ -1,24 +1,25 @@
-import React, {useState} from "react";
-import { useStores } from "../../hooks/useStores";
+import React from "react";
+//import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./testenv.module.css";
+import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
+/*
 import RegisterForm from "../F_RegisterForm/registerForm.js"
 import LoginForm from "../F_LoginForm/loginForm.js";
-import Profile from "../profile/profile";
-import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
+import Profile from "../profile/profile";*/
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
 
 const Testenv = () => {
+  /*
   const { uiStore } = useStores();
   const [login, setLogin] = useState(true);
   const toggle = () => setLogin(!login);
-
   const testFunction = () => {
     uiStore.logUserStoreRequests();
     console.log('*********')
     console.log(uiStore.currentUser)
-  }
+  }*/
 
 
   return useObserver(() => (

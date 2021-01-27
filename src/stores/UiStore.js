@@ -23,14 +23,14 @@ class UiStore {
       interestedTags: [],
       level: 0,
       mail: "migueleken@hotmail.com",
-      name: "de pelsmaeker",
+      surname: "de pelsmaeker",
       phone: "+32 478 99 38 47",
       picture: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2F8SzbHZQ7UygNou338Vks4KTPmf93%2Fde%20pelsmaeker_miguel.jpg?alt=media&token=433024e8-d62a-4dba-8637-5b5e523dddc6",
       publicMail: true,
       publicPhone: true,
       role: 0,
       statistics: [],
-      surname: "miguel",
+      name: "miguel",
       unlockedBadges: [],
     })
   }

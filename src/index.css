@@ -16,13 +16,14 @@
   font-style:normal;
   font-weight:500;
   }
-  @font-face {
+
+@font-face {
     font-family:"Montserrat-semiBold";
     src: url("/assets/fonts/Montserrat/Montserrat-SemiBold.ttf") format("opentype");
     font-display:auto;
     font-style:normal;
     font-weight:700;
-    }
+  }
 
 @font-face {
   font-family:"Montserrat-black";
@@ -32,9 +33,35 @@
   font-weight:500;
   }
   
+@font-face {
+  font-family:"Montserrat";
+  src: url("/assets/fonts/Montserrat/Montserrat-Italic.ttf") format("opentype");
+  font-display:auto;
+  font-style: italic;
+  font-weight:500;
+  }
+
+@font-face {
+  font-family:"Montserrat";
+  src: url("/assets/fonts/Montserrat/Montserrat-BoldItalic.ttf") format("opentype");
+  font-display:auto;
+  font-style: italic;
+  font-weight:700;
+  }
 
 
+strong {
+  font-weight: bold;
+}
 
+em {
+  font-style: italic;
+}
+
+strong em {
+  font-weight: bold;
+  font-style: italic;
+}
 
 html {
   box-sizing: border-box;
