@@ -126,6 +126,10 @@
     transition: all .15s;
 }
 
+.addPicture {
+    cursor: pointer;
+}
+
 .projectOwner {
     margin-top: 5rem;
     margin-bottom: 5rem;

@@ -19,18 +19,12 @@ const CreateProjectForm = () => {
   //control of which page you are on
   const STEPS = { 1: 'Naar de volgende stap 2/5', 2: 'Naar de volgende stap 3/5', 3: 'Naar de volgende stap 4/5', 4: 'Naar de volgende stap 5/5', 5: 'Creatie voltooien 👍', 6: 'Bekijk de pagina', }
 
-  const [currentStep, setCurrentStep] = useState(1)
+  const [currentStep, setCurrentStep] = useState(2)
   const newProjectID = ''
-  //Data required for the project
-  const [projectName, setProjectName] = useState('')
-  const [description, setdescription] = useState('')
   const [impact, setimpact] = useState('')
-  const [budget, setBudget] = useState('')
-  const [tags, setTags] = useState([])
-  const [pictures, setPictures] = useState([])
+
   const [deadline, setdeadline] = useState('')
-  const [owner, setOwner] = useState(`${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)  
-  const [preview, setPreview] = useState('')  
+
   const [contactOptions, setContactOptions] = useState('')
   const [about, setAbout] = useState('')
   const [questions, setQuestions] = useState('')
@@ -57,9 +51,9 @@ const CreateProjectForm = () => {
   const returnPage = (number) => {
     switch (number) {
       case 1:
-        return <CreateProjectFormStepOne navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}} projectName={{ value: projectName, func:   setProjectName}} budget={{ value: budget, func:   setBudget}} tags={{ value: tags, func:   setTags}} owner={{ value: owner, func:   setOwner}} pictures={{ value: pictures, func:   setPictures}} preview={{ value: preview, func:   setPreview}}/>;
+        return <CreateProjectFormStepOne navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 2:
-         return <CreateProjectFormStepTwo description={{ value: description, func:   setdescription}}/>;
+         return <CreateProjectFormStepTwo navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 3:
         return <CreateProjectFormStepThree impact={{ value: impact, func:   setimpact}} about={{ value: about, func:   setAbout}} contact={{ value: contactOptions, func:   setContactOptions}}/>;
       case 4:

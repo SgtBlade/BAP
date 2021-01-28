@@ -3,3 +3,15 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.errorList {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-flow: column;
+    color: var(--durfRed)
+}
+
+.errorList li {
+    margin: .5rem;
+}

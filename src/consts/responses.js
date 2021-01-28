@@ -23,6 +23,7 @@ const RESPONSE = {
     NoOwner: 'Er is geen eigenaar ingesteld',
     NoPictures: 'Er moet minimum 1 foto zijn',
     NoPreview: 'Er moet een korte beschriijving gegeven worden',
+    NoDescription: 'Zorg dat er een beschrijving gegeven is en alles aangevinked is',
   };
   
   export { RESPONSE };

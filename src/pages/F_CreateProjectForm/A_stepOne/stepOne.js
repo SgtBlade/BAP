@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState} from 'react'
 import { useObserver } from "mobx-react-lite";
 import parentStyle from "../createProjectForm.module.css";
 import TAGS from "../../../consts/tags"
@@ -8,14 +8,24 @@ import Compressor from 'compressorjs';
 import { RESPONSE } from '../../../consts/responses';
 import NavButtons from '../navButtons/navButtons';
 
-const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromErrorArray, addToErrorArray, pictures, preview, errors, navData}) => {
+const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors, navData}) => {
   const { uiStore } = useStores();
-  const [projectOwnerTmp, SetProjectOwnerTmp] = useState('')
+  const [projectOwnerTmp, SetProjectOwnerTmp] = useState('');
+
+
+
+  //Data required for the project
+  const [projectName, setProjectName] = useState('')
+  const [budget, setBudget] = useState('')
+  const [tags, setTags] = useState([])
+  const [pictures, setPictures] = useState([])
+  const [owner, setOwner] = useState(`${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)  
+  const [preview, setPreview] = useState('')  
 
   let tagValues = [];
   const handleTagAdd = async (e) => {
     //Check if the value is valid, does not already include and the array with the tags is shorter than 5
-    if(tagValues.includes(e.currentTarget.value) && !tags.value.includes(e.currentTarget.value) && tags.value.length < 5)tags.func([...tags.value, e.currentTarget.value]);
+    if(tagValues.includes(e.currentTarget.value) && !tags.includes(e.currentTarget.value) && tags.length < 5)setTags([...tags, e.currentTarget.value]);
     if(e.currentTarget.value) e.currentTarget.value = '';
     if(errors.value['tag'])removeFromErrorArray('tag');
   }
@@ -34,15 +44,17 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
   
   //Remove if the remove button is clicked
   const removeTag = async (el) => {
-    tags.func(tags.value.filter(item => item !== el))
-    
+    const tmpTags = tags.filter(item => item !== el);
+    setTags(tmpTags);
+    validateTag(tmpTags)
   }
   
-  let inputFileRef = null;
-  const handleChangePhotoButton = e => { e.preventDefault(); inputFileRef.click(); };
+  let pictureRef = null;
+  let ownerRef = null;
+  const handleChangePhotoButton = e => { e.preventDefault(); pictureRef.click(); };
   
   const handlePictureUpload = async (e) => {
-    if(pictures.value.length < 5){
+    if(pictures.length < 5){
       const target = e.currentTarget;
       const file = target.files.item(0);
       
@@ -55,9 +67,9 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
           if (!validImageTypes.includes(fileType) ) {
             alert(RESPONSE.NotAnImage);
             e.currentTarget.value = "";
-            validatePictures();
+            validatePictures([]);
             return;
-          }else if(fileSize > 5) alert(RESPONSE.fileSizeOver5MB);
+          }else if(fileSize > 5000) alert(RESPONSE.fileSizeOver5MB);
           
           else{
             new Compressor(file, {
@@ -65,7 +77,8 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
               maxWidth: 640,
               maxHeight: 360,
               success(result) {
-                pictures.func([...pictures.value, result])
+                setPictures([...pictures, result])
+                validatePictures(['empty']);
               },
               error(err) {
                 console.log(err.message);
@@ -75,43 +88,43 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
   }
   
   //validation functions:
-  const validateProjectName = () => {
-      if(projectName.value === '') addToErrorArray('projectName', RESPONSE.NoprojectName) 
+  const validateProjectName = (data = projectName) => {
+      if(data === '') addToErrorArray('projectName', RESPONSE.NoprojectName) 
       else if(errors.value['projectName']) removeFromErrorArray('projectName')
     }
 
-  const validateBudget = () => {
-        if(budget.value > 3000) addToErrorArray('budget', RESPONSE.budgetTooHigh)
-        else if((budget.value) === '') addToErrorArray('budget', RESPONSE.NoBudget)
+  const validateBudget = (data = budget) => {
+        if(data > 3000) addToErrorArray('budget', RESPONSE.budgetTooHigh)
+        else if((data) === '' || data <= 0) addToErrorArray('budget', RESPONSE.NoBudget)
         else if(errors.value['budget']) removeFromErrorArray('budget');
     }
   
-  const validateTag = () => {
-    if (tags.value.length === 0) addToErrorArray('tag', RESPONSE.NoTags)
+  const validateTag = (data = tags) => {
+    if (data.length === 0) addToErrorArray('tag', RESPONSE.NoTags)
     else if(errors.value['tag']) removeFromErrorArray('tag');
   }
   
-  const validateOwner = () => {
+  const validateOwner = (data = projectOwnerTmp) => {
     if(document.querySelector('.projectCheck').checked) {
-      if(projectOwnerTmp === '')   addToErrorArray('owner', RESPONSE.NoOwner) 
+      if(data === '')   addToErrorArray('owner', RESPONSE.NoOwner) 
       else if(errors.value['owner']) removeFromErrorArray('owner')}
     else if(errors.value['owner']) removeFromErrorArray('owner')}
   
-  const validatePictures = () => {
-    if(pictures.value.length === 0 ) addToErrorArray('pictures', RESPONSE.NoPictures) 
+  const validatePictures = (data = pictures) => {
+    if(data.length === 0 ) addToErrorArray('pictures', RESPONSE.NoPictures) 
     else if(errors.value['pictures']) removeFromErrorArray('pictures');}
   
-  const validatePreview = () => {
-    if(preview.value === '') addToErrorArray('preview', RESPONSE.NoPreview) 
+  const validatePreview = (data = preview) => {
+    if(data === '') addToErrorArray('preview', RESPONSE.NoPreview) 
     else if(errors.value['preview']) removeFromErrorArray('preview');
   }
 
   //Removing the image if remove is clicked
   const removeImage = async(index) => {
-    let tmp = pictures.value;
+    let tmp = pictures;
     tmp.splice(index, 1);
     //Tripple dot to trigger re-render, without it it doesn't know what has changed
-    pictures.func([...tmp]);
+    setPictures([...tmp]);
     validatePictures();
   }
 
@@ -123,17 +136,18 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
         <p className={parentStyle.inputSubtitle}>Zorg voor een goede beschrijvende en unieke naam.</p>
         {errors.value['projectName'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['projectName'])}</p> : ''}
         
-        <input onBlur={validateProjectName}  
-        onKeyDown={async e => 
-          {
-            projectName.func(e.currentTarget.value)
-            if(errors.value['projectName'])validateProjectName();
+        <input 
+        onBlur={e => {validateProjectName(e.currentTarget.value)}}  
+        onChange={ e => {
+            setProjectName(e.currentTarget.value);
+            if(errors.value['projectName']) validateProjectName(e.currentTarget.value)
           }} 
         className={parentStyle.input} 
         name={'projectName'} 
         id={'projectName'} 
-        value={projectName.value}  
-        type={'text'}/>
+        value={projectName}  
+        type={'text'}
+        />
       </label>
 
       <div className={style.midsection}>
@@ -141,7 +155,17 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
           <p className={`${parentStyle.inputTitle} ${parentStyle.white}`}>Wat is het budget?</p>
           <p className={`${parentStyle.inputSubtitle} ${parentStyle.white}`}>Geef hier het budget dat het project moet halen om te slagen. Maximum € 3000.</p>
           {errors.value['budget'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['budget'])}</p> : ''}
-          <input min={0} max={3000} onBlur={validateBudget} onChange={e => {budget.func(e.currentTarget.value); if(errors.value['budget'])validateBudget()}} className={`${parentStyle.input} ${parentStyle.white} ${parentStyle.blackLetter} ${parentStyle.largeFontSize} ${style.budgetInput}`} name={'budget'} id={'budget'} value={budget.value}  type={'number'}/>
+          
+          <input min={1} max={3000} 
+          onBlur={e => validateBudget(e.currentTarget.value)} 
+          onChange={e => {
+            setBudget(e.currentTarget.value); 
+            if(errors.value['budget'])validateBudget(e.currentTarget.value)}} 
+          className={`${parentStyle.input} ${parentStyle.white} ${parentStyle.blackLetter} ${parentStyle.largeFontSize} ${style.budgetInput}`} 
+          name={'budget'} 
+          id={'budget'} 
+          value={budget}  
+          type={'number'}/>
         </label>
 
         <div className={`${style.midsection__item}`} htmlFor={'tags'}>
@@ -150,9 +174,9 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
         {errors.value['tag'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['tag'])}</p> : ''}
 
           <div className={style.tagCollection}>
-              {tags.value.map(tag => {return (<div key={tag} className={style.tag}><p>{tag}</p> <span onClick={() => {removeTag(tag);}}>X</span></div>)})}
+              {tags.map(tag => {return (<div key={tag} className={style.tag}><p>{tag}</p> <span onClick={() => {removeTag(tag);}}>X</span></div>)})}
 
-                {tags.value.length < 5 ? 
+                {tags.length < 5 ? 
                 <div className={style.selectWrap}>
                 <p className={style.tagSelectBoxButton}>+</p>
                 <select 
@@ -190,10 +214,10 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
 
           <label className={``} htmlFor={'owner'}>
             <input
-            checked={owner.value === `${uiStore.currentUser.name} ${uiStore.currentUser.surname}` ? true : false}
+            checked={owner === `${uiStore.currentUser.name} ${uiStore.currentUser.surname}` ? true : false}
             onChange={e => {
-              owner.func(e.currentTarget.value); 
-              validateOwner();
+              setOwner(e.currentTarget.value); 
+              if(errors.value['owner'] )validateOwner(e.currentTarget.value);
             }} 
             className={`${style.projectUser}`} 
             name={'owner'} id={'owner'} 
@@ -204,8 +228,8 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
 
           <label className={``} htmlFor={'owener2'}>
             <input
-            onClick={() => {owner.func('');document.querySelector('.projectOwner').focus()}}
-            onChange={() => {owner.func(projectOwnerTmp); console.log(owner.value)}} 
+            onClick={() => ownerRef.focus()}
+            onChange={() => {setOwner(projectOwnerTmp); console.log(owner)}} 
             className={`projectCheck`} 
             name={'owner'} 
             id={'owener2'} 
@@ -214,12 +238,13 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
             Dit project is onder een groepsnaam / organisatie:
             
             <input
-            onBlur={() => {if(projectOwnerTmp === '') owner.func(`${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)}}
+            onBlur={() => {if(projectOwnerTmp === '') setOwner(`${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)}}
             onClick={() => document.querySelector('.projectCheck').checked = true}
             onChange={e =>{
-              owner.func(e.currentTarget.value); 
+              setOwner(e.currentTarget.value); 
               SetProjectOwnerTmp(e.currentTarget.value); 
             }} 
+            ref={input => (ownerRef = input)}
             className={`${parentStyle.input} projectOwner`} 
             name={'owner'} 
             value={projectOwnerTmp}  
@@ -234,11 +259,11 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
         <p className={parentStyle.inputSubtitle}>Voeg hier max <strong className={`${parentStyle.blackLetter}`}>5</strong> kwaliteitsvolle afbeeldingen van je project toe.</p>
           {errors.value['pictures'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['pictures'])}</p> : ''}
         <p className={parentStyle.inputDetail}>*De afbeeldingen worden aangepast naar een 16:9 formaat en mogem maximum 4 MB zijn</p>
-        {pictures.value.length < 5 ?
+        {pictures.length < 5 ?
         //min 1
         <input
               onChange={handlePictureUpload}
-              ref={input => (inputFileRef = input)}
+              ref={input => (pictureRef = input)}
               style={{ display: "none" }}
               type="file"
               id={'images'}
@@ -246,9 +271,9 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
             :''}
       </label>
         <div className={style.imagesWrapper}>
-          {pictures.value.length < 5 ? <p onClick={handleChangePhotoButton} className={`${parentStyle.blackLetter}`}> + VOEG DIENEN FOTO TOE</p> : ''}
-          {pictures.value.map((image, index) => {
-            return <div key={index} className={style.previewImage}><img width={'426'} height={'240'} alt={`Project ${index}`} src={URL.createObjectURL(image)}/><span onClick={() => {removeImage(index)}}>X</span></div>
+          {pictures.length < 5 ? <p onClick={handleChangePhotoButton} className={`${parentStyle.blackLetter} ${style.addPicture}`}> + VOEG DIENEN FOTO TOE</p> : ''}
+          {pictures.map((image, index) => {
+            return <div key={index} className={style.previewImage}><img width={'426'} height={'240'} alt={`Project ${index}`} src={URL.createObjectURL(image)}/><span onClick={() => {removeImage(index); validatePictures()}}>X</span></div>
           })}
         </div>
 
@@ -258,18 +283,18 @@ const CreateProjectFormStepOne = ({projectName, budget, tags, owner, removeFromE
           <p className={`${parentStyle.inputTitle}`}>Beschrijf je project in 120 karakters</p>
           <p className={`${parentStyle.inputSubtitle}`}>Geef hier kort weer waarover het project gaat.</p>
           {errors.value['preview'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['preview'])}</p> : ''}
-          <p className={parentStyle.inputDetail}>{preview.value.length}/120</p>
+          <p className={parentStyle.inputDetail}>{preview.length}/120</p>
           
           <textarea 
-          onBlur={validatePreview} 
+          onBlur={e=>validatePreview(e.currentTarget.value)} 
           onChange={e => {
-            if(e.currentTarget.value.length <= 120)preview.func(e.currentTarget.value)
-            if(errors.value['preview'])validatePreview()
+            if(e.currentTarget.value.length <= 120)setPreview(e.currentTarget.value)
+            if(errors.value['preview'])validatePreview(e.currentTarget.value)
           }} 
           className={`${parentStyle.input}`} 
           name={'introduction'} 
           id={'introduction'} 
-          value={preview.value}  
+          value={preview}  
           type={'textarea'}/>
         </label>
 

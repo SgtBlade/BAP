@@ -9,15 +9,15 @@ const NavButtons = ({validate, currentStep, errors, STEPS, newProjectID = ''}) =
   
   return useObserver(() => (
     <>
-      <div>
+      <ul className={style.errorList}>
         {
         errors.value ?
         Object.keys(errors.value).map(function(key, index) {
-          return <p key={index}>{errors.value[key]}</p>
+          return <li key={index}>{errors.value[key]}</li>
         })
         : ''
         }
-      </div>
+      </ul>
       <div className={style.buttonWrapper}>
       {currentStep.value !== 1 ? 
       <p onClick={() => currentStep.func(currentStep.value-1)} className={`${globalStyle.mainButton} ${globalStyle.previousButton}`}>Terug naar vorige stap</p>: ''}
