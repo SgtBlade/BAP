@@ -22,7 +22,7 @@
 }
 
 .blackLetter {
-    font-family: Montserrat-black !important;
+    font-family: Montserrat_black !important;
 }
 
 .largeFontSize {
@@ -30,7 +30,7 @@
 }
 
 .inputTitle, .inputTitleLarge {
-        font-family: Montserrat-black;
+        font-family: Montserrat_black;
         font-style: normal;
         font-weight: 900;
         font-size: 3rem;
@@ -39,6 +39,20 @@
 
 .inputTitleLarge {
     font-size: 5rem;
+}
+
+.labelText {
+    font-family: Montserrat-semiBold;
+    width: 40%;
+    font-size: 2rem;
+
+    color: var(--dark);
+    
+    display: flex;
+    flex-flow: column;
+}   
+
+.labelText input {
 }
 
 .inputSubtitle {

@@ -23,7 +23,10 @@ const RESPONSE = {
     NoOwner: 'Er is geen eigenaar ingesteld',
     NoPictures: 'Er moet minimum 1 foto zijn',
     NoPreview: 'Er moet een korte beschriijving gegeven worden',
-    NoDescription: 'Zorg dat er een beschrijving gegeven is en alles aangevinked is',
+    NoDescription: 'Zorg dat er een beschrijving gegeven is en alles aangevinkt is',
+    NoIntroduction: 'Gelieve een korte introductie te geven over u of uw organisatie.',
+    ContactSelectedNotGiven: 'Er is geen contactinformatie gegeven',
+    NoOptionChosen: 'Gelieve een van de opties te kiezen'
   };
   
   export { RESPONSE };

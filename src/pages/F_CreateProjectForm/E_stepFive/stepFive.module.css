@@ -1,0 +1,76 @@
+.articleWrap {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.subtitle {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 2rem;
+
+    color: var(--black);
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.buttons {
+    padding: 1.4rem 2.5rem;
+    font-size: 2rem;
+    font-family: Montserrat_black;
+    background-color: var(--durfGreen);
+    color: var(--light);
+    
+    display: inline-block;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    width: auto;
+}
+
+
+.bottonLarge {
+    width: 25rem;
+    height: 8rem;
+    margin-right: 2.5rem;
+
+    background-color: var(--durfGreen);
+    color: white;
+    border-radius: 1rem;
+
+    font-family: Montserrat_black;
+    font-weight: 900;
+    font-size: 2.8rem;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.articleWrapRow {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.articleWrapRow h2{
+    width: 100%;
+}
+
+.red {
+    background: var(--durfRed) !important;
+}
+
+.notSelected {
+    background-color: #c7c7c7 !important;
+}
+
+.errorOverride {
+    width: 100%;
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem
+}

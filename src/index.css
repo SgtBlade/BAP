@@ -26,8 +26,8 @@
   }
 
 @font-face {
-  font-family:"Montserrat-black";
-  src: url("/assets/fonts/Montserrat/Montserrat-Black") format("opentype");
+  font-family:"Montserrat_black";
+  src: url("/assets/fonts/Montserrat/Montserrat-Black.ttf") format("opentype");
   font-display:auto;
   font-style:normal;
   font-weight:500;

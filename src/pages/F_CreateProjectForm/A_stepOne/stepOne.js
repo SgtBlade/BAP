@@ -31,6 +31,7 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
   }
 
 
+  //Collection of all validations to be used for when clicking next step
   const validation = async () => {
     validateProjectName();
     validateBudget();
@@ -38,7 +39,7 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
     validateOwner();
     validatePictures();
     validatePreview();
-    if(errors.value.length === 0) return true;
+    if(Object.keys(errors.value).length === 0) return true;
     else return false;
   }
   
@@ -49,25 +50,33 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
     validateTag(tmpTags)
   }
   
+  //initialising the references
   let pictureRef = null;
   let ownerRef = null;
   const handleChangePhotoButton = e => { e.preventDefault(); pictureRef.click(); };
   
+  //Prepping the image to an uploadable type of file
   const handlePictureUpload = async (e) => {
+    //check if not more than 5 images yes
     if(pictures.length < 5){
       const target = e.currentTarget;
       const file = target.files.item(0);
       
+        //checking if there actually is a new file uploaded
         if (target.files && file) {
               
+          //setting the filesize to MB
           const fileSize =  target.files[0].size / 1024 / 1024;
           const fileType = file['type'];
+          //List of accepted filetypes, add here if there's any other type you want
           const validImageTypes = ['image/jpeg', 'image/png'];
           
+          //Check if the right type of file has been uploaded
           if (!validImageTypes.includes(fileType) ) {
+            //send an alert message, clear the uplaoded file & validate
             alert(RESPONSE.NotAnImage);
             e.currentTarget.value = "";
-            validatePictures([]);
+            validatePictures(pictures.pop());
             return;
           }else if(fileSize > 5000) alert(RESPONSE.fileSizeOver5MB);
           
@@ -87,33 +96,41 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
     }}
   }
   
+  //All validations have a data option because the useState would not update fast enough,
+  //this way I can give the e.currentTarget.value with it where it is needed
+
   //validation functions:
   const validateProjectName = (data = projectName) => {
       if(data === '') addToErrorArray('projectName', RESPONSE.NoprojectName) 
       else if(errors.value['projectName']) removeFromErrorArray('projectName')
     }
 
+  //Check the limits of the budget & give the appropriate response
   const validateBudget = (data = budget) => {
         if(data > 3000) addToErrorArray('budget', RESPONSE.budgetTooHigh)
         else if((data) === '' || data <= 0) addToErrorArray('budget', RESPONSE.NoBudget)
         else if(errors.value['budget']) removeFromErrorArray('budget');
     }
   
+  //Check the amount of tags by using an array length function
   const validateTag = (data = tags) => {
     if (data.length === 0) addToErrorArray('tag', RESPONSE.NoTags)
     else if(errors.value['tag']) removeFromErrorArray('tag');
   }
   
+  //Check which option has been selected, check the input field if other owner is selected
   const validateOwner = (data = projectOwnerTmp) => {
     if(document.querySelector('.projectCheck').checked) {
       if(data === '')   addToErrorArray('owner', RESPONSE.NoOwner) 
       else if(errors.value['owner']) removeFromErrorArray('owner')}
     else if(errors.value['owner']) removeFromErrorArray('owner')}
   
+  //Check the amount of pictures by using an array length function
   const validatePictures = (data = pictures) => {
     if(data.length === 0 ) addToErrorArray('pictures', RESPONSE.NoPictures) 
     else if(errors.value['pictures']) removeFromErrorArray('pictures');}
   
+  //Basic check based on it not being an empty string
   const validatePreview = (data = preview) => {
     if(data === '') addToErrorArray('preview', RESPONSE.NoPreview) 
     else if(errors.value['preview']) removeFromErrorArray('preview');

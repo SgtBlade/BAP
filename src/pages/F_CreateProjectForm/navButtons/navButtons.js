@@ -23,15 +23,18 @@ const NavButtons = ({validate, currentStep, errors, STEPS, newProjectID = ''}) =
       <p onClick={() => currentStep.func(currentStep.value-1)} className={`${globalStyle.mainButton} ${globalStyle.previousButton}`}>Terug naar vorige stap</p>: ''}
 
       {currentStep.value === 5 ?
-      <p onClick={() => {alert('final')}} className={`${globalStyle.mainButton}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep.value]} </Link></p>
+      <p onClick={async () => {
+        if(await validate())
+        {
+          currentStep.func(currentStep.value+1);window.scrollTo(0, 0);}
+        }}  className={`${globalStyle.mainButton}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep.value]} </Link></p>
       :
       <p onClick={async () => {
         if(await validate())
         {
           currentStep.func(currentStep.value+1);window.scrollTo(0, 0);}
-        }} className={`${globalStyle.mainButton} ${errors.length === 0 ? '' : globalStyle.disabledButton}`}>{STEPS[currentStep.value]}</p>
+        }} className={`${globalStyle.mainButton} ${Object.keys(errors.value).length === 0 ? '' : globalStyle.disabledButton}`}>{STEPS[currentStep.value]}</p>
       }
-      
       </div>
     </>
   ));
