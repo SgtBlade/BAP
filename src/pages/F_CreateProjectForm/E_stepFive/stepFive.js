@@ -6,9 +6,18 @@ import { RESPONSE } from '../../../consts/responses';
 import NavButtons from '../navButtons/navButtons';
 
 const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addToErrorArray}) => {
+  const tmpDate = new Date(Date.now());
+  
+
   const [deadline, setDeadline] = useState(undefined)
   const [allowQuestions, setAllowQuestions] = useState(undefined)
   const [allowComments, setAllowComments] = useState(undefined)
+  const [date, setDate] = useState(`${tmpDate.getFullYear()}-${tmpDate.getMonth()+1 >= 10 ? `${tmpDate.getMonth()+1}` : `0${tmpDate.getMonth()+1}`}-${tmpDate.getDate()+1 >= 10 ? `${tmpDate.getDate()+1}` : `0${tmpDate.getDate()+1}`}`)
+
+  const handleDateChange = (value = date) => {
+    if(new Date(value) > new Date(Date.now())){setDate(value);if(errors.value['deadline'])removeFromErrorArray('deadline')}
+    else addToErrorArray('deadline', RESPONSE.dateInPast)
+  }
 
 
   const validation = () => {
@@ -37,7 +46,7 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
           <p 
           onClick={() => {setDeadline(true);if(errors.value['deadline'])removeFromErrorArray('deadline')}} 
           className={`${deadline === true ? '' : style.notSelected} ${style.buttons}`}>JA, is er een deadline</p>
-          <p>ate</p>
+          <input type="date" value={date} onChange={e => handleDateChange(e.currentTarget.value)}/>
         </div>
         <p 
         onClick={() => {setDeadline(false);if(errors.value['deadline'])removeFromErrorArray('deadline')}} 

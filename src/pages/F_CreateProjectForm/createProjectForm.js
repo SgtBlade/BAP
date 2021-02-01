@@ -19,7 +19,7 @@ const CreateProjectForm = () => {
   //control of which page you are on
   const STEPS = { 1: 'Naar de volgende stap 2/5', 2: 'Naar de volgende stap 3/5', 3: 'Naar de volgende stap 4/5', 4: 'Naar de volgende stap 5/5', 5: 'Creatie voltooien 👍', 6: 'Bekijk de pagina', }
 
-  const [currentStep, setCurrentStep] = useState(5)
+  const [currentStep, setCurrentStep] = useState(4)
 
 
   //Remove Function that is given to the components to update the error array

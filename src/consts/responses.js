@@ -26,7 +26,8 @@ const RESPONSE = {
     NoDescription: 'Zorg dat er een beschrijving gegeven is en alles aangevinkt is',
     NoIntroduction: 'Gelieve een korte introductie te geven over u of uw organisatie.',
     ContactSelectedNotGiven: 'Er is geen contactinformatie gegeven',
-    NoOptionChosen: 'Gelieve een van de opties te kiezen'
+    NoOptionChosen: 'Gelieve een van de opties te kiezen',
+    dateInPast: 'Gelieve een datum te nemen die niet in het verleden ligt'
   };
   
   export { RESPONSE };
