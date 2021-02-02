@@ -27,7 +27,8 @@ const RESPONSE = {
     NoIntroduction: 'Gelieve een korte introductie te geven over u of uw organisatie.',
     ContactSelectedNotGiven: 'Er is geen contactinformatie gegeven',
     NoOptionChosen: 'Gelieve een van de opties te kiezen',
-    dateInPast: 'Gelieve een datum te nemen die niet in het verleden ligt'
+    dateInPast: 'Gelieve een datum te nemen die niet in het verleden ligt',
+    noLocation: 'Gelieve een locatie op te geven'
   };
   
   export { RESPONSE };

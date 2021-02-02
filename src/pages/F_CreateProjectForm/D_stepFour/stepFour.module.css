@@ -1,6 +1,15 @@
 .boxWrapper {
     display: flex;
     flex-flow: row wrap;
+    margin-bottom: 10rem;
+}
+
+.subtitle {
+    margin-bottom: 2rem;
+}
+
+.option input {
+    margin-top: 1rem;
 }
 
 .box {
@@ -123,7 +132,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 5rem
 }
 
 .inputWrap {
@@ -170,4 +180,25 @@
 
 .multipleChoice__list__lastItem {
     list-style: none
+}
+
+.requirementsField, .discussionField {
+    display: grid;
+    grid-template-columns: 10fr 2fr 1fr;
+    grid-gap: 1rem;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.requirements label, .discussionField label{
+    margin-top: 1rem;
+}
+
+.requirements input, .discussionField input {
+    margin-top: 0rem;
+}
+
+.discussionField {
+    grid-template-columns: 2fr 10fr 1fr;
 }

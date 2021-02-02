@@ -8,19 +8,20 @@ import Compressor from 'compressorjs';
 import { RESPONSE } from '../../../consts/responses';
 import NavButtons from '../navButtons/navButtons';
 
-const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors, navData}) => {
+const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors, navData, mergeProjectData, projectData}) => {
   const { uiStore } = useStores();
   const [projectOwnerTmp, SetProjectOwnerTmp] = useState('');
 
 
 
   //Data required for the project
-  const [projectName, setProjectName] = useState('')
-  const [budget, setBudget] = useState('')
-  const [tags, setTags] = useState([])
-  const [pictures, setPictures] = useState([])
-  const [owner, setOwner] = useState(`${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)  
-  const [preview, setPreview] = useState('')  
+  const [projectName, setProjectName] = useState(projectData.title? projectData.title : '')
+  const [budget, setBudget] = useState(projectData.budget? projectData.budget : '')
+  const [tags, setTags] = useState(projectData.tags? projectData.tags : [])
+  const [pictures, setPictures] = useState(projectData.pictures? projectData.pictures : [])
+  const [owner, setOwner] = useState(projectData.owner? projectData.owner : `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)  
+  const [preview, setPreview] = useState(projectData.previewText? projectData.previewText : '')  
+  const [location, setLocation] = useState(projectData.location? projectData.location : '')  
 
   let tagValues = [];
   const handleTagAdd = async (e) => {
@@ -30,7 +31,6 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
     if(errors.value['tag'])removeFromErrorArray('tag');
   }
 
-
   //Collection of all validations to be used for when clicking next step
   const validation = async () => {
     validateProjectName();
@@ -39,7 +39,10 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
     validateOwner();
     validatePictures();
     validatePreview();
-    if(Object.keys(errors.value).length === 0) return true;
+    validateLocation();
+    if(Object.keys(errors.value).length === 0) {
+      mergeProjectData({title: projectName, budget: budget, tags: tags, pictures: pictures, publicOwner: owner, previewText: preview, location: location})
+      return true;}
     else return false;
   }
   
@@ -143,6 +146,11 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
     //Tripple dot to trigger re-render, without it it doesn't know what has changed
     setPictures([...tmp]);
     validatePictures();
+  }
+
+  const validateLocation = (data = location) => {
+    if(data === '') addToErrorArray('location', RESPONSE.noLocation) 
+    else if(errors.value['location']) removeFromErrorArray('location')
   }
 
 
@@ -313,6 +321,26 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
           id={'introduction'} 
           value={preview}  
           type={'textarea'}/>
+        </label>
+
+
+
+        <label className={`${style.midsection__item} ${style.projectOwner}`} htmlFor={'location'}>
+          <p className={`${parentStyle.inputTitle}`}>Waar is het project gelegen?</p>
+          <p className={`${parentStyle.inputSubtitle}`}>Geef op in welke stad je project gelegen is.</p>
+          {errors.value['location'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['location'])}</p> : ''}
+          
+          <input 
+          onBlur={e=>validateLocation(e.currentTarget.value)} 
+          onChange={e => {
+            setLocation(e.currentTarget.value)
+            if(errors.value['location'])validateLocation(e.currentTarget.value)
+          }} 
+          className={`${parentStyle.input}`} 
+          name={'location'} 
+          id={'location'} 
+          value={location}  
+          type={'text'}/>
         </label>
 
 

@@ -1,71 +1,116 @@
+'./assets/project/default.jpg'
+
 
 class Project {
   
-  constructor({ id, title, description, impact, requiredAmount, updates = [], questions = [], coWorkers = [], mainPicture = './assets/project/default.jpg', extraPictures = [], deadline = false, tags = [], owner, upvotes = 0, downvotes = 0, creationDate = Date.now(), upvotesRequiredForFunding = false, isInFundingStage = false})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers, deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = [], previewText, questions, requirements, tags, updates, creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false})
   {
     this.id = id;
     this.title = title;
-    this.description = description;
-    this.impact = impact;
-    this.requiredAmount = requiredAmount;
-    this.updates = updates;
-    this.questions = questions;
+    this.allowComments = allowComments;
+    this.allowQuestions = allowQuestions;
+    this.ownerID = ownerID;
+    this.publicOwner = publicOwner;
+    this.budget = budget;
+    this.contact = contact;
     this.coWorkers = coWorkers;
-    this.mainPicture = mainPicture;
-    this.extraPictures = extraPictures;
-    this.deadline = false = deadline;
+    this.deadlineDate = deadlineDate;
+    this.deadline = deadline;
+    this.description = description;
+    this.discussions = discussions;
+    this.location = location;
+    this.multipleChoice = multipleChoice;
+    this.personalIntroduction = personalIntroduction;
+    this.pictures = pictures;
+    this.previewText = previewText;
+    this.questions = questions;
+    this.requirements = requirements;
     this.tags = tags;
-    this.owner = owner;
+    this.updates = updates;
+    this.isInFundingStage = isInFundingStage;
+    this.creationDate = creationDate;
     this.upvotes = upvotes;
     this.downvotes = downvotes;
-    this.creationDate = creationDate;
-    this.upvotesRequiredForFunding = upvotesRequiredForFunding;
-    this.isInFundingStage = isInFundingStage;
-    
   }
+
+
+  changeID = (id) => this.id = id;
+
+  addPictue = (pic) => this.pictures.push(pic)
+
+  setDescription = (desc) => this.description = desc;
+
+  setPictures = (picArr) => this.pictures = picArr;
+
+
+
+
+
+
+
 
 }
 
 const projectConverter = {
   toFirestore: function(project) {
     return {
-      name: project.name,
-      surname: project.surname,
-      picture: project.picture,
-      mail: project.mail,
-      statistics: project.statistics,
-      unlockedBadges: project.unlockedBadges,
-      bio: project.bio,
-      creationDate: project.creationDate,
-      interestedTags: project.interestedTags,
-      role: project.role,
-      level: project.level,
-      exp: project.exp,
-      publicMail: project.publicMail,
-      publicPhone: project.publicPhone,
-      phone: project.phone,
-
+      id: project.id, 
+      title: project.title, 
+      allowComments: project.allowComments, 
+      allowQuestions: project.allowQuestions, 
+      ownerID: project.ownerID, 
+      publicOwner: project.publicOwner, 
+      budget: project.budget, 
+      contact: project.contact, 
+      coWorkers: project.coWorkers, 
+      deadline: project.deadline, 
+      deadlineDate: project.deadlineDate, 
+      description: project.description, 
+      discussions: project.discussions, 
+      location: project.location, 
+      multipleChoice: project.multipleChoice, 
+      personalIntroduction: project.personalIntroduction, 
+      pictures: project.pictures, 
+      previewText: project.previewText, 
+      questions: project.questions, 
+      requirements: project.requirements, 
+      tags: project.tags, 
+      updates: project.updates, 
+      isInFundingStage: project.isInFundingStage, 
+      creationDate: project.creationDate, 
+      upvotes: project.upvotes, 
+      downvotes: project.downvotes,
     };
   },
   fromFirestore: function(snapshot, options) {
     const data = snapshot.data(options);
     return new Project({
       id: snapshot.id,
-      name: data.name,
-      surname: data.surname,
-      picture: data.picture,
-      mail: data.mail,
-      statistics: data.statistics,
-      unlockedBadges: data.unlockedBadges,
-      bio: data.bio,
+      title: data.title,
+      allowComments: data.allowComments,
+      allowQuestions: data.allowQuestions,
+      ownerID: data.ownerID,
+      publicOwner: data.publicOwner,
+      budget: data.budget,
+      contact: data.contact,
+      coWorkers: data.coWorkers,
+      deadline: data.deadline,
+      deadlineDate: data.deadlineDate,
+      description: data.description,
+      discussions: data.discussions,
+      location: data.location,
+      multipleChoice: data.multipleChoice,
+      personalIntroduction: data.personalIntroduction,
+      pictures: data.pictures,
+      previewText: data.previewText,
+      questions: data.questions,
+      requirements: data.requirements,
+      tags: data.tags,
+      updates: data.updates,
+      isInFundingStage: data.isInFundingStage,
       creationDate: data.creationDate,
-      interestedTags: data.interestedTags,
-      role: data.role,
-      level: data.level,
-      exp: data.exp,
-      publicMail: data.publicMail,
-      publicPhone: data.publicPhone,
-      phone: data.phone
+      upvotes: data.upvotes,
+      downvotes: data.downvotes,
     });
   }
 };

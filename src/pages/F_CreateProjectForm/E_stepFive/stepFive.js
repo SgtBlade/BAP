@@ -5,20 +5,19 @@ import parentStyle from "../createProjectForm.module.css";
 import { RESPONSE } from '../../../consts/responses';
 import NavButtons from '../navButtons/navButtons';
 
-const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addToErrorArray}) => {
+const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addToErrorArray, mergeProjectData, projectData}) => {
   const tmpDate = new Date(Date.now());
   
 
-  const [deadline, setDeadline] = useState(undefined)
-  const [allowQuestions, setAllowQuestions] = useState(undefined)
-  const [allowComments, setAllowComments] = useState(undefined)
-  const [date, setDate] = useState(`${tmpDate.getFullYear()}-${tmpDate.getMonth()+1 >= 10 ? `${tmpDate.getMonth()+1}` : `0${tmpDate.getMonth()+1}`}-${tmpDate.getDate()+1 >= 10 ? `${tmpDate.getDate()+1}` : `0${tmpDate.getDate()+1}`}`)
+  const [deadline, setDeadline] = useState(projectData.deadline ? projectData.deadline : undefined)
+  const [allowQuestions, setAllowQuestions] = useState(projectData.allowQuestions ? projectData.allowQuestions : undefined)
+  const [allowComments, setAllowComments] = useState(projectData.allowComments ? projectData.allowComments : undefined)
+  const [date, setDate] = useState(projectData.date ? projectData.date : `${tmpDate.getFullYear()}-${tmpDate.getMonth()+1 >= 10 ? `${tmpDate.getMonth()+1}` : `0${tmpDate.getMonth()+1}`}-${tmpDate.getDate()+1 >= 10 ? `${tmpDate.getDate()+1}` : `0${tmpDate.getDate()+1}`}`)
 
   const handleDateChange = (value = date) => {
     if(new Date(value) > new Date(Date.now())){setDate(value);if(errors.value['deadline'])removeFromErrorArray('deadline')}
     else addToErrorArray('deadline', RESPONSE.dateInPast)
   }
-
 
   const validation = () => {
     if(deadline === undefined) addToErrorArray('deadline', RESPONSE.NoOptionChosen)
@@ -28,7 +27,14 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
     if(allowComments === undefined) addToErrorArray('allowComments', RESPONSE.NoOptionChosen)
     else if(errors.value['allowComments'])removeFromErrorArray('allowComments')
 
-    if(Object.keys(errors.value).length === 0) return true;
+    if(Object.keys(errors.value).length === 0) {
+      mergeProjectData({
+        deadline: deadline,
+        allowQuestions: allowQuestions,
+        allowComments: allowComments,
+        deadlineDate: date,
+      })
+      return true;}
     else return false;
   }
   

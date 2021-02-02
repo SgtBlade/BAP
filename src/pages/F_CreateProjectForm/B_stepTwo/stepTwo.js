@@ -7,12 +7,13 @@ import 'react-quill/dist/quill.snow.css';
 import ImageCompress from 'quill-image-compress';
 import NavButtons from '../navButtons/navButtons';
 import { RESPONSE } from '../../../consts/responses';
+import { useStores } from '../../../hooks/useStores';
 Quill.register('modules/imageCompress', ImageCompress);
 
-
-const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToErrorArray}) => {
-  const [description, setDescription] = useState('');
+const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToErrorArray, mergeProjectData,projectData }) => {
+  const [description, setDescription] = useState(projectData.description? projectData.description : '');
   let ref1, ref2, ref3 = useRef();
+  const {uiStore} = useStores();
 
 
   //Validation for all fields, first if might look a little strange but
@@ -25,9 +26,9 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
       console.log('test1')
       return false;
     }else {if(errors.value['description'])removeFromErrorArray('description'); 
-    console.log('test2');return true}
+    mergeProjectData({description: description});
+    return true}
     else if(data === '' || data === '<p><br></p>'){
-      console.log('test3')
       addToErrorArray('description', RESPONSE.NoDescription);
       return false;
     } 
@@ -80,11 +81,15 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
     }
   }
 
+  const test = () => {
+    uiStore.uploadDescription({description: description, pictures: []})
+  }
+
 
   return useObserver(() => (
     <div className={style.wrap}>
 
-        <p onClick={validation}>CHECK VALIDATION</p>
+        <p onClick={test}>CHECK UPLOAD</p>
 
           <label className={`${style.midsection__item}`} htmlFor={'budget'}>
             <p className={`${parentStyle.inputTitle}`}>Wat moeten de mensen weten over je project?</p>

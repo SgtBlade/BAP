@@ -15,11 +15,15 @@ import CreateProjectFormStepSix from './F_stepSix/stepSix';
 const CreateProjectForm = () => {
   //const {uiStore} = useStores();
   const [errors, setErrors] = useState({});
+  const [projectData, setProjectData] = useState({});
+
+  const mergeProjectData = (mergeData) => setProjectData({...projectData, ...mergeData})
+  
 
   //control of which page you are on
   const STEPS = { 1: 'Naar de volgende stap 2/5', 2: 'Naar de volgende stap 3/5', 3: 'Naar de volgende stap 4/5', 4: 'Naar de volgende stap 5/5', 5: 'Creatie voltooien 👍', 6: 'Bekijk de pagina', }
 
-  const [currentStep, setCurrentStep] = useState(4)
+  const [currentStep, setCurrentStep] = useState(2)
 
 
   //Remove Function that is given to the components to update the error array
@@ -43,17 +47,17 @@ const CreateProjectForm = () => {
   const returnPage = (number) => {
     switch (number) {
       case 1:
-        return <CreateProjectFormStepOne navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
+        return <CreateProjectFormStepOne projectData={projectData} mergeProjectData={mergeProjectData} navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 2:
-         return <CreateProjectFormStepTwo navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
+         return <CreateProjectFormStepTwo projectData={projectData} mergeProjectData={mergeProjectData} navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 3:
-        return <CreateProjectFormStepThree navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
+        return <CreateProjectFormStepThree projectData={projectData} mergeProjectData={mergeProjectData} navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 4:
-        return <CreateProjectFormStepFour/>;
+        return <CreateProjectFormStepFour projectData={projectData} mergeProjectData={mergeProjectData} navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 5:
-        return <CreateProjectFormStepFive navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
+        return <CreateProjectFormStepFive projectData={projectData} mergeProjectData={mergeProjectData} navData={{ currentStep: {value: currentStep, func: setCurrentStep}, STEPS}} removeFromErrorArray={removeFromErrorArray} addToErrorArray={addToErrorArray} errors={{value: errors, func: setErrors}}/>;
       case 6:
-         return <CreateProjectFormStepSix/>;
+         return <CreateProjectFormStepSix projectData={projectData}/>;
       default:
           return <CreateProjectFormStepOne/>;
     }

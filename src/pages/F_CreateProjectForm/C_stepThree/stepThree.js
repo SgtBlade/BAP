@@ -6,17 +6,19 @@ import NavButtons from '../navButtons/navButtons';
 import { RESPONSE } from '../../../consts/responses';
 
 
-const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addToErrorArray}) => {
+const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addToErrorArray, mergeProjectData, projectData}) => {
 
-  const [personalIntroduction, setPersonalIntroduction] = useState('');
-  const [contact, setContact] = useState(false);
+  const [personalIntroduction, setPersonalIntroduction] = useState(projectData.personalIntroduction ? projectData.personalIntroduction : '');
+  const [contact, setContact] = useState(projectData.contact ? projectData.contact : false);
   let contactRef, publicDataRef;
 
   //Function that does all validations as final check
   const validation = () => {
       validateIntroduction();
       validateContact();
-      if(Object.keys(errors.value).length === 0) return true;
+      if(Object.keys(errors.value).length === 0) {
+        mergeProjectData({contact: contact, personalIntroduction: personalIntroduction})
+        return true;}
       else return false;
   }
 
@@ -35,7 +37,6 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
 
   return useObserver(() => (
     <div className={style.wrap}>
-
 
           <label className={`${style.midsection__item}`} htmlFor={'personalIntroduction'}>
             <p className={`${parentStyle.inputTitle}`}>Hoe moeten de mensen jou / je groep / je organisatie leren kennen?</p>

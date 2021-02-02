@@ -3,6 +3,7 @@ import AuthService from "../services/AuthenticationService";
 import UserService from "../services/UserService";
 import User from "../models/User";
 import { RESPONSE } from "../consts/responses";
+import ProjectService from "../services/ProjectService";
 class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -12,9 +13,20 @@ class UiStore {
     this.isLoading = false;
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
+    this.projectService = new ProjectService(this.rootStore.firebase);
+  }
+
+  test = async () => {
+    this.isLoading = true;
+    await setTimeout(() => {this.isLoading = false;  return true; }, 2000)
+  }
+
+  uploadDescription = (data) => {
+    this.projectService.uploadProject(data, 5)
   }
 
   seed = () => {
+
     return new User({
       bio: "testing the fish in the pond when it is still hot",
       creationDate: 1611067622180,
@@ -113,11 +125,13 @@ class UiStore {
 decorate(UiStore, {
   currentUser: observable,
   verifiedUser: observable,
+  isLoading: observable,
   updateCurrentUser: action,
   logout: action,
   verifyLogin: action,
   onAuthStateChanged: action,
   createAccount: action,
+  test: action,
 });
 
 export default UiStore;

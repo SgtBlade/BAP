@@ -38,6 +38,8 @@ const RegisterForm = () => {
       //Display the new image in the preview window and replace the old image in the picture parameter
       new Compressor(file, {
         quality: 0.4,
+        minWidth: 127,
+        minHeight: 127,
         maxWidth: 127,
         maxHeight: 127,
         success(result) {
