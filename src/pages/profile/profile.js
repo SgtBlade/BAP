@@ -2,7 +2,7 @@ import React from "react";
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./profile.module.css";
-import Tag from "./../../components/tag/tag.js"
+import Tag from "../../components/tag/tag.js"
 import COLORS from "../globalStyles/colors";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
