@@ -2,7 +2,7 @@ import React from "react";
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./profile.module.css";
-import Tag from "../../components/tag/tag.js"
+import Tag from "../../components/Tag/tag.js"
 import COLORS from "../globalStyles/colors";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
@@ -47,7 +47,7 @@ const Profile = () => {
             <div className={style.badgesContainer}>
               <h2 className={style.profileBadgesTitle}>Badges <span className={style.profile__total}>{uiStore.currentUser.unlockedBadges.length}</span></h2>
             </div>
-            <div className={style.badgesSliderContainer}>
+            <div className={style.  }>
               <div className={style.badgesSlider}>
                 <div>
                   <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
