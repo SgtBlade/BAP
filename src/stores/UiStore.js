@@ -37,7 +37,7 @@ class UiStore {
       mail: "migueleken@hotmail.com",
       surname: "de pelsmaeker",
       phone: "+32 478 99 38 47",
-      picture: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2F8SzbHZQ7UygNou338Vks4KTPmf93%2Fde%20pelsmaeker_miguel.jpg?alt=media&token=433024e8-d62a-4dba-8637-5b5e523dddc6",
+      picture: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2F8SzbHZQ7UygNou338Vks4KTPmf93%2Faar_output.png?alt=media&token=3f880272-4d5e-4786-b959-12fd5b4d7862",
       publicMail: true,
       publicPhone: true,
       role: 0,
