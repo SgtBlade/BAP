@@ -106,7 +106,17 @@
     overflow-x: scroll;
     overflow-y: hidden;
     justify-content: space-between;
-    padding-left: 3rem;;
+    padding-left: 3rem;
+}
+
+.badgesSlider::-webkit-scrollbar{
+    width: 10rem;
+    height: 10rem;
+}
+
+.badgesSlider::-webkit-scrollbar-track{
+    width: 10rem;
+    background-color: var(--lightGrey);
 }
 
 .badgesContainer {
@@ -116,8 +126,6 @@
     
 }
 
-
 .badgeImage {
     border: none;
-
 }
