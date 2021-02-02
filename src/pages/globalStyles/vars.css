@@ -5,6 +5,10 @@
   --durfOrange: #F4812E;
   --durfBlue: #01081F;
   --background: #EEEEEE;
+  --lightGrey: #EEEEEE;
   --light: #FFFFFF;
   --dark: #000000;
+
+  --smallShadow: 0 .2rem rgba(0, 0, 0, .15);
+  --tagShadow: 0 .2rem rgba(0, 0, 0, .15);
 }

@@ -4,6 +4,7 @@ const COLORS = {
   durfYellow: "#FFED00",
   durfOrange: "#F4812E",
   durfBlue: "#01081F",
+  lightGrey: "#EEEEEE",
   light: "#FFFFFF",
   dark: "#000000",
 };
