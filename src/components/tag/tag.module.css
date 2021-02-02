@@ -4,7 +4,7 @@
     border-radius: 50rem;
     font-family: "Montserrat_black";
     font-size: 1.6rem;
-    box-shadow: var(--smallShadow);
+    box-shadow: var(--tagShadow);
     display: inline-block;
     width: auto;
 }

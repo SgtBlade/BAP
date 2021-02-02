@@ -44,7 +44,63 @@ const Profile = () => {
           </div>
 
           <section className={style.badges}>
-            <h2 className={style.profileBadgesTitle}>Badges <span className={style.profile__total}>{uiStore.currentUser.unlockedBadges.length}</span></h2>
+            <div className={style.badgesContainer}>
+              <h2 className={style.profileBadgesTitle}>Badges <span className={style.profile__total}>{uiStore.currentUser.unlockedBadges.length}</span></h2>
+            </div>
+            <div className={style.badgesSlider}>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+              <div>
+                <img className={style.badgeImage} src="./assets/badges/eersteFunding.svg" alt="badge"/>
+              </div>
+            </div>
           </section>
 
       </article>
