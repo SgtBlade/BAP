@@ -1,71 +1,65 @@
 // 1 Underscore for space, 2 underscores for &, 3 underscores for /
 const TAGS = {
     Gemeenschap_Groepen: {
-        Vriendengroep: 'Vriendengroep/vrienden',
+        Color: '#230E7D',
+        Vrienden: 'Vriendengroep/vrienden',
         Familie : 'Familie',
         Gezin: 'Gezin',
         Koppel: 'Koppel',
+        Sociaal: 'Sociaal',
+        
+    },
+    Diversiteit: {
+        Color: '#F4812E',
         LGTBQIA: 'LGTBQIA+',
+        Godsdienst: 'Godsdienst',
+        Diversiteit: 'Diversiteit'
     },
 
-    Activiteiten: {
+    Ontspanning: {
+        Color: "#FFED00",
         Theater: 'Theater',
         Dans: 'Dans',
         Spelen: 'Spelen',
         Knutselen: 'Knutselen',
         Ontspanning: 'Ontspanning',
         Muziek: 'Muziek',
-    },
-
-    Beweging: {
         Sport: 'Sport',
         Actief: 'Actief',
+        Kind: "Kind"
     },
 
     Milieu__welzijn: {
+        Color: "#54BBAB",
         Dieren: 'Dieren',
         Natuur: 'Natuur',
         Landbouw: 'Landbouw',
         Gezondheid: 'Gezondheid',
-    },
-
-    Literatuur: {
-        blog: 'blog',
-        vlog: 'vlog',
-        boek: 'boek',
-    },
-
-    Technologie: {
-        Technologie: 'Technologie',
-    },
-
-    Educatie: {
+        Milieu: 'Milieu',
         Educatie: 'Educatie',
     },
 
-    Sociaal: {
-        Sociaal: 'Sociaal',
-    },
-
-    Kunst___Artestiek: {
+    Kunst: {
+        Color: "#01081F",
         Architectuur: 'Architectuur',
         Fotografie: 'Fotografie',
         Mode: 'Mode',
     },
 
-    Eten: {
+    Consumeren: {
+        Color: "#E62336",
         Eten: 'Eten',
-    },
-
-    Drinken: {
         Drinken: 'Drinken',
     },
 
     Economie: {
-        commercieel: 'commercieel',
-        winkels: 'winkels',        
+        Color: "#D02C75",
+        Commercieel: 'Commercieel',
+        winkels: 'winkels', 
+        Technologie: 'Technologie',      
+        Economie: 'Economie',
+        Ambacht: 'Ambacht' 
     }
-
 
 }
 
