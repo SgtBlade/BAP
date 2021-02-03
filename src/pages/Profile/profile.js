@@ -8,9 +8,10 @@ import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
 const Profile = () => {
-  const { uiStore } = useStores();
+  const { uiStore, projectStore } = useStores();
 
   console.log(uiStore.currentUser);
+  console.log(projectStore.projects);
 
   return useObserver(() => (
     <article className={style.profile}>
@@ -229,7 +230,11 @@ const Profile = () => {
           <ProjectPreview type='funding'/>
           <ProjectPreview type='voting'/>
           <ProjectPreview type='funding'/>
-          
+          <ProjectPreview type='funding'/>
+          <ProjectPreview type='funding'/>
+          <ProjectPreview type='funding'/>
+          <ProjectPreview type='funding'/>
+          <ProjectPreview type='funding'/>
         </div>
       </section>
     </article>

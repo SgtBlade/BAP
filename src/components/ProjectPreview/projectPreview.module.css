@@ -3,6 +3,7 @@
     position: relative;
     box-shadow: var(--cardShadow);
     border-radius: 1rem;
+    background-color: var(--cardGrey);
 }
 
 .projectCard__container {
@@ -86,6 +87,7 @@
     grid-template-columns: repeat(3,1fr);
     position: absolute;
     bottom: 2.5rem;
+    
 }
 
 .projectCard__tag {

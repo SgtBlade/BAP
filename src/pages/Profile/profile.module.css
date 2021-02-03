@@ -1,3 +1,9 @@
+.profile {
+    background-image: url('/assets/uiElementen/greenRectangleOutline.svg');
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+
 .profileName {
     text-transform: uppercase;
     font-family: "Montserrat_black";
@@ -151,7 +157,10 @@
 }
 
 .profileProjects {
-    margin-bottom: 5rem;
+    padding-bottom: 10rem;
+    background: url('/assets/uiElementen/yellowRectangle.svg');
+    background-repeat: no-repeat;
+    background-position: right top; 
 }
 
 .profileProjectsContainer {
@@ -169,6 +178,7 @@
     column-gap: 2.5rem;
     justify-items: center;
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 5rem
 }
 
 
