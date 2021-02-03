@@ -17,8 +17,8 @@ const Authentication = () => {
       <div>
         <Switch>
           
-          <Route path={ROUTES.home}>
-            <Testenv/>
+          <Route exact path={ROUTES.home}>
+            {/* <Testenv/> */}
             <Home/>
           </Route>
 
@@ -26,7 +26,7 @@ const Authentication = () => {
             {console.log('test')}
             
           </Route>
-          <Route exact path={ROUTES.overons}>
+          <Route exact path={ROUTES.overons}> 
 
           </Route>
 
