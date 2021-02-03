@@ -4,6 +4,7 @@ import { useObserver } from "mobx-react-lite";
 import style from "./profile.module.css";
 import Tag from "../../components/Tag/tag.js";
 import COLORS from "../globalStyles/colors";
+import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
 const Profile = () => {
@@ -83,7 +84,7 @@ const Profile = () => {
       <section className={style.badges}>
         <div className={style.badgesContainer}>
           <h2 className={style.profileBadgesTitle}>
-            Badges{" "}
+            Badges
             <span className={style.profile__total}>
               {uiStore.currentUser.unlockedBadges.length}
             </span>
@@ -212,6 +213,23 @@ const Profile = () => {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={style.profileProjects}>
+        <div className={style.profileProjectsContainer}>
+          <h2 className={style.profileProjectsTitle}>
+            Projecten
+            <span className={style.profile__total}>
+              {uiStore.currentUser.unlockedBadges.length}
+            </span>
+          </h2>
+        </div>
+        <div className={style.profileProjects__container}>
+          <ProjectPreview type='funding'/>
+          <ProjectPreview type='voting'/>
+          <ProjectPreview type='funding'/>
+          
         </div>
       </section>
     </article>

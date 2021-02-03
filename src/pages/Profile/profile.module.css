@@ -5,7 +5,7 @@
     margin-bottom: 1rem;
 }
 
-.profileTagsTitle, .profileBadgesTitle {
+.profileTagsTitle, .profileBadgesTitle, .profileProjectsTitle {
     font-family: "Montserrat_black";
     font-size: 1.8rem;
 }
@@ -26,7 +26,6 @@
 
 .profileHeader {
     display: flex;
-    width: 100vw;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15rem;
@@ -101,41 +100,78 @@
     color: white;
 }
 
-.badgesSliderContainer{
-    position: relative;
+.badges {
+    margin-bottom: 15rem;
 }
+
+.badgesSliderContainer {
+    position: relative;
+    background: url(/assets/uiElementen/halveCirkelRood.svg);
+    height: 19.1rem;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
 .badgesSlider{
     position: absolute;
-    width: 90vw;
+    width: 92.5vw;
     display: flex;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     justify-content: space-between;
-    padding-left: 3rem;
     right: 0;
+   
 }
 
 .badgesSlider::-webkit-scrollbar{
     width: 100%;
-    height: 2.5rem;
+    height: 1rem;
+    border-radius: 5rem;
 }
 
 .badgesSlider::-webkit-scrollbar-track{
     width: 10px;
-    background-color: var(--lightGrey);
+    background-color: white;
+    border-radius: 5rem;
 }
 
 .badgesSlider::-webkit-scrollbar-thumb {
     background: #888; 
+    border-radius: 5rem;
 }
 
-.badgesContainer {
-    width: 160rem;
+.badgesContainer, .profileProjectsContainer {
+    width: 85vw;
     margin: auto; 
     margin-bottom: 2.5rem;
-    
 }
 
 .badgeImage {
     border: none;
 }
+
+.profileProjects {
+    margin-bottom: 5rem;
+}
+
+.profileProjectsContainer {
+    margin-bottom: 5rem;
+}
+.profileProjectsTitle{
+    font-size: 2.8rem;
+    color: var(--durfGreen); 
+}
+
+.profileProjects__container{
+    width: 85vw;
+    margin: auto;
+    display: grid;
+    column-gap: 2.5rem;
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+
+
+

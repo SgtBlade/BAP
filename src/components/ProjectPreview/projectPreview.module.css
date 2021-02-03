@@ -1,0 +1,147 @@
+.projectCard {
+    width: 100%;
+    position: relative;
+    box-shadow: var(--cardShadow);
+    border-radius: 1rem;
+}
+
+.projectCard__container {
+    padding-left: 1rem;
+    padding-bottom: 2.5rem;
+}
+
+.projectCard__image {
+    width: 100%;
+    border-radius: 0rem 1rem 0 0;
+    margin-bottom: 2.5rem;
+}
+.borderLeft {
+    width: 1rem;
+    height: 100%;
+    background-color: black;
+    position: absolute;
+    border-radius: 1rem 0 0 1rem;
+}
+
+.projectCard__container__content {
+    padding: 0rem 2.5rem;
+    background-color: var(--cardGrey);
+}
+
+.projectCard__container__content__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.projectCard__title {
+    font-size: 1.8rem;
+    font-family: "Montserrat_black";
+    margin-right: 1.5rem;
+}
+
+.projectCard__type {
+    font-size: 1.2rem;
+    font-family: "Montserrat-semiBold";
+    padding: .5rem 1.5rem;
+    background-color: black;
+    color: white;
+    border-radius: 2rem;
+}
+
+.projectCard__funding {
+    margin-bottom: 2.5rem;
+}
+
+.projectCard__funding__progressValues {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+}
+
+.projectCard__funding__progressValues__content {
+    font-size: 1.6rem;
+    font-family: "Montserrat-semiBold";
+    position: relative;
+}
+
+.projectCard__funding__progressBar {
+    width: 100%;
+    height: 1.5rem;
+    border:none;
+    margin-bottom: .5rem;
+}
+
+.projectCard__time {
+    font-size: 1.4rem;
+    color: #767676;
+    font-family: "Montserrat";
+    font-weight: 200;
+}
+
+.projectCard__tags {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    position: absolute;
+    bottom: 2.5rem;
+}
+
+.projectCard__tag {
+    font-size: 1.8rem;
+    font-family: "Montserrat";
+    font-weight: 200;
+    display: flex;
+    align-items: center;
+
+}
+
+.projectCard__tag__color {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50rem;
+    margin-right: 1rem;
+    display: inline-block;
+    background-color: black;
+}
+
+.projectCard__voting {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.projectCard_voting_text {
+    font-size: 1.6rem;
+    color: var(--durfGreenDarker);
+    font-family: "Montserrat-semiBold";
+    margin-bottom: .5rem;    
+}
+
+.projectCard__voting__container {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    padding-right: 5rem;
+    background-color: var(--durfGreenDarker);
+    position: absolute;
+    color: white;
+    border-radius: 1rem 0 0 1rem;
+    right: -2.5rem;
+}
+
+.projectCard__voting__amount {
+    font-size: 2.4rem;
+    font-family: "Montserrat-semiBold";
+    margin-left: .5rem;
+}
+
+.projectCard__description {
+    font-size: 1.6rem;
+    font-family: "Montserrat";
+    font-weight: 200;
+    margin-bottom: 5rem;
+}
+
