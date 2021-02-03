@@ -9,9 +9,9 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
   const tmpDate = new Date(Date.now());
   
 
-  const [deadline, setDeadline] = useState(projectData.deadline ? projectData.deadline : undefined)
-  const [allowQuestions, setAllowQuestions] = useState(projectData.allowQuestions ? projectData.allowQuestions : undefined)
-  const [allowComments, setAllowComments] = useState(projectData.allowComments ? projectData.allowComments : undefined)
+  const [deadline, setDeadline] = useState(projectData.deadline ? projectData.deadline : false)
+  const [allowQuestions, setAllowQuestions] = useState(projectData.allowQuestions ? projectData.allowQuestions : false)
+  const [allowComments, setAllowComments] = useState(projectData.allowComments ? projectData.allowComments : false)
   const [date, setDate] = useState(projectData.date ? projectData.date : `${tmpDate.getFullYear()}-${tmpDate.getMonth()+1 >= 10 ? `${tmpDate.getMonth()+1}` : `0${tmpDate.getMonth()+1}`}-${tmpDate.getDate()+1 >= 10 ? `${tmpDate.getDate()+1}` : `0${tmpDate.getDate()+1}`}`)
 
   const handleDateChange = (value = date) => {
@@ -20,12 +20,7 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
   }
 
   const validation = () => {
-    if(deadline === undefined) addToErrorArray('deadline', RESPONSE.NoOptionChosen)
-    else if(errors.value['deadline'])removeFromErrorArray('deadline')
-    if(allowQuestions === undefined) addToErrorArray('allowQuestions', RESPONSE.NoOptionChosen)
-    else if(errors.value['allowQuestions'])removeFromErrorArray('allowQuestions')
-    if(allowComments === undefined) addToErrorArray('allowComments', RESPONSE.NoOptionChosen)
-    else if(errors.value['allowComments'])removeFromErrorArray('allowComments')
+    
 
     if(Object.keys(errors.value).length === 0) {
       mergeProjectData({
@@ -86,7 +81,7 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
       </article>
 
       
-      <NavButtons errors={errors} validate={validation} currentStep={navData.currentStep} STEPS={navData.STEPS}/>
+      <NavButtons errors={errors} validate={validation} currentStep={navData.currentStep} STEPS={navData.STEPS} projectData={projectData}/>
     </div>
   ));
 };

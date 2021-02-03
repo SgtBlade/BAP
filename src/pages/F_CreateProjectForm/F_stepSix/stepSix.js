@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useObserver } from "mobx-react-lite";
 import style from "./stepSix.module.css";
 import { useStores } from "../../../hooks/useStores";
@@ -7,8 +7,10 @@ import { useStores } from "../../../hooks/useStores";
 
 const CreateProjectFormStepSix = ({projectData}) => {
   const { uiStore } = useStores();
+  const [hasUploaded, setHasUploaded] = useState(false);
 
-  console.log(projectData)
+  if(!hasUploaded){uiStore.uploadProject(projectData); setHasUploaded(true)}
+
   return useObserver(() => (
     <div className={style.wrap}>
       

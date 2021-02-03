@@ -17,13 +17,15 @@ const CreateProjectForm = () => {
   const [errors, setErrors] = useState({});
   const [projectData, setProjectData] = useState({});
 
+  //Merging the old data with the new data
   const mergeProjectData = (mergeData) => setProjectData({...projectData, ...mergeData})
   
 
   //control of which page you are on
   const STEPS = { 1: 'Naar de volgende stap 2/5', 2: 'Naar de volgende stap 3/5', 3: 'Naar de volgende stap 4/5', 4: 'Naar de volgende stap 5/5', 5: 'Creatie voltooien 👍', 6: 'Bekijk de pagina', }
 
-  const [currentStep, setCurrentStep] = useState(2)
+  //The step in the process
+  const [currentStep, setCurrentStep] = useState(1)
 
 
   //Remove Function that is given to the components to update the error array

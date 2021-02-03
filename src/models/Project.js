@@ -1,9 +1,7 @@
-'./assets/project/default.jpg'
-
-
+import { decorate, observable, action } from "mobx";
 class Project {
   
-  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers, deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = [], previewText, questions, requirements, tags, updates, creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0})
   {
     this.id = id;
     this.title = title;
@@ -12,6 +10,7 @@ class Project {
     this.ownerID = ownerID;
     this.publicOwner = publicOwner;
     this.budget = budget;
+    this.collectedMoney = collectedMoney;
     this.contact = contact;
     this.coWorkers = coWorkers;
     this.deadlineDate = deadlineDate;
@@ -33,6 +32,7 @@ class Project {
     this.downvotes = downvotes;
   }
 
+  setOwnerID = (id) => this.ownerID = id;
 
   changeID = (id) => this.id = id;
 
@@ -42,12 +42,17 @@ class Project {
 
   setPictures = (picArr) => this.pictures = picArr;
 
-
-
-
-
-
-
+  convertDescriptionToData = async () => {
+    var descriptionFile = new XMLHttpRequest();
+    descriptionFile.open("GET",this.description,true);
+    descriptionFile.send();
+    descriptionFile.onreadystatechange = () => {
+        if (descriptionFile.readyState === 4 && descriptionFile.status === 200) {
+            this.description = (descriptionFile.responseText);
+        }
+     }
+     return true;
+  }
 
 }
 
@@ -60,7 +65,8 @@ const projectConverter = {
       allowQuestions: project.allowQuestions, 
       ownerID: project.ownerID, 
       publicOwner: project.publicOwner, 
-      budget: project.budget, 
+      budget: project.budget,
+      collectedMoney: project.collectedMoney,
       contact: project.contact, 
       coWorkers: project.coWorkers, 
       deadline: project.deadline, 
@@ -92,6 +98,7 @@ const projectConverter = {
       ownerID: data.ownerID,
       publicOwner: data.publicOwner,
       budget: data.budget,
+      collectedMoney: data.collectedMoney,
       contact: data.contact,
       coWorkers: data.coWorkers,
       deadline: data.deadline,
@@ -114,6 +121,11 @@ const projectConverter = {
     });
   }
 };
+
+decorate(Project, {
+  description: observable,
+  convertDescriptionToData: action,
+});
 
 export { projectConverter };
 export default Project;

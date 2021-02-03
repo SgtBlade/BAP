@@ -1,6 +1,7 @@
 import UiStore from "./UiStore";
 
 import * as firebase from "firebase/app";
+import ProjectStore from "./ProjectStore";
 
 class RootStore {
   constructor() {
@@ -16,6 +17,7 @@ class RootStore {
     // Initialize Firebase
     this.firebase = firebase.initializeApp(firebaseConfig);
     this.uiStore = new UiStore(this);
+    this.projectStore = new ProjectStore(this);
     this.initFirebaseCaching();
   }
 

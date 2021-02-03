@@ -26,7 +26,8 @@ const NavButtons = ({validate, currentStep, errors, STEPS, newProjectID = ''}) =
       <p onClick={async () => {
         if(await validate())
         {
-          currentStep.func(currentStep.value+1);window.scrollTo(0, 0);}
+          currentStep.func(currentStep.value+1);window.scrollTo(0, 0);
+        }
         }}  className={`${globalStyle.mainButton}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep.value]} </Link></p>
       :
       <p onClick={async () => {

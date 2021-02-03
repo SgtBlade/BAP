@@ -15,13 +15,13 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
 
 
   //Data required for the project
-  const [projectName, setProjectName] = useState(projectData.title? projectData.title : '')
-  const [budget, setBudget] = useState(projectData.budget? projectData.budget : '')
+  const [projectName, setProjectName] = useState(projectData.title? projectData.title : 'Dit is een project titel')
+  const [budget, setBudget] = useState(projectData.budget? projectData.budget : '2100')
   const [tags, setTags] = useState(projectData.tags? projectData.tags : [])
   const [pictures, setPictures] = useState(projectData.pictures? projectData.pictures : [])
   const [owner, setOwner] = useState(projectData.owner? projectData.owner : `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`)  
-  const [preview, setPreview] = useState(projectData.previewText? projectData.previewText : '')  
-  const [location, setLocation] = useState(projectData.location? projectData.location : '')  
+  const [preview, setPreview] = useState(projectData.previewText? projectData.previewText : 'Dit is een preview text van maximaal 120 woorden')  
+  const [location, setLocation] = useState(projectData.location? projectData.location : 'Ghent')  
 
   let tagValues = [];
   const handleTagAdd = async (e) => {
@@ -214,11 +214,14 @@ const CreateProjectFormStepOne = ({removeFromErrorArray, addToErrorArray, errors
                 name="skills" 
                 defaultValue='00'>
                 <option disabled value='00'> -- select an option -- </option>
-                        { Object.keys(TAGS).map(function(key, index) {
-                          return <optgroup key={key} label={key.replace('___', ' / ').replace('__', ' & ').replace('_', ' ')}>
-                            { Object.keys(TAGS[key]).map(function(seckey, secindex) {
+                        { Object.keys(TAGS).map((key, index) => {
+                          
+                          return <optgroup key={`Goption_${key}`} label={key.replace('___', ' / ').replace('__', ' & ').replace('_', ' ')}>
+                            { Object.keys(TAGS[key]).map((seckey, secindex) => {
+                              if(key !== 'Color'){
                               tagValues.push(TAGS[key][seckey])
-                              return <option key={`${key}${secindex}`} value={TAGS[key][seckey]}>{TAGS[key][seckey]}</option>
+                              return <option key={`${key}${secindex}`} value={TAGS[key][seckey]}>{TAGS[key][seckey]}</option>}
+                              else return false;
                             }) }
                           </optgroup>
                         }) }

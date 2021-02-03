@@ -13,7 +13,6 @@ const Home = () => {
 
   console.log(uiStore.currentUser);
 
-  //intro
 
   return (
     <main>

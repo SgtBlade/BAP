@@ -1,80 +1,85 @@
 import "firebase/firestore";
 import "firebase/auth";
 import 'firebase/storage'; 
-import User, { userConverter } from "../models/User";
-import { RESPONSE } from "../consts/responses";
 import { v4 } from "uuid";
-import Project from "../models/Project";
+import Project, { projectConverter } from "../models/Project";
 
 class ProjectService {
   constructor(firebase) {
     this.db = firebase.firestore();
     this.auth = firebase.auth();
     this.storage = firebase.storage();
-    this.test = {
-      allowComments: true,
-      allowQuestions: false,
-      contact: {mail: "mijnEmail.@gmail.com", phone: "032421 12 42"},
-      deadline: true,
-      deadlineDate: "2021-02-18",
-      description: `<h1 class="ql-align-justify"><strong>Lorem's story</strong></h1><p class="ql-align-justify"><br></p><p class="ql-align-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus tristique tempus. Fusce iaculis urna ut lacus suscipit, vulputate condimentum ligula ullamcorper. Suspendisse ac mollis orci. Vestibulum sagittis sapien ut interdum consectetur. Nunc bibendum sodales ex, vitae ultricies libero dapibus ac. Proin porttitor, lacus vitae lacinia auctor, nulla sapien egestas sapien, id sodales elit quam vitae sapien. Nullam at lectus sem. Proin quis tellus vel elit auctor sodales a id urna.</p><p class="ql-align-justify">Sed ut augue dignissim quam porta lobortis. Fusce blandit imperdiet sapien id semper. Nullam vulputate justo id diam finibus euismod. Curabitur nisl odio, convallis aliquet libero id, viverra feugiat turpis. Aenean sed pretium dui. Nulla at nulla eget est consequat maximus vitae nec dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><p class="ql-align-justify">Phasellus efficitur est at lectus euismod, a venenatis metus placerat. Vivamus sagittis nibh est, eget malesuada odio molestie dignissim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In pulvinar vehicula arcu, sed suscipit elit pharetra vel. Vestibulum eleifend mattis magna non elementum. Nunc ut augue vestibulum, laoreet nisi at, ultrices turpis. In porta pretium diam, sit amet lacinia neque tempor a. Cras placerat eleifend convallis.</p><p class="ql-align-justify">Proin ac varius urna, sit amet dictum neque. Integer et enim lectus. Fusce arcu augue, convallis eu enim sit amet, pretium scelerisque velit. Suspendisse euismod lacinia ante, sed semper libero. Sed rutrum finibus est, et tincidunt nisi dictum finibus. Pellentesque pretium tortor in rutrum sodales. Nullam luctus sed odio vel pretium. Etiam rhoncus volutpat sapien sit amet accumsan. Suspendisse feugiat a turpis ut semper. Aenean condimentum condimentum dolor, id aliquam sem finibus sed. Nulla ac ullamcorper nisi, eget congue odio. Cras ac orci sed diam elementum interdum ut id tortor. Integer auctor justo lacus, sed luctus odio posuere vitae.</p><p><br></p><p class="ql-align-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus tristique tempus. Fusce iaculis urna ut lacus suscipit, vulputate condimentum ligula ullamcorper. Suspendisse ac mollis orci. Vestibulum sagittis sapien ut interdum consectetur. Nunc bibendum sodales ex, vitae ultricies libero dapibus ac. Proin porttitor, lacus vitae lacinia auctor, nulla sapien egestas sapien, id sodales elit quam vitae sapien. Nullam at lectus sem. Proin quis tellus vel elit auctor sodales a id urna.</p><p class="ql-align-justify">Sed ut augue dignissim quam porta lobortis. Fusce blandit imperdiet sapien id semper. Nullam vulputate justo id diam finibus euismod. Curabitur nisl odio, convallis aliquet libero id, viverra feugiat turpis. Aenean sed pretium dui. Nulla at nulla eget est consequat maximus vitae nec dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p><p class="ql-align-justify">Phasellus efficitur est at lectus euismod, a venenatis metus placerat. Vivamus sagittis nibh est, eget malesuada odio molestie dignissim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In pulvinar vehicula arcu, sed suscipit elit pharetra vel. Vestibulum eleifend mattis magna non elementum. Nunc ut augue vestibulum, laoreet nisi at, ultrices turpis. In porta pretium diam, sit amet lacinia neque tempor a. Cras placerat eleifend convallis.</p><p class="ql-align-justify">Proin ac varius urna, sit amet dictum neque. Integer et enim lectus. Fusce arcu augue, convallis eu enim sit amet, pretium scelerisque velit. Suspendisse euismod lacinia ante, sed semper libero. Sed rutrum finibus est, et tincidunt nisi dictum finibus. Pellentesque pretium tortor in rutrum sodales. Nullam luctus sed odio vel pretium. Etiam rhoncus volutpat sapien sit amet accumsan. Suspendisse feugiat a turpis ut semper. Aenean condimentum condimentum dolor, id aliquam sem finibus sed. Nulla ac ullamcorper nisi, eget congue odio. Cras ac orci sed diam elementum interdum ut id tortor. Integer auctor justo lacus, sed luctus odio posuere vitae.</p><p><br></p>`,
-      discussions: [],
-      location: "Ghent",
-      multipleChoice: [],
-      personalIntroduction: "Ik heb geen idee hoe menzen mij moeten leren kennen",
-      pictures: [],
-      previewText: "Dit is de korte beschrijving die maximum 120 woorden mag bevatten amar ik weet niet meer wat te zeggen oh kijk 120 woord",
-      publicOwner: "miguel de pelsmaeker",
-      questions:  ["De ja-neen vraag", "Nog een ja-neen vraag"],
-      requirements: [],
-      tags: [],
-      title: "This is the project title"}
   }
 
+  getProjectById = async (id) => {
+    //Basic database query to get project and convert to project object
+    let project = await this.db
+    .collection("projects")
+    .doc(id)
+    .withConverter(projectConverter)
+    .get();
+    //await for the data of the query above and take the data
+    project = await project.data();
+    //Update requests of this type
+    return project;
+  }
 
-  uploadProject = async (data) => {
-    //const docRef = this.dp.collection("projects").doc();
-    //const docId = docRef.id;
+  uploadProject = async (data, userID) => {
     
-    const project = new Project(this.test);
+    //Prepare a new document and get the id of it
+    const docRef = this.db.collection("projects").doc();
+    const docId = docRef.id;
+    const project = new Project(data);
 
-    project.setPictures(this.uploadImages(data.pictures))
-    this.uploadDescription(data.description, 'projectID')
-    .then((value) => project.setDescription(value))
-    .then(() => {
+    //Set the owner, upload the images and description
+    project.setOwnerID(userID)
+    await this.uploadImages(data.pictures, docId, userID)
+    .then(pics => project.setPictures(pics))
+    .then(async () => 
+                await this.uploadDescription(data.description, docId, userID)
+                .then((value) => project.setDescription(value))
+                .then(() => {
+                  //Once the description is uploaded, upload the rest of the data
+                  docRef
+                      .withConverter(projectConverter)
+                      .set(project)
+                      .then(function() {
+                        console.log("Document successfully written!");
+                        console.log(project)
+                      })
+                      .catch(function(error) {
+                          console.error("Error writing document: ", error);
+                      });
+                })
+                .then(() => {
+                  console.log(project)
+                  
+                return true;
+                }))
 
-      //console.log(project)
-      console.log(project.description)
-    })
-    .then(() => {
-      //console.log(data)
-    })
-    /*
-    docRef.set(data)
-          .then(function() {
-            console.log("Document successfully written!");
-          })
-          .catch(function(error) {
-              console.error("Error writing document: ", error);
-          });*/
+    return true;
 
     
   }
 
-  uploadImages = async (images, projectID) => {
+  uploadImages = async (images, projectID, userID) => {
     let Urls = [];
-    await images.forEach((image => {
+    //Loop through all images
+    await images.forEach((async image => {
     
       const storageRef = this.storage.ref();
       const name = v4();
+      //Getting the file type
       const imageType = image.name.split('.')[image.name.split('.').length]
 
-      this.blobToBase64(image).then(res => {
+      //convert then upload
+      await this.blobToBase64(image).then(async res => {
 
-        let ImageRef = storageRef.child(`${5}/${projectID}/${name}.${imageType}`).putString(res, 'data_url');
-        ImageRef.on("state_changed", {
+        let ImageRef = storageRef.child(`projects/${userID}/${projectID}/${name}.${imageType}`).putString(res, 'data_url');
+        await ImageRef.on("state_changed", {
           error: error => console.log(error),
           complete: () => {
+              //once you have the url push it to the array to collect them & push later
               ImageRef.snapshot.ref.getDownloadURL()
               .then(downloadURL => {
                 Urls.push(downloadURL)
@@ -82,19 +87,16 @@ class ProjectService {
           }
         });
 
-      });
-
+      })
     }))
-
-    return Urls;
-    
+    return await Urls;
     
   }
 
-  uploadDescription = async (file, projectID) => {
-      
+  uploadDescription = async (file, projectID, userID) => {
+      //Create a reference and push the data, once its done, return the url of the file
       const storageRef = this.storage.ref();
-        let descriptionRef = await storageRef.child(`${5}/${5}/description.txt`).putString(file)
+        let descriptionRef = await storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)
         .then((snapshot) => {
           const url = (snapshot.ref.getDownloadURL());
           return url;
@@ -103,6 +105,7 @@ class ProjectService {
       
   }
 
+  //convert blob to base64, this is used to upload pictures
   blobToBase64 = blob => {
     const reader = new FileReader();
     reader.readAsDataURL(blob);
@@ -112,7 +115,69 @@ class ProjectService {
       };
     });
   };
+  
+  //CURRENTLY UNUSED DELETE LATER
+  getDescriptionDownloadData = (userID, projectID) => {
 
+    const storageRef = this.storage.ref();
+    var starsRef = storageRef.child('projects/8SzbHZQ7UygNou338Vks4KTPmf93/7ogVf47Ir8Y9xUqMCf0J/description.txt');
+    // Get the download URL
+    starsRef.getDownloadURL()
+    .then((data => {
+      fetch(data)
+      .then(function(response) {
+        response.text().then(function(text) {
+          console.log(text);
+        });
+      });
+    }))
+  
+    .catch((error) => {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case 'storage/object-not-found':
+          // File doesn't exist
+          break;
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+        case 'storage/unknown':
+          // Unknown error occurred, inspect the server response
+          break;
+        default:
+          // User canceled the upload
+          break;
+      }
+    });
+
+
+    /*
+    const ref = this.storage.ref(`projects/8SzbHZQ7UygNou338Vks4KTPmf93/7ogVf47Ir8Y9xUqMCf0J/description.txt`);
+    ref.getDownloadURL().subscribe(data => {
+      fetch(data)
+      .then(function(response) {
+        response.text().then(function(text) {
+          console.log(text);
+        });
+      });
+    });*/
+  }
+
+  convertDescriptionToData = async (url, setDescription) => {
+    //Send a request to the url to get the txt file, update the file with the function once it's fetched
+    var descriptionFile = new XMLHttpRequest();
+    descriptionFile.open("GET",url,true);
+    descriptionFile.send();
+    descriptionFile.onreadystatechange = () => {
+        if (descriptionFile.readyState === 4 && descriptionFile.status === 200) {
+          setDescription(descriptionFile.responseText);
+        }
+     }
+  }
 }
 
 export default ProjectService;

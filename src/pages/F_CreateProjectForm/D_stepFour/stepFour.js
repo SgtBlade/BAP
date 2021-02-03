@@ -12,16 +12,17 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   const [allowDiscussion, setAllowDiscussion] = useState(projectData.discussions ? projectData.discussions.length > 0 ? true: false : false);
 
   //The actual data variables
-  const [questions, setQuestions] = useState(projectData.questions ? projectData.questions : [])
-  const [multipleChoice, setMultiplechoice] = useState(projectData.multipleChoice ? projectData.multipleChoice : [])
-  const [requirements, setRequirements] = useState(projectData.requirements ? projectData.requirements : [])
-  const [discussions, setDiscussions] = useState(projectData.discussions ? projectData.discussions : [])
+  const [questions, setQuestions] = useState(projectData.questions ?? [])
+  const [multipleChoice, setMultiplechoice] = useState(projectData.multipleChoice ?? [])
+  const [requirements, setRequirements] = useState(projectData.requirements ?? [])
+  const [discussions, setDiscussions] = useState(projectData.discussions ?? [])
 
 
   //Update the questions array, again -> using ... because rerender wont trigger otherwise
   const updateQuestions = (value, index) => {
       let tmpQuestions = questions;
-      tmpQuestions[index] = value;
+      if(!tmpQuestions[index]) tmpQuestions[index] = {value: '', yes: 0, no: 0}
+      tmpQuestions[index].value = value;
       setQuestions([...tmpQuestions])
   }
 
@@ -29,7 +30,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   //this means you can't just set x[index].quesion = or you'd get an error
   const updateMultiplechoice = (value, index) => {
     let tmpQuestions = multipleChoice;
-    if(!tmpQuestions[index]) tmpQuestions[index] = {question: value, options: ['']};
+    if(!tmpQuestions[index]) tmpQuestions[index] = {question: value, options: [{value: '', count: 0}, {value: '', count: 0}]};
     else tmpQuestions[index].question = value;
     setMultiplechoice([...tmpQuestions])
   }
@@ -37,7 +38,8 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   //Updating the options of a certain question
   const updateMultipleChoiceOption = (value, questionIndex, optionIndex) => {
     let tmpQuestions = multipleChoice;
-    tmpQuestions[questionIndex].options[optionIndex] = value;
+    if(!tmpQuestions[questionIndex].options[optionIndex]) tmpQuestions[questionIndex].options[optionIndex] = {value: '', count: 0}
+    else tmpQuestions[questionIndex].options[optionIndex].value = value;
     setMultiplechoice([...tmpQuestions])
   }
 
@@ -59,7 +61,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   }
 
   //not much to validate here except for cleaning up empty values
-  const cleanupQuestions = () => questions.filter(question => question.replace(' ', '').length > 3);
+  const cleanupQuestions = () => questions.filter(question => question.value.replace(' ', '').length > 3);
   const cleanupMultipleChoice = () => setMultiplechoice(multipleChoice.filter(choice => choice.question.replace(' ', '').length > 3))
   const cleanupRequirements = () => setRequirements(requirements.filter(requirement => requirement.name.replace(' ', '').length > 3))
   const cleanupDiscussion = () => setDiscussions(discussions.filter(discussion => discussion.name.replace(' ', '').length > 3 && discussion.url.replace(' ', '').length > 3 ))
@@ -108,7 +110,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
         <div className={style.box}
          onClick={() => {
            if(!allowMultipleChoice){
-             if(multipleChoice.length === 0)setMultiplechoice([{question: '', options: ['']}])
+             if(multipleChoice.length === 0)setMultiplechoice([{question: '', options: [{value: '', count: 0}, {value: '', count: 0}]}])
                 setAllowMultipleChoice(true); }
            else {setAllowMultipleChoice(false);cleanupMultipleChoice()}}} 
         >
@@ -173,7 +175,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
                     <input 
                     onChange={ e => {updateQuestions(e.currentTarget.value, index)}} 
                     className={parentStyle.input}
-                    value={question}  
+                    value={question.value}  
                     type={'text'}
                     placeholder={'Je vraag'}
                     /> 
@@ -219,12 +221,12 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
                           <input 
                           onChange={ e => {updateMultipleChoiceOption(e.currentTarget.value, questionIndex, optionIndex)}} 
                           className={parentStyle.input}
-                          value={option}  
+                          value={option.value}  
                           type={'text'}
                           /> <div onClick={
                             () => {
                               const tmpArray = multipleChoice;
-                              if(tmpArray[questionIndex].options.length > 1){
+                              if(tmpArray[questionIndex].options.length > 2){
                               tmpArray[questionIndex].options.splice(optionIndex, 1)
                               setMultiplechoice([...tmpArray])}
                             }

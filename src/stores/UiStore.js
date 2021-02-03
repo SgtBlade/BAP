@@ -21,8 +21,10 @@ class UiStore {
     await setTimeout(() => {this.isLoading = false;  return true; }, 2000)
   }
 
-  uploadDescription = (data) => {
-    this.projectService.uploadProject(data, 5)
+  uploadProject = async (data) => {
+    this.isLoading = true;
+    this.projectService.uploadProject(data, this.currentUser.id)
+    .then(() => {this.isLoading = false;})
   }
 
   seed = () => {
@@ -132,6 +134,7 @@ decorate(UiStore, {
   onAuthStateChanged: action,
   createAccount: action,
   test: action,
+  uploadDescription: action,
 });
 
 export default UiStore;

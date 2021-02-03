@@ -8,7 +8,7 @@ import { RESPONSE } from '../../../consts/responses';
 
 const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addToErrorArray, mergeProjectData, projectData}) => {
 
-  const [personalIntroduction, setPersonalIntroduction] = useState(projectData.personalIntroduction ? projectData.personalIntroduction : '');
+  const [personalIntroduction, setPersonalIntroduction] = useState(projectData.personalIntroduction ? projectData.personalIntroduction : 'hier komt een persoonlijke introductie over mezelf, de groep of andere dingen');
   const [contact, setContact] = useState(projectData.contact ? projectData.contact : false);
   let contactRef, publicDataRef;
 
