@@ -7,13 +7,11 @@ import 'react-quill/dist/quill.snow.css';
 import ImageCompress from 'quill-image-compress';
 import NavButtons from '../navButtons/navButtons';
 import { RESPONSE } from '../../../consts/responses';
-import { useStores } from '../../../hooks/useStores';
 Quill.register('modules/imageCompress', ImageCompress);
 
 const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToErrorArray, mergeProjectData,projectData }) => {
   const [description, setDescription] = useState(projectData.description ??  ``);
   let ref1, ref2, ref3 = useRef();
-  const {uiStore} = useStores();
 
 
   //Validation for all fields, first if might look a little strange but
@@ -83,33 +81,16 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
     }
   }
 
-  const test = () => {
-    uiStore.uploadDescription({description: description, pictures: []})
-  }
-
-
   return useObserver(() => (
     <div className={style.wrap}>
-
-        <p onClick={test}>CHECK UPLOAD</p>
-
           <label className={`${style.midsection__item}`} htmlFor={'budget'}>
             <p className={`${parentStyle.inputTitle}`}>Wat moeten de mensen weten over je project?</p>
             <p className={`${parentStyle.inputSubtitle}`}>Geef hier de uitleg over je project.</p>
           {errors.value['description'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['description'])}</p> : ''}
             <p className={`${parentStyle.inputDetail} filesize`}></p>
           </label>
-          <ReactQuill 
-          theme={'snow'}
-          onChange={handleChange}
-          onBlur={e => validation(description)}
-          value={description}
-          modules={modules} 
-          style={{height: '80vh', marginTop: '2rem', marginBottom: '6rem'}}
-          />
-
-        <div className={style.checkbox}>
-          <p className={`${parentStyle.inputSubtitle}`}>Geef hier de uitleg over je project.</p>
+          <div className={style.checkbox}>
+          <p className={`${parentStyle.inputSubtitle}`}>Mijn uitleg bevat volgende zaken:</p>
             <label htmlFor={'option1'}>
               <input 
               ref={input => ref1 = input}
@@ -145,6 +126,14 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
             </label>  
 
         </div>
+          <ReactQuill 
+          theme={'snow'}
+          onChange={handleChange}
+          onBlur={e => validation(description)}
+          value={description}
+          modules={modules} 
+          style={{height: '80vh', marginTop: '2rem', marginBottom: '6rem'}}
+          />
 
         
         <NavButtons errors={errors} validate={validation} currentStep={navData.currentStep} STEPS={navData.STEPS}/>

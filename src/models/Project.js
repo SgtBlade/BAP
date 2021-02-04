@@ -1,35 +1,46 @@
 import { decorate, observable, action } from "mobx";
 class Project {
   
-  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false})
   {
+    //Numbers
     this.id = id;
-    this.title = title;
-    this.allowComments = allowComments;
-    this.allowQuestions = allowQuestions;
     this.ownerID = ownerID;
-    this.publicOwner = publicOwner;
     this.budget = budget;
     this.collectedMoney = collectedMoney;
-    this.contact = contact;
-    this.coWorkers = coWorkers;
+    this.upvotes = upvotes;
+    this.downvotes = downvotes;
+
+    //Dates
     this.deadlineDate = deadlineDate;
-    this.deadline = deadline;
-    this.description = description;
-    this.discussions = discussions;
+    this.creationDate = creationDate;
+
+    //Strings
+    this.title = title;
     this.location = location;
-    this.multipleChoice = multipleChoice;
     this.personalIntroduction = personalIntroduction;
-    this.pictures = pictures;
+    this.publicOwner = publicOwner;
+    this.description = description;
+
+    //Arrays
+    this.tags = tags;
+    this.updates = updates;
     this.previewText = previewText;
     this.questions = questions;
     this.requirements = requirements;
-    this.tags = tags;
-    this.updates = updates;
+    this.pictures = pictures;
+    this.multipleChoice = multipleChoice;
+    this.contact = contact;
+    this.coWorkers = coWorkers;
+    this.discussions = discussions;
+
+    //Booleans
+    this.allowComments = allowComments;
+    this.allowQuestions = allowQuestions;
+    this.archived = archived;
     this.isInFundingStage = isInFundingStage;
-    this.creationDate = creationDate;
-    this.upvotes = upvotes;
-    this.downvotes = downvotes;
+    this.approved = approved;
+    this.deadline = deadline;
   }
 
   setOwnerID = (id) => this.ownerID = id;
@@ -86,6 +97,8 @@ const projectConverter = {
       creationDate: project.creationDate, 
       upvotes: project.upvotes, 
       downvotes: project.downvotes,
+      archived: project.archived,
+      approved: project.approved
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -118,6 +131,8 @@ const projectConverter = {
       creationDate: data.creationDate,
       upvotes: data.upvotes,
       downvotes: data.downvotes,
+      archived: data.archived,
+      approved: data.approved
     });
   }
 };

@@ -1,7 +1,7 @@
 
 class User {
   
-  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = './assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0 }) 
+  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = './assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0, notifications = [] }) 
   {
     this.id = id;
     this.name = name;
@@ -19,6 +19,7 @@ class User {
     this.role = role;
     this.exp = exp;
     this.level = level;
+    this.notifications = notifications
   }
 
   updateBio = (newBio) => this.bio = newBio;
@@ -46,10 +47,10 @@ const userConverter = {
       role: user.role,
       level: user.level,
       exp: user.exp,
-      publicMail: user.publicMail,
-      publicPhone: user.publicPhone,
+      //publicMail: user.publicMail,
+      //publicPhone: user.publicPhone,
       phone: user.phone,
-
+      notifications: user.notifications
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -69,9 +70,10 @@ const userConverter = {
       role: data.role,
       level: data.level,
       exp: data.exp,
-      publicMail: data.publicMail,
-      publicPhone: data.publicPhone,
-      phone: data.phone
+      publicMail: snapshot.publicMail,
+      publicPhone: snapshot.publicPhone,
+      phone: data.phone,
+      notifications: data.notifications
     });
   }
 };

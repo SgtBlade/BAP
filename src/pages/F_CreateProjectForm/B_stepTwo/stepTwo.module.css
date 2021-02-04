@@ -5,6 +5,7 @@
 .checkbox {
     display: flex;
     flex-flow: column;
+    margin-top: 5rem;
 }
 
 .checkbox label {

@@ -31,7 +31,7 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
   //Validation for second item, if the contact object is empty or not filled it -> give an error
   const validateContact = () => {
         if(contact === {}) addToErrorArray('personalIntroduction', RESPONSE.ContactSelectedNotGiven)
-        else if(contact.mail === '' && contact.phone === '') addToErrorArray('personalIntroduction', RESPONSE.ContactSelectedNotGiven)
+        else if(contact.mail === '' && contact.phone === '') addToErrorArray('contact', RESPONSE.ContactSelectedNotGiven)
         else if(errors.value['contact'])removeFromErrorArray('contact')
   }
 
@@ -63,23 +63,25 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
               <p className={`${parentStyle.inputSubtitle}`}>Geef aan of jij de organisator bent of dit maakt onder naam van.</p>
               {errors.value['contact'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['contact'])}</p> : ''}
 
+              <p onClick={e => {console.log(contact); console.log(projectData)}}>LOG</p>
 
               <label className={`${style.labelSmall} ${!contact ? style.active : ''}`} htmlFor={'contact'}>
                 <input
                 checked={!contact}
+                onClick={e => setContact(false)}
                 onChange={e => {
-                  setContact(e.currentTarget.value); 
+                  setContact(false); 
                   if(errors.value['contact'] )validateContact(e.currentTarget.value);
                 }} 
                 className={`${style.projectUser}`} 
                 name={'contact'} id={'contact'} 
-                value={false}  
                 type={'radio'}/>
                 Ik heb liever dat er toestemming moet gegeven worden tot het verkrijgen van de contactgegevens.
               </label>
 
               <label className={`${style.labelSmall} ${contact ? style.active : ''}`} htmlFor={'contact2'}>
                 <input
+                checked={contact}
                 onClick={() => {contactRef.focus(); setContact({mail: '', phone: ''})}}
                 onChange={() => {setContact({mail: '', phone: ''});}} 
                 ref={input => publicDataRef = input}
@@ -94,7 +96,6 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
                   <label className={`${parentStyle.labelText}`}>
                     E-mail
                       <input
-                      onBlur={() => {if(contact.mail === '' && contact.phone === '') setContact(false)}}
                       onClick={() => {publicDataRef.checked = true; if(!contact)setContact({mail: '', phone: ''})}}
                       onChange={e =>{
                         if(!contact)setContact({mail: e.currentTarget.value});
@@ -116,7 +117,6 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
                   <label className={`${parentStyle.labelText}`}>
                     Telefoon
                     <input
-                    onBlur={() => {if(contact.mail === '' && contact.phone === '') setContact(false)}}
                     onClick={() => {publicDataRef.checked = true; if(!contact)setContact({mail: '', phone: ''})}}
                     onChange={e =>{
                       if(!contact)setContact({phone: e.currentTarget.value});

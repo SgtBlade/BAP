@@ -1,6 +1,8 @@
 import "firebase/firestore";
 import "firebase/auth";
 import 'firebase/storage'; 
+import 'firebase/app'; 
+import firebaseParent from 'firebase/app'; 
 import { v4 } from "uuid";
 import Project, { projectConverter } from "../models/Project";
 
@@ -8,7 +10,53 @@ class ProjectService {
   constructor(firebase) {
     this.db = firebase.firestore();
     this.auth = firebase.auth();
+    this.fieldValue = firebaseParent.firestore.FieldValue;
     this.storage = firebase.storage();
+
+  }
+
+  getArchivedProjects = async (onChange) => {
+    this.db
+      .collection('projects')
+      .where("archived", "==", true)
+      .withConverter(projectConverter)
+      .onSnapshot(async snapshot => {
+        snapshot.docChanges().forEach(async change => {
+          if (change.type === "added" || change.type === "removed") {
+            const projectObj = change.doc.data();
+            onChange([change.type, projectObj]);
+          }
+        });
+      });
+  };
+
+  getProjects = async (onChange) => {
+    this.db
+      .collection('projects')
+      .where("archived", "==", false)
+      .withConverter(projectConverter)
+      .onSnapshot(async snapshot => {
+        snapshot.docChanges().forEach(async change => {
+          if (change.type === "added" || change.type === "removed") {
+            const projectObj = change.doc.data();
+            onChange([change.type, projectObj]);
+          }
+        });
+      });
+  };
+
+  deleteProjectById = async (projectId) => {
+    this.db
+    .collection("projects")
+    .doc(projectId)
+    .delete();
+  }
+
+  addToProjectArray = (projectID, array, values) => {
+    let projectRef = this.db.collection("projects").doc(projectID);
+    projectRef.update({
+        [array]: this.fieldValue.arrayUnion(...values)
+    });
   }
 
   getProjectById = async (id) => {
@@ -69,20 +117,18 @@ class ProjectService {
     
       const storageRef = this.storage.ref();
       const name = v4();
-      //Getting the file type
-      const imageType = image.name.split('.')[image.name.split('.').length]
 
       //convert then upload
       await this.blobToBase64(image).then(async res => {
 
-        let ImageRef = storageRef.child(`projects/${userID}/${projectID}/${name}.${imageType}`).putString(res, 'data_url');
+        let ImageRef = storageRef.child(`projects/${userID}/${projectID}/${name}`).putString(res, 'data_url');
         await ImageRef.on("state_changed", {
           error: error => console.log(error),
           complete: () => {
               //once you have the url push it to the array to collect them & push later
               ImageRef.snapshot.ref.getDownloadURL()
               .then(downloadURL => {
-                Urls.push(downloadURL)
+                Urls.push({url: downloadURL, path: `projects/${userID}/${projectID}/${name}`})
               });
           }
         });
@@ -99,7 +145,7 @@ class ProjectService {
         let descriptionRef = await storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)
         .then((snapshot) => {
           const url = (snapshot.ref.getDownloadURL());
-          return url;
+          return {url};
         });
         return await (descriptionRef)
       

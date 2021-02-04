@@ -16,9 +16,9 @@ class RootStore {
     };
     // Initialize Firebase
     this.firebase = firebase.initializeApp(firebaseConfig);
+    this.initFirebaseCaching();
     this.uiStore = new UiStore(this);
     this.projectStore = new ProjectStore(this);
-    this.initFirebaseCaching();
   }
 
 
