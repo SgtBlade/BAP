@@ -13,7 +13,7 @@ const Authentication = () => {
   return useObserver(() => (
     <>
       <Nav />
-      <div className={style.wrapper}>
+      <div>
         <Switch>
           <Route exact path={ROUTES.home}>
             {/* <Testenv/> */}

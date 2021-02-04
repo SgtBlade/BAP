@@ -1,0 +1,44 @@
+.nav {
+    width: 85%;
+    display: flex;
+    padding: 2.5rem 0;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.nav__links {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin: 0 2.5rem;
+    color: black;
+}
+
+.nav__button {
+    padding: 1rem 1.5rem;
+    background-color: rgba(196,196,196, 0.29);
+    border-radius: .5rem;
+    color: var(--durfGreen);
+    font-family: "Montserrat-semibold";
+}
+
+.nav__profilePicture{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 2.5rem;
+    border: none;
+}
+
+.active {
+    color: var(--durfGreenDarker);
+}
+
+.activeImage > .nav__profilePicture {
+    border: .35rem solid var(--durfGreen);
+}

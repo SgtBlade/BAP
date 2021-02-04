@@ -11,7 +11,6 @@ const Profile = () => {
   const { uiStore, projectStore } = useStores();
 
   console.log(uiStore.currentUser);
-  console.log(projectStore.projects);
 
   return useObserver(() => (
     <article className={style.profile}>
