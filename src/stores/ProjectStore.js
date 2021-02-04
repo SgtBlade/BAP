@@ -17,8 +17,8 @@ class ProjectStore {
 
   getAllDefaultProjects = () => {return this.projects.filter(project => project.archived = false)}
 
-  getProjectsByTags = (tagsToCompare) => {return this.projects.filter(project => project.tags.some(r=> tagsToCompare.includes(r)));}
-
+  getProjectsByTags = (tagsToCompare) => { return this.projects.filter(project => project.tags.some(r=> tagsToCompare.includes(r)))} 
+  
   getProjectsFromDatabase = async () => await this.projectService.getAllProjects(this.onProjectsChange); 
 
   getProjectById = async (id) => this.currentProject = await this.projectService.getProjectById(id);
@@ -81,7 +81,7 @@ decorate(ProjectStore, {
   getProjectById: action,
   test: action,
   updateDescription: action,
-  getProjectsByTags: computed,
+  getProjectsByTags: action,
   addProject: action,
   removeProject: action,
 });
