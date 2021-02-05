@@ -6,6 +6,7 @@ import style from "./Authentication.module.css";
 import PasswordResetForm from "../F_PasswordResetForm/passwordResetForm";
 import Person from "../Profile/profile.js";
 import Nav from "../../components/Nav/nav";
+import Footer from "../../components/Footer/footer.js";
 import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 
@@ -49,6 +50,7 @@ const Authentication = () => {
             <Detail />
           </Route> */}
         </Switch>
+        <Footer/>
       </div>
     </>
   ));
