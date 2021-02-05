@@ -24,9 +24,16 @@ const Footer = () => {
             </div>
             <div className={style.followUs}>
                 <p className={style.footerTitle}>Sitemap</p>
-                <img src="./assets/socials/instagram.svg" className={style.footerSocial} alt="instagram"/>
-                <img src="./assets/socials/linkedin.svg" className={style.footerSocial} alt="linkedin"/>
-                <img src="./assets/socials/facebook.svg" className={style.footerSocial} alt="facebook"/>
+                <a href="" className={style.footerSocial}>
+                    <img src="./assets/socials/instagram.svg" className={style.footerSocial} alt="instagram"/>
+                </a>
+                <a href="" className={style.footerSocial}>
+                    <img src="./assets/socials/linkedin.svg" className={style.footerSocial} alt="linkedin"/>
+                </a>
+                <a href="" className={style.footerSocial}>
+                    <img src="./assets/socials/facebook.svg" className={style.footerSocial} alt="facebook"/>
+                </a>
+                
             </div>
             <div className={style.contactUs}>
                 <p className={style.footerTitle}>Sitemap</p>
@@ -34,7 +41,7 @@ const Footer = () => {
                     <p className={style.footerText}>DURF2030</p>
                     <p className={style.footerText}>Broelkaai 6</p>
                     <p className={style.footerText}>8500 KORTRIJK</p>
-                    <a href="mailto::hello@durf2030.eu" className={style.footerMail}>Schrijf je in voor de nieuwsbrief!</a>
+                    <a href="mailto::hello@durf2030.eu" className={style.footerMail}>hello@durf2030.eu</a>
                 </div>
                 <a className={style.nieuwsbrief}>Schrijf je in voor de nieuwsbrief!</a>
             </div>
