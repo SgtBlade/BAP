@@ -5,7 +5,7 @@ import globalStyle from '../../globalStyles/main.module.css'
 import { ROUTES } from '../../../consts';
 import { Link } from 'react-router-dom';
 
-const NavButtons = ({validate, currentStep, errors, STEPS, newProjectID = ''}) => {
+const NavButtons = ({validate, currentStep, errors, STEPS}) => {
   
   return useObserver(() => (
     <>
@@ -28,7 +28,7 @@ const NavButtons = ({validate, currentStep, errors, STEPS, newProjectID = ''}) =
         {
           currentStep.func(currentStep.value+1);window.scrollTo(0, 0);
         }
-        }}  className={`${globalStyle.mainButton}`}><Link to={`${ROUTES.projectDetail.to}${newProjectID}`}>{STEPS[currentStep.value]} </Link></p>
+        }}  className={`${globalStyle.mainButton}`}>{STEPS[currentStep.value]}</p>
       :
       <p onClick={async () => {
         if(await validate())

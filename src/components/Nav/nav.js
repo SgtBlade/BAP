@@ -34,6 +34,9 @@ const Nav = () => {
             <img className={style.nav__profilePicture} src={uiStore.currentUser.picture} alt="profiel"/>
           </NavLink>
         </li>
+        <li>
+          <NavLink exact className={`${style.link} ${style.nav__button}`} activeClassName={style.active} to={ROUTES.discovery}>Discovery</NavLink>
+        </li>
       </ul>
     </nav>
   );

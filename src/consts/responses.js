@@ -28,7 +28,8 @@ const RESPONSE = {
     ContactSelectedNotGiven: 'Er is geen contactinformatie gegeven',
     NoOptionChosen: 'Gelieve een van de opties te kiezen',
     dateInPast: 'Gelieve een datum te nemen die niet in het verleden ligt',
-    noLocation: 'Gelieve een locatie op te geven'
+    noLocation: 'Gelieve een locatie op te geven',
+    coWorkerSameAsUser: 'Gelieve niet uw eigen email adres in te vullen'
   };
   
   export { RESPONSE };

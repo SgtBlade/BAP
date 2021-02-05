@@ -1,4 +1,4 @@
-import { decorate, observable, action, computed } from "mobx";
+import { decorate, observable, action } from "mobx";
 import Project from "../models/Project";
 import ProjectService from "../services/ProjectService";
 class ProjectStore {

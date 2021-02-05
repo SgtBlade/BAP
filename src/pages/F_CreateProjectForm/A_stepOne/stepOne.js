@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useObserver } from "mobx-react-lite";
+import Select from 'react-select';
 import parentStyle from "../createProjectForm.module.css";
 import TAGS from "../../../consts/tags";
 import style from "./stepOne.module.css";
 import { useStores } from "../../../hooks/useStores";
 import Compressor from "compressorjs";
 import { RESPONSE } from "../../../consts/responses";
+import LOCATIONS from '../../../consts/locations'
 import NavButtons from "../navButtons/navButtons";
+
 
 const CreateProjectFormStepOne = ({
   removeFromErrorArray,
@@ -20,29 +23,15 @@ const CreateProjectFormStepOne = ({
   const [projectOwnerTmp, SetProjectOwnerTmp] = useState("");
 
   //Data required for the project
-  const [projectName, setProjectName] = useState(
-    projectData.title ? projectData.title : "Dit is een project titel"
-  );
-  const [budget, setBudget] = useState(
-    projectData.budget ? projectData.budget : "2100"
-  );
+  const [projectName, setProjectName] = useState( projectData.title ? projectData.title : "" );
+  const [budget, setBudget] = useState( projectData.budget ? projectData.budget : "0" );
   const [tags, setTags] = useState(projectData.tags ? projectData.tags : []);
-  const [pictures, setPictures] = useState(
-    projectData.pictures ? projectData.pictures : []
-  );
-  const [owner, setOwner] = useState(
-    projectData.owner
-      ? projectData.owner
-      : `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`
-  );
-  const [preview, setPreview] = useState(
-    projectData.previewText
-      ? projectData.previewText
-      : "Dit is een preview text van maximaal 120 woorden"
-  );
-  const [location, setLocation] = useState(
-    projectData.location ? projectData.location : "Ghent"
-  );
+  const [pictures, setPictures] = useState( projectData.pictures ? projectData.pictures : [] );
+  const [owner, setOwner] = useState( projectData.owner ? projectData.owner : `${uiStore.currentUser.name} ${uiStore.currentUser.surname}` );
+  const [preview, setPreview] = useState( projectData.previewText ? projectData.previewText : "" );
+  const [location, setLocation] = useState( projectData.location ? projectData.location : "" );
+  const [enableCoWorkers, setEnableCoWorkers] = useState(projectData.enableCoWorkers ? true : false)
+  const [coWorkers, setCoWorkers] = useState(projectData.coWorkers ?? [''])
 
   let tagValues = [];
   const handleTagAdd = async (e) => {
@@ -66,6 +55,7 @@ const CreateProjectFormStepOne = ({
     validatePictures();
     validatePreview();
     validateLocation();
+    validatecoWorkers();
     if (Object.keys(errors.value).length === 0) {
       mergeProjectData({
         title: projectName,
@@ -75,6 +65,7 @@ const CreateProjectFormStepOne = ({
         publicOwner: owner,
         previewText: preview,
         location: location,
+        coWorkerRequests: enableCoWorkers? coWorkers : false,
       });
       return true;
     } else return false;
@@ -90,10 +81,7 @@ const CreateProjectFormStepOne = ({
   //initialising the references
   let pictureRef = null;
   let ownerRef = null;
-  const handleChangePhotoButton = (e) => {
-    e.preventDefault();
-    pictureRef.click();
-  };
+  const handleChangePhotoButton = (e) => { e.preventDefault(); pictureRef.click(); };
 
   //Prepping the image to an uploadable type of file
   const handlePictureUpload = async (e) => {
@@ -148,7 +136,7 @@ const CreateProjectFormStepOne = ({
   //Check the limits of the budget & give the appropriate response
   const validateBudget = (data = budget) => {
     if (data > 3000) addToErrorArray("budget", RESPONSE.budgetTooHigh);
-    else if (data === "" || data <= 0)
+    else if (data === "" || data < 0)
       addToErrorArray("budget", RESPONSE.NoBudget);
     else if (errors.value["budget"]) removeFromErrorArray("budget");
   };
@@ -172,7 +160,8 @@ const CreateProjectFormStepOne = ({
     if (data.length === 0) addToErrorArray("pictures", RESPONSE.NoPictures);
     else if (errors.value["pictures"]) removeFromErrorArray("pictures");
   };
-
+  
+  const validatecoWorkers = () => {coWorkers.filter(coWorker => coWorker.replace(' ', '').length > 3 && coWorker.toLowerCase() !== uiStore.currentUser.mail.toLowerCase());}
   //Basic check based on it not being an empty string
   const validatePreview = (data = preview) => {
     if (data === "") addToErrorArray("preview", RESPONSE.NoPreview);
@@ -192,6 +181,14 @@ const CreateProjectFormStepOne = ({
     if (data === "") addToErrorArray("location", RESPONSE.noLocation);
     else if (errors.value["location"]) removeFromErrorArray("location");
   };
+
+  const updateCoworkers = (value, index) => {
+    if(errors.value["coWorker"]) removeFromErrorArray("coWorker");
+    if(value.toLowerCase() === uiStore.currentUser.mail.toLowerCase()){value = '';addToErrorArray('coWorker', RESPONSE.coWorkerSameAsUser)}
+    let tmpworkers = coWorkers;
+    tmpworkers[index] = value;
+    setCoWorkers([...new Set(tmpworkers)])
+  }
 
   return useObserver(() => (
     <div className={style.wrap}>
@@ -347,13 +344,7 @@ const CreateProjectFormStepOne = ({
         <p className={`${parentStyle.inputSubtitle}`}>
           Geef aan of jij de organisator bent of dit maakt onder naam van.
         </p>
-        {errors.value["owner"] ? (
-          <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>
-            {errors.value["owner"]}
-          </p>
-        ) : (
-          ""
-        )}
+        {errors.value["owner"] ? ( <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}> {errors.value["owner"]} </p> ) : ( "" )}
 
         <label className={``} htmlFor={"owner"}>
           <input
@@ -411,6 +402,49 @@ const CreateProjectFormStepOne = ({
             type={"text"}
           />
         </label>
+      
+        <label className={``} htmlFor={"CoWorker"}>
+          <input
+            onChange={() => {setEnableCoWorkers(!enableCoWorkers)}}
+            className={`projectCheck`}
+            name={"CoWorker"}
+            id={"CoWorker"}
+            value={""}
+            type={"checkbox"}
+          />
+          Er werken meerdere mensen aan dit project
+          <p className={parentStyle.inputDetail}>Enkel mensen met een account kunnen uitgenodigd worden</p>
+          {errors.value["coWorker"] ? ( <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}> {errors.value["coWorker"]} </p> ) : ( "" )}
+        </label>
+      
+        
+        {enableCoWorkers ?
+      <article className={style.option}>
+        <h2 style={{display: 'none'}}>Co-workers</h2>
+        
+        {coWorkers.map((coWorker, index) => {
+          return <div key={`coWorker_${index}`}  className={style.inputWrap}>
+                    <input 
+                    onChange={ e => {updateCoworkers(e.currentTarget.value, index)}} 
+                    onBlur={validatecoWorkers}
+                    className={parentStyle.input}
+                    value={coWorker}  
+                    type={'text'}
+                    placeholder={'Email'}
+                    /> 
+
+                  <div onClick={
+                    () => {
+                      const tmpArray = coWorkers;
+                      tmpArray.splice(index, 1)
+                      setCoWorkers([...new Set(tmpArray)])
+                    }
+                  } className={style.deleteButton}>X</div>
+                </div>
+        })}
+        <p className={style.addOption} onClick={() => updateCoworkers('', coWorkers.length)}> <span>+</span> Medewerker toevoegen</p>
+      </article>
+      : '' }
       </div>
 
       <label htmlFor={"images"}>
@@ -451,7 +485,7 @@ const CreateProjectFormStepOne = ({
             className={`${parentStyle.blackLetter} ${style.addPicture}`}
           >
             {" "}
-            + VOEG DIENEN FOTO TOE
+            + VOEG EEN FOTO TOE
           </p>
         ) : (
           ""
@@ -527,20 +561,17 @@ const CreateProjectFormStepOne = ({
           ""
         )}
 
-        <input
-          onBlur={(e) => validateLocation(e.currentTarget.value)}
-          onChange={(e) => {
-            setLocation(e.currentTarget.value);
-            if (errors.value["location"])
-              validateLocation(e.currentTarget.value);
-          }}
-          className={`${parentStyle.input}`}
-          name={"location"}
-          id={"location"}
-          value={location}
-          type={"text"}
-        />
+        <Select 
+        className={`${style.dropdown}`}
+        onChange={(e) => setLocation(e.value)}
+        options={LOCATIONS}
+        name={"location"}
+        id={"location"}/>
       </label>
+
+
+      
+      
 
       <NavButtons
         errors={errors}

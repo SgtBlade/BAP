@@ -34,7 +34,7 @@ class UserService {
       id: user.uid, 
       name: data.name, 
       surname: data.surname,
-      mail: user.email,
+      mail: user.email.toLowerCase(),
       bio: data.bio,
       publicMail: data.publicMail,
       publicPhone: data.publicPhone,

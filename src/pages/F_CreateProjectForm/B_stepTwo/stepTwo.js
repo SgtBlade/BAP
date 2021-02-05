@@ -21,7 +21,6 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
     if(ref1 && ref2 && ref3)
     if(data === '' || data === '<p><br></p>') {
       addToErrorArray('description', RESPONSE.NoDescription);
-      console.log('test1')
       return false;
     }else {if(errors.value['description'])removeFromErrorArray('description'); 
     mergeProjectData({description: description});
@@ -46,6 +45,7 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
  //activates when quill receives input
  //Displays the code quill generates & places empty lines for visibility
   const handleChange = (html) => {
+    if(errors.value['description'])validation();
     setDescription(html);
     //bytesToSize(encodeURI(html).split(/%(?:u[0-9A-F]{2})?[0-9A-F]{2}|./).length - 1)
     if(errors.value['description'])validation()

@@ -11,6 +11,7 @@ import Nav from "../../components/Nav/nav";
 import Footer from "../../components/Footer/footer.js";
 import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
+import Discovery from "../Discovery/Discovery.js";
 
 const Authentication = () => {
   return useObserver(() => (
@@ -46,6 +47,11 @@ const Authentication = () => {
 
           <Route exact path={ROUTES.reset}>
             <PasswordResetForm />
+          </Route>
+
+
+          <Route exact path={ROUTES.discovery}>
+            <Discovery/>
           </Route>
 
           {/* <Route path="/me">

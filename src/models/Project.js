@@ -1,7 +1,7 @@
 import { decorate, observable, action } from "mobx";
 class Project {
   
-  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false})
   {
     //Numbers
     this.id = id;
@@ -41,6 +41,7 @@ class Project {
     this.isInFundingStage = isInFundingStage;
     this.approved = approved;
     this.deadline = deadline;
+    this.featured = featured;
   }
 
   setOwnerID = (id) => this.ownerID = id;
@@ -98,7 +99,8 @@ const projectConverter = {
       upvotes: project.upvotes, 
       downvotes: project.downvotes,
       archived: project.archived,
-      approved: project.approved
+      approved: project.approved,
+      featured: project.featured
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -132,7 +134,8 @@ const projectConverter = {
       upvotes: data.upvotes,
       downvotes: data.downvotes,
       archived: data.archived,
-      approved: data.approved
+      approved: data.approved,
+      featured: data.featured
     });
   }
 };

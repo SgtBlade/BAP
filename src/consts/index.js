@@ -8,6 +8,7 @@ const ROUTES = {
   overons: '/overons',
   startproject: '/startproject',
   profiel: '/profiel',
+  discovery: '/discovery',
 };
 
 export { ROUTES };

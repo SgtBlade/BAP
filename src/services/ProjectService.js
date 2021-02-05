@@ -78,22 +78,31 @@ class ProjectService {
     const docRef = this.db.collection("projects").doc();
     const docId = docRef.id;
     const project = new Project(data);
+    
 
     //Set the owner, upload the images and description
     project.setOwnerID(userID)
     await this.uploadImages(data.pictures, docId, userID)
-    .then(pics => project.setPictures(pics))
-    .then(async () => 
-                await this.uploadDescription(data.description, docId, userID)
-                .then((value) => project.setDescription(value))
-                .then(() => {
+    .then(pics => project.setPictures(pics));
+    this.uploadDescription(data.description, docId, userID)
+    .then(res => project.setDescription(res))
+    .then(() => {
                   //Once the description is uploaded, upload the rest of the data
                   docRef
                       .withConverter(projectConverter)
                       .set(project)
-                      .then(function() {
-                        console.log("Document successfully written!");
-                        console.log(project)
+                      .then(() => {
+                        if(data.coWorkerRequests) {
+                          data.coWorkerRequests.forEach(coWorker => {                             
+                          let userRef = this.db.collection("users").where('mail', '==', coWorker.toLowerCase())
+                          .get()
+                          .then((querySnapshot) => {
+                              querySnapshot.forEach((doc) => {
+                                  doc.ref.update({ notifications: this.fieldValue.arrayUnion({type: 'coRequest', projectTitle: data.title, projectID: docId}) });
+                              });
+                          })
+                          })
+                        }
                       })
                       .catch(function(error) {
                           console.error("Error writing document: ", error);
@@ -103,7 +112,7 @@ class ProjectService {
                   console.log(project)
                   
                 return true;
-                }))
+                })
 
     return true;
 
@@ -139,15 +148,24 @@ class ProjectService {
     
   }
 
-  uploadDescription = async (file, projectID, userID) => {
+  uploadDescription = (file, projectID, userID) => {
       //Create a reference and push the data, once its done, return the url of the file
       const storageRef = this.storage.ref();
-        let descriptionRef = await storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)
+      /*storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)
         .then((snapshot) => {
           const url = (snapshot.ref.getDownloadURL());
           return {url};
+        });*/
+
+        let promise = new Promise(function(resolve, reject) {
+          storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)
+        .then((snapshot) => {
+          const url = (snapshot.ref.getDownloadURL());
+          resolve(url);
         });
-        return await (descriptionRef)
+        });
+        return promise
+        //return await descriptionRef
       
   }
 
@@ -166,7 +184,7 @@ class ProjectService {
   getDescriptionDownloadData = (userID, projectID) => {
 
     const storageRef = this.storage.ref();
-    var starsRef = storageRef.child('projects/8SzbHZQ7UygNou338Vks4KTPmf93/7ogVf47Ir8Y9xUqMCf0J/description.txt');
+    var starsRef = storageRef.child(`projects/${userID}/${projectID}/description.txt`);
     // Get the download URL
     starsRef.getDownloadURL()
     .then((data => {
@@ -179,8 +197,6 @@ class ProjectService {
     }))
   
     .catch((error) => {
-      // A full list of error codes is available at
-      // https://firebase.google.com/docs/storage/web/handle-errors
       switch (error.code) {
         case 'storage/object-not-found':
           // File doesn't exist
