@@ -87,36 +87,41 @@ const RegisterForm = () => {
 
   return useObserver(() => (
     <>
-    <div className={style.container}>
-      <form className={style.form} onSubmit={handleCreateSubmit}>
-        <p className={`alertwindow ${style.negative}`}></p>
-         <legend>Register form</legend>
-         <br></br>
-         
-         <label htmlFor="createEmail"> mail: <input id="createEmail" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} /> </label> 
-         <label htmlFor="createPassword"> password: <input id="createPassword" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} /> </label>
+    <div className={style.registerContainer}>
+      <div className={style.formContainer}>
+        <form className={style.form} onSubmit={handleCreateSubmit}>
+          <p className={`alertwindow ${style.negative}`}></p>
+          <legend className={style.formTitle}>Registreer</legend>
+          <br></br>
 
-         <label htmlFor="name"> name: <input id="name" value={name} onChange={e => setName(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
-         <label htmlFor="lname"> surname: <input id="lname" value={lname} onChange={e => setLname(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
-         <label htmlFor="phone"> phone: <input id="phone" value={phone} onChange={e => setPhone(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
-         <label htmlFor="publicPhone"> Set phone public: <input id="publicPhone" value={publicPhone} onChange={e => setPublicPhone(e.currentTarget.checked)} className={style.input} type={"checkbox"} /> </label>
-         <label htmlFor="publicMail"> Set mail public: <input id="publicMail" value={publicMail} onChange={e => setPublicMail(e.currentTarget.checked)} className={style.input} type={"checkbox"} /> </label>
-         <label htmlFor="bio"> bio: <textarea id="bio" value={bio} onChange={e => setBio(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
-         
-         <br></br>
-         <br></br>
-         <label>
-           Upload een image:
-           <input
-              onChange={handleChangePhotoFileInput}
-              type="file"
-            />
-         </label>
+          <label class={style.label} htmlFor="lname"> Voornaam: <input id="lname" value={lname} onChange={e => setLname(e.currentTarget.value)} className={style.input} type={"text"} placeholder="Type hier uw voornaam"/> </label>          
+          <label class={style.label} htmlFor="name"> Achternaam: <input id="name" value={name} onChange={e => setName(e.currentTarget.value)} className={style.input} type={"text"}  placeholder="Type hier uw achternaam"/> </label>
+          
+          <label class={style.label} htmlFor="createEmail"> E-mail: <input id="createEmail" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} placeholder="voorbeeld@provider.be"/> </label> 
+          <label class={style.label} htmlFor="createPassword"> Wachtwoord: <input id="createPassword" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} placeholder="Vul hier het wachtwoord in" /> </label>
 
-          <button type="submit">create</button> 
-         <img alt={'preview'} src={'./assets/profile/defaultProfileImage.png'} height='50' width='50' className={`testObject ${style.testObject}`}/>
-         </form>
+          
+          <label class={style.label} htmlFor="phone"> Telefoon: <input id="phone" value={phone} onChange={e => setPhone(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
+          {/* <label class={`${style.label} ${style.label__checkbox}`} htmlFor="publicPhone"> Het telefoonnummer mag publiek staan <input id="publicPhone" value={publicPhone} onChange={e => setPublicPhone(e.currentTarget.checked)} className={`${style.input} ${style.input__checkbox}`} type={"checkbox"} placeholder="+32 470 12 34 56" /> </label>
+          <label class={`${style.label} ${style.label__checkbox}`} htmlFor="publicMail">Het e-mail mag publiek staan<input id="publicMail" value={publicMail} onChange={e => setPublicMail(e.currentTarget.checked)} className={`${style.input} ${style.input__checkbox}`} type={"checkbox"} /> </label> */}
+        <label class={style.label} htmlFor="bio"> Korte biografie: <textarea id="bio" value={bio} onChange={e => setBio(e.currentTarget.value)} className={`${style.input} ${style.input__textfield}`} type={"text"} placeholder="Begin hier met typen"/> </label>
+          
+          <label class={style.label}>
+            Upload een profielfoto:
+            <div className={style.label__image__container}>
+              <input className={`${style.input} ${style.input__image}`}
+                  onChange={handleChangePhotoFileInput}
+                  type="file"
+                />
+              <img alt={'preview'} src={'./assets/profile/defaultProfileImage.png'} height='50' width='50' className={`testObject ${style.testObject}`}/>
+            </div>
+          </label>
+          
+          <button className={style.confirmButton} type="submit">Wordt nu een Durver</button> 
+          
+        </form>
       </div>
+    </div>
     </>
   ));
 };
