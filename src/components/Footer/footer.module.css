@@ -1,5 +1,5 @@
 footer {
-    background-color: var(--durfGreen);
+    background-color: var(--durfGreenDarker);
 }
 
 .footerContainer {
@@ -28,9 +28,42 @@ footer {
     font-size: 1.6rem;
     font-family: "Montserrat-semiBold";
     line-height: 1.5;
+    display: block;
+    color: white;
 
 }
 
 .footerSocial {
     margin-right: 1rem;
 }
+
+.footerText__adres {
+    font-family: "Montserrat";
+    font-weight: 200;
+
+}
+
+.footerMail {
+    color: var(--durfYellow);
+    text-decoration: underline;
+    line-height: 1.5;
+}
+
+.nieuwsbrief {
+    background-color: #FAFAFA;
+    font-size: 1.6rem;
+    font-family: "Montserrat-semiBold";
+    color: var(--durfGreenDarker);
+    padding: 1.5rem 1.5rem;
+    border-radius: .25rem;
+    display: inline-block;
+}
+
+.disclaimer {
+    color: white;
+    text-align: center;
+    padding-bottom: 2.5rem;
+}
+
+
+

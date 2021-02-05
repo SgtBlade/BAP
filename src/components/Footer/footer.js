@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import style from "./footer.module.css";
+import { ROUTES } from "../../consts";
 //import COLORS from "../globalStyles/colors";
 
 const Footer = () => {
@@ -11,19 +13,19 @@ const Footer = () => {
             <div className={style.sitemap}>
                 <p className={style.footerTitle}>Sitemap</p>
                 <div className={style.sitemap__container}>
-                    <p className={style.footerText}>Over ons</p>
-                    <p className={style.footerText}>Projecten</p>
+                    <Link className={style.footerText} to={ROUTES.overons}>Over ons</Link>
+                    <Link className={style.footerText} to={ROUTES.projecten}>Projecten</Link>
                 </div>
                 <div className={style.sitemap__container}>
-                    <p className={style.footerText}>Aanmelden</p>
-                    <p className={style.footerText}>Registreer</p>
+                    <Link className={style.footerText} to={ROUTES.login}>Aanmelden</Link>
+                    <Link className={style.footerText} to={ROUTES.registreer}>Registreer</Link>
                 </div>
                 <div className={style.sitemap__container}>
-                    <p className={style.footerText}>Contacteer ons</p>
+                    <Link className={style.footerText} to={ROUTES.home}>Contacteer ons</Link>
                 </div>
             </div>
             <div className={style.followUs}>
-                <p className={style.footerTitle}>Sitemap</p>
+                <p className={style.footerTitle}>Volg ons op</p>
                 <a href="" className={style.footerSocial}>
                     <img src="./assets/socials/instagram.svg" className={style.footerSocial} alt="instagram"/>
                 </a>
@@ -36,11 +38,11 @@ const Footer = () => {
                 
             </div>
             <div className={style.contactUs}>
-                <p className={style.footerTitle}>Sitemap</p>
+                <p className={style.footerTitle}>Contacteer ons</p>
                 <div className={style.sitemap__container}>
-                    <p className={style.footerText}>DURF2030</p>
-                    <p className={style.footerText}>Broelkaai 6</p>
-                    <p className={style.footerText}>8500 KORTRIJK</p>
+                    <p className={`${style.footerText} ${style.footerText__adres}`}>DURF2030</p>
+                    <p className={`${style.footerText} ${style.footerText__adres}`}>Broelkaai 6</p>
+                    <p className={`${style.footerText} ${style.footerText__adres}`}>8500 KORTRIJK</p>
                     <a href="mailto::hello@durf2030.eu" className={style.footerMail}>hello@durf2030.eu</a>
                 </div>
                 <a className={style.nieuwsbrief}>Schrijf je in voor de nieuwsbrief!</a>
