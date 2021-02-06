@@ -1,6 +1,7 @@
 .mainButton,
 .previousButton,
-.altButton {
+.altButton,
+.linkButton {
   display: inline-flex;
   flex-direction: row;
   justify-content: center;
@@ -45,6 +46,21 @@
 .previousButton:hover,
 .altButton:hover {
   background: var(--lightGrey);
+}
+
+.linkButton {
+  color: var(--durfGreenDarker);
+  background: none;
+  margin: 0.5rem 0;
+}
+
+.linkButton::after {
+  content: "";
+  height: var(--fontRegular);
+  width: 3rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("/assets/icons/right-arrow.svg");
 }
 
 .disabledButton {
