@@ -1,0 +1,176 @@
+@import "../globalStyles/main.module.css";
+
+.homeMain {
+  font-family: "Montserrat";
+  font-weight: 200;
+}
+
+.section {
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 120.4rem;
+  margin: 0 auto;
+}
+
+.sectionContainer {
+  display: flex;
+  max-width: 120.4rem;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.introTitle {
+  font-size: 7.2rem;
+  font-family: "Montserrat-black", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.2;
+}
+
+.introTitleHighlight {
+  color: var(--dark);
+  background: var(--durfYellow);
+  border-radius: 0.8rem;
+  padding: 0 0.4rem;
+}
+
+.introParagraph {
+  padding-top: 3rem;
+  font-weight: 200;
+}
+
+.introTitle {
+  color: var(--durfGreenDarker);
+}
+
+.introTextContainer {
+  padding: 2rem;
+  flex: 1;
+  min-width: 50%;
+  padding-right: calc(2vw + 2rem);
+}
+
+.introText {
+  max-width: 60ch;
+  line-height: 1.4;
+}
+
+.introButton {
+  margin-top: 3rem;
+}
+
+.introButton + .introButton {
+  margin-left: 1rem;
+}
+
+.introProjectCard {
+  padding: 2rem;
+  width: 100%;
+  flex: 1;
+  min-width: 50rem;
+  max-width: 50%;
+}
+
+.how {
+  background: var(--background);
+  border-bottom: solid var(--durfRed) 1rem;
+}
+
+.howTitle {
+  margin-top: 6rem;
+  font-family: var(--weightBlackFont);
+  font-size: var(--fontUltra);
+  color: var(--durfRed);
+}
+
+.howTitleHighlight {
+  background: white;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  border-bottom-right-radius: 4rem;
+}
+
+.howSections {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6rem 0;
+}
+
+.howSection {
+  padding: 2rem 1rem;
+  flex: 1 1;
+  border-radius: 1rem;
+  line-height: 1.5;
+}
+
+.howSection:hover {
+  background: var(--durfRed);
+  color: white;
+}
+
+.howSection + .howSection {
+  margin-left: 2rem;
+}
+
+.howSectionTitle {
+  font-family: var(--weightSemiboldFont);
+  padding: 2rem 0;
+}
+
+.pillars {
+  display: flex;
+  flex-flow: row-reverse;
+}
+
+.pillarsHeader {
+  flex: 1 1 auto;
+}
+
+.pillarsTitle {
+  font-family: var(--weightBlackFont);
+  font-size: var(--fontUltra);
+}
+
+.pillarsSections {
+  flex: 2 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 2rem; */
+}
+
+.pillarsSection {
+  padding: 2rem;
+  /* max-width: 50%; */
+  flex: 2 1;
+  border-radius: 2rem;
+}
+
+.pillarsSectionTitle {
+  padding: 4rem 0;
+  font-family: var(--weightBlackFont);
+}
+
+.pillarSectionParagraph {
+  line-height: 1.4;
+}
+
+.pillarsSection:nth-child(1) {
+  background: var(--durfGreenDarker);
+  color: white;
+}
+
+.pillarsSection:nth-child(2) {
+  background: var(--durfYellow);
+}
+
+.pillarsSection:nth-child(3) {
+  background: var(--durfRed);
+}
+
+.pillarsSection:nth-child(4) {
+  background: var(--durfBlue);
+  color: white;
+}
