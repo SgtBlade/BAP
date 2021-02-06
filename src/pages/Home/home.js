@@ -134,10 +134,11 @@ const Home = () => {
       >
         <header className={style.pillarsHeader}>
           <h2 className={style.pillarsTitle}>
-            De <span className={style.pillarsTitleSpan}>4</span> Durf pijlers
+            De <span className={style.pillarsTitleSpan}>4</span>
+            <br /> Durf pijlers
           </h2>
           <a
-            className={style.link}
+            className={style.linkButton}
             href="https://www.durf2030.eu/over-durf2030"
             target="_blank"
             rel="noopener noreferrer"

@@ -167,7 +167,7 @@
 
 .pillarsHeader {
   flex: 2;
-  margin: 0 auto;
+  margin: 2rem auto 10rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,6 +177,15 @@
 .pillarsTitle {
   font-family: var(--weightBlackFont);
   font-size: var(--fontUltra);
+  line-height: 0.9;
+  margin: 2rem;
+}
+
+.pillarsTitleSpan {
+  font-size: calc(72px + 10vw);
+  display: inline-block;
+  color: var(--durfGreen);
+  text-shadow: -0.4rem 0rem var(--dark);
 }
 
 .pillarsSections {
