@@ -26,13 +26,13 @@ const Footer = () => {
             </div>
             <div className={style.followUs}>
                 <p className={style.footerTitle}>Volg ons op</p>
-                <a href="" className={style.footerSocial}>
+                <a href="#" className={style.footerSocial}>
                     <img src="./assets/socials/instagram.svg" className={style.footerSocial} alt="instagram"/>
                 </a>
-                <a href="" className={style.footerSocial}>
+                <a href="#" className={style.footerSocial}>
                     <img src="./assets/socials/linkedin.svg" className={style.footerSocial} alt="linkedin"/>
                 </a>
-                <a href="" className={style.footerSocial}>
+                <a href="#" className={style.footerSocial}>
                     <img src="./assets/socials/facebook.svg" className={style.footerSocial} alt="facebook"/>
                 </a>
                 
