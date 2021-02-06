@@ -17,18 +17,28 @@ const LoginForm = () => {
 
   return useObserver(() => (
     <>
-    <div className={style.container}>
-      <form className={style.form} onSubmit={handleLoginSubmit}> 
-        {response[0] ? 
-        <p className={style[response[1]]}> {response[2]}</p>
-          : ''
-        }
-        <p className={`alertwindow ${style.negative}`}></p>
-        <legend>LoginForm</legend>  <label htmlFor="email"> mail: <input id="email" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} /> </label> 
-        <label htmlFor="password"> password: <input id="password" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} /> </label> <button type="submit">Login</button> 
-        <p onClick={() => {uiStore.resetPassword(email, setResponse)}}>Forgot password</p>
-        </form>
-     
+    <div className={style.loginContainer}>
+      <div className={style.formContainer}>      
+        <form className={style.form} onSubmit={handleLoginSubmit}> 
+          <p className={`alertwindow ${style.negative}`}></p>
+          <legend className={style.formTitle}>Meld je hier aan</legend>  
+          
+          {response[0] ? 
+          <p className={style[response[1]]}> {response[2]}</p>
+            : ''
+          }
+          <div className={style.inputFieldsContrainer}>
+            <label class={style.label} htmlFor="email">E-mail: 
+              <input id="email" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} placeholder="Vul hier je e-mail in"/> 
+            </label> 
+            <label class={style.label} htmlFor="password">Wachtwoord: 
+              <input id="password" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} /> 
+              </label> 
+            <button className={style.confirmButton} type="submit">Meld me aan</button> 
+            <p className={style.resetPassword} onClick={() => {uiStore.resetPassword(email, setResponse)}}>Doeme, ik ben mijn wachtwoord vergeten</p>
+          </div>
+          </form>
+        </div>
     </div>
     </>
   ));

@@ -28,3 +28,144 @@
 .negative {
     color:rgb(211, 0, 0);
 }
+
+.formContainer {
+    padding: 5rem 0;
+    width: 48rem;
+    margin: auto;
+    position: relative;
+}
+
+.formContainer::before {
+    content: '';
+    position: absolute;
+    top: 6rem;
+    left: -15rem;
+    width: 65.7rem;
+    height: 23.6rem;
+    background: url(/assets/uiELementen/registerTop.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.formContainer::after {
+    content: '';
+    position: absolute;
+    width: 11.7rem;
+    height: 11.7rem;
+    top: 37.5rem;
+    bottom: 0px;
+    left: -10rem;
+    z-index: -1;
+    border: 1.5rem solid var(--durfGreen);
+    border-radius: 51rem;
+}
+
+.form {
+    padding: 5rem 2.5rem;
+    margin: 3rem;
+    border: solid 1px black;
+    display: flex;
+    flex-flow: column;
+    width: 46.2rem;
+    border-radius: 1rem 1rem 1rem 0;
+    background: var(--cardGrey);
+    border: none;
+    margin: 5rem auto;
+    box-shadow: var(--cardShadow);
+    position: relative;
+}
+
+.form::before {
+    content: '';
+    width: 5rem;
+    height: 70%;
+    background-color: var(--lightGrey);
+    position: absolute;
+    border-radius: 0 0 0 1rem;
+    left: -5rem;
+    bottom: 0;
+    box-shadow: var(--cardShadow);
+}
+
+.form::after {
+    content: '';
+    width: 7.5rem;
+    height: 7.5rem;
+    background-color: red;
+    position: absolute;
+    border-radius: 1rem;
+    right: -3.25rem;
+    bottom: -3.25rem;
+    z-index: -1;
+}
+
+.input {
+    border: none;
+    border-bottom: .25rem solid black;
+    margin-bottom: 3.5rem;
+    margin-top: 1.5rem;
+    font-size: var(--fontNormal);
+    font-family: "Montserrat";
+    font-weight: 200;
+    width: 100%;
+
+}
+
+.input:focus, .input:active {
+    background-color: var(--lightGrey);
+    border-bottom: .25rem solid black;
+}
+
+.formTitle {
+    font-size: 3.2rem;
+    font-family: "Montserrat_black";
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.label {
+    display: flex;
+    flex-flow: column;
+    font-size: var(--fontMedium);
+    font-family: "Montserrat-semibold";
+    justify-content: flex-end;
+    line-height: 1.5rem;
+
+}
+
+.inputFieldsContrainer {
+    margin-top: 2.5rem;
+}
+
+.confirmButton{
+    border-radius: .5rem;
+    border:none;
+    color: white;
+    background-color: var(--durfGreenDarker);
+    padding: 1.5rem 0;
+    transition: .25s;
+    border: .5rem solid var(--durfGreenDarker);
+    font-size: 1.6rem;
+    display: block;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.confirmButton:hover {
+    cursor: pointer;
+    border: .5rem solid var(--durfGreenDarker);
+    background: transparent;
+    color: var(--durfGreenDarker);
+    padding: 1.5rem 0;
+}
+
+.resetPassword {
+    text-align: center;
+    color: blue;
+}
+
+.resetPassword:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
