@@ -1,7 +1,7 @@
 import { decorate, observable, action } from "mobx";
 class Project {
   
-  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false, completed = false})
   {
     //Numbers
     this.id = id;
@@ -37,11 +37,12 @@ class Project {
     //Booleans
     this.allowComments = allowComments;
     this.allowQuestions = allowQuestions;
-    this.archived = archived;
     this.isInFundingStage = isInFundingStage;
+    this.archived = archived;
     this.approved = approved;
     this.deadline = deadline;
     this.featured = featured;
+    this.completed = completed;
   }
 
   setOwnerID = (id) => this.ownerID = id;
@@ -100,7 +101,8 @@ const projectConverter = {
       downvotes: project.downvotes,
       archived: project.archived,
       approved: project.approved,
-      featured: project.featured
+      featured: project.featured,
+      completed: project.completed
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -135,7 +137,8 @@ const projectConverter = {
       downvotes: data.downvotes,
       archived: data.archived,
       approved: data.approved,
-      featured: data.featured
+      featured: data.featured,
+      completed: data.completed
     });
   }
 };
