@@ -94,7 +94,7 @@ class ProjectService {
                       .then(() => {
                         if(data.coWorkerRequests) {
                           data.coWorkerRequests.forEach(coWorker => {                             
-                          let userRef = this.db.collection("users").where('mail', '==', coWorker.toLowerCase())
+                          this.db.collection("users").where('mail', '==', coWorker.toLowerCase())
                           .get()
                           .then((querySnapshot) => {
                               querySnapshot.forEach((doc) => {

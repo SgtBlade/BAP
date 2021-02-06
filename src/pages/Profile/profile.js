@@ -8,7 +8,7 @@ import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
 const Profile = () => {
-  const { uiStore, projectStore } = useStores();
+  const { uiStore, /*projectStore*/ } = useStores();
 
   console.log(uiStore.currentUser);
 

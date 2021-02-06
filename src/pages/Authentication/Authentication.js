@@ -2,7 +2,7 @@ import React from "react";
 import { useObserver } from "mobx-react-lite";
 import { Switch, Route /*Redirect, */ } from "react-router-dom";
 import { ROUTES } from "../../consts/index.js";
-import style from "./Authentication.module.css";
+//import style from "./Authentication.module.css";
 import PasswordResetForm from "../F_PasswordResetForm/passwordResetForm";
 import Person from "../Profile/profile.js";
 import LoginForm from "../F_LoginForm/loginForm.js"
@@ -26,7 +26,7 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.projecten}>
-            {console.log("test")}
+            
           </Route>
           <Route exact path={ROUTES.overons}>
           <ProjectDetail />

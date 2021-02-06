@@ -62,6 +62,21 @@ class UserService {
         this.requestVerificationMail(newUser.mail);
         this.requests['continueUserCreation'] ? this.requests['continueUserCreation']++ : this.requests['continueUserCreation'] = 1;
       })
+      .then(() => {
+        //Small loop to capitalize first letter in case the user forgot
+        const mySentence = `${newUser.surname} ${newUser.name}`;
+        const words = mySentence.split(" ");
+        for (let i = 0; i < words.length; i++) {
+            words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+        }
+
+        //Setting the basic information of the user in the firebase auth (not the user from firestore)
+        this.auth.currentUser.updateProfile({
+          photoURL: newUser.picture,
+          displayName: words.join(" "),
+          phoneNumber: newUser.phoneNumber,
+        })
+      })
       .catch((error) => {
         console.error("Error writing document: ", error);
         return false;
@@ -143,21 +158,8 @@ class UserService {
               .then(downloadURL => {
                 //continueing to the user creation after the image has been uploaded
                 this.continueUserCreation(user, [true, user.updateImage(downloadURL)],changeLoadingTo, updateUser);
-  
-                  //Small loop to capitalize first letter in case the user forgot
-                  const mySentence = `${user.surname} ${user.name}`;
-                  const words = mySentence.split(" ");
-                  for (let i = 0; i < words.length; i++) {
-                      words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-                  }
-                
                 this.requests['addImageToStorage'] ? this.requests['addImageToStorage']++ : this.requests['addImageToStorage'] = 1;
-                //Setting the basic information of the user in the firebase auth (not the user from firestore)
-                this.auth.currentUser.updateProfile({
-                  photoURL: downloadURL,
-                  displayName: words.join(" "),
-                  phoneNumber: user.phoneNumber,
-                })
+
               });
           }
         });
@@ -188,11 +190,11 @@ class UserService {
     var actionCodeSettings = { url: RESPONSE.resetPasswordURL, handleCodeInApp: true, };
     this.auth.sendPasswordResetEmail(
         mail, actionCodeSettings)
-        .then(function() {
+        .then(() => {
           //Once finished send a response that it was successful
           sendResponse([true, 'positive', RESPONSE.resetPasswordSucces])
           this.requests['sendPasswordResetMail'] ? this.requests['sendPasswordResetMail']++ : this.requests['sendPasswordResetMail'] = 1;
-        })
+        }) 
         .catch(function(error) {
           sendResponse([true, 'negative', RESPONSE.resetPasswordFail])
         });

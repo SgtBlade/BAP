@@ -34,7 +34,7 @@ class UiStore {
       creationDate: 1611067622180,
       exp: 0,
       id: '8SzbHZQ7UygNou338Vks4KTPmf93',
-      interestedTags: [],
+      interestedTags: ['Ontspanning'],
       level: 0,
       mail: "migueleken@hotmail.com",
       surname: "de pelsmaeker",
