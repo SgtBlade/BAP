@@ -75,12 +75,38 @@
 }
 
 .how {
+  position: relative;
   background: var(--background);
-  border-bottom: solid var(--durfRed) 1rem;
+  /* border-bottom: solid var(--durfRed) 1rem;
+  border-top: solid
+    linear-gradient(
+      to right,
+      var(--durfYellow) 25%,
+      var(--durfGreen) 25%,
+      var(--durfGreen) 75%,
+      var(--durfRed) 75%
+    )
+    1rem; */
+}
+
+.how::after {
+  background: linear-gradient(
+    to right,
+    var(--durfYellow) 25%,
+    var(--durfGreen) 25%,
+    var(--durfGreen) 75%,
+    var(--durfRed) 75%
+  );
+  position: absolute;
+  content: "";
+  height: 1rem;
+  right: 0;
+  left: 0;
+  top: 0;
 }
 
 .howTitle {
-  margin-top: 6rem;
+  margin-top: 8rem;
   font-family: var(--weightBlackFont);
   font-size: var(--fontUltra);
   color: var(--durfRed);
@@ -100,33 +126,52 @@
 }
 
 .howSection {
-  padding: 2rem 1rem;
   flex: 1 1;
-  border-radius: 1rem;
   line-height: 1.5;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-.howSection:hover {
+.howSectionImg {
+  order: -1;
+  margin-bottom: -4rem;
+  z-index: 1;
+  margin-left: 2rem;
+}
+
+.howSectionTextContainer {
+  border-radius: 1rem;
+  padding: 3rem 1rem 3rem 2rem;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.howSection:hover .howSectionTextContainer {
   background: var(--durfRed);
   color: white;
 }
 
 .howSection + .howSection {
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .howSectionTitle {
   font-family: var(--weightSemiboldFont);
-  padding: 2rem 0;
+  padding: 4rem 0 2rem 0;
 }
 
 .pillars {
   display: flex;
   flex-flow: row-reverse;
+  gap: 2rem;
 }
 
 .pillarsHeader {
-  flex: 1 1 auto;
+  flex: 2;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 }
 
 .pillarsTitle {
@@ -135,26 +180,36 @@
 }
 
 .pillarsSections {
-  flex: 2 1 auto;
-  display: flex;
+  flex: 3;
+  /* display: flex;
   flex-wrap: wrap;
-  /* gap: 2rem; */
+  gap: 2rem; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 2rem 2rem;
 }
 
 .pillarsSection {
   padding: 2rem;
-  /* max-width: 50%; */
-  flex: 2 1;
   border-radius: 2rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.pillarsSectionImage {
+  order: -1;
+  margin-top: 2rem;
 }
 
 .pillarsSectionTitle {
-  padding: 4rem 0;
+  padding: 4rem 0 2rem 0;
   font-family: var(--weightBlackFont);
 }
 
 .pillarSectionParagraph {
   line-height: 1.4;
+  margin-bottom: 2rem;
 }
 
 .pillarsSection:nth-child(1) {
@@ -168,6 +223,7 @@
 
 .pillarsSection:nth-child(3) {
   background: var(--durfRed);
+  color: white;
 }
 
 .pillarsSection:nth-child(4) {

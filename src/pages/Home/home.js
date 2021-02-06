@@ -56,60 +56,74 @@ const Home = () => {
           </h2>
           <div className={style.howSections}>
             <section className={style.howSection}>
+              <div className={style.howSectionTextContainer}>
+                <h3 className={style.howSectionTitle}>
+                  Projectidee is aangevraagd
+                </h3>
+                <p className={style.howSectionParagraph}>
+                  Iemand (of jezelf) voegt een creatief project toe na het
+                  invullen van alle nodige informatie.
+                </p>
+              </div>
               <img
+                className={style.howSectionImg}
                 src="assets/images/lamp.svg"
                 alt="lamp die een projectidee weergeeft"
                 width="115"
                 height="130"
               />
-              <h3 className={style.howSectionTitle}>
-                Projectidee is aangevraagd
-              </h3>
-              <p className={style.howSectionParagraph}>
-                Iemand (of jezelf) voegt een creatief project toe na het
-                invullen van alle nodige informatie.
-              </p>
             </section>
             <section className={style.howSection}>
+              <div className={style.howSectionTextContainer}>
+                <h3 className={style.howSectionTitle}>Er wordt gestemd</h3>
+                <p className={style.howSectionParagraph}>
+                  Het project wordt zichtbaar en Iedereen kan erop stemmen
+                  indien ze het graag zouden zien verwezelijkt.
+                </p>
+              </div>
               <img
+                className={style.howSectionImg}
                 src="assets/images/button.svg"
                 alt="likebutton met hartjes"
                 width="130"
                 height="130"
               ></img>
-              <h3 className={style.howSectionTitle}>Er wordt gestemd</h3>
-              <p className={style.howSectionParagraph}>
-                Het project wordt zichtbaar en Iedereen kan erop stemmen indien
-                ze het graag zouden zien verwezelijkt.
-              </p>
             </section>
             <section className={style.howSection}>
+              <div className={style.howSectionTextContainer}>
+                <h3 className={style.howSectionTitle}>
+                  Er worden middelen verzameld
+                </h3>
+                <p className={style.howSectionParagraph}>
+                  Naast middelen zoals vrijwilligers en materiaal, kunnen
+                  geïntreseerden een donatie doen om het project te steunen.
+                </p>
+              </div>
               <img
+                className={style.howSectionImg}
                 src="assets/images/resources.svg"
                 alt="geldinzamelpot met verfborstel"
                 width="130"
                 height="130"
               ></img>
-              <h3 className={style.howSectionTitle}>
-                Er worden middelen verzameld
-              </h3>
-              <p className={style.howSectionParagraph}>
-                Naast middelen zoals vrijwilligers en materiaal, kunnen
-                geïntreseerden een donatie doen om het project te steunen.
-              </p>
             </section>
             <section className={style.howSection}>
+              <div className={style.howSectionTextContainer}>
+                <h3 className={style.howSectionTitle}>
+                  Durf2030 steunt verder
+                </h3>
+                <p className={style.howSectionParagraph}>
+                  Goedgekeurde projecten worden op verschillende manieren verder
+                  ondersteund door Durf2030.
+                </p>
+              </div>
               <img
+                className={style.howSectionImg}
                 src="assets/images/steunverder.svg"
                 alt="steunpilaren worden gebouwd"
                 width="115"
                 height="130"
               ></img>
-              <h3 className={style.howSectionTitle}>Durf2030 steunt verder</h3>
-              <p className={style.howSectionParagraph}>
-                Goedgekeurde projecten worden op verschillende manieren verder
-                ondersteund door Durf2030.
-              </p>
             </section>
           </div>
         </div>
@@ -120,9 +134,10 @@ const Home = () => {
       >
         <header className={style.pillarsHeader}>
           <h2 className={style.pillarsTitle}>
-            De <span>4</span> Durf pijlers
+            De <span className={style.pillarsTitleSpan}>4</span> Durf pijlers
           </h2>
           <a
+            className={style.link}
             href="https://www.durf2030.eu/over-durf2030"
             target="_blank"
             rel="noopener noreferrer"
@@ -138,6 +153,7 @@ const Home = () => {
               individuen jouw project vooruit kunnen helpen.
             </p>
             <img
+              className={style.pillarsSectionImage}
               src="assets/images/connect.svg"
               alt="verbinden van verschillende vormen"
               width="130"
@@ -151,6 +167,7 @@ const Home = () => {
               media kanalen.
             </p>
             <img
+              className={style.pillarsSectionImage}
               src="assets/images/verrekijker.svg"
               alt="verrekijker die kijkt"
               width="150"
@@ -164,6 +181,7 @@ const Home = () => {
               we iedereen die een project wil opzetten.
             </p>
             <img
+              className={style.pillarsSectionImage}
               src="assets/images/inspireer.svg"
               alt="hersenen die geïnspireerd worden aan de hand van elektrische prikkels"
               width="130"
@@ -177,6 +195,7 @@ const Home = () => {
               financieren, communiceren.
             </p>
             <img
+              className={style.pillarsSectionImage}
               src="assets/images/ondersteun.svg"
               alt="meerdere steunpilaren die de verschillende manieren van steun weergeven"
               width="130"
