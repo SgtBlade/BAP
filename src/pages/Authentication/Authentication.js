@@ -7,6 +7,7 @@ import PasswordResetForm from "../F_PasswordResetForm/passwordResetForm";
 import Person from "../Profile/profile.js";
 import LoginForm from "../F_LoginForm/loginForm.js"
 import RegisterForm from "../F_RegisterForm/registerForm.js"
+import ProjectDetail from "../Projectdetail/projectdetail.js"
 import Nav from "../../components/Nav/nav";
 import Footer from "../../components/Footer/footer.js";
 import Home from "../Home/home.js";
@@ -27,7 +28,9 @@ const Authentication = () => {
           <Route exact path={ROUTES.projecten}>
             {console.log("test")}
           </Route>
-          <Route exact path={ROUTES.overons}></Route>
+          <Route exact path={ROUTES.overons}>
+          <ProjectDetail />
+          </Route>
 
           <Route exact path={ROUTES.startproject}>
             <CreateProjectForm />
