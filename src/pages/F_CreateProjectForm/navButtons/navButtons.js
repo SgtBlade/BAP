@@ -2,8 +2,6 @@ import React from 'react'
 import { useObserver } from "mobx-react-lite";
 import style from "./navButtons.module.css";
 import globalStyle from '../../globalStyles/main.module.css'
-import { ROUTES } from '../../../consts';
-import { Link } from 'react-router-dom';
 
 const NavButtons = ({validate, currentStep, errors, STEPS}) => {
   

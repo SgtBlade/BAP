@@ -4,7 +4,7 @@ import { useStores } from "../../hooks/useStores";
 import moduleStyle from "./home.module.css";
 import globalStyle from "../globalStyles/main.module.css";
 //import COLORS from "../globalStyles/colors";
-import ProjectCard from "../../components/ProjectCard/projectCard";
+//import ProjectCard from "../../components/ProjectCard/projectCard";
 import ProjectPreview from "../../components/ProjectPreview/projectPreview";
 import { Link } from "react-router-dom";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
