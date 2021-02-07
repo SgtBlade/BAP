@@ -12,10 +12,12 @@ import style from "./projectdetail.module.css";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 const ProjectDetail = () => {
 
-  //console.log(uiStore.currentUser);
-
-
   const { projectStore } = useStores();
+
+  //console.log(uiStore.currentUser);
+  const tags = projectStore.currentProject.tags;
+  console.log(tags);
+
 
   return useObserver(() => (
     <article className={style.projectDetail}>
@@ -25,7 +27,7 @@ const ProjectDetail = () => {
       <div className={style.projectDetail__container}>
         <div className={style.projectDetail__head}>
           <div className={style.projectDetail__head__box}>
-            <img className={style.projectDetail__head__image} src="./assets/project/placeholder.svg" alt="project afbeelding"/>
+            <img className={style.projectDetail__head__image} src="./assets/project/placeholder2.png" alt="project afbeelding"/>
             <div className={style.head__information}>
               <div className={style.head__information__box}>
                 <p className={style.information__title}>Projectfase</p>
@@ -53,22 +55,16 @@ const ProjectDetail = () => {
             </div>
             <hr className={style.line}/>
             <div className={style.tags}>
-              <p className={style.tag}>
-                <span className={style.tag__color}></span>
-                Sociaal
-              </p>
-              <p className={style.tag}>
-                <span className={style.tag__color}></span>
-                Sociaal
-              </p>
-              <p className={style.tag}>
-                <span className={style.tag__color}></span>
-                Sociaal
-              </p>
+                {tags.map( tag => 
+                    <p key={tag}  className={style.tag}>
+                    <span  className={style.tag__color}></span>
+                    {tag}
+                  </p>
+                )}
             </div>
           </div>
           <div className={style.projectDetail__head__box}>
-            <h1 className={style.projectDetail__title}>Vraagstraat</h1>
+            <h1 className={style.projectDetail__title}>{projectStore.currentProject.title}</h1>
             <div className={style.head__collaborators}>
               <span className={style.collaborators__others}>+3</span>
               <div>
@@ -131,14 +127,19 @@ const ProjectDetail = () => {
           </div>
         </div>
         <div className={style.images__container}>
-          <img src="./assets/project/placeholder.svg" alt="project afbeelding"/>
-          <img src="./assets/project/placeholder.svg" alt="project afbeelding"/>
-          <img src="./assets/project/placeholder.svg" alt="project afbeelding"/>
-          <img src="./assets/project/placeholder.svg" alt="project afbeelding"/>
+          <div className={style.images__box}>
+            <img className={style.image} src="./assets/project/placeholder2.png" alt="project afbeelding"/>
+            <img className={style.image} src="./assets/project/placeholder2.png" alt="project afbeelding"/>
+            <img className={style.image} src="./assets/project/placeholder2.png" alt="project afbeelding"/>
+            <img className={style.image} src="./assets/project/placeholder2.png" alt="project afbeelding"/>
+            <img className={style.image} src="./assets/project/placeholder2.png" alt="project afbeelding"/>
+          </div>
         </div>
       </div>
 
-      <SimpleTabs content="patatzo"/>
+      <div className={style.tabs}>
+        <SimpleTabs description={projectStore.currentProjectDescription}/>
+      </div>
     </article>
   ));
 };

@@ -7,17 +7,18 @@
     width: 85vw;
     margin: auto;
     margin-bottom: 2.5rem;
+    
 }
+
 .breadcrumb__content, .breadcrumb__content__link {
     font-size: var(--fontRegular);
-    font-family: "Montserrat_black";
     color: var(--durfGreenDarker);
     text-transform: uppercase;
+    font-family: "Montserrat_black";
 }
 
 .projectDetail__head {
     display: flex;
-    margin-bottom: 5rem;
 }
 
 .projectDetail__head__box {
@@ -34,6 +35,8 @@
 
 .projectDetail__head__image {
     margin-bottom: 2.5rem;
+    width: 100%;
+    height: auto;
 }
 
 .head__information {
@@ -64,6 +67,8 @@
 .tags {
     display: flex;
     margin-top: 2.5rem;
+    flex-flow: wrap;
+    
 }
 
 .tag {
@@ -73,6 +78,7 @@
     display: flex;
     align-items: center;
     margin-right: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .tag__color {
@@ -81,7 +87,7 @@
     border-radius: 50rem;
     margin-right: 1rem;
     display: inline-block;
-    background-color: var(--black);
+    background-color: var(--dark);
 }
 
 .line {
@@ -286,15 +292,15 @@
 }
 
 .fundingButtons__secondary {
-    border: .25rem solid var(--black);
-    color: var(--black);
+    border: .25rem solid var(--dark);
+    color: var(--dark);
     transition: .25s;
     position: relative;
 }
 
 .fundingButtons__secondary:hover {
     color: white;
-    background-color: var(--black);
+    background-color: var(--dark);
     transform: scale(.95);
 }
 
@@ -313,8 +319,36 @@
 .receivedMoney__text__big {
     color: var(--durfGreen);
     font-size: 4.8rem;
-    font-family: "Montserrat-black";
+    font-family: "Montserrat-dark";
     margin-right: 1rem;
     
 }
+.images__box {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    padding: 5rem 0;
+    padding-left: 7.5vw;
+
+}
+
+.image {
+    margin-right: 2.5rem;
+    transition: .5s;
+    width: 75%;
+    height: auto;
+}
+
+.image:hover {  
+    transform: scale(1.15);
+    z-index: 2;
+}
+
+.tabs {
+    margin-bottom: 5rem;
+    display: flex;
+}
+
+
+
 
