@@ -1,0 +1,16 @@
+.tabs__container {
+    width: 85vw;
+    margin: auto;
+
+}
+
+.tab {
+    font-size: 60rem;
+}
+
+.MuiTabs-scroller {
+    width: 100%;
+    border-bottom: 1rem solid black;
+
+}
+

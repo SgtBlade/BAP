@@ -58,8 +58,8 @@
   border-radius: 2rem;
 }
 
-.projectCard__funding {
-}
+/* .projectCard__funding {
+} */
 
 .projectCard__funding__progressValues {
   display: flex;
