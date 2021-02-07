@@ -46,7 +46,7 @@ const ProjectPreview = (props, tags) => {
                 backgroundColor: color,
             }}></span>
             <div className={style.projectCard__container}>
-              <img className={style.projectCard__image} src="./assets/project/placeholder.svg" alt="projectImage"/>
+              <img className={style.projectCard__image} src="./assets/project/placeholder2.png" alt="projectImage"/>
               <div className={style.projectCard__container__content}>
                     <div className={style.projectCard__container__content__title}>
                         <h3 className={style.projectCard__title}>The Rope</h3>
