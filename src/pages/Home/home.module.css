@@ -12,7 +12,7 @@
 
 .container {
   max-width: 120.4rem;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 .sectionContainer {
@@ -40,6 +40,7 @@
 .introParagraph {
   padding-top: 3rem;
   font-weight: 200;
+  line-height: 1.5;
 }
 
 .introTitle {
@@ -55,7 +56,6 @@
 
 .introText {
   max-width: 60ch;
-  line-height: 1.4;
 }
 
 .introButton {
@@ -263,17 +263,23 @@
 
 .highlightsCards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-auto-columns: 2fr 1fr;
-  grid-auto-rows: 1fr 1fr;
-  grid-gap: 1rem 1rem;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto;
+  gap: 2rem 4rem;
+}
+
+.highlightsCardBig {
+  grid-row: 1 / span 2;
+  align-self: center;
 }
 
 .callToAction {
   display: flex;
   flex-flow: row-reverse;
-  gap: 6rem;
+  gap: calc(4rem + 4vw);
+  justify-content: space-around;
+  margin-bottom: 8rem;
+  margin-top: 2rem;
 }
 
 .callToActionTitle {
@@ -282,7 +288,13 @@
 }
 
 .callToActionText {
-  display: flex;
+  margin: auto;
   flex-flow: column;
   justify-content: space-evenly;
+}
+
+.callToActionParagraph {
+  margin-top: 3rem;
+  line-height: 1.4;
+  max-width: 50ch;
 }

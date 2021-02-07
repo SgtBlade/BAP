@@ -45,7 +45,7 @@ const Home = () => {
           </div>
         </div>
         <div className={`${style.introProjectCard}`}>
-          <ProjectPreview></ProjectPreview>
+          <ProjectPreview type="funding"></ProjectPreview>
         </div>
       </section>
 
@@ -214,20 +214,22 @@ const Home = () => {
         </h2>
         <div className={style.highlightsCards}>
           {/* Hier komen 3 projecten */}
-          <ProjectPreview></ProjectPreview>
-          <ProjectPreview></ProjectPreview>
-          <ProjectPreview></ProjectPreview>
+          <div className={style.highlightsCardBig}>
+            <ProjectPreview type="funding"></ProjectPreview>
+            <Link className={`${style.introButton} ${style.mainButton}`} to="/">
+              Toon alle projecten
+            </Link>
+          </div>
+          <ProjectPreview type="voting"></ProjectPreview>
+          <ProjectPreview type="funding"></ProjectPreview>
         </div>
-        <Link className={`${style.introButton} ${style.mainButton}`} to="/">
-          Toon alle projecten
-        </Link>
       </section>
       <section
         className={`${style.section} ${style.callToAction} ${style.container}`}
       >
         <div className={style.callToActionText}>
           <h2 className={style.callToActionTitle}>Doe mee met jouw project!</h2>
-          <p>
+          <p className={style.callToActionParagraph}>
             Ben je gebeten door het maken van projecten? Of heb je een idee in
             je hoofd maar weet je niet hoe het uit te werken, of van waar je het
             financiële kan halen? Maak dan nu een account aan en ontdek de vele
