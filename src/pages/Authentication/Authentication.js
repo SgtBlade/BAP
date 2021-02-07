@@ -5,14 +5,15 @@ import { ROUTES } from "../../consts/index.js";
 //import style from "./Authentication.module.css";
 import PasswordResetForm from "../F_PasswordResetForm/passwordResetForm";
 import Person from "../Profile/profile.js";
-import LoginForm from "../F_LoginForm/loginForm.js"
-import RegisterForm from "../F_RegisterForm/registerForm.js"
-import ProjectDetail from "../Projectdetail/projectdetail.js"
+import LoginForm from "../F_LoginForm/loginForm.js";
+import RegisterForm from "../F_RegisterForm/registerForm.js";
+import ProjectDetail from "../Projectdetail/projectdetail.js";
 import Nav from "../../components/Nav/nav";
 import Footer from "../../components/Footer/footer.js";
 import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 import Discovery from "../Discovery/Discovery.js";
+import Quiz from "../Quiz/quiz.js";
 
 const Authentication = () => {
   return useObserver(() => (
@@ -20,16 +21,9 @@ const Authentication = () => {
       <Nav />
       <div>
         <Switch>
-          <Route exact path={ROUTES.home}>
-            {/* <Testenv/> */}
-            <Home />
-          </Route>
-
-          <Route exact path={ROUTES.projecten}>
-            
-          </Route>
+          <Route exact path={ROUTES.projecten}></Route>
           <Route exact path={ROUTES.overons}>
-          <ProjectDetail />
+            <ProjectDetail />
           </Route>
 
           <Route exact path={ROUTES.startproject}>
@@ -43,7 +37,7 @@ const Authentication = () => {
           <Route exact path={ROUTES.registreer}>
             <RegisterForm />
           </Route>
-          
+
           <Route exact path={ROUTES.login}>
             <LoginForm />
           </Route>
@@ -52,9 +46,17 @@ const Authentication = () => {
             <PasswordResetForm />
           </Route>
 
-
           <Route exact path={ROUTES.discovery}>
-            <Discovery/>
+            <Discovery />
+          </Route>
+
+          <Route exact path={ROUTES.home}>
+            {/* <Testenv/> */}
+            <Home />
+          </Route>
+
+          <Route exact path={ROUTES.quiz}>
+            <Quiz />
           </Route>
 
           {/* <Route path="/me">
@@ -69,7 +71,7 @@ const Authentication = () => {
             <Detail />
           </Route> */}
         </Switch>
-        <Footer/>
+        <Footer />
       </div>
     </>
   ));

@@ -2,13 +2,14 @@ const ROUTES = {
   home: "/",
   login: "/login",
   registreer: "/registreer",
-  reset: '/reset',
+  reset: "/reset",
   projectDetail: { path: "/projecten/:id", to: "/projecten/" },
-  projecten: '/projecten',
-  overons: '/overons',
-  startproject: '/startproject',
-  profiel: '/profiel',
-  discovery: '/discovery',
+  projecten: "/projecten",
+  overons: "/overons",
+  startproject: "/startproject",
+  profiel: "/profiel",
+  discovery: "/discovery",
+  quiz: "/quiz",
 };
 
 export { ROUTES };
