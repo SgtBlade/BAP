@@ -1,0 +1,320 @@
+.projectDetail__head {
+    width: 85vw;
+    margin: auto;
+}
+
+.breadcrumb {
+    width: 85vw;
+    margin: auto;
+    margin-bottom: 2.5rem;
+}
+.breadcrumb__content, .breadcrumb__content__link {
+    font-size: var(--fontRegular);
+    font-family: "Montserrat_black";
+    color: var(--durfGreenDarker);
+    text-transform: uppercase;
+}
+
+.projectDetail__head {
+    display: flex;
+    margin-bottom: 5rem;
+}
+
+.projectDetail__head__box {
+    width: 50%;
+}
+
+.projectDetail__head__box:nth-child(1) {
+    padding-right: 1.25rem;
+}
+
+.projectDetail__head__box:nth-child(2) {
+    padding-left: 5rem;
+}
+
+.projectDetail__head__image {
+    margin-bottom: 2.5rem;
+}
+
+.head__information {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+}
+
+.information__title{
+    font-family: "RobotoMono-light";
+    text-transform: uppercase;
+    font-size: var(--fontSmall);
+    color: #AAAAAA;
+    margin-left: 4rem;
+    margin-bottom: .5rem;
+}
+
+.information__content {
+    font-size: var(--fontMedium);
+    display: flex;
+    align-items: center;
+}
+
+.information__content__icon {
+    margin-right: 1.5rem;
+}
+
+.tags {
+    display: flex;
+    margin-top: 2.5rem;
+}
+
+.tag {
+    font-size: 1.8rem;
+    font-family: "Montserrat";
+    font-weight: 200;
+    display: flex;
+    align-items: center;
+    margin-right: 2.5rem;
+}
+
+.tag__color {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50rem;
+    margin-right: 1rem;
+    display: inline-block;
+    background-color: var(--black);
+}
+
+.line {
+    width: 100%;
+    position: relative;
+    height: .5rem;
+    border: none;
+    
+}
+
+.line::before {
+    background: linear-gradient( to right, var(--durfYellow) 25%, var(--durfGreen) 25%, var(--durfGreen) 75%, var(--durfRed) 75% );
+    position: absolute;
+    content: "";
+    height: 1rem;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+.projectDetail__title {
+    font-size: 6.4rem;
+    font-family: "Montserrat-Bold";
+    margin-bottom: 2.5rem;
+}
+
+.head__collaborators {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.collaborators__others, .profilePicture, .profilePicture__hoofd {
+    width: 3.5rem; 
+    height: 3.5rem;
+    padding: 0;
+}
+
+.collaborators__others {
+    background-color: var(--lightGrey);
+    border-radius: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:"Montserrat-semiBold";
+    font-size: 1.2rem;
+}
+
+.profilePicture {
+    transform: translateX(-1rem);
+}
+
+.profilePicture__hoofd__container {
+    position: relative;
+    transform: translateX(-2rem);
+}
+
+.profilePicture__hoofd__container--alone {
+    position: relative;
+    transform: translateX(0rem);
+}
+.profilePicture__hoofd__level {
+    position: absolute;
+    bottom: -0.75rem;
+    right: -.75rem;
+    width: 2.25rem; 
+    height: 2.25rem;
+    color: white;
+    border-radius: 5rem;
+    background-color: var(--durfGreenDarker);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat-semiBold";
+    font-size: 1.2rem;
+    padding-top: .125rem;
+    padding-left: .125rem;
+}
+
+.collaborateurs {
+    font-size: 1.6rem;
+    font-family: "Montserrat-semiBold";
+}
+
+.receivedMoney__container {
+    margin-bottom: 2.5rem;
+}
+
+.description {
+    font-size: var(--fontRegular);
+    line-height: 1.5;
+    font-family: "Montserrat";
+    font-weight: 200;
+    margin-bottom: 2.5rem;;
+}
+
+.shareContainer {
+    display: flex;
+    margin-bottom: 2.5rem;
+}
+
+.shareContainer__link {
+    margin-right: 1.5rem;
+}
+
+.votingTitle {
+    font-family: "Montserrat-semiBold";
+    font-size: var(--fontMedium);
+    margin-bottom: 2.5rem;
+}
+
+.votingButtons__container {
+    display: flex;
+}
+
+.votingButtons {
+    padding: 1.5rem 2.5rem;
+    background-color: transparent;
+    font-family: "Montserrat-semiBold";
+    font-size: var(--fontMedium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+    border: none;
+}
+
+.votingButtons__primary {
+    margin-right: 2.5rem;
+    border: .25rem solid var(--durfGreenDarker);
+    color: white;
+    background-color: var(--durfGreenDarker);
+    transition: .25s;
+    position: relative;
+}
+
+.votingButtons__primary:hover {
+    background-color: transparent;
+    color: var(--durfGreenDarker);
+    transform: scale(.95);
+    position: relative;
+}
+
+.votingButtons__primary:hover::after {
+    content: "";
+    position: absolute;
+    width: 2.4rem;
+    height: 2.4rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 2.5rem;
+    background: url('/assets/icons/love-greenInvert.svg');
+}
+
+.votingButtons__secondary {
+    border: .25rem solid var(--durfRed);
+    color: var(--durfRed);
+    transition: .25s;
+    position: relative;
+}
+
+.votingButtons__secondary:hover {
+    color: white;
+    background-color: var(--durfRed);
+    transform: scale(.95);
+}
+
+.votingButtons__secondary:hover::after {
+    content: "";
+    position: absolute;
+    width: 1.8rem;
+    height: 1.8rem;
+    position: absolute;
+    top: 1.8rem;
+    left: 2.5rem;
+    background: url('/assets/icons/dislike-invertWhite.svg');
+
+}
+
+.votingButtons:hover {
+    cursor: pointer;
+}
+
+.votingButtons__icons {
+    margin-right: 1.5rem;
+}
+
+.fundingButtons__primary {
+    margin-right: 2.5rem;
+    border: .25rem solid var(--durfGreenDarker);
+    color: white;
+    background-color: var(--durfGreenDarker);
+    transition: .25s;
+    position: relative;
+}
+
+.fundingButtons__primary:hover {
+    background-color: transparent;
+    color: var(--durfGreenDarker);
+    transform: scale(.95);
+    position: relative;
+}
+
+.fundingButtons__secondary {
+    border: .25rem solid var(--black);
+    color: var(--black);
+    transition: .25s;
+    position: relative;
+}
+
+.fundingButtons__secondary:hover {
+    color: white;
+    background-color: var(--black);
+    transform: scale(.95);
+}
+
+.receivedMoney__progressBar {
+    width: 100%;
+    height: 2rem;
+    border: none;
+}
+
+.receivedMoney__text {
+    margin-bottom: .5rem;
+    font-size: var(--fontRegular);
+    font-family: "Montserrat-semiBold";
+}
+
+.receivedMoney__text__big {
+    color: var(--durfGreen);
+    font-size: 4.8rem;
+    font-family: "Montserrat-black";
+    margin-right: 1rem;
+    
+}
+
