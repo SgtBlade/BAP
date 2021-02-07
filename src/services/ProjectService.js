@@ -12,7 +12,6 @@ class ProjectService {
     this.auth = firebase.auth();
     this.fieldValue = firebaseParent.firestore.FieldValue;
     this.storage = firebase.storage();
-
   }
 
   getArchivedProjects = async (onChange) => {
@@ -239,6 +238,18 @@ class ProjectService {
           setDescription(descriptionFile.responseText);
         }
      }
+  }
+
+  updateProject = (id, user) => {
+    let projectRef = this.db.collection('projects').doc(id);
+    projectRef.update({
+      upvotes: this.fieldValue.increment(1)
+    });
+
+    let userRef = this.db.collection('users').doc(user.id);
+    userRef.update({
+          votes: this.fieldValue.arrayUnion(id)
+      });
   }
 }
 

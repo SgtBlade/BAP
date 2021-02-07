@@ -1,354 +1,363 @@
 .projectDetail__head {
-    width: 85vw;
-    margin: auto;
+  width: 85vw;
+  margin: auto;
 }
 
 .breadcrumb {
-    width: 85vw;
-    margin: auto;
-    margin-bottom: 2.5rem;
-    
+  width: 85vw;
+  margin: auto;
+  margin-bottom: 2.5rem;
 }
 
-.breadcrumb__content, .breadcrumb__content__link {
-    font-size: var(--fontRegular);
-    color: var(--durfGreenDarker);
-    text-transform: uppercase;
-    font-family: "Montserrat_black";
+.breadcrumb__content,
+.breadcrumb__content__link {
+  font-size: var(--fontRegular);
+  color: var(--durfGreenDarker);
+  text-transform: uppercase;
+  font-family: "Montserrat_black";
 }
 
 .projectDetail__head {
-    display: flex;
+  display: flex;
 }
 
 .projectDetail__head__box {
-    width: 50%;
+  width: 50%;
 }
 
 .projectDetail__head__box:nth-child(1) {
-    padding-right: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .projectDetail__head__box:nth-child(2) {
-    padding-left: 5rem;
+  padding-left: 5rem;
 }
 
 .projectDetail__head__image {
-    margin-bottom: 2.5rem;
-    width: 100%;
-    height: auto;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  height: auto;
 }
 
 .head__information {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
 }
 
-.information__title{
-    font-family: "RobotoMono-light";
-    text-transform: uppercase;
-    font-size: var(--fontSmall);
-    color: #AAAAAA;
-    margin-left: 4rem;
-    margin-bottom: .5rem;
+.information__title {
+  font-family: "RobotoMono-light";
+  text-transform: uppercase;
+  font-size: var(--fontSmall);
+  color: #aaaaaa;
+  margin-left: 4rem;
+  margin-bottom: 0.5rem;
 }
 
 .information__content {
-    font-size: var(--fontMedium);
-    display: flex;
-    align-items: center;
+  font-size: var(--fontMedium);
+  display: flex;
+  align-items: center;
 }
 
 .information__content__icon {
-    margin-right: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .tags {
-    display: flex;
-    margin-top: 2.5rem;
-    flex-flow: wrap;
-    
+  display: flex;
+  margin-top: 2.5rem;
+  flex-flow: wrap;
 }
 
 .tag {
-    font-size: 1.8rem;
-    font-family: "Montserrat";
-    font-weight: 200;
-    display: flex;
-    align-items: center;
-    margin-right: 2.5rem;
-    margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-family: "Montserrat";
+  font-weight: 200;
+  display: flex;
+  align-items: center;
+  margin-right: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .tag__color {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50rem;
-    margin-right: 1rem;
-    display: inline-block;
-    background-color: var(--dark);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50rem;
+  margin-right: 1rem;
+  display: inline-block;
+  background-color: var(--dark);
 }
 
 .line {
-    width: 100%;
-    position: relative;
-    height: .5rem;
-    border: none;
-    
+  width: 100%;
+  position: relative;
+  height: 0.5rem;
+  border: none;
 }
 
 .line::before {
-    background: linear-gradient( to right, var(--durfYellow) 25%, var(--durfGreen) 25%, var(--durfGreen) 75%, var(--durfRed) 75% );
-    position: absolute;
-    content: "";
-    height: 1rem;
-    right: 0;
-    left: 0;
-    top: 0;
+  background: linear-gradient(
+    to right,
+    var(--durfYellow) 25%,
+    var(--durfGreen) 25%,
+    var(--durfGreen) 75%,
+    var(--durfRed) 75%
+  );
+  position: absolute;
+  content: "";
+  height: 1rem;
+  right: 0;
+  left: 0;
+  top: 0;
 }
 
 .projectDetail__title {
-    font-size: 6.4rem;
-    font-family: "Montserrat-Bold";
-    margin-bottom: 2.5rem;
+  font-size: 6.4rem;
+  font-family: "Montserrat-Bold";
+  margin-bottom: 2.5rem;
 }
 
 .head__collaborators {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
 }
 
-.collaborators__others, .profilePicture, .profilePicture__hoofd {
-    width: 3.5rem; 
-    height: 3.5rem;
-    padding: 0;
+.collaborators__others,
+.profilePicture,
+.profilePicture__hoofd {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
 }
 
 .collaborators__others {
-    background-color: var(--lightGrey);
-    border-radius: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family:"Montserrat-semiBold";
-    font-size: 1.2rem;
+  background-color: var(--lightGrey);
+  border-radius: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat-semiBold";
+  font-size: 1.2rem;
 }
 
 .profilePicture {
-    transform: translateX(-1rem);
+  transform: translateX(-1rem);
 }
 
 .profilePicture__hoofd__container {
-    position: relative;
-    transform: translateX(-2rem);
+  position: relative;
+  transform: translateX(-2rem);
 }
 
 .profilePicture__hoofd__container--alone {
-    position: relative;
-    transform: translateX(0rem);
+  position: relative;
+  transform: translateX(0rem);
 }
 .profilePicture__hoofd__level {
-    position: absolute;
-    bottom: -0.75rem;
-    right: -.75rem;
-    width: 2.25rem; 
-    height: 2.25rem;
-    color: white;
-    border-radius: 5rem;
-    background-color: var(--durfGreenDarker);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Montserrat-semiBold";
-    font-size: 1.2rem;
-    padding-top: .125rem;
-    padding-left: .125rem;
+  position: absolute;
+  bottom: -0.75rem;
+  right: -0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: white;
+  border-radius: 5rem;
+  background-color: var(--durfGreenDarker);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat-semiBold";
+  font-size: 1.2rem;
+  padding-top: 0.125rem;
+  padding-left: 0.125rem;
 }
 
 .collaborateurs {
-    font-size: 1.6rem;
-    font-family: "Montserrat-semiBold";
+  font-size: 1.6rem;
+  font-family: "Montserrat-semiBold";
 }
 
 .receivedMoney__container {
-    margin-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .description {
-    font-size: var(--fontRegular);
-    line-height: 1.5;
-    font-family: "Montserrat";
-    font-weight: 200;
-    margin-bottom: 2.5rem;;
+  font-size: var(--fontRegular);
+  line-height: 1.5;
+  font-family: "Montserrat";
+  font-weight: 200;
+  margin-bottom: 2.5rem;
 }
 
 .shareContainer {
-    display: flex;
-    margin-bottom: 2.5rem;
+  display: flex;
+  margin-bottom: 2.5rem;
 }
 
 .shareContainer__link {
-    margin-right: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .votingTitle {
-    font-family: "Montserrat-semiBold";
-    font-size: var(--fontMedium);
-    margin-bottom: 2.5rem;
+  font-family: "Montserrat-semiBold";
+  font-size: var(--fontMedium);
+  margin-bottom: 2.5rem;
 }
 
 .votingButtons__container {
-    display: flex;
+  display: flex;
 }
 
 .votingButtons {
-    padding: 1.5rem 2.5rem;
-    background-color: transparent;
-    font-family: "Montserrat-semiBold";
-    font-size: var(--fontMedium);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: .5rem;
-    border: none;
+  padding: 1.5rem 2.5rem;
+  background-color: transparent;
+  font-family: "Montserrat-semiBold";
+  font-size: var(--fontMedium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: none;
 }
 
 .votingButtons__primary {
-    margin-right: 2.5rem;
-    border: .25rem solid var(--durfGreenDarker);
-    color: white;
-    background-color: var(--durfGreenDarker);
-    transition: .25s;
-    position: relative;
+  margin-right: 2.5rem;
+  border: 0.25rem solid var(--durfGreenDarker);
+  color: white;
+  background-color: var(--durfGreenDarker);
+  transition: 0.25s;
+  position: relative;
 }
 
 .votingButtons__primary:hover {
-    background-color: transparent;
-    color: var(--durfGreenDarker);
-    transform: scale(.95);
-    position: relative;
+  background-color: transparent;
+  color: var(--durfGreenDarker);
+  transform: scale(0.95);
+  position: relative;
 }
 
 .votingButtons__primary:hover::after {
-    content: "";
-    position: absolute;
-    width: 2.4rem;
-    height: 2.4rem;
-    position: absolute;
-    top: 1.5rem;
-    left: 2.5rem;
-    background: url('/assets/icons/love-greenInvert.svg');
+  content: "";
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 1.5rem;
+  left: 2.5rem;
+  background: url("/assets/icons/love-greenInvert.svg");
 }
 
 .votingButtons__secondary {
-    border: .25rem solid var(--durfRed);
-    color: var(--durfRed);
-    transition: .25s;
-    position: relative;
+  border: 0.25rem solid var(--durfRed);
+  color: var(--durfRed);
+  transition: 0.25s;
+  position: relative;
 }
 
 .votingButtons__secondary:hover {
-    color: white;
-    background-color: var(--durfRed);
-    transform: scale(.95);
+  color: white;
+  background-color: var(--durfRed);
+  transform: scale(0.95);
 }
 
 .votingButtons__secondary:hover::after {
-    content: "";
-    position: absolute;
-    width: 1.8rem;
-    height: 1.8rem;
-    position: absolute;
-    top: 1.8rem;
-    left: 2.5rem;
-    background: url('/assets/icons/dislike-invertWhite.svg');
-
+  content: "";
+  position: absolute;
+  width: 1.8rem;
+  height: 1.8rem;
+  position: absolute;
+  top: 1.8rem;
+  left: 2.5rem;
+  background: url("/assets/icons/dislike-invertWhite.svg");
 }
 
 .votingButtons:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .votingButtons__icons {
-    margin-right: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .fundingButtons__primary {
-    margin-right: 2.5rem;
-    border: .25rem solid var(--durfGreenDarker);
-    color: white;
-    background-color: var(--durfGreenDarker);
-    transition: .25s;
-    position: relative;
+  margin-right: 2.5rem;
+  border: 0.25rem solid var(--durfGreenDarker);
+  color: white;
+  background-color: var(--durfGreenDarker);
+  transition: 0.25s;
+  position: relative;
 }
 
 .fundingButtons__primary:hover {
-    background-color: transparent;
-    color: var(--durfGreenDarker);
-    transform: scale(.95);
-    position: relative;
+  background-color: transparent;
+  color: var(--durfGreenDarker);
+  transform: scale(0.95);
+  position: relative;
 }
 
 .fundingButtons__secondary {
-    border: .25rem solid var(--dark);
-    color: var(--dark);
-    transition: .25s;
-    position: relative;
+  border: 0.25rem solid var(--dark);
+  color: var(--dark);
+  transition: 0.25s;
+  position: relative;
 }
 
 .fundingButtons__secondary:hover {
-    color: white;
-    background-color: var(--dark);
-    transform: scale(.95);
+  color: white;
+  background-color: var(--dark);
+  transform: scale(0.95);
 }
 
 .receivedMoney__progressBar {
-    width: 100%;
-    height: 2rem;
-    border: none;
+  height: 2rem;
+  border-radius: 2rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+.receivedMoney__progressBar[value]::-webkit-progress-bar {
+  background-color: var(--background);
+  border-radius: 4rem;
+}
+
+.receivedMoney__progressBar[value]::-webkit-progress-value {
+  border-radius: 4rem;
+  background-color: var(--durfGreen);
 }
 
 .receivedMoney__text {
-    margin-bottom: .5rem;
-    font-size: var(--fontRegular);
-    font-family: "Montserrat-semiBold";
+  margin-bottom: 0.5rem;
+  font-size: var(--fontRegular);
+  font-family: "Montserrat-semiBold";
 }
 
 .receivedMoney__text__big {
-    color: var(--durfGreen);
-    font-size: 4.8rem;
-    font-family: "Montserrat-dark";
-    margin-right: 1rem;
-    
+  color: var(--durfGreen);
+  font-size: 4.8rem;
+  font-family: "Montserrat-dark";
+  margin-right: 1rem;
 }
 .images__box {
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    padding: 5rem 0;
-    padding-left: 7.5vw;
-
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  padding: 5rem 0;
+  padding-left: 7.5vw;
 }
 
 .image {
-    margin-right: 2.5rem;
-    transition: .5s;
-    width: 75%;
-    height: auto;
+  margin-right: 2.5rem;
+  transition: 0.5s;
+  width: 75%;
+  height: auto;
 }
 
-.image:hover {  
-    transform: scale(1.15);
-    z-index: 2;
+.image:hover {
+  transform: scale(1.15);
+  z-index: 2;
 }
 
 .tabs {
-    margin-bottom: 5rem;
-    display: flex;
+  margin-bottom: 5rem;
+  display: flex;
 }
-
-
-
-

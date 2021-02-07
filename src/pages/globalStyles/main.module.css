@@ -67,3 +67,50 @@
   opacity: 0.2;
   cursor: not-allowed;
 }
+
+
+.Vriendengroepvrienden,
+.Familie,
+.Gezin,
+.Koppel,
+.Sociaal{
+  background-color: #230E7D
+}
+
+.LGTBQIA, .Godsdienst,
+.Diversiteit {
+background-color: #F4812E;
+}
+
+.Theater, .Dans, .Spelen, .Knutselen, .Ontspanning, .Muziek, .Sport, .Actief,
+.Kind {
+background-color: #FFED00;
+}
+
+.Dieren,
+.Natuur,
+.Landbouw,
+.Gezondheid,
+.Milieu,
+.Educatie{
+background-color: #54BBAB;
+}
+
+.Architectuur,
+.Fotografie,
+.Mode{
+background-color: #01081F;
+}
+
+.Eten,
+.Drinken {
+background-color: #E62336;
+}
+
+.Commercieel,
+.winkels,
+.Technologie,
+.Economie,
+.Ambacht {
+  background-color: #D02C75;
+}
