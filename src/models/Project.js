@@ -42,7 +42,6 @@ class Project {
     this.approved = approved;
     this.deadline = deadline;
     this.featured = featured;
-    this.completed = completed;
   }
 
   setOwnerID = (id) => this.ownerID = id;
@@ -66,6 +65,8 @@ class Project {
      }
      return true;
   }
+
+  addVote = () => { this.upvotes++; }
 
 }
 
@@ -102,7 +103,6 @@ const projectConverter = {
       archived: project.archived,
       approved: project.approved,
       featured: project.featured,
-      completed: project.completed
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -138,7 +138,6 @@ const projectConverter = {
       archived: data.archived,
       approved: data.approved,
       featured: data.featured,
-      completed: data.completed
     });
   }
 };

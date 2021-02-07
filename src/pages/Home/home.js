@@ -1,5 +1,4 @@
 import React from "react";
-import { useStores } from "../../hooks/useStores";
 //import { useObserver } from "mobx-react-lite";
 import moduleStyle from "./home.module.css";
 import globalStyle from "../globalStyles/main.module.css";
@@ -12,10 +11,6 @@ import { Link } from "react-router-dom";
 const style = { ...moduleStyle, ...globalStyle };
 
 const Home = () => {
-  const { uiStore } = useStores();
-
-  console.log(uiStore.currentUser);
-
   return (
     <main className={style.homeMain}>
       <h1 className="hidden">Durf2030 - Home</h1>

@@ -1,7 +1,7 @@
 
 class User {
   
-  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = './assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0, notifications = [] }) 
+  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = './assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0, notifications = [], votes = [] }) 
   {
     this.id = id;
     this.name = name;
@@ -20,6 +20,7 @@ class User {
     this.exp = exp;
     this.level = level;
     this.notifications = notifications
+    this.votes = votes;
   }
 
   updateBio = (newBio) => this.bio = newBio;
@@ -28,7 +29,7 @@ class User {
 
   changeId = (newId) => {this.id = newId}
   
-
+  addProjectVote = (id) => { this.votes.push(id) }
 
 }
 
@@ -50,7 +51,8 @@ const userConverter = {
       //publicMail: user.publicMail,
       //publicPhone: user.publicPhone,
       phone: user.phone,
-      notifications: user.notifications
+      notifications: user.notifications,
+      votes: user.votes
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -73,7 +75,8 @@ const userConverter = {
       publicMail: snapshot.publicMail,
       publicPhone: snapshot.publicPhone,
       phone: data.phone,
-      notifications: data.notifications
+      notifications: data.notifications,
+      votes: data.votes
     });
   }
 };

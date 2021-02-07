@@ -38,6 +38,7 @@ const Discovery = () => {
 
   }
 
+
   if(location !== '')projectstmp = projectStore.filterByLocation(projectstmp, location)
     switch (sort) {
         case 'Trending':
@@ -68,7 +69,7 @@ const Discovery = () => {
       tmp = tmp.filter(project => project.title.toLowerCase().includes(value.toLowerCase()))
     }
     if(searchParameter === 'People' && value !== ''){
-
+      tmp = tmp.filter(project => project.coWorkers.some(coworker => (`${coworker.name} ${coworker.surname}`).toLowerCase().includes(value.toLowerCase())))
     }
     if(searchParameter === 'Tags' && value !== ''){
       tmp = tmp.filter(project => project.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase())))
@@ -83,6 +84,7 @@ const Discovery = () => {
 
       <div className={`${style.filterWrap}`}>
         <Select 
+        placeholder={'Regio'}
         isClearable={true}
         className={`${style.dropdown} ${filterLocation !== '' ? style.dropdownActive : ''}`}
         onChange={(e) => {filter({location: e ? e.value:  ''});setFilterLocation(e ? e.value:  ''); }}
@@ -188,10 +190,14 @@ const Discovery = () => {
     <section>
       <h2 style={{visibility: 'hidden'}}>Zoekresultaten</h2>
 
-      <div>
+      <div className={`${style.ProjectWrap} ${projects.length === 0 ? style.projectWrapCenter : ''}`}>
           {projects.map((project, index) => {
             return <ProjectCard key={`Project_${index}`} project={project}/>
           })}
+            {projects.length === 0 ? 
+            <p className={style.ProjectWrap__noResults}>Geen projecten gevonden</p>
+            :
+            ''}
       </div>
     </section>
 
