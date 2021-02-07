@@ -49,13 +49,13 @@
 
 .introTextContainer {
   padding: 2rem;
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 50%;
   padding-right: calc(2vw + 2rem);
 }
 
 .introText {
-  max-width: 60ch;
+  max-width: 50ch;
 }
 
 .introButton {
@@ -72,6 +72,31 @@
   flex: 1;
   min-width: 50rem;
   max-width: 50%;
+  position: relative;
+}
+
+.introProjectCard::after {
+  content: "";
+  width: 6rem;
+  height: 6rem;
+  background-color: var(--durfRed);
+  position: absolute;
+  border-radius: 0.5rem;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.introProjectCard::before {
+  content: "";
+  width: 6rem;
+  height: 20rem;
+  background-color: var(--lightGrey);
+  position: absolute;
+  border-radius: 0.5rem;
+  top: calc(50% - 10rem);
+  left: -2rem;
+  z-index: -1;
 }
 
 .how {
@@ -88,6 +113,18 @@
       var(--durfRed) 75%
     )
     1rem; */
+}
+
+.how::before {
+  content: "";
+  width: 12rem;
+  height: 12rem;
+  background-color: var(--durfGreen);
+  position: absolute;
+  border-radius: 50%;
+  top: -3rem;
+  left: calc(50% - 3rem);
+  z-index: -1;
 }
 
 .how::after {
