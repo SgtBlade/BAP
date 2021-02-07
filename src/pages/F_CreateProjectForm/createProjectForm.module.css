@@ -1,109 +1,110 @@
 .wrap {
-    width: 118rem;
-    height: 100%;
-    align-items:center;
+  width: 118rem;
+  height: 100%;
+  align-items: center;
 
-    display: block;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    background-color: var(--light);
-    margin:auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: var(--light);
+  margin: auto;
 }
 
 .error {
-    color: var(--durfRed) !important;
+  color: var(--durfRed) !important;
 }
 
 .white {
-    color: var(--light) !important;
+  color: var(--light) !important;
 }
 
 .blackLetter {
-    font-family: Montserrat_black !important;
+  font-family: Montserrat_black !important;
 }
 
 .largeFontSize {
-    font-size: 3rem !important;
+  font-size: 3rem !important;
 }
 
-.inputTitle, .inputTitleLarge {
-        font-family: Montserrat_black;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 3rem;
-        color: var(--dark);
+.inputTitle,
+.inputTitleLarge {
+  font-family: Montserrat_black;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 3rem;
+  color: var(--dark);
 }
 
 .inputTitleLarge {
-    font-size: 5rem;
+  font-size: 5rem;
 }
 
 .labelText {
-    font-family: Montserrat-semiBold;
-    width: 40%;
-    font-size: 2rem;
+  font-family: Montserrat-semiBold;
+  width: 40%;
+  font-size: 2rem;
 
-    color: var(--dark);
-    
-    display: flex;
-    flex-flow: column;
-}   
+  color: var(--dark);
+
+  display: flex;
+  flex-flow: column;
+}
 
 .labelText input {
 }
 
 .inputSubtitle {
-    margin-top: 1rem;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.8rem;
-    color: var(--dark);
+  margin-top: 1rem;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.8rem;
+  color: var(--dark);
 }
 
 .input {
-    border: none;
-    border-bottom: solid 5px var(--dark);
-    padding: 1rem 1rem .5rem 0;
-    font-family: Montserrat-semiBold;
-    font-weight: 700;
-    font-size: 1.8rem;
-    width: 100%;
-    margin-top: 2.5rem;
-    color: var(--dark);
-    background-color: transparent;
+  border: none;
+  border-bottom: solid 5px var(--dark);
+  padding: 1rem 1rem 0.5rem 0;
+  font-family: Montserrat-semiBold;
+  font-weight: 700;
+  font-size: 1.8rem;
+  width: 100%;
+  margin-top: 2.5rem;
+  color: var(--dark);
+  background-color: transparent;
 }
+
 .progress {
-    height: 2rem;
-    border-radius: 2rem;
-    margin-bottom: 5rem;
-    width:100%;
-  }
-  progress[value]::-webkit-progress-bar {
-    background-color: var(--background);
-    border-radius: 4rem; 
-  }
-  
-  progress[value]::-webkit-progress-value {
-    border-radius: 4rem;
-    background-color:var(--durfGreen); 
-  }
+  height: 2rem;
+  border-radius: 2rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+.progress[value]::-webkit-progress-bar {
+  background-color: var(--background);
+  border-radius: 4rem;
+}
 
-  .buttons {
-      margin-top: 6rem;
-      width: 100;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-end;
-      align-items: center;
+.progress[value]::-webkit-progress-value {
+  border-radius: 4rem;
+  background-color: var(--durfGreen);
+}
 
-  }
+.buttons {
+  margin-top: 6rem;
+  width: 100;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
 
-  .inputDetail {
-    font-size: 1.4rem;
-    margin-top: .5rem;
-  }
+.inputDetail {
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+}

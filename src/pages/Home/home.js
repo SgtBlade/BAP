@@ -200,9 +200,7 @@ const Home = () => {
           </section>
         </div>
       </section>
-      <section
-        className={`${style.section} ${style.highlights} ${style.container}`}
-      >
+      <section className={`${style.section} ${style.highlights}`}>
         <h2 className={style.highlightsTitle}>
           <span className={style.highlightsTitleHighlight}>Uitgelichte </span>
           projecten
