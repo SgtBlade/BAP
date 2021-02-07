@@ -52,7 +52,7 @@ const Home = () => {
       <section className={`${style.section} ${style.how}`}>
         <div className={style.container}>
           <h2 className={style.howTitle}>
-            Hoe werkt <span className={style.howTitleHighlight}>het?</span>
+            Hoe werkt h<span className={style.howTitleHighlight}>et?</span>
           </h2>
           <div className={style.howSections}>
             <section className={style.howSection}>
@@ -205,7 +205,9 @@ const Home = () => {
           </section>
         </div>
       </section>
-      <section className={`${style.section} ${style.highlights}`}>
+      <section
+        className={`${style.section} ${style.highlights} ${style.container}`}
+      >
         <h2 className={style.highlightsTitle}>
           <span className={style.highlightsTitleHighlight}>Uitgelichte </span>
           projecten
@@ -216,17 +218,22 @@ const Home = () => {
           <ProjectPreview></ProjectPreview>
           <ProjectPreview></ProjectPreview>
         </div>
+        <Link className={`${style.introButton} ${style.mainButton}`} to="/">
+          Toon alle projecten
+        </Link>
       </section>
-      <section className={`${style.section} ${style.callToAction}`}>
+      <section
+        className={`${style.section} ${style.callToAction} ${style.container}`}
+      >
         <div className={style.callToActionText}>
-          <h2>Doe mee met jouw project!</h2>
+          <h2 className={style.callToActionTitle}>Doe mee met jouw project!</h2>
           <p>
             Ben je gebeten door het maken van projecten? Of heb je een idee in
             je hoofd maar weet je niet hoe het uit te werken, of van waar je het
             financiële kan halen? Maak dan nu een account aan en ontdek de vele
             voordelen van het DURF platform en ondersteuning!
           </p>
-          <Link className={style.cta__link} to="/">
+          <Link className={`${style.introButton} ${style.mainButton}`} to="/">
             Ik heb een project!
           </Link>
         </div>
