@@ -169,6 +169,41 @@ const ProjectDetail = () => {
                 </div>
               </article>
 
+              <article className={style.questionsContainer__multipleChoice}>
+                <h3 className={style.questionsSubtitle}>Wanneer past het best</h3>
+                <p className={style.multipleChoice__question}>
+                  Welke datum(s) verkies jij om samen te komen met mensen?
+                </p>
+                <form className={style.multipleChoice__form}>
+                  <label className={style.form__select}>
+                    <input className={style.form__select__input} type="checkbox" value="optie1"/>
+                    <p className={style.form__select__content}>optie1</p>
+                  </label> 
+                  <label className={style.form__select}>
+                    <input className={style.form__select__input} type="checkbox" value="optie1"/>
+                    <p className={style.form__select__content}>optie1</p>
+                  </label> 
+                </form>
+              </article>
+
+              <article className={style.questionsContainer__volunteer}>
+                <h3 className={style.questionsSubtitle}>Geef je op als vrijwilliger</h3>
+                <p className={style.multipleChoice__question}>
+                  Wij hebben vrijwilligers nodig als het project succesvol is, wil jij ons helpen?
+                </p>
+                
+              </article>
+
+              <article className={style.questionsContainer__discussion}>
+                <h3 className={style.questionsSubtitle}>Doe mee aan onze discussies</h3>
+                <p className={style.multipleChoice__question}>
+                  Join ons microsoft teams kanaal om zo het project mee vorm te geven
+                </p>
+                <a href="https://google.be" className={style.questionsContainer__discussion__link}>
+                  Doe mee aan de discussie (Discord) ►
+                </a>
+              </article>
+
             </div>
         </section>
       </div>
