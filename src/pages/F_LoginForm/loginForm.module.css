@@ -106,7 +106,7 @@
     margin-bottom: 3.5rem;
     margin-top: 1.5rem;
     font-size: var(--fontNormal);
-    font-family: "Montserrat";
+    
     font-weight: 200;
     width: 100%;
 
@@ -119,7 +119,7 @@
 
 .formTitle {
     font-size: 3.2rem;
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     text-align: center;
     margin-bottom: 2.5rem;
 }
@@ -128,7 +128,7 @@
     display: flex;
     flex-flow: column;
     font-size: var(--fontMedium);
-    font-family: "Montserrat-semibold";
+    font-weight: var(--weightSemiBold);
     justify-content: flex-end;
     line-height: 1.5rem;
 

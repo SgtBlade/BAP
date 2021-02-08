@@ -9,7 +9,7 @@ const Footer = () => {
   return(
     <footer>
         <div className={style.footerContainer}>
-            <img src="./assets/logo-white.svg" className={style.footerImage} alt="footer DURF2030 logo"/>
+            <img src="/assets/logo-white.svg" className={style.footerImage} alt="footer DURF2030 logo"/>
             <div className={style.sitemap}>
                 <p className={style.footerTitle}>Sitemap</p>
                 <div className={style.sitemap__container}>
@@ -27,13 +27,13 @@ const Footer = () => {
             <div className={style.followUs}>
                 <p className={style.footerTitle}>Volg ons op</p>
                 <a href={window.location.href} className={style.footerSocial}>
-                    <img src="./assets/socials/instagram.svg" className={style.footerSocial} alt="instagram"/>
+                    <img src="/assets/socials/instagram.svg" className={style.footerSocial} alt="instagram"/>
                 </a>
                 <a href={window.location.href} className={style.footerSocial}>
-                    <img src="./assets/socials/linkedin.svg" className={style.footerSocial} alt="linkedin"/>
+                    <img src="/assets/socials/linkedin.svg" className={style.footerSocial} alt="linkedin"/>
                 </a>
                 <a href={window.location.href} className={style.footerSocial}>
-                    <img src="./assets/socials/facebook.svg" className={style.footerSocial} alt="facebook"/>
+                    <img src="/assets/socials/facebook.svg" className={style.footerSocial} alt="facebook"/>
                 </a>
                 
             </div>

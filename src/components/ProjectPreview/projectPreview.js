@@ -50,7 +50,7 @@ const ProjectPreview = (props, tags) => {
       <div className={style.projectCard__container}>
         <img
           className={style.projectCard__image}
-          src="./assets/project/placeholder2.png"
+          src="/assets/project/placeholder2.png"
           alt="projectImage"
         />
         <div className={style.projectCard__container__content}>
@@ -103,7 +103,7 @@ const ProjectPreview = (props, tags) => {
               </p>
               <p className={style.projectCard__time}>22 dagen resterend</p>
               <div className={style.projectCard__voting__container}>
-                <img src="./assets/icons/thumbs-up.svg" alt="duim omhoog" />
+                <img src="/assets/icons/thumbs-up.svg" alt="duim omhoog" />
                 <p className={style.projectCard__voting__amount}>40</p>
               </div>
             </div>
@@ -118,7 +118,7 @@ const ProjectPreview = (props, tags) => {
               </p>
               <p className={style.projectCard__time}>22 dagen resterend</p>
               <div className={style.projectCard__voting__container}>
-                <img src="./assets/icons/thumbs-up.svg" alt="duim omhoog" />
+                <img src="/assets/icons/thumbs-up.svg" alt="duim omhoog" />
                 <p className={style.projectCard__voting__amount}>40</p>
               </div>
             </div>

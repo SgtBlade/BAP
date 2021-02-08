@@ -122,6 +122,7 @@ class ProjectService {
   uploadImages = async (images, projectID, userID) => {
     let Urls = [];
     //Loop through all images
+    if(images.length === 0) Urls.push('/assets/project/cardPlaceholderLarge.jpg')
     await images.forEach((async image => {
     
       const storageRef = this.storage.ref();
@@ -179,18 +180,16 @@ class ProjectService {
   getDescriptionDownloadData = (userID, projectID) => {
 
     const storageRef = this.storage.ref();
-    var starsRef = storageRef.child(`projects/${userID}/${projectID}/description.txt`);
+    let starsRef = storageRef.child(`projects/${userID}/${projectID}/description.txt`);
     // Get the download URL
     starsRef.getDownloadURL()
     .then((data => {
       fetch(data)
       .then(function(response) {
         response.text().then(function(text) {
-          console.log(text);
         });
       });
     }))
-  
     .catch((error) => {
       switch (error.code) {
         case 'storage/object-not-found':
@@ -210,30 +209,20 @@ class ProjectService {
           break;
       }
     });
-
-
-    /*
-    const ref = this.storage.ref(`projects/8SzbHZQ7UygNou338Vks4KTPmf93/7ogVf47Ir8Y9xUqMCf0J/description.txt`);
-    ref.getDownloadURL().subscribe(data => {
-      fetch(data)
-      .then(function(response) {
-        response.text().then(function(text) {
-          console.log(text);
-        });
-      });
-    });*/
   }
 
   convertDescriptionToData = async (url, setDescription) => {
     //Send a request to the url to get the txt file, update the file with the function once it's fetched
-    var descriptionFile = new XMLHttpRequest();
+    try{
+    let descriptionFile = new XMLHttpRequest();
     descriptionFile.open("GET",url,true);
     descriptionFile.send();
     descriptionFile.onreadystatechange = () => {
         if (descriptionFile.readyState === 4 && descriptionFile.status === 200) {
           setDescription(descriptionFile.responseText);
         }
-     }
+     }}
+     catch (e) {}
   }
 
   updateProject = (id, user) => {

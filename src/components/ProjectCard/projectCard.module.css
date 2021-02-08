@@ -24,7 +24,7 @@
 }
 
 .projectCard__title {
-    font-family: Montserrat_black;
+    font-weight: var(--weightBlack);
     font-size: 1.8rem;
 }
 
@@ -33,7 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
     font-size: 1.2rem;
     padding: .5rem 1.2rem;
     background-color: #EEEEEE;
@@ -79,7 +79,7 @@
 
 .budgetFunding {
 
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
     font-size: 1.6rem;
     margin: 0 2rem 0 2rem;
 
@@ -96,7 +96,7 @@
 .success {
     margin-left: 2rem;
     font-size: 1.8rem;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
     margin-bottom: 2rem;
 }
 
@@ -118,7 +118,7 @@
     background-color: var(--durfGreen);
     color: white;
     font-size: 2.4rem;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
     padding: 1rem;
     right: 0;
     top: 0;

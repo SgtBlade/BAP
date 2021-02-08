@@ -151,7 +151,7 @@ class UserService {
         uploadTask.on("state_changed", {
           error: error => {
             //to prevent issues later, set the default image and continue creating the account
-           this.continueUserCreation(user, [true, './assets/profile/defaultProfileImage.png', error],changeLoadingTo, updateUser);
+           this.continueUserCreation(user, [true, '/assets/profile/defaultProfileImage.png', error],changeLoadingTo, updateUser);
           },
           complete: () => {
             return uploadTask.snapshot.ref.getDownloadURL()
@@ -165,7 +165,7 @@ class UserService {
         });
     }else {
       //Set the default image and continue
-      this.continueUserCreation(user, [true, './assets/profile/defaultProfileImage.png'],changeLoadingTo, updateUser);
+      this.continueUserCreation(user, [true, '/assets/profile/defaultProfileImage.png'],changeLoadingTo, updateUser);
       const mySentence = `${user.surname} ${user.name}`;
       const words = mySentence.split(" ");
       for (let i = 0; i < words.length; i++) {
@@ -175,7 +175,7 @@ class UserService {
       //Setting the basic information of the user in the firebase auth (not the user from firestore)
       this.requests['addImageToStorage'] ? this.requests['addImageToStorage']++ : this.requests['addImageToStorage'] = 1;
       this.auth.currentUser.updateProfile({
-        photoURL: './assets/profile/defaultProfileImage.png',
+        photoURL: '/assets/profile/defaultProfileImage.png',
         displayName: words.join(" "),
         phoneNumber: user.phoneNumber,
       })

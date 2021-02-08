@@ -111,7 +111,7 @@ const RegisterForm = () => {
                   onChange={handleChangePhotoFileInput}
                   type="file"
                 />
-              <img alt={'preview'} src={'./assets/profile/defaultProfileImage.png'} height='50' width='50' className={`testObject ${style.testObject}`}/>
+              <img alt={'preview'} src={'/assets/profile/defaultProfileImage.png'} height='50' width='50' className={`testObject ${style.testObject}`}/>
             </div>
           </label>
           

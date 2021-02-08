@@ -26,6 +26,10 @@ const Authentication = () => {
             <ProjectDetail />
           </Route>
 
+          <Route exact path={ROUTES.projectDetail.path}>
+              <ProjectDetail />
+          </Route>
+
           <Route exact path={ROUTES.startproject}>
             <CreateProjectForm />
           </Route>
