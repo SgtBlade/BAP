@@ -29,7 +29,7 @@
   font-size: var(--fontMedium);
   background: var(--lightGrey);
   border-radius: 0.5rem;
-  font-family: var(--weightSemiboldFont);
+  font-weight: var(--weightSemiBold);
   box-shadow: darkgray 0rem 0.4rem;
 }
 
