@@ -7,4 +7,5 @@
   font-family: var(--weightSemiboldFont);
   font-size: var(--fontRegular);
   text-align: center;
+  margin: 1rem 0 3rem 0;
 }
