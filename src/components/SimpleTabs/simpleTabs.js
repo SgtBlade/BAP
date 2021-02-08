@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -75,38 +75,63 @@ function a11yProps(index) {
 }
 
 export default function CustomizedTabs(data) {
-  const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    
+    let buttonOneDisplay = 'hidden';
+    let buttonTwoDisplay = 'hidden';
+    let quillHeight = '50rem';
 
-  return (
-      <div className={style.tabs__container}>
-        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
-          <StyledTab label="Workflows" {...a11yProps(0)}/>
-          <StyledTab label="Datasets" {...a11yProps(1)}/>
-          <StyledTab label="Connections" {...a11yProps(2)}/>
-          <StyledTab label="Connections" {...a11yProps(3)}/>
-        </StyledTabs>
-        <TabPanel value={value} index={0}>
-            <ReactQuill 
-                readOnly={true}
-                modules={{ "toolbar": false }}
-                value={data.description}
-                style={{height: '50rem', border:"1rem solid transparent", overflow:"hidden", marginTop: '2rem', marginBottom: '6rem'}}
-            />
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-            Item two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-            Item Three
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-            Item Four
-        </TabPanel>
-      </div>
-  );
+    const foldOut = () =>    {
+        quillHeight = '100%';
+        buttonOneDisplay = 'hidden';
+        buttonTwoDisplay = 'visible';
+    };
+
+    const foldDown = () =>{
+        quillHeight = '50rem';
+        buttonOneDisplay = 'visible';
+        buttonTwoDisplay = 'hidden';
+    };
+
+    return (
+        <div className={style.tabs__container}>
+            <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
+            <StyledTab label="Project" {...a11yProps(0)}/>
+            <StyledTab label="FAQ" {...a11yProps(1)}/>
+            <StyledTab label="Updates 11" {...a11yProps(2)}/>
+            <StyledTab label="Over ons" {...a11yProps(3)}/>
+            </StyledTabs>
+            <TabPanel value={value} index={0}>
+                <ReactQuill 
+                    readOnly={true}
+                    modules={{ "toolbar": false }}
+                    value={data.description}
+                    style={{height: quillHeight, border:"1rem solid transparent", overflow:"hidden", marginTop: '2rem', marginBottom: '6rem'}}
+                />
+                <button style={{visibility: buttonOneDisplay}} onClick={() => foldOut}>
+                    Lees meer
+                    <img src='./assests/icons/readMore.svg' alt="icon"/>
+                </button>
+                <button style={{visibility: buttonTwoDisplay}} onClick={() => foldDown}>
+                    Lees minder
+                    <img src='./assests/icons/readLess.svg' alt="icon"/>    
+                </button>
+
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                Item two
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                Item Three
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                {data.project.personalIntroduction}
+            </TabPanel>
+        </div>
+    );
 }

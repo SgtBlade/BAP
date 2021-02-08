@@ -1,3 +1,9 @@
+.projectDetail {
+  background: url('/assets/uiElementen/ellipseYellowDetail.svg');
+  background-repeat: no-repeat;
+  background-position: -5rem 115%;
+}
+
 .projectDetail__head {
   width: 85vw;
   margin: auto;
@@ -209,7 +215,7 @@
   display: flex;
 }
 
-.votingButtons {
+.votingButtons, .answerButtons {
   padding: 1.5rem 2.5rem;
   background-color: transparent;
   font-family: "Montserrat-semiBold";
@@ -337,6 +343,11 @@
   font-family: "Montserrat-dark";
   margin-right: 1rem;
 }
+
+.images__container {
+  margin-bottom: 5rem;
+}
+
 .images__box {
   display: flex;
   width: 100%;
@@ -361,3 +372,222 @@
   margin-bottom: 5rem;
   display: flex;
 }
+
+.questions {
+  background-color: var(--durfGreenDarker);
+  padding: 10rem 0;
+  position: relative;
+  margin-bottom: 5rem;
+}
+
+.questions::before{
+  background: linear-gradient(
+    to right,
+    var(--durfYellow) 25%,
+    var(--durfGreen) 25%,
+    var(--durfGreen) 75%,
+    var(--durfRed) 75%
+  );
+  position: absolute;
+  content: "";
+  height: 1rem;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.questionsContainer {
+  width: 85vw;
+  margin: auto;
+  color: white;
+}
+
+.questionsTitle {
+  font-family: "Montserrat_black";
+  font-size: 3.6rem;
+  margin-bottom: 2.5rem;
+
+}
+
+.questionsInleiding {
+  font-family: "Montserrat";
+  font-weight: 200;
+  width: 50ch;
+  line-height: 1.5;
+}
+
+.questionsContainer__box {
+  padding-top: 5rem;
+  width: 56vw;
+  margin: auto;
+}
+
+.questionsSubtitle {
+  font-family: "Montserrat-semiBold";
+  font-size: var(--fontRegular);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.yesno__container, .yesno__answers {
+  display: flex;
+  align-items: center;
+}
+
+.yesno__question {
+  font-family: "Montserrat-bold";
+  font-size: 2.4rem;
+  line-height: 1.25;
+}
+
+.yesno__answers {
+  margin-left: 2.5rem;
+}
+
+.answerButtons {
+  background-color: white;
+  border: .25rem solid;
+  transition: .25s;
+}
+
+.answerButtons:hover {
+  transform: scale(.95);
+  cursor: pointer;
+}
+
+.answerButtons__primary{
+  margin-right: 2.5rem;
+}
+
+.answerButtons__icons {
+  margin-right: 1.5rem;
+}
+
+.answerButtons__primary {
+  border-color: var(--durfGreen);
+  color: var(--durfGreen);
+}
+
+.answerButtons__secondary {
+  border-color: var(--durfRed);
+  color: var(--durfRed);
+}
+
+.reacties {
+  width: 85vw;
+  margin: auto;
+  padding-bottom: 10rem;
+}
+
+.reactiesContainer {
+  width: 56vw;
+  margin: auto;
+}
+
+.reactiesTitle {
+  font-family: "Montserrat_black";
+  font-size: 3.6rem;
+  margin-bottom: 5rem;
+}
+
+.reactiePerson, .reactiePerson__box {
+  display: flex;
+  align-items: center;
+}
+
+.reactiePerson {
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.reactiePerson__image {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 1.5rem;
+}
+
+.information__owner {
+  padding: 1rem 1rem;
+  color: white;
+  background-color: var(--durfGreenDarker);
+  border-radius: 5rem;
+  margin-right: 1.5rem;
+}
+
+.reactiePerson__information {
+  margin-right: 1.5rem;
+}
+
+.information__name {
+  font-size: var(--fontSmall);
+  font-family: "Montserrat-semiBold";
+  line-height: 1.5;
+}
+
+.information__timepast {
+  color: grey;
+  font-family: "Montserrat";
+  font-weight: 200;
+  font-size: 1rem;
+
+}
+
+.information__level {
+  font-family: "RobotoMono-light";
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.reactiePerson__rapport {
+  justify-self: flex-end;
+  color: grey;
+  font-size: var(--fontSmall);
+  font-family: "RobotoMono-light";
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+}
+
+.reactiePerson__rapport:hover {
+  cursor: pointer;
+}
+
+.reactiePerson__rapport__icon {
+  margin-left: .5rem;
+
+}
+
+.reactie__text {
+  line-height: 1.5;
+}
+
+.extraQuestion {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.extraQuestion__title {
+  font-family: "Montserrat-semiBold";
+  font-size: 2.4rem;
+  margin-bottom: 2.5rem;
+}
+
+.extraQuestion__buttons {
+  display: flex;
+
+}
+
+.extraQuestion__buttons:nth-child(1) {
+  margin-right: 1.125rem;  
+}
+
+.extraQuestion__buttons:nth-child(2) {
+  margin-left: 1.125rem;  
+}
+
