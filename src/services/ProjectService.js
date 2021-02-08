@@ -81,6 +81,7 @@ class ProjectService {
 
     //Set the owner, upload the images and description
     project.setOwnerID(userID)
+    project.changeID(docId)
     await this.uploadImages(data.pictures, docId, userID)
     .then(pics => project.setPictures(pics));
     this.uploadDescription(data.description, docId, userID)
@@ -150,11 +151,6 @@ class ProjectService {
   uploadDescription = (file, projectID, userID) => {
       //Create a reference and push the data, once its done, return the url of the file
       const storageRef = this.storage.ref();
-      /*storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)
-        .then((snapshot) => {
-          const url = (snapshot.ref.getDownloadURL());
-          return {url};
-        });*/
 
         let promise = new Promise(function(resolve, reject) {
           storageRef.child(`projects/${userID}/${projectID}/description.txt`).putString(file)

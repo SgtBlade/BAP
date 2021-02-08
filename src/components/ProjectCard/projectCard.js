@@ -17,7 +17,6 @@ const ProjectCard = ({project}) => {
     let date2 = new Date(Date.now());
     let difference = date1.getTime() - date2.getTime();
     return Math.ceil(difference / (1000 * 3600 * 24));
-
   }
 
   const vote = (id) => {
