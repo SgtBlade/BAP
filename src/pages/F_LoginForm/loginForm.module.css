@@ -106,7 +106,7 @@
     margin-bottom: 3.5rem;
     margin-top: 1.5rem;
     font-size: var(--fontNormal);
-    font-family: "Montserrat";
+    
     font-weight: 200;
     width: 100%;
 
@@ -128,7 +128,7 @@
     display: flex;
     flex-flow: column;
     font-size: var(--fontMedium);
-    font-family: "Montserrat-semibold";
+    font-weight: var(--weightSemiBold);
     justify-content: flex-end;
     line-height: 1.5rem;
 

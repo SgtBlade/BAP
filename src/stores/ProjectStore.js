@@ -108,7 +108,7 @@ class ProjectStore {
       const newProject = await this.projects.filter(proj => proj.id === id)[0];
       this.currentProjectDescription = 'Loading';
       this.currentProject = newProject;
-      //if(newProject !== undefined)this.projectService.convertDescriptionToData(this.currentProject.description, this.updateDescription)
+      if(newProject !== undefined)this.projectService.convertDescriptionToData(this.currentProject.description, this.updateDescription)
       return newProject;
   }
   

@@ -51,7 +51,7 @@
 
 .projectCard__type {
   font-size: 1.2rem;
-  font-family: "Montserrat-semiBold";
+  font-weight: var(--weightSemiBold);
   padding: 0.5rem 1.5rem;
   background-color: black;
   color: white;
@@ -70,7 +70,7 @@
 
 .projectCard__funding__progressValues__content {
   font-size: 1.6rem;
-  font-family: "Montserrat-semiBold";
+  font-weight: var(--weightSemiBold);
   position: relative;
 }
 
@@ -93,7 +93,7 @@
 .projectCard__time {
   font-size: 1.4rem;
   color: #767676;
-  font-family: "Montserrat";
+  
   font-weight: 200;
 }
 
@@ -105,7 +105,7 @@
 
 .projectCard__tag {
   font-size: 1.8rem;
-  font-family: "Montserrat";
+  
   font-weight: 200;
   display: flex;
   align-items: center;
@@ -130,7 +130,7 @@
 .projectCard_voting_text {
   font-size: 1.6rem;
   color: var(--durfGreenDarker);
-  font-family: "Montserrat-semiBold";
+  font-weight: var(--weightSemiBold);
   margin-bottom: 0.5rem;
 }
 
@@ -148,13 +148,13 @@
 
 .projectCard__voting__amount {
   font-size: 2.4rem;
-  font-family: "Montserrat-semiBold";
+  font-weight: var(--weightSemiBold);
   margin-left: 0.5rem;
 }
 
 .projectCard__description {
   font-size: 1.6rem;
-  font-family: "Montserrat";
+  
   font-weight: 200;
   height: 100%;
 }

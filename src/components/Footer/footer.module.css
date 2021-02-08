@@ -26,7 +26,7 @@ footer {
 
 .footerText {
     font-size: 1.6rem;
-    font-family: "Montserrat-semiBold";
+    font-weight: var(--weightSemiBold);
     line-height: 1.5;
     display: block;
     color: white;
@@ -38,7 +38,7 @@ footer {
 }
 
 .footerText__adres {
-    font-family: "Montserrat";
+    
     font-weight: 200;
 
 }
@@ -52,7 +52,7 @@ footer {
 .nieuwsbrief {
     background-color: #FAFAFA;
     font-size: 1.6rem;
-    font-family: "Montserrat-semiBold";
+    font-weight: var(--weightSemiBold);
     color: var(--durfGreenDarker);
     padding: 1.5rem 1.5rem;
     border-radius: .25rem;

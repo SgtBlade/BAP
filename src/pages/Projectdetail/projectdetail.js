@@ -232,7 +232,7 @@ const ProjectDetail = () => {
           {`
           .ql-video {
             width: 50%;
-            height: 50%;
+            height: 70%;
             margin-left: auto;
             margin-right: auto;
           }

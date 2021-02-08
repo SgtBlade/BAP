@@ -101,7 +101,7 @@
     display: flex;
     flex-flow: column;
     font-size: var(--fontMedium);
-    font-family: "Montserrat-semibold";
+    font-weight: var(--weightSemiBold);
     justify-content: flex-end;
     line-height: 1.5rem;
 
@@ -117,7 +117,7 @@
     margin-bottom: 3.5rem;
     margin-top: 1.5rem;
     font-size: var(--fontNormal);
-    font-family: "Montserrat";
+    
     font-weight: 200;
 
 }
@@ -156,7 +156,7 @@
     border: none;
     margin-bottom: 1.5rem;
     font-weight: auto;
-    font-family: "Montserrat";
+    
     font-weight: 500;
 }
 
@@ -165,7 +165,7 @@
     color: var(--durfGreenDarker);
     padding: .5rem 1rem;
     background: transparent;
-    font-family: "Montserrat-semibold";
+    font-weight: var(--weightSemiBold);
     border-radius: .5rem;
     transition: .15s;
 }
