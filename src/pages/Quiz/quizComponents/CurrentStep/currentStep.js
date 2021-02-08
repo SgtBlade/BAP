@@ -2,10 +2,13 @@ import React from "react";
 
 import ProgressBar from "../Progressbar/progressbar";
 
+//temporary hardcoded value
+let currentStep = 3;
+
 const CurrentStep = () => {
   return (
     <>
-      <ProgressBar></ProgressBar>
+      <ProgressBar currentStep={currentStep}></ProgressBar>
       <p>CurrentStep</p>
       {/* currentvraagstap */}
       {/* currentvraag */}
