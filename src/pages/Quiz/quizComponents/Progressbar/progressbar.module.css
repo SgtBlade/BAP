@@ -8,10 +8,46 @@
   background-color: purple;
 } */
 
+.progressbarContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+}
+
+.progressbarNumbers {
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.progressbarNumber {
+  padding: 2rem 0;
+  width: 6rem;
+  text-align: center;
+  font-size: var(--fontMedium);
+  background: var(--lightGrey);
+  border-radius: 0.5rem;
+  font-family: var(--weightSemiboldFont);
+  box-shadow: darkgray 0rem 0.4rem;
+}
+
+.progressbarNumber.active {
+  color: var(--light);
+  background: var(--durfGreen);
+  box-shadow: var(--durfGreenDarker) 0rem 0.4rem;
+}
+
+.progressbarNumber.passed {
+  color: var(--durfGreenDarker);
+}
+
 .progressbar {
-  height: 1rem;
+  grid-row: 1;
+  grid-column: 1;
+  height: 0.5rem;
   border-radius: 0rem;
-  margin-bottom: 5rem;
   width: 100%;
 }
 .progressbar[value]::-webkit-progress-bar {
