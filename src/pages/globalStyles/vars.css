@@ -21,8 +21,8 @@
   --fontBig: 3.6rem;
   --fontUltra: 4.8rem;
 
-  --weightLight: 200;
-  --weightRegAvoid: 500;
-  --weightSemiboldFont: "Montserrat-semiBold";
-  --weightBlackFont: "Montserrat_black";
+  --weightLight: 300;
+  --weightRegAvoid: 400;
+  --weightSemiBold: 600;
+  --weightBlack: 900;
 }

@@ -4,8 +4,8 @@
 }
 
 .title {
-  font-family: var(--weightSemiboldFont);
   font-size: var(--fontRegular);
+  font-weight: var(--weightSemiBold);
   text-align: center;
   margin: 1rem 0 3rem 0;
 }
