@@ -1,8 +1,10 @@
 @import "../globalStyles/main.module.css";
 
 .homeMain {
-  font-family: "Montserrat";
-  font-weight: 200;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
 .section {
@@ -24,10 +26,11 @@
 
 .introTitle {
   font-size: 7.2rem;
-  font-family: "Montserrat-black", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
     "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.2;
+  font-weight: var(--weightBlack);
 }
 
 .introTitleHighlight {
@@ -39,7 +42,7 @@
 
 .introParagraph {
   padding-top: 3rem;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.5;
 }
 
@@ -145,7 +148,7 @@
 
 .howTitle {
   margin-top: 8rem;
-  font-family: var(--weightBlackFont);
+  font-weight: var(--weightBlack);
   font-size: var(--fontUltra);
   color: var(--durfRed);
 }
@@ -197,7 +200,7 @@
 }
 
 .howSectionTitle {
-  font-family: var(--weightSemiboldFont);
+  font-weight: var(--weightSemiBold);
   padding: 4rem 0 2rem 0;
 }
 
@@ -220,7 +223,7 @@
 }
 
 .pillarsTitle {
-  font-family: var(--weightBlackFont);
+  font-weight: var(--weightBlack);
   font-size: var(--fontUltra);
   line-height: 0.9;
   margin: 2rem;
@@ -258,7 +261,7 @@
 
 .pillarsSectionTitle {
   padding: 4rem 0 2rem 0;
-  font-family: var(--weightBlackFont);
+  font-weight: var(--weightBlack);
 }
 
 .pillarSectionParagraph {
@@ -291,7 +294,7 @@
 }
 
 .highlightsTitle {
-  font-family: var(--weightBlackFont);
+  font-weight: var(--weightBlack);
   font-size: var(--fontUltra);
   margin: 3rem 0;
 }
@@ -337,7 +340,7 @@
 }
 
 .callToActionTitle {
-  font-family: var(--weightBlackFont);
+  font-weight: var(--weightBlack);
   font-size: var(--fontBig);
 }
 
