@@ -45,7 +45,7 @@
 
 .projectCard__title {
   font-size: 1.8rem;
-  font-family: "Montserrat_black";
+  font-weight: var(--weightBlack);
   margin-right: 1.5rem;
 }
 

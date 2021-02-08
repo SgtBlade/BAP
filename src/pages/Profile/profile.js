@@ -38,7 +38,7 @@ const Profile = () => {
               src={
                 uiStore.currentUser.picture
                   ? uiStore.currentUser.picture
-                  : "./assets/profile/defaultProfileImage.png"
+                  : "/assets/profile/defaultProfileImage.png"
               }
             />
           </div>
@@ -95,84 +95,84 @@ const Profile = () => {
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
@@ -180,35 +180,35 @@ const Profile = () => {
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>
             <div>
               <img
                 className={style.badgeImage}
-                src="./assets/badges/eersteFunding.svg"
+                src="/assets/badges/eersteFunding.svg"
                 alt="badge"
               />
             </div>

@@ -17,7 +17,7 @@ footer {
 
 .footerTitle {
     font-size: 1.6rem;
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     color: white;
     margin-bottom: 1.5rem;
 

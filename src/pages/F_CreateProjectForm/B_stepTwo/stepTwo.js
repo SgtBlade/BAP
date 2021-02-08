@@ -83,6 +83,16 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
 
   return useObserver(() => (
     <div className={style.wrap}>
+        <style>
+          {`
+          .ql-video {
+            width: 50%;
+            height: 50%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          `}
+        </style>
           <label className={`${style.midsection__item}`} htmlFor={'budget'}>
             <p className={`${parentStyle.inputTitle}`}>Wat moeten de mensen weten over je project?</p>
             <p className={`${parentStyle.inputSubtitle}`}>Geef hier de uitleg over je project.</p>

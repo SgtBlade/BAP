@@ -13,7 +13,7 @@ const Nav = () => {
   return (
     <nav className={style.nav}>
       <NavLink exact className={style.link} activeClassName={style.active} to={ROUTES.home}>
-        <img src="./assets/logo.svg" alt="DURF2030 logo"/>
+        <img src="/assets/logo.svg" alt="DURF2030 logo"/>
       </NavLink>
       <ul className={style.nav__links}>
         <li>

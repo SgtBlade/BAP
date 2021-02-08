@@ -19,7 +19,7 @@
     margin-bottom: 1.5rem;
     font-size: 1.6rem;
     width: 100%;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
 }
 
 
@@ -30,7 +30,7 @@
 
 .filter__options, .headFilter__subtitle {
     font-size: 1.6rem;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
     color: #01081F;
     user-select: none; 
 }
@@ -70,7 +70,7 @@
 }
 
 .headFilter__title {
-    font-family: Montserrat_black;
+    font-weight: var(--weightBlack);
     font-size: 4rem;
     color: var(--durfGreen)
 }
@@ -126,7 +126,7 @@
     color: var(--durfGreen);
     border-bottom: solid 3px var(--durfGreen);
     padding-bottom: 1rem;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
 }
 
 .ProjectWrap {
@@ -142,7 +142,7 @@
 .projectWrapCenter {
     justify-content: center;
     align-items: center;
-    font-family: Montserrat-semiBold;
+    font-weight: var(--weightSemiBold);
     font-size: 1.8rem;
 
 }

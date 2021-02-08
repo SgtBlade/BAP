@@ -1,7 +1,7 @@
 
 class User {
   
-  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = './assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0, notifications = [], votes = [] }) 
+  constructor({ id, name, surname, publicMail = false, publicPhone = false, phone = '', picture = '/assets/profile/defaultProfileImage.png', mail, statistics = [], unlockedBadges = [], bio, creationDate = Date.now(), interestedTags = [], role = 0, exp = 0, level = 0, notifications = [], votes = [] }) 
   {
     this.id = id;
     this.name = name;

@@ -6,13 +6,13 @@
 
 .profileName {
     text-transform: uppercase;
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
 .profileTagsTitle, .profileBadgesTitle, .profileProjectsTitle {
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     font-size: 1.8rem;
 }
 
@@ -59,7 +59,7 @@
     padding: 1.25rem 1.5rem;
     background: var(--durfGreen);
     border-radius: 50rem;
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     color: white;
     font-size: 2rem;
     margin-right: -2.5rem;
@@ -98,7 +98,7 @@
 }
 
 .profile__total {
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     margin-left: .5rem;
     padding: .5rem 1rem;
     background: var(--durfGreenDarker);

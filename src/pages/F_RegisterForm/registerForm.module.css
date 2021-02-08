@@ -92,7 +92,7 @@
 
 .formTitle {
     font-size: 3.2rem;
-    font-family: "Montserrat_black";
+    font-weight: var(--weightBlack);
     text-align: center;
     margin-bottom: 2.5rem;
 }

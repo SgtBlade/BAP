@@ -81,7 +81,7 @@ const Discovery = () => {
 
   return useObserver(() => (
    <div className={style.discoveryWrap}>
-
+     
       <div className={`${style.filterWrap}`}>
         <Select 
         placeholder={'Regio'}

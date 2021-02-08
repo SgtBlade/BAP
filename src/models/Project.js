@@ -1,7 +1,7 @@
 import { decorate, observable, action } from "mobx";
 class Project {
   
-  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['./assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false, completed = false})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['/assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false, completed = false})
   {
     //Numbers
     this.id = id;

@@ -52,7 +52,7 @@ const CreateProjectFormStepOne = ({
     validateBudget();
     validateTag();
     validateOwner();
-    validatePictures();
+    //validatePictures();
     validatePreview();
     validateLocation();
     validatecoWorkers();
@@ -108,9 +108,9 @@ const CreateProjectFormStepOne = ({
         } else if (fileSize > 5000) alert(RESPONSE.fileSizeOver5MB);
         else {
           new Compressor(file, {
-            quality: 0.4,
-            maxWidth: 640,
-            maxHeight: 360,
+            quality: 0.5,
+            maxWidth: 663,
+            maxHeight: 372,
             success(result) {
               setPictures([...pictures, result]);
               validatePictures(["empty"]);
@@ -177,11 +177,13 @@ const CreateProjectFormStepOne = ({
     validatePictures();
   };
 
+  //Validate if the location field was filled in
   const validateLocation = (data = location) => {
     if (data === "") addToErrorArray("location", RESPONSE.noLocation);
     else if (errors.value["location"]) removeFromErrorArray("location");
   };
 
+  //validate if the given email is not the same as the user
   const updateCoworkers = (value, index) => {
     if(errors.value["coWorker"]) removeFromErrorArray("coWorker");
     if(value.toLowerCase() === uiStore.currentUser.mail.toLowerCase()){value = '';addToErrorArray('coWorker', RESPONSE.coWorkerSameAsUser)}
