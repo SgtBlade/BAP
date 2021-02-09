@@ -8,6 +8,7 @@ const ROUTES = {
   overons: "/overons",
   startproject: "/startproject",
   profiel: "/profiel",
+  feed: "/feed",
   discovery: "/discovery",
   quiz: "/quiz",
 };

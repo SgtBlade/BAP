@@ -8,12 +8,14 @@ import Person from "../Profile/profile.js";
 import LoginForm from "../F_LoginForm/loginForm.js";
 import RegisterForm from "../F_RegisterForm/registerForm.js";
 import ProjectDetail from "../Projectdetail/projectdetail.js";
+import PersonalFeed from "../PersonalFeed/personalFeed.js";
 import Nav from "../../components/Nav/nav";
 import Footer from "../../components/Footer/footer.js";
 import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 import Discovery from "../Discovery/Discovery.js";
 import Quiz from "../Quiz/quiz.js";
+
 
 const Authentication = () => {
   return useObserver(() => (
@@ -48,6 +50,10 @@ const Authentication = () => {
 
           <Route exact path={ROUTES.reset}>
             <PasswordResetForm />
+          </Route>
+
+          <Route exact path={ROUTES.feed}>
+            <PersonalFeed />
           </Route>
 
           <Route exact path={ROUTES.discovery}>

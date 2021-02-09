@@ -20,7 +20,7 @@ const Nav = () => {
           <NavLink exact className={style.link} activeClassName={style.active} to={ROUTES.home}>Home</NavLink>
         </li>
         <li>
-          <NavLink exact className={style.link} activeClassName={style.active} to={ROUTES.discovery}>Projecten</NavLink>
+          <NavLink exact className={style.link} activeClassName={style.active} to={ROUTES.feed}>Projecten</NavLink>
         </li>
         
         <li>

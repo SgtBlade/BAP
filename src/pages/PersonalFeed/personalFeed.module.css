@@ -1,0 +1,144 @@
+.hidden {
+    display: none;
+}
+
+.feedContainer {
+    width: 85vw;
+    margin: auto;
+}
+
+.feedContainer__head {
+    margin-top: 10rem;
+    position: relative;
+    display: flex;
+}   
+
+.feedContainer__head__image__container {
+    position: relative;
+    margin-bottom: 10rem;
+}
+
+.feedContainer__head__image__container::before {
+    content: '';
+    position: absolute;
+    bottom: -5.5rem;
+    left: -2rem;
+    width: 65rem;
+    height: 23.3rem;
+    background: url(/assets/uiElementen/feedBottom.svg);
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.feedContainer__head__image__container::after {
+    content: "";
+    width: 7.5rem;
+    height: 7.5rem;
+    position: absolute;
+    top: -2rem;
+    left: -2rem;
+    background-color: var(--durfYellow);
+    border-radius: 1rem;
+    z-index: -1;
+}
+
+.feedContainer__head__image {
+    width: 47.8rem;
+    border-radius: 1rem;
+    box-shadow: var(--cardShadow);
+}
+
+.head__projectSwitch {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+/* .feedContainer__head__image__container,
+.feedContainer__head__box {
+    width: 50%;
+} */
+
+.feedContainer__head__box {
+    padding-left: 12.5rem;
+}
+
+.head__uitgelicht {
+    font-family: 'Roboto Mono';
+    font-size: var(--fontSmall);
+    color: grey;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+}
+
+.head__title {
+    font-size: 4.8rem;
+    font-family: "Montserrat";
+    font-weight: var(--weightBlack);
+    padding-left: 2.5rem;
+    padding-top: 1rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+}
+
+.head__title::before {
+    content: '';
+    width: 7rem;
+    height: 7rem;
+    background: var(--durfGreen);
+    border-radius: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.head__type {
+    font-size: 1.2rem;
+    font-family: "Montserrat";
+    font-weight: var(--weightSemiBold);
+    padding: 0.5rem 1.5rem;
+    background-color: black;
+    color: white;
+    border-radius: 2rem;
+    display: inline-block;
+    margin-bottom: 2.5rem;
+}
+
+.head__description {
+    width: 50ch;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+}
+
+.head__tags {
+    display: flex;
+    margin-bottom: 2.5rem;
+}
+
+.head__tag {
+    margin-right: 2.5rem;
+    font-size: 1.8rem;
+    font-weight: 200;
+    display: flex;
+    align-items: center;
+}
+
+.head__tag__color {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50rem;
+    margin-right: 1rem;
+    display: inline-block;
+    background-color: black;
+}
+
+.head__button {
+    padding: 1.5rem 2.5rem;
+    color: white;
+    background: var(--durfGreenDarker);
+    border-radius: .75rem;
+    font-family: "Montserrat";
+    font-weight: var(--weightSemiBold);
+    display: inline-block;
+}
