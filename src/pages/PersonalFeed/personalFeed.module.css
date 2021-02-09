@@ -11,6 +11,7 @@
     margin-top: 10rem;
     position: relative;
     display: flex;
+    margin-bottom: 10rem;
 }   
 
 .feedContainer__head__image__container {
@@ -46,12 +47,6 @@
     width: 47.8rem;
     border-radius: 1rem;
     box-shadow: var(--cardShadow);
-}
-
-.head__projectSwitch {
-    position: absolute;
-    bottom: 0;
-    right: 0;
 }
 
 /* .feedContainer__head__image__container,
@@ -141,4 +136,65 @@
     font-family: "Montserrat";
     font-weight: var(--weightSemiBold);
     display: inline-block;
+    transition: .25s;
+    border: .25rem solid var(--durfGreenDarker);
+}
+
+
+.head__button:hover {
+    cursor: pointer;
+    transform: scale(.95);
+    background: white;
+    color: var(--durfGreenDarker);
+
+}
+
+.head__projectSwitch {
+    display: flex; 
+    border-radius: .75rem 0 0 .75rem;
+    background: var(--durfGreen);
+    padding: 1rem;
+    padding-top: 1.5rem;
+    padding-right: 10rem;
+    position: absolute;
+    bottom: 2.5rem;
+    right: -15rem;
+}
+
+.head__projectSwitch__button {
+    border: none;
+    background: var(--durfGreen);
+    transition: .25s;
+}
+
+.head__projectSwitch__button__image__flip{
+    transform: scaleX(-1);
+}
+
+.head__projectSwitch__button:hover {
+    cursor: pointer;
+    transform: scale(.9)
+}
+
+.feedContainer__filter__container {
+    padding: 5rem 0;
+    background-color: #FAFAFA;
+    position: relative;
+    margin-bottom: 5rem;
+}
+
+.feedContainer__filter__container::before {
+    background: linear-gradient( to right, var(--durfYellow) 25%, var(--durfGreen) 25%, var(--durfGreen) 75%, var(--durfRed) 75% );
+    position: absolute;
+    content: "";
+    height: 1rem;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.feedContainer__filter__box {
+    width: 85vw;
+    margin: auto;
 }

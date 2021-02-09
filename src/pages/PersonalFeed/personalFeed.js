@@ -2,7 +2,7 @@ import React from "react";
 //import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./personalFeed.module.css";
-import { Link } from "@material-ui/core";
+import { Link} from "react-router-dom";
 //import Tag from "../../components/Tag/tag.js";
 //import COLORS from "../globalStyles/colors";
 //import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
@@ -32,18 +32,26 @@ const PersonalFeed = () => {
                         <p className={style.head__tag}><span className={style.head__tag__color}></span>Sociaal</p>
                         <p className={style.head__tag}><span className={style.head__tag__color}></span>Sociaal</p>
                     </div>
-                    <Link style={{color: 'white'}} className={style.head__button}>Bekijk Vraagstraat</Link>
+                    <Link className={style.head__button} to="/">Bekijk vraagstraat</Link>
                 </div>
                 <div className={style.head__projectSwitch}>
                     <button className={style.head__projectSwitch__button}>
                         <img className={style.head__projectSwitch__button__image} src="/assets/icons/arrowSwitch.svg" alt="icons arrow"/>
                     </button>
                     <button className={style.head__projectSwitch__button}>
-                        <img className={style.head__projectSwitch__button__image} src="/assets/icons/arrowSwitch.svg" alt="icons arrow"/>
+                        <img className={`${style.head__projectSwitch__button__image} ${style.head__projectSwitch__button__image__flip}`} src="/assets/icons/arrowSwitch.svg" alt="icons arrow"/>
                     </button>
                 </div>
             </div>
+            
         </section>
+        <div className={style.feedContainer__body}>
+                <div className={style.feedContainer__filter__container}>
+                    <div className={style.feedContainer__filter__box}>
+                        <p>dit is aaaaaa</p> 
+                    </div>
+                </div>
+            </div>
     </article>
   ));
 };

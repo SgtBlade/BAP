@@ -5,8 +5,9 @@
   display: inline-flex;
   flex-direction: row;
   justify-content: center;
+  font-family: "Montserrat";
   font-size: var(--fontRegular);
-  font-family: var(--weightSemiboldFont);
+  font-weight: var(--weightSemiBold);
   align-items: center;
   padding: 1.5rem;
   cursor: pointer;
@@ -16,7 +17,7 @@
   border-radius: 0.4rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  transition: all 0.3s;
+  transition: all 0.25s;
 }
 
 .mainButton {
@@ -41,11 +42,13 @@
 .mainButton:hover {
   background: var(--durfGreen);
   border: solid 0.2rem var(--durfGreen);
+  transform: scale(.95);
 }
 
 .previousButton:hover,
 .altButton:hover {
   background: var(--lightGrey);
+  transform: scale(.95);
 }
 
 .linkButton {
