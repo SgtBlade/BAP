@@ -9,17 +9,12 @@ import CurrentStep from "./quizComponents/CurrentStep/currentStep";
 
 const style = { ...moduleStyle, ...globalStyle };
 
-// let curStepNum = 1;
-// const setCurStep = stepNum => {
-//   console.log(stepNum);
-// };
-
 const Quiz = () => {
-  const [stepNum, setCurStep] = useState(1);
+  const [stepNum, setStepNum] = useState(1);
 
   const receivedStep = step => {
-    // receive nextStep from child component
-    setCurStep(step);
+    // receive step from child component
+    setStepNum(step);
     console.log(step);
   };
 
