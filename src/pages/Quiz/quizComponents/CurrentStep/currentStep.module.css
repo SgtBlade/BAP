@@ -1,0 +1,8 @@
+.currentQuestionTitle {
+  font-weight: var(--weightSemiBold);
+}
+
+.stepQuestionContainer {
+  margin: 4rem auto;
+  max-width: 96rem;
+}
