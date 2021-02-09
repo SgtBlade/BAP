@@ -44,6 +44,20 @@ class ProjectService {
       });
   };
 
+  getAllProjects = async (onChange) => {
+    this.db
+      .collection('projects')
+      .withConverter(projectConverter)
+      .onSnapshot(async snapshot => {
+        snapshot.docChanges().forEach(async change => {
+          if (change.type === "added" || change.type === "removed") {
+            const projectObj = change.doc.data();
+            onChange([change.type, projectObj]);
+          }
+        });
+      });
+  };
+
   deleteProjectById = async (projectId) => {
     this.db
     .collection("projects")
@@ -98,7 +112,7 @@ class ProjectService {
                           .get()
                           .then((querySnapshot) => {
                               querySnapshot.forEach((doc) => {
-                                  doc.ref.update({ notifications: this.fieldValue.arrayUnion({type: 'coRequest', projectTitle: data.title, projectID: docId}) });
+                                  doc.ref.update({ notifications: this.fieldValue.arrayUnion({type: 'coRequest', title: data.title, projectID: docId}) });
                               });
                           })
                           })
@@ -228,14 +242,41 @@ class ProjectService {
   updateProject = (id, user) => {
     let projectRef = this.db.collection('projects').doc(id);
     projectRef.update({
-      upvotes: this.fieldValue.increment(1)
+      upvotes: this.fieldValue.arrayUnion(user.id)
     });
 
     let userRef = this.db.collection('users').doc(user.id);
     userRef.update({
-          votes: this.fieldValue.arrayUnion(id)
+          'statistics.upvotes': this.fieldValue.arrayUnion(id)
       });
   }
+
+  uploadComment = (projectId, commentData) => {
+    let projectRef = this.db.collection('projects').doc(projectId);
+    projectRef.update({
+      comments: this.fieldValue.arrayUnion(commentData)
+    });
+
+  }
+
+  deleteComment = (projectId, comment) => {
+    console.log('test')
+    let projectRef = this.db.collection('projects').doc(projectId);
+    projectRef.update({
+      comments: this.fieldValue.arrayRemove(comment)
+    })
+  }
+
+  sendContactDetails = (ownerId) => {
+    let projectRef = this.db.collection('users').doc(ownerId);
+    projectRef.update({ notifications: this.fieldValue.arrayUnion({type: 'participation', title: 'Hallo, ik heb interesse om mee te werken aan dit project, u kan mij op onderstaande manieren berijken', mail: this.auth.currentUser.email}) })
+  }
+
+  voteYesNo = (projectId, questions) => {
+    let projectRef = this.db.collection('projects').doc(projectId);
+    projectRef.update({ questions: questions });
+  }
+
 }
 
 export default ProjectService;

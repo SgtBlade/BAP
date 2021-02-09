@@ -21,7 +21,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   //Update the questions array, again -> using ... because rerender wont trigger otherwise
   const updateQuestions = (value, index) => {
       let tmpQuestions = questions;
-      if(!tmpQuestions[index]) tmpQuestions[index] = {value: '', yes: 0, no: 0}
+      if(!tmpQuestions[index]) tmpQuestions[index] = {value: '', yes: [], no: []}
       tmpQuestions[index].value = value;
       setQuestions([...tmpQuestions])
   }

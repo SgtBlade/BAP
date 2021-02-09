@@ -437,6 +437,7 @@
 .yesno__container, .yesno__answers {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .yesno__question {
@@ -487,6 +488,7 @@
 .reactiesContainer {
   width: 56vw;
   margin: auto;
+  margin-bottom: 5rem;
 }
 
 .reactiesTitle {
@@ -502,13 +504,14 @@
 
 .reactiePerson {
   justify-content: space-between;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .reactiePerson__image {
   width: 3.5rem;
   height: 3.5rem;
   margin-right: 1.5rem;
+  border-radius: 5rem;
 }
 
 .information__owner {
@@ -527,6 +530,7 @@
   font-size: var(--fontSmall);
   font-weight: var(--weightSemiBold);
   line-height: 1.5;
+  text-transform: capitalize;
 }
 
 .information__timepast {
@@ -638,3 +642,52 @@
   cursor: pointer;
 }
 
+.loadingScreen {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+.detail {
+  font-size: .8rem;
+  margin-top: -4rem;
+}
+
+.reactieInputLabel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reactieInput {
+  width: 80%;
+  border: none;
+  border-bottom: solid 3px black;
+  height: 4rem;
+  font-size: 1.8rem;
+  padding-bottom: 0rem;
+}
+
+.reactieButton {
+  background-color: var(--durfGreen);
+  padding: 1.5rem 1rem;
+  font-weight: var(--weightBlack);
+  border-radius: .5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.participationItem {
+  font-size: 1.6rem;
+}
+
+.participationItem span{
+  font-weight: var(--weightSemiBold);
+}
+
+.requirementsSignup {
+  margin-top: 4rem;
+}

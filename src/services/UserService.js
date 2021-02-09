@@ -74,8 +74,11 @@ class UserService {
         this.auth.currentUser.updateProfile({
           photoURL: newUser.picture,
           displayName: words.join(" "),
-          phoneNumber: newUser.phoneNumber,
+          phoneNumber: newUser.phone,
         })
+        console.log('----------')
+        console.log(newUser)
+        console.log('----------')
       })
       .catch((error) => {
         console.error("Error writing document: ", error);

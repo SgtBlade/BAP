@@ -1,7 +1,7 @@
 import { decorate, observable, action } from "mobx";
 class Project {
   
-  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['/assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = 0, downvotes = 0, isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false, completed = false})
+  constructor({ id = '', title, allowComments, allowQuestions, ownerID, publicOwner, budget, contact, coWorkers = [], deadline, deadlineDate, description = '', discussions, location, multipleChoice, personalIntroduction, pictures = ['/assets/project/default.jpg'], previewText, questions, requirements, tags, updates = [], creationDate = Date.now(), upvotes = [], downvotes = [], isInFundingStage = false, collectedMoney = 0, archived = false, approved = false, featured = false, comments = []})
   {
     //Numbers
     this.id = id;
@@ -33,6 +33,7 @@ class Project {
     this.contact = contact;
     this.coWorkers = coWorkers;
     this.discussions = discussions;
+    this.comments = comments;
 
     //Booleans
     this.allowComments = allowComments;
@@ -103,6 +104,7 @@ const projectConverter = {
       archived: project.archived,
       approved: project.approved,
       featured: project.featured,
+      comments: project.comments
     };
   },
   fromFirestore: function(snapshot, options) {
@@ -138,6 +140,7 @@ const projectConverter = {
       archived: data.archived,
       approved: data.approved,
       featured: data.featured,
+      comments: data.comments,
     });
   }
 };

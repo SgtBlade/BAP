@@ -9,7 +9,7 @@ import { useStores } from "../../hooks/useStores";
 const ProjectCard = ({project}) => {
   const {uiStore, projectStore} = useStores();
   const [upvotes, setUpvotes] = useState(project.upvotes)
-  const [voted, setVoted] = useState(uiStore.currentUser.votes.includes(project.id));
+  const [voted, setVoted] = useState(uiStore.currentUser.statistics.upvotes ? uiStore.currentUser.statistics.upvotes.includes(project.id) : false);
   
 
   const getTime = (date) => {
@@ -33,7 +33,7 @@ const ProjectCard = ({project}) => {
   }
 
   return useObserver(() => (
-    <Link style={{color: 'black', flex: '1'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
+    <Link style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
       <div className={`${style.projectCardContainer} ${project.isInFundingStage ? style.projectCardContainer__Green : project.archived ? style.projectCardContainer__Yellow : ''}`}>
   
         {project.pictures[0] ?
@@ -69,7 +69,7 @@ const ProjectCard = ({project}) => {
               : 
               <img width={18} height={18} alt={'vote thumb'} src={'/assets/icons/voteSmall.svg'}/> 
             }
-            <span>{upvotes}</span>
+            <span>{upvotes.length}</span>
           </div>
         </div>
         }

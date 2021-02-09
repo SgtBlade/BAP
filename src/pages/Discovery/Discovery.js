@@ -13,7 +13,7 @@ const Discovery = () => {
   const [filterSort, setFilterSort] = useState('');
   const [searchValue, setSearchValue] = useState('');
 
-  const [searchParameter, setSearchParameter] = useState('Projecten');
+  const [searchParameter, setSearchParameter] = useState('All');
 
   const [projects, setProjects] = useState(projectStore.projects);
   const [originalProjects, setOriginalProjects] = useState(projects);
@@ -63,16 +63,23 @@ const Discovery = () => {
     setOriginalProjects(projectstmp)
   }
 
-  const inputFilter = async (value = searchValue) => {
+  const inputFilter = async (value = searchValue, searchParam = searchParameter) => {
+    
     let tmp = originalProjects;
-    if(searchParameter === 'Projecten' && value !== ''){
+    if(searchParam === 'Projecten' && value !== ''){
       tmp = tmp.filter(project => project.title.toLowerCase().includes(value.toLowerCase()))
     }
-    if(searchParameter === 'People' && value !== ''){
+    if(searchParam === 'People' && value !== ''){
       tmp = tmp.filter(project => project.coWorkers.some(coworker => (`${coworker.name} ${coworker.surname}`).toLowerCase().includes(value.toLowerCase())))
     }
-    if(searchParameter === 'Tags' && value !== ''){
+    if(searchParam === 'Tags' && value !== ''){
       tmp = tmp.filter(project => project.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase())))
+    }
+    if(searchParam === 'All' && value !== ''){
+      let tmp1 = tmp.filter(project => project.title.toLowerCase().includes(value.toLowerCase()))
+      let tmp2 = tmp.filter(project => project.coWorkers.some(coworker => (`${coworker.name} ${coworker.surname}`).toLowerCase().includes(value.toLowerCase())))
+      let tmp3 = tmp.filter(project => project.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase())))
+      tmp = (tmp1.concat(tmp2).concat(tmp3)).reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [] );
     }
 
     setProjects([...tmp])
@@ -180,9 +187,9 @@ const Discovery = () => {
           
           
           <ul className={style.headFilter__filter__options}>
-            <p  onClick={() => { setSearchParameter(searchParameter !== 'Projecten' ? 'Projecten' : 'Projecten')}}  className={`${searchParameter === 'Projecten' ? style.searchActive : ''}`}>Projecten</p>
-            <p  onClick={() => { setSearchParameter(searchParameter !== 'People' ? 'People' : 'Projecten')}} className={`${searchParameter === 'People' ? style.searchActive : ''}`}>Personen / organisaties</p>
-            <p  onClick={() => { setSearchParameter(searchParameter !== 'Tags' ? 'Tags' : 'Projecten')}} className={`${searchParameter === 'Tags' ? style.searchActive : ''}`}>Tags</p>
+            <p  onClick={() => { setSearchParameter(searchParameter !== 'Projecten' ? 'Projecten' : 'All'); inputFilter(searchValue, searchParameter !== 'Projecten' ? 'Projecten' : 'All');}}  className={`${searchParameter === 'Projecten' ? style.searchActive : ''}`}>Projecten</p>
+            <p  onClick={() => { setSearchParameter(searchParameter !== 'People' ? 'People' : 'All'); inputFilter(searchValue, searchParameter !== 'People' ? 'People' : 'All');}} className={`${searchParameter === 'People' ? style.searchActive : ''}`}>Personen / organisaties</p>
+            <p  onClick={() => { setSearchParameter(searchParameter !== 'Tags' ? 'Tags' : 'All'); inputFilter(searchValue, searchParameter !== 'Tags' ? 'Tags' : 'All');}} className={`${searchParameter === 'Tags' ? style.searchActive : ''}`}>Tags</p>
           </ul>
         </div>
     </section>

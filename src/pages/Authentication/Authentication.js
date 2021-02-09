@@ -3,7 +3,6 @@ import { useObserver } from "mobx-react-lite";
 import { Switch, Route /*Redirect, */ } from "react-router-dom";
 import { ROUTES } from "../../consts/index.js";
 //import style from "./Authentication.module.css";
-import PasswordResetForm from "../F_PasswordResetForm/passwordResetForm";
 import Person from "../Profile/profile.js";
 import LoginForm from "../F_LoginForm/loginForm.js";
 import RegisterForm from "../F_RegisterForm/registerForm.js";
@@ -49,7 +48,7 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.reset}>
-            <PasswordResetForm />
+            <LoginForm />
           </Route>
 
           <Route exact path={ROUTES.feed}>

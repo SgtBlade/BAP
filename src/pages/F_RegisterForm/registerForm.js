@@ -92,19 +92,19 @@ const RegisterForm = () => {
           <legend className={style.formTitle}>Registreer</legend>
           <br></br>
 
-          <label class={style.label} htmlFor="lname"> Voornaam: <input id="lname" value={lname} onChange={e => setLname(e.currentTarget.value)} className={style.input} type={"text"} placeholder="Type hier uw voornaam"/> </label>          
-          <label class={style.label} htmlFor="name"> Achternaam: <input id="name" value={name} onChange={e => setName(e.currentTarget.value)} className={style.input} type={"text"}  placeholder="Type hier uw achternaam"/> </label>
+          <label className={style.label} htmlFor="lname"> Voornaam: <input id="lname" value={lname} onChange={e => setLname(e.currentTarget.value)} className={style.input} type={"text"} placeholder="Type hier uw voornaam"/> </label>          
+          <label className={style.label} htmlFor="name"> Achternaam: <input id="name" value={name} onChange={e => setName(e.currentTarget.value)} className={style.input} type={"text"}  placeholder="Type hier uw achternaam"/> </label>
           
-          <label class={style.label} htmlFor="createEmail"> E-mail: <input id="createEmail" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} placeholder="voorbeeld@provider.be"/> </label> 
-          <label class={style.label} htmlFor="createPassword"> Wachtwoord: <input id="createPassword" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} placeholder="Vul hier het wachtwoord in" /> </label>
+          <label className={style.label} htmlFor="createEmail"> E-mail: <input id="createEmail" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} placeholder="voorbeeld@provider.be"/> </label> 
+          <label className={style.label} htmlFor="createPassword"> Wachtwoord: <input id="createPassword" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} placeholder="Vul hier het wachtwoord in" /> </label>
 
+          {/*
+          <label className={style.label} htmlFor="phone"> Telefoon: <input id="phone" value={phone} onChange={e => setPhone(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
+           <label className={`${style.label} ${style.label__checkbox}`} htmlFor="publicPhone"> Het telefoonnummer mag publiek staan <input id="publicPhone" value={publicPhone} onChange={e => setPublicPhone(e.currentTarget.checked)} className={`${style.input} ${style.input__checkbox}`} type={"checkbox"} placeholder="+32 470 12 34 56" /> </label>
+          <label className={`${style.label} ${style.label__checkbox}`} htmlFor="publicMail">Het e-mail mag publiek staan<input id="publicMail" value={publicMail} onChange={e => setPublicMail(e.currentTarget.checked)} className={`${style.input} ${style.input__checkbox}`} type={"checkbox"} /> </label> */}
+        <label className={style.label} htmlFor="bio"> Korte biografie: <textarea id="bio" value={bio} onChange={e => setBio(e.currentTarget.value)} className={`${style.input} ${style.input__textfield}`} type={"text"} placeholder="Begin hier met typen"/> </label>
           
-          <label class={style.label} htmlFor="phone"> Telefoon: <input id="phone" value={phone} onChange={e => setPhone(e.currentTarget.value)} className={style.input} type={"text"} /> </label>
-          {/* <label class={`${style.label} ${style.label__checkbox}`} htmlFor="publicPhone"> Het telefoonnummer mag publiek staan <input id="publicPhone" value={publicPhone} onChange={e => setPublicPhone(e.currentTarget.checked)} className={`${style.input} ${style.input__checkbox}`} type={"checkbox"} placeholder="+32 470 12 34 56" /> </label>
-          <label class={`${style.label} ${style.label__checkbox}`} htmlFor="publicMail">Het e-mail mag publiek staan<input id="publicMail" value={publicMail} onChange={e => setPublicMail(e.currentTarget.checked)} className={`${style.input} ${style.input__checkbox}`} type={"checkbox"} /> </label> */}
-        <label class={style.label} htmlFor="bio"> Korte biografie: <textarea id="bio" value={bio} onChange={e => setBio(e.currentTarget.value)} className={`${style.input} ${style.input__textfield}`} type={"text"} placeholder="Begin hier met typen"/> </label>
-          
-          <label class={style.label}>
+          <label className={style.label}>
             Upload een profielfoto:
             <div className={style.label__image__container}>
               <input className={`${style.input} ${style.input__image}`}
