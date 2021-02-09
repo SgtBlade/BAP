@@ -124,6 +124,23 @@ const Home = () => {
         </div>
       </section>
 
+      <section className={`${style.section} ${style.highlights}`}>
+        <h2 className={style.highlightsTitle}>
+          <span className={style.highlightsTitleHighlight}>Uitgelichte </span>
+          projecten
+        </h2>
+        <div className={style.highlightsCards}>
+          {/* Hier komen 3 projecten */}
+          <div className={style.highlightsCardBig}>
+            <ProjectPreview type="funding"></ProjectPreview>
+            <Link className={`${style.introButton} ${style.mainButton}`} to="/">
+              Toon alle projecten
+            </Link>
+          </div>
+          <ProjectPreview type="voting"></ProjectPreview>
+          <ProjectPreview type="funding"></ProjectPreview>
+        </div>
+      </section>
       <section
         className={`${style.section} ${style.pillars} ${style.container}`}
       >
@@ -198,23 +215,6 @@ const Home = () => {
               height="130"
             ></img>
           </section>
-        </div>
-      </section>
-      <section className={`${style.section} ${style.highlights}`}>
-        <h2 className={style.highlightsTitle}>
-          <span className={style.highlightsTitleHighlight}>Uitgelichte </span>
-          projecten
-        </h2>
-        <div className={style.highlightsCards}>
-          {/* Hier komen 3 projecten */}
-          <div className={style.highlightsCardBig}>
-            <ProjectPreview type="funding"></ProjectPreview>
-            <Link className={`${style.introButton} ${style.mainButton}`} to="/">
-              Toon alle projecten
-            </Link>
-          </div>
-          <ProjectPreview type="voting"></ProjectPreview>
-          <ProjectPreview type="funding"></ProjectPreview>
         </div>
       </section>
       <section
