@@ -52,7 +52,7 @@
 }
 
 .information__title {
-  font-family: "RobotoMono-light";
+  font-family: "Roboto Mono";
   text-transform: uppercase;
   font-size: var(--fontSmall);
   color: #aaaaaa;
@@ -215,7 +215,7 @@
   display: flex;
 }
 
-.votingButtons, .answerButtons {
+.votingButtons, .answerButtons, .volunteerButton {
   padding: 1.5rem 2.5rem;
   background-color: transparent;
   font-weight: var(--weightSemiBold);
@@ -538,7 +538,7 @@
 }
 
 .information__level {
-  font-family: "RobotoMono-light";
+  font-family: "Roboto Mono";
   font-size: 1.2rem;
   text-transform: uppercase;
 }
@@ -547,7 +547,7 @@
   justify-self: flex-end;
   color: grey;
   font-size: var(--fontSmall);
-  font-family: "RobotoMono-light";
+  font-family: "Roboto Mono";
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -617,6 +617,24 @@
 
 .questionsContainer__discussion__link {
   color: var(--durfYellow);
-  font-family: "Monserrat";
+  font-family: "Montserrat";
+  font-weight: var(--weightSemiBold);
+  display: block;
+  margin-top: 1.5rem;
+
+}
+
+.volunteerButton {
+  margin-top: 1.5rem;
+  background-color: white;
+  border: .25rem solid;
+  transition: .25s;
+  border: none;
+  color: var(--durfGreenDarker);
+}
+
+.volunteerButton:hover {
+  transform: scale(.95);
+  cursor: pointer;
 }
 

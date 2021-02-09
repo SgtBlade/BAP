@@ -46,9 +46,9 @@ const ProjectDetail = () => {
         <div className={style.projectDetail__head}>
           <div className={style.projectDetail__head__box}>
             {project.pictures[0] ?
-              <img alt={'cover'} width={663} height={372} src={project.pictures[0].url} />
+              <img className={style.projectDetail__head__image} alt={'cover'} width={663} height={372} src={project.pictures[0].url} />
               :
-              <img style={{border: 'solid 1px black'}} alt={'cover'} width={663} height={372} src={'/assets/project/cardPlaceholderLarge.jpg'} />
+              <img className={style.projectDetail__head__image} style={{border: 'solid 1px black'}} alt={'cover'} width={663} height={372} src={'/assets/project/cardPlaceholderLarge.jpg'} />
               }
             <div className={style.head__information}>
               <div className={style.head__information__box}>
@@ -211,7 +211,10 @@ const ProjectDetail = () => {
                 <p className={style.multipleChoice__question}>
                   Wij hebben vrijwilligers nodig als het project succesvol is, wil jij ons helpen?
                 </p>
-                
+                <button className={style.volunteerButton}>
+                  Meld je aan als vrijwilliger
+                </button>
+            
               </article>
 
               <article className={style.questionsContainer__discussion}>

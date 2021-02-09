@@ -31,7 +31,8 @@ const StyledTabs = withStyles({
 const StyledTab = withStyles((theme) => ({
   root: {
     textTransform: 'none',
-    fontFamily: "Montserrat_black",
+    fontFamily: "Montserrat",
+    fontWeight: 'var(--weightBlack);',
     fontSize: '1.6rem',
     color: 'black',
     '&:focus': {
