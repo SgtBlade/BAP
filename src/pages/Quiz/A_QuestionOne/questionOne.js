@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import style from "./questionOne.module.css";
 
-const QuestionOne = ({ onReveiveButtonText }) => {
+const QuestionOne = ({ onReveiveButtonText, onPickedQuestionOneAnswer }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
+
+  // set prev & next button text
   const prevButtonText = "Vorige vraag - geen";
   const nextButtonText = "Volgende vraag: Favoriete locatie";
-
   // pass the button text to the parent component
   onReveiveButtonText(prevButtonText, nextButtonText);
+
+  // send the picked answer to the parent component
+  const questionOneAnswer = answer => {
+    onPickedQuestionOneAnswer(answer);
+  };
 
   return (
     <div>
@@ -17,7 +23,10 @@ const QuestionOne = ({ onReveiveButtonText }) => {
       <div className={style.answers}>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(1)}
+          onClick={() => {
+            setSelectedAnswer(1);
+            questionOneAnswer("Literatuur");
+          }}
           className={`${style.quizButton} ${style.quizButtonGrey} ${
             selectedAnswer === 1 ? style.active : ""
           }`}
@@ -32,7 +41,10 @@ const QuestionOne = ({ onReveiveButtonText }) => {
         </button>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(2)}
+          onClick={() => {
+            setSelectedAnswer(2);
+            questionOneAnswer(["Literatuur", "Spelen"]);
+          }}
           className={`${style.quizButton} ${style.quizButtonOrange}
           ${selectedAnswer === 2 ? `${style.active}` : ""}`}
         >
@@ -46,7 +58,10 @@ const QuestionOne = ({ onReveiveButtonText }) => {
         </button>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(3)}
+          onClick={() => {
+            setSelectedAnswer(3);
+            questionOneAnswer(["Sport", "Spelen"]);
+          }}
           className={`${style.quizButton} ${style.quizButtonGreen}
           ${selectedAnswer === 3 ? `${style.active}` : ""}`}
         >
@@ -60,7 +75,10 @@ const QuestionOne = ({ onReveiveButtonText }) => {
         </button>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(4)}
+          onClick={() => {
+            setSelectedAnswer(4);
+            questionOneAnswer(["Sport", "Gezondheid"]);
+          }}
           className={`${style.quizButton} ${style.quizButtonRed}
           ${selectedAnswer === 4 ? `${style.active}` : ""}`}
         >
