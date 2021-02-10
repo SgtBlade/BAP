@@ -30,7 +30,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   //this means you can't just set x[index].quesion = or you'd get an error
   const updateMultiplechoice = (value, index) => {
     let tmpQuestions = multipleChoice;
-    if(!tmpQuestions[index]) tmpQuestions[index] = {question: value, options: [{value: '', count: 0}, {value: '', count: 0}]};
+    if(!tmpQuestions[index]) tmpQuestions[index] = {question: value, options: [{value: '', count: 0}, {value: '', count: 0}], answers: []};
     else tmpQuestions[index].question = value;
     setMultiplechoice([...tmpQuestions])
   }
@@ -110,7 +110,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
         <div className={style.box}
          onClick={() => {
            if(!allowMultipleChoice){
-             if(multipleChoice.length === 0)setMultiplechoice([{question: '', options: [{value: '', count: 0}, {value: '', count: 0}]}])
+             if(multipleChoice.length === 0)setMultiplechoice([{question: '', options: [{value: '', count: 0}, {value: '', count: 0}],  answers: []}])
                 setAllowMultipleChoice(true); }
            else {setAllowMultipleChoice(false);cleanupMultipleChoice()}}} 
         >

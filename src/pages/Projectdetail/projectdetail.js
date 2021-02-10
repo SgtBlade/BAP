@@ -14,43 +14,33 @@ import Tagstyle from '../globalStyles/main.module.css'
 const ProjectDetail = () => {
   const { id } = useParams();
   const {projectStore, uiStore} = useStores();
-  const [project, setProject] = useState(projectStore.currentProject ? projectStore.currentProject.id === id ? projectStore.currentProject : undefined : undefined)
+  const [project, setProject] = useState(undefined)
   const [comment, setComment] = useState('')
+  const [forceRefresh, setForceRefresh] = useState(false)
+  const [voted, setVoted] = useState(false)
   const [participation, setParticipation] = useState(false)
+  
+  
   const getProject = async () => {
     if(projectStore.initialized){
     const proj = await projectStore.getProjectById(id);
     if(proj === undefined){setProject(false)}
     else if(proj.approved === false) {
         if(uiStore.currentUser)
-          if(uiStore.currentUser.id === proj.ownerID)setProject(proj)
+          if(uiStore.currentUser.id === proj.ownerID){setProject(proj); setVoted(proj.upvotes.includes(uiStore.currentUser.id) || proj.downvotes.includes(uiStore.currentUser.id) ? true : false)}
           else setProject(false)
         else setProject(false)
-    } else setProject(proj)}
-    else setTimeout(() => {console.log('test'); getProject()}, 1000)
+    } else {setProject(proj); setVoted(proj.upvotes.includes(uiStore.currentUser.id) || proj.downvotes.includes(uiStore.currentUser.id) ? true : false)}}
+    else setTimeout(() => {console.log('retrying to fetch the project'); getProject()}, 1200)
   }
   if(project === undefined)getProject();
 
-  const comments = [
-    {
-      content: "Elke avond zorgden we voor live-entertainment van lokaal talent. Een vuurspuwer, operazanger of rapper.",
-      id: "8SzbHZQ7UygNou338Vks4KTPmf93",
-      image: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2F8SzbHZQ7UygNou338Vks4KTPmf93%2Faar_output.png?alt=media&token=9cacae59-d379-4511-a768-ffde73587287",
-      level: 0,
-      name: "miguel de pelsmaeker",
-      date: 1612908370857,},
-    {
-      content: "Elke avond zorgden we voor live-entertainment van lokaal talent. Een vuurspuwer, operazanger of rapper",
-      id: "8SzbHZQ7UygNou338Vks4KTPmf93",
-      image: "https://firebasestorage.googleapis.com/v0/b/durf2030-65052.appspot.com/o/users%2F8SzbHZQ7UygNou338Vks4KTPmf93%2Faar_output.png?alt=media&token=9cacae59-d379-4511-a768-ffde73587287",
-      level: 0,
-      name: "miguel de pelsmaeker",
-      date: 1612908377768,},
-  ]
 
   const uploadComment = async () => {
-    console.log(project.id)
-    if(validateComment)projectStore.uploadComment(project.id, {id: uiStore.currentUser.id, name: `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`, level: uiStore.currentUser.level, content: comment, date: Date.now(), image: uiStore.currentUser.picture})
+    if(validateComment){
+      projectStore.uploadComment(project.id, {id: uiStore.currentUser.id, name: `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`, level: uiStore.currentUser.level, content: comment, date: Date.now(), image: uiStore.currentUser.picture})
+      project.addComment({id: uiStore.currentUser.id, name: `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`, level: uiStore.currentUser.level, content: comment, date: Date.now(), image: uiStore.currentUser.picture})
+    }
     setComment('')
   }
 
@@ -66,6 +56,26 @@ const ProjectDetail = () => {
     else questions[index].no.push(uiStore.currentUser.id)
 
     projectStore.voteYesNo(project.id, questions)
+    project.setYesNo(questions)
+    setForceRefresh(!forceRefresh)
+  }
+
+  const vote = (type) => {
+    if(uiStore.currentUser){
+    if(type){project.addUpvote(id);projectStore.upvoteProject(id);}
+    else {project.addDownvote(id);projectStore.downvoteProject(id);}
+    setVoted(true)}
+  }
+
+  const voteMultipleChoice = (questionIndex, optionIndex) => {
+      if(uiStore.currentUser){
+        let tmpQsts = project.multipleChoice;
+        tmpQsts[questionIndex].answers.push({id: uiStore.currentUser.id, vote: optionIndex})
+        console.log(tmpQsts)
+        //projectStore.voteMultiplechoice(id, tmpQsts);
+        //project.setMultipleChoice(id, tmpQsts);
+        //setForceRefresh(!forceRefresh);
+      }
   }
 
   return useObserver(() => (
@@ -77,11 +87,19 @@ const ProjectDetail = () => {
     </div>
     :
     project === false ?
-    <Redirect to={ROUTES.projecten} />
+      <Redirect to={ROUTES.discovery} />
     :
     <article className={style.projectDetail}>
+            
+      <meta property="og:url"           content={window.location.href} />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content={`Durf2030 - ${project.title}`} />
+      <meta property="og:description"   content={project.previewText} />
+      <meta property="og:image"         content={project.pictures[0] ? project.pictures[0].url : 'https://bap-eight.vercel.app/assets/project/cardPlaceholderLarge.jpg'} />
+
+
       <div className={style.breadcrumb}>
-        <p className={style.breadcrumb__content}><Link className={style.breadcrumb__content__link} to={ROUTES.discovery}>Projecten</Link> - {projectStore.currentProject.title}</p>
+        <p className={style.breadcrumb__content}><Link className={style.breadcrumb__content__link} to={ROUTES.discovery}>Projecten</Link> - {project.title}</p>
       </div>
       <div className={style.projectDetail__container}>
         <div className={style.projectDetail__head}>
@@ -95,7 +113,7 @@ const ProjectDetail = () => {
               <div className={style.head__information__box}>
                 <p className={style.information__title}>Projectfase</p>
 
-                {projectStore.currentProject.isFundingStage ? 
+                {project.isFundingStage ? 
                   <p className={style.information__content}>
                   <img className={style.information__content__icon} src="/assets/icons/money.svg" alt="icon"/>
                   Geld inzamelen
@@ -112,13 +130,13 @@ const ProjectDetail = () => {
                 <p className={style.information__title}>Locatie</p>
                 <p className={style.information__content}>
                   <img className={style.information__content__icon} src="/assets/icons/maps.svg" alt="icon"/>
-                  {projectStore.currentProject.location}
+                  {project.location}
                 </p>
               </div>
             </div>
             <hr className={style.line}/>
             <div className={style.tags}>
-                {projectStore.currentProject.tags.map( tag => 
+                {project.tags.map( tag => 
                     <p key={tag}  className={style.tag}>
                     <span  className={`${style.tag__color} ${Tagstyle[tag.replace('/', '').replace('+', '')]}`}></span>
                     {tag}
@@ -127,7 +145,7 @@ const ProjectDetail = () => {
             </div>
           </div>
           <div className={style.projectDetail__head__box}>
-            <h1 className={style.projectDetail__title}>{projectStore.currentProject.title}</h1>
+            <h1 className={style.projectDetail__title}>{project.title}</h1>
             {/*
             <div className={style.head__collaborators}>
               <span className={style.collaborators__others}>+3</span>
@@ -143,10 +161,10 @@ const ProjectDetail = () => {
             */}
             
             {/*RECEIVED MONEY PROGRESS*/
-              projectStore.currentProject.isFundingStage ? 
+              project.isFundingStage ? 
                 <div className={style.receivedMoney__container}>
-                <p className={style.receivedMoney__text}><span className={style.receivedMoney__text__big}>€ {projectStore.currentProject.collectedMoney}</span> van de € {projectStore.currentProject.budget} ingezameld</p>
-                <progress className={style.receivedMoney__progressBar} value={projectStore.currentProject.collectedMoney} max={projectStore.currentProject.budget}/>
+                <p className={style.receivedMoney__text}><span className={style.receivedMoney__text__big}>€ {project.collectedMoney}</span> van de € {project.budget} ingezameld</p>
+                <progress className={style.receivedMoney__progressBar} value={project.collectedMoney} max={project.budget}/>
               </div>
               :
               ""
@@ -157,12 +175,11 @@ const ProjectDetail = () => {
               {project.previewText}
             </p>
             <div className={style.shareContainer}>
-              <a className={style.shareContainer__link} href="https://google.be"><img src="/assets/socials/facebook-small.svg" alt="facebook share"/></a>
-              <a className={style.shareContainer__link} href="https://google.be"><img src="/assets/socials/twitter-small.svg" alt="twitter share"/></a>
-              <a className={style.shareContainer__link} href="https://google.be"><img src="/assets/socials/share-small.svg" alt="share"/></a>
+              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=600');}} href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}><img src="/assets/socials/facebook-small.svg" alt="facebook share"/></a>
+              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=300');}} href={`https://twitter.com/intent/tweet?title=${'Durf2030 - '}&text=${project.previewText}&url=${window.location.href}`} ><img src="/assets/socials/twitter-small.svg" alt="twitter share"/></a>
+              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); navigator.clipboard.writeText(window.location.href)}} href={window.location.href}><img className={style.urlCopy} src="/assets/socials/share-small.svg" alt="share"/></a>
             </div>
-
-            {projectStore.currentProject.isFundingStage ? 
+            {project.isFundingStage ? 
               <div>
                 <div className={style.votingButtons__container}>
                   <button className={`${style.votingButtons} ${style.fundingButtons__primary}`}>
@@ -174,19 +191,23 @@ const ProjectDetail = () => {
                 </div>
               </div>
               :
-              <div>
-                <p className={style.votingTitle}>Mag dit project uitgewerkt worden?</p>
-                <div className={style.votingButtons__container}>
-                  <button className={`${style.votingButtons} ${style.votingButtons__primary}`}>
-                    <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__love}`} src="/assets/icons/love.svg" alt="icon like"/>
-                    Ja, ik stem op dit project
-                  </button>
-                  <button className={`${style.votingButtons} ${style.votingButtons__secondary}`}>
-                    <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__dislike}`} src="/assets/icons/dislike.svg" alt="alt icon dislike"/>
-                    Nee
-                  </button>
+              voted ?
+                  <p className={style.votingTitle}>Wij danken u voor uw mening</p>
+                :
+                <div>
+                  <p className={style.votingTitle}>Mag dit project uitgewerkt worden?</p>
+                  <div className={style.votingButtons__container}>
+                    <button onClick={() => {vote(true)}} className={`${style.votingButtons} ${style.votingButtons__primary}`}>
+                      <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__love}`} src="/assets/icons/love.svg" alt="icon like"/>
+                      Ja, ik stem op dit project
+                    </button>
+                    <button onClick={() => {vote(false)}} className={`${style.votingButtons} ${style.votingButtons__secondary}`}>
+                      <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__dislike}`} src="/assets/icons/dislike.svg" alt="alt icon dislike"/>
+                      Nee
+                    </button>
+                  </div>
                 </div>
-              </div>
+              
             }
 
           </div>
@@ -205,13 +226,13 @@ const ProjectDetail = () => {
       </div>
       <div id="questions" className={style.questions}>
         <section className={style.questionsContainer}>
+            
+
+            <div className={style.questionsContainer__box}>
             <h2 className={style.questionsTitle}>Samenwerken</h2>
             <p className={style.questionsInleiding}>Naast financieële steun, kan je ook op andere manieren helpen.
             Geef ons jouw mening, of schrijf je in als vrijwilliger.
             </p>
-
-            <div className={style.questionsContainer__box}>
-
             
             {project.questions ?
                           project.questions.length > 0 ?
@@ -223,6 +244,22 @@ const ProjectDetail = () => {
                     <p className={style.yesno__question}>
                       {question.value}
                     </p>
+                    {question.yes.includes(uiStore.currentUser.id) || question.no.includes(uiStore.currentUser.id) ?
+                    
+                      <div className={style.yesno__results}>
+                        
+                        <button className={`${style.answerButtons} ${style.answerButtons__primary}`}>
+                        {Math.round(  ((question.yes.length/(question.yes.length + question.no.length))*100 ))}%
+                        </button>
+                        
+                         stemde op Ja en 
+
+                         <button className={`${style.answerButtons} ${style.answerButtons__secondary}`}>
+                         {Math.round(((question.no.length/(question.yes.length + question.no.length))*100))}% 
+                          </button>
+                         
+                        stemde Nee</div>
+                    :
                     <div className={style.yesno__answers}>
                       <button onClick={() => {if(uiStore.currentUser)voteYesNo(index, true)}} className={`${style.answerButtons} ${style.answerButtons__primary}`}>
                         <img className={`${style.answerButtons__icons} ${style.answerButtons__icons__like}`} src="/assets/icons/like.svg" alt="alt icon dislike"/>
@@ -233,6 +270,7 @@ const ProjectDetail = () => {
                         Nee
                       </button>
                     </div>
+                    }
                   </div>)
                 })}
               </article>
@@ -242,30 +280,37 @@ const ProjectDetail = () => {
 
 
               <article className={style.questionsContainer__multipleChoice}>
-                <h3 className={style.questionsSubtitle}>Wanneer past het best</h3>
-                <p className={style.multipleChoice__question}>
-                  Welke datum(s) verkies jij om samen te komen met mensen?
-                </p>
-                <form className={style.multipleChoice__form}>
-                  <label className={style.form__select}>
-                    <input className={style.form__select__input} type="checkbox" value="optie1"/>
-                    <p className={style.form__select__content}>optie1</p>
-                  </label> 
-                  <label className={style.form__select}>
-                    <input className={style.form__select__input} type="checkbox" value="optie1"/>
-                    <p className={style.form__select__content}>optie1</p>
-                  </label> 
-                </form>
+                
+                {project.multipleChoice.map((multiQuestion, questionIndex) => {
+
+                  return (<div key={`MultiQUestion_${questionIndex}`} className={style.multipleChoice__container} >
+                            <p className={style.multipleChoice__question}>
+                              {multiQuestion.question}
+                            </p>
+                            <form className={style.multipleChoice__form}>
+                              {multiQuestion.options.map((option, optionIndex) => {
+                                return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
+                                          <p onClick={() => voteMultipleChoice(questionIndex, optionIndex)} className={style.form__select__content}>{option.value}</p>
+                                        </label> )
+                              })}
+                            </form>
+                          </div>)
+                })}
+                
               </article>
+
+
+
 
              
                         {project.requirements ?
                           project.requirements.length > 0 ?
                           <article className={style.questionsContainer__volunteer}>
                             <h3 className={style.questionsSubtitle}>Wij hebben onderstaande dingen nog nodig:</h3>
+                            <ul>
                             {project.requirements.map((req, index) => {
-                              return <p key={`req${index}`} className={style.participationItem}><span>{req.count}x</span> {req.name}</p>
-                            })}
+                              return <li key={`req${index}`} className={style.participationItem}><span>{req.count}x</span> {req.name}</li>
+                            })}</ul>
                             <p className={`${style.questionsSubtitle} ${style.requirementsSignup}`}>Geef je op als vrijwilliger</p>
                             {participation ? <p className={style.multipleChoice__question}>Bedankt voor u aan te melden!</p> : ''}
                             {uiStore.currentUser ?<button onClick={() => {projectStore.sendContactDetails(project.ownerID); setParticipation(true)}} className={style.volunteerButton}> Meld je aan als vrijwilliger </button> :''}
@@ -280,7 +325,7 @@ const ProjectDetail = () => {
                 <h3 className={style.questionsSubtitle}>Doe mee aan onze discussies</h3>
 
                 {project.discussions.map ((disc, index) => {
-                  return <a key={`contact${index}`} href={disc.url} target={'_blank'} className={style.questionsContainer__discussion__link}>
+                  return <a key={`contact${index}`} href={disc.url} target={'_blank'} rel="noopener noreferrer" className={style.questionsContainer__discussion__link}>
                          Doe mee aan de discussie ({disc.name}) ►</a>
                 })}
                 
@@ -296,7 +341,7 @@ const ProjectDetail = () => {
           <h2 className={style.reactiesTitle}>Reacties</h2>
           
             
-            {comments.map((comment, index) => {
+            {project.comments.map((comment, index) => {
 
               return ( 
                 <div key={`commentNr${index}`} className={style.reactiesContainer}>
@@ -313,7 +358,7 @@ const ProjectDetail = () => {
                               <p className={style.information__level}>Level {comment.level}</p>
                             </div>
                             {comment.id === uiStore.currentUser.id ?
-                              <button onClick={() => {projectStore.deleteComment(project.id, comment)}} className={style.reactiePerson__rapport}>
+                              <button onClick={() => {projectStore.deleteComment(project.id, comment); project.deleteComment(index); setForceRefresh(!forceRefresh)}} className={style.reactiePerson__rapport}>
                                 verwijder
                               </button>
                               :''}
@@ -333,6 +378,7 @@ const ProjectDetail = () => {
                 type="text"
                 value={comment}
                 onChange={e => setComment(e.currentTarget.value)}
+                onKeyUp={e => { if (e.keyCode === 13) uploadComment() }}
                 />
                 <p onClick={uploadComment} className={style.reactieButton}>reactie versturen</p> 
               </label>
@@ -340,19 +386,22 @@ const ProjectDetail = () => {
            </div>
            :''}
 
+          {voted ? 
+          '':
           <div className={style.extraQuestion}>
             <p className={style.extraQuestion__title}>Mag dit project verwezenlijkt worden?</p>
             <div className={style.extraQuestion__buttons}>
-              <button className={`${style.votingButtons} ${style.votingButtons__primary}`}>
+              <button onClick={() => {vote(true)}} className={`${style.votingButtons} ${style.votingButtons__primary}`}>
                 <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__love}`} src="/assets/icons/love.svg" alt="icon like"/>
                 JA
               </button>
-              <button className={`${style.votingButtons} ${style.votingButtons__secondary}`}>
+              <button onClick={() => {vote(false)}} className={`${style.votingButtons} ${style.votingButtons__secondary}`}>
                 <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__dislike}`} src="/assets/icons/dislike.svg" alt="alt icon dislike"/>
                 Nee
               </button>
             </div>
           </div>
+            }
         </section>
         :''}
 

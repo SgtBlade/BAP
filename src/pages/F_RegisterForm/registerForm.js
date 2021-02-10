@@ -12,7 +12,6 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("test12345");
   const [name, setName] = useState("de pelsmaeker");
   const [lname, setLname] = useState("miguel");
-  const [phone, setPhone] = useState("+32 478 32 99 38");
   const [bio, setBio] = useState("testing the fish in the pond when it is still hot");
   const [picture, setPicture] = useState('');
 
@@ -78,7 +77,7 @@ const RegisterForm = () => {
       image : picture,
       publicMail: false,
       publicPhone: false,
-      phone: phone,
+      phone: '',
     }
     await uiStore.createAccount(email, password, data);
   }
