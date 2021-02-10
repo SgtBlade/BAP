@@ -1,5 +1,5 @@
-import React from "react";
-//import { useStores } from "../../hooks/useStores";
+import React, {useState} from "react";
+import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./personalFeed.module.css";
 import { Link} from "react-router-dom";
@@ -7,9 +7,47 @@ import { Link} from "react-router-dom";
 //import COLORS from "../globalStyles/colors";
 //import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
+import ProjectCard from "../../components/ProjectCard/projectCard";
+//mport ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
+import { ROUTES } from "../../consts";
+import TAGS from "../../consts/tags";
+import Select from 'react-select';
 
 const PersonalFeed = () => {
-  //const { uiStore, /*projectStore*/ } = useStores();
+    const { uiStore, projectStore } = useStores();
+    const [filterSort, setFilterSort] = useState('Aanbevolen');
+    const [projects, setProjects] = useState(projectStore.projects);
+    const [firstLoad, setFirstLoad] = useState(false);
+  
+
+    const filter = async ({sort = filterSort}) => {
+        let projectstmp = projectStore.getProjects;
+    
+        switch (sort) {
+            case 'Populair':
+                console.log('aaaa');
+                projectstmp = projectstmp.slice().sort((a, b) => (a.upvotes < b.upvotes) ? 1 : -1)
+                break;
+
+            case 'Aanbevolen':
+                if(uiStore.currentUser)projectstmp = (projectstmp.slice().sort((a, b) => (a.tags.some(elem => uiStore.currentUser.interestedTags.includes(elem))) ? 1 : -1)).reverse()
+                break;
+            default:
+                // if(uiStore.currentUser)projectstmp = (projectstmp.slice().sort((a, b) => (a.tags.some(elem => uiStore.currentUser.interestedTags.includes(elem))) ? 1 : -1)).reverse()
+
+            break;       
+        }
+
+        setProjects([...projectstmp])
+    }
+
+    if(!firstLoad) {
+        setFirstLoad(true);
+        filter('Aanbevolen');
+    }
+
+
+    
 
 
   return useObserver(() => (
@@ -46,12 +84,55 @@ const PersonalFeed = () => {
             
         </section>
         <div className={style.feedContainer__body}>
-                <div className={style.feedContainer__filter__container}>
-                    <div className={style.feedContainer__filter__box}>
-                        <p>dit is aaaaaa</p> 
+            <div className={style.feedContainer__filter__container}>
+                <div className={style.feedContainer__filter__box}>
+                    <div className={style.feedContainer__filter__options__container}>
+                        <p 
+                        className={`${style.feedContainer__filter__options} ${filterSort === 'Aanbevolen' ? style.feedContainer__filter__options__active:""}`}
+                        onClick={() => {
+                            setFilterSort(filterSort !== 'Aanbevolen' ? 'Aanbevolen' : '');
+                            filter({sort: (filterSort !== 'Aanbevolen' ? 'Aanbevolen' : '')});
+                          }}
+                          >Aanbevolen</p> 
+                        <p 
+                        className={`${style.feedContainer__filter__options} ${filterSort === 'Populair' ? style.feedContainer__filter__options__active:""}`}
+                        onClick={() => {
+                            setFilterSort(filterSort !== 'Populair' ? 'Populair' : '');
+                            filter({sort: (filterSort !== 'Populair' ? 'Populair' : '')});
+                          }}
+                        >Populair</p> 
                     </div>
+                    {/* <div className={style.feedContainer__filter__tags}>
+                        <p className={style.tags__label}>Jouw tags</p>
+                        <div className={style.tags__container}>
+                            <span className={style.tag}></span>
+                            <Select 
+                            placeholder={'Kies een tag'}
+                            isClearable={true}
+                            className={style.tags__dropdown}
+                            // className={`${style.dropdown} ${filterTag !== '' ? style.dropdownActive : ''}`}
+                            // onChange={(e) => {filter({location: e ? e.value:  ''});setFilterLocation(e ? e.value:  ''); }}
+                            //options={TAGS}
+                            name={"tag"}
+                            id={"tag"}/>
+                        </div>
+                    </div> */}
                 </div>
             </div>
+            <div className={style.body__projects}>
+                <div className={style.body__projects__container}>
+                {projects.map((project, index) => {
+                    if(!project.approved && project.ownerID !== uiStore.currentUser.id) return ''
+                    else return <ProjectCard key={`Project_${index}`} project={project}/>
+                })}
+                </div>
+                <button className={style.projects__more}>
+                    Lees meer
+                    <img src='/assets/icons/arrowDown.svg' className={style.projects__more__icon} alt="arrow down"/>
+                </button>
+                <Link className={style.projects__all} to={ROUTES.discovery}>Bekijk alle projecten</Link>
+            </div>
+        </div>
     </article>
   ));
 };
