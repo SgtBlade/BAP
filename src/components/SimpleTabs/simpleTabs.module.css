@@ -11,6 +11,49 @@
 .MuiTabs-scroller {
     width: 100%;
     border-bottom: 1rem solid black;
+}
+
+.updates {
+    border-left: .25rem solid;
+    padding-left: 5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.update {
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.update:last-child {
+    margin-bottom: 0;
+}
+
+.update__bol {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--dark);
+    position: absolute;
+    left: -6rem;
+    border-radius: 1rem;
 
 }
+
+.date {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: var(--durfGreen)
+}
+
+.description {
+    font-weight: var(--weightSemiBold);
+    line-height: 1.5;
+}
+
+
+
+
 

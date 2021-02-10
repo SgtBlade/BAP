@@ -128,7 +128,23 @@ export default function CustomizedTabs(data) {
                 Item two
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <div className={style.updates}>
+                    <div className={style.update}>
+                        <span className={style.update__bol}></span>
+                        <p className={style.date}>23 november 2021</p>
+                        <p className={style.description}>Dit is de beschrijving voor de update voor een project. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div className={style.update}>
+                        <span className={style.update__bol}></span>
+                        <p className={style.date}>23 november 2021</p>
+                        <p className={style.description}>Dit is de beschrijving voor de update voor een project. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div className={style.update}>
+                        <span className={style.update__bol}></span>
+                        <p className={style.date}>23 november 2021</p>
+                        <p className={style.description}>Dit is de beschrijving voor de update voor een project. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
                 {data.project.personalIntroduction}
