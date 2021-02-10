@@ -51,6 +51,7 @@
 .description {
     font-weight: var(--weightSemiBold);
     line-height: 1.5;
+    width: 75ch;
 }
 
 

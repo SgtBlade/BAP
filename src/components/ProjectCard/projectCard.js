@@ -8,8 +8,9 @@ import { useStores } from "../../hooks/useStores";
 
 const ProjectCard = ({project}) => {
   const {uiStore, projectStore} = useStores();
-  const [upvotes, setUpvotes] = useState(project.upvotes)
-  const [voted, setVoted] = useState(uiStore.currentUser.statistics.upvotes ? uiStore.currentUser.statistics.upvotes.includes(project.id) : false);
+  const [upvotes, setUpvotes] = useState(project.upvotes.length)
+  let currentuserId = uiStore.currentUser.id ?? '';
+  const [voted, setVoted] = useState(project.upvotes.includes(currentuserId) || project.downvotes.includes(currentuserId) ? true : false);
   
 
   const getTime = (date) => {
@@ -20,8 +21,7 @@ const ProjectCard = ({project}) => {
   }
 
   const vote = (id) => {
-    uiStore.currentUser.addProjectVote(id);
-    project.addVote(id);
+    project.addUpvote(id);
     projectStore.upvoteProject(id);
     setUpvotes(upvotes+1);
     setVoted(true);
@@ -31,7 +31,7 @@ const ProjectCard = ({project}) => {
     e.preventDefault();
     if(uiStore.currentUser){ if(!voted)vote(id); }
   }
-
+  console.log(`${ROUTES.projectDetail.to}${project.id}`)
   return useObserver(() => (
     <Link style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
       <div className={`${style.projectCardContainer} ${project.isInFundingStage ? style.projectCardContainer__Green : project.archived ? style.projectCardContainer__Yellow : ''}`}>
@@ -69,7 +69,7 @@ const ProjectCard = ({project}) => {
               : 
               <img width={18} height={18} alt={'vote thumb'} src={'/assets/icons/voteSmall.svg'}/> 
             }
-            <span>{upvotes.length}</span>
+            <span>{upvotes}</span>
           </div>
         </div>
         }

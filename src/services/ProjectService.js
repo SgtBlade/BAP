@@ -239,7 +239,7 @@ class ProjectService {
      catch (e) {}
   }
 
-  updateProject = (id, user) => {
+  upvoteProject = (id, user) => {
     let projectRef = this.db.collection('projects').doc(id);
     projectRef.update({
       upvotes: this.fieldValue.arrayUnion(user.id)
@@ -248,6 +248,18 @@ class ProjectService {
     let userRef = this.db.collection('users').doc(user.id);
     userRef.update({
           'statistics.upvotes': this.fieldValue.arrayUnion(id)
+      });
+  }
+
+  downvoteProject = (id, user) => {
+    let projectRef = this.db.collection('projects').doc(id);
+    projectRef.update({
+      downvotes: this.fieldValue.arrayUnion(user.id)
+    });
+
+    let userRef = this.db.collection('users').doc(user.id);
+    userRef.update({
+          'statistics.downvotes': this.fieldValue.arrayUnion(id)
       });
   }
 
@@ -277,6 +289,10 @@ class ProjectService {
     projectRef.update({ questions: questions });
   }
 
+  voteMultiplechoice = (projectId, questionObj) => {
+    let projectRef = this.db.collection('projects').doc(projectId);
+    projectRef.update({ multipleChoice: questionObj });
+  }
 }
 
 export default ProjectService;

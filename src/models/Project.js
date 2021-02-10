@@ -67,7 +67,17 @@ class Project {
      return true;
   }
 
-  addVote = () => { this.upvotes++; }
+  addUpvote = (id) => { this.upvotes.push(id); }
+
+  addDownvote = (id) => { this.downvotes.push(id); }
+
+  addComment = (comment) => {this.comments.push(comment)}
+
+  deleteComment = (index) => this.comments.splice(index, 1)
+
+  setYesNo = (obj) => this.questions = obj;
+
+  setMultipleChoice = (obj) => this.multipleChoice = obj
 
 }
 
