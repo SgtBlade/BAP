@@ -1,6 +1,7 @@
 import React from "react";
 import { useObserver } from "mobx-react-lite";
-import { Switch, Route /*Redirect, */ } from "react-router-dom";
+import { Switch, Route, /*Redirect, */ 
+Redirect} from "react-router-dom";
 import { ROUTES } from "../../consts/index.js";
 //import style from "./Authentication.module.css";
 import Person from "../Profile/profile.js";
@@ -14,15 +15,19 @@ import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 import Discovery from "../Discovery/Discovery.js";
 import Quiz from "../Quiz/quiz.js";
+import { useStores } from "../../hooks/useStores.js";
 
 
 const Authentication = () => {
+  const { uiStore} = useStores();
+
   return useObserver(() => (
     <>
       <Nav />
       <div>
         <Switch>
           <Route exact path={ROUTES.projecten}></Route>
+
           <Route exact path={ROUTES.overons}>
             <ProjectDetail />
           </Route>
@@ -32,7 +37,11 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.startproject}>
+            {uiStore.currentUser ? 
             <CreateProjectForm />
+            :
+            <Redirect to={ROUTES.discovery}/>
+            }
           </Route>
 
           <Route exact path={ROUTES.profiel}>
@@ -40,15 +49,27 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.registreer}>
-            <RegisterForm />
+            {uiStore.currentUser ? 
+              <Redirect to={ROUTES.discovery}/>
+              :
+              <RegisterForm />
+            }
           </Route>
 
           <Route exact path={ROUTES.login}>
-            <LoginForm />
+            {uiStore.currentUser ? 
+              <Redirect to={ROUTES.discovery}/>
+              :
+              <LoginForm />
+            }
           </Route>
 
           <Route exact path={ROUTES.reset}>
-            <LoginForm />
+            {uiStore.currentUser ? 
+              <LoginForm />
+              :
+              <Redirect to={ROUTES.discovery}/>
+            }
           </Route>
 
           <Route exact path={ROUTES.feed}>
@@ -60,7 +81,6 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.home}>
-            {/* <Testenv/> */}
             <Home />
           </Route>
 
@@ -68,17 +88,6 @@ const Authentication = () => {
             <Quiz />
           </Route>
 
-          {/* <Route path="/me">
-            {isLoggedIn ?
-            <Profile />
-            :
-            <Redirect to="/" />
-            }
-          </Route> */}
-
-          {/* <Route path="/detail/:id">
-            <Detail />
-          </Route> */}
         </Switch>
         <Footer />
       </div>
