@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import style from "./questionOne.module.css";
+import style from "./questionTwo.module.css";
 
-const QuestionOne = ({ onReveiveButtonText }) => {
+const QuestionTwo = ({ onReveiveButtonText }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
-  const prevButtonText = "Vorige vraag - geen";
-  const nextButtonText = "Volgende vraag: Favoriete locatie";
+  const prev = "Vorige Vraag: Hoe sportief";
+  const next = "Volgende vraag: Spendeer tijd met";
 
   // pass the button text to the parent component
-  onReveiveButtonText(prevButtonText, nextButtonText);
+  onReveiveButtonText(prev, next);
 
   return (
     <div>
@@ -77,4 +77,4 @@ const QuestionOne = ({ onReveiveButtonText }) => {
   );
 };
 
-export default QuestionOne;
+export default QuestionTwo;

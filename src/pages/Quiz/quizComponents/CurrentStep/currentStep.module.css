@@ -6,3 +6,9 @@
   margin: 4rem auto;
   max-width: 96rem;
 }
+
+.quizStepButtons {
+  margin: 1rem 0 4rem 0;
+  display: flex;
+  justify-content: space-around;
+}
