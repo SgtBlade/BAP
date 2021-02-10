@@ -13,6 +13,9 @@
   width: 85vw;
   margin: auto;
   margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .breadcrumb__content,
@@ -691,3 +694,20 @@
 .requirementsSignup {
   margin-top: 4rem;
 }
+
+.editProject {
+  display: flex;
+  align-items: center;
+  font-weight: var(--weightSemiBold);
+  background-color: lightgrey;
+  color: black;
+  padding: 1rem 1.25rem;
+  border-radius: .5rem;
+}
+
+.editProject__image {
+  width: 1.5rem;
+  height: auto;
+  margin-right: 1rem;
+}
+
