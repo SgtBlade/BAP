@@ -15,6 +15,7 @@ import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 import Discovery from "../Discovery/Discovery.js";
 import Quiz from "../Quiz/quiz.js";
+import ProjectEdit from "../ProjectEdit/projectEdit.js";
 import { useStores } from "../../hooks/useStores.js";
 
 
@@ -32,9 +33,14 @@ const Authentication = () => {
             <ProjectDetail />
           </Route>
 
+          <Route exact path={ROUTES.projectBewerken.path}>
+            <ProjectEdit />
+          </Route>
+
           <Route exact path={ROUTES.projectDetail.path}>
               <ProjectDetail />
           </Route>
+          
 
           <Route exact path={ROUTES.startproject}>
             {uiStore.currentUser ? 

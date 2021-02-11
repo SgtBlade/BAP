@@ -3,11 +3,32 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "../Progressbar/progressbar";
 import QuestionOne from "../../A_QuestionOne/questionOne";
 import QuestionTwo from "../../B_QuestionTwo/questionTwo";
+/*
+import QuestionThree from "../../C_QuestionThree/questionThree";
+import QuestionFour from "../../D_QuestionFour/questionFour";
+import Results from "../../E_Results/results";
+*/
 
 import moduleStyle from "./currentStep.module.css";
 import globalStyle from "../../../globalStyles/main.module.css";
 
 const style = { ...moduleStyle, ...globalStyle };
+
+let tags = [];
+// const calcAnswers = answer => {
+//   tags.push(answer);
+//   console.log(tags);
+// };
+
+// get the answer(s) from  specific questions
+// Q1
+const pickedQuestionOneAnswers = answer => {
+  console.log(answer);
+};
+//Q2
+const pickedQuestionTwoAnswers = answer => {
+  console.log(answer);
+};
 
 const CurrentStep = ({ onSetStep }) => {
   const [curStep, setCurStep] = useState(1);
@@ -32,12 +53,18 @@ const CurrentStep = ({ onSetStep }) => {
     switch (currentStep) {
       case 1:
         stepComponent = (
-          <QuestionOne onReveiveButtonText={receivedButtonText}></QuestionOne>
+          <QuestionOne
+            onReveiveButtonText={receivedButtonText}
+            onPickedQuestionOneAnswer={pickedQuestionOneAnswers}
+          ></QuestionOne>
         );
         break;
       case 2:
         stepComponent = (
-          <QuestionTwo onReveiveButtonText={receivedButtonText}></QuestionTwo>
+          <QuestionTwo
+            onReveiveButtonText={receivedButtonText}
+            onPickedQuestionTwoAnswer={pickedQuestionTwoAnswers}
+          ></QuestionTwo>
         );
         break;
       case 3:
@@ -87,14 +114,22 @@ const CurrentStep = ({ onSetStep }) => {
         <button
           className={style.previousButton}
           type="button"
-          onClick={() => onSetStep(curStep)}
+          // onSetStep passes step info to quiz component, setCurStep changes the actual step
+          onClick={() => {
+            onSetStep(curStep - 1);
+            setCurStep(curStep - 1);
+          }}
         >
           {`${prevButtonText}`}
         </button>
         <button
           type="button"
           className={style.mainButton}
-          onClick={() => setCurStep(curStep + 1)}
+          onClick={() => {
+            onSetStep(curStep + 1);
+            setCurStep(curStep + 1);
+            // sendAnswers("test");
+          }}
         >
           {`${nextButtonText}`}
         </button>

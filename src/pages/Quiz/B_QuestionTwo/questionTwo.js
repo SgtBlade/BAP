@@ -1,76 +1,89 @@
 import React, { useState } from "react";
 import style from "./questionTwo.module.css";
 
-const QuestionTwo = ({ onReveiveButtonText }) => {
+const QuestionTwo = ({ onReveiveButtonText, onPickedQuestionTwoAnswer }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
-  const prev = "Vorige Vraag: Hoe sportief";
-  const next = "Volgende vraag: Spendeer tijd met";
 
+  // set prev & next button text
+  const prevButtonText = "Vorige Vraag: Hoe sportief";
+  const nextButtonText = "Volgende vraag: Spendeer tijd met";
   // pass the button text to the parent component
-  onReveiveButtonText(prev, next);
+  onReveiveButtonText(prevButtonText, nextButtonText);
+
+  // send the picked answer to the parent component
+  const questionTwoAnswer = answer => {
+    onPickedQuestionTwoAnswer(answer);
+  };
 
   return (
     <div>
-      <p className={style.questionTitle}>
-        Hoe sportief ben je in je vrije tijd?
-      </p>
+      <p className={style.questionTitle}>Mijn favoriete locatie is...</p>
       <div className={style.answers}>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(1)}
+          onClick={() => {
+            setSelectedAnswer(1);
+            questionTwoAnswer("Sociaal");
+          }}
           className={`${style.quizButton} ${style.quizButtonGrey} ${
             selectedAnswer === 1 ? style.active : ""
           }`}
         >
-          <img
-            src="assets/images/quiz/nothingmeter.svg"
-            width="114"
-            height="114"
-            alt="Lage/lege actiefmeter"
-          ></img>
-          <span className={style.quizButtonText}>Niet sportief</span>
+          <span className={style.quizButtonText}>
+            'T Café{" "}
+            <span role="img" aria-label="bier">
+              🍻
+            </span>
+          </span>
         </button>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(2)}
+          onClick={() => {
+            setSelectedAnswer(2);
+            questionTwoAnswer(["Natuur", "Milieu"]);
+          }}
           className={`${style.quizButton} ${style.quizButtonOrange}
           ${selectedAnswer === 2 ? `${style.active}` : ""}`}
         >
-          <img
-            src="assets/images/quiz/somemeter.svg"
-            width="114"
-            height="114"
-            alt="redelijk lage actiefmeter"
-          ></img>
-          <span className={style.quizButtonText}>Soms sportief</span>
+          <span className={style.quizButtonText}>
+            De natuur{" "}
+            <span role="img" aria-label="boom">
+              🌳
+            </span>
+          </span>
         </button>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(3)}
+          onClick={() => {
+            setSelectedAnswer(3);
+
+            questionTwoAnswer(["Architectuur", "Commercieel"]);
+          }}
           className={`${style.quizButton} ${style.quizButtonGreen}
           ${selectedAnswer === 3 ? `${style.active}` : ""}`}
         >
-          <img
-            src="assets/images/quiz/regularmeter.svg"
-            width="114"
-            height="114"
-            alt="normale actiefmeter"
-          ></img>
-          <span className={style.quizButtonText}>Sportief</span>
+          <span className={style.quizButtonText}>
+            De stad{" "}
+            <span role="img" aria-label="stad">
+              🏙
+            </span>
+          </span>
         </button>
         <button
           type="button"
-          onClick={() => setSelectedAnswer(4)}
+          onClick={() => {
+            setSelectedAnswer(4);
+            questionTwoAnswer("Ontspanning");
+          }}
           className={`${style.quizButton} ${style.quizButtonRed}
           ${selectedAnswer === 4 ? `${style.active}` : ""}`}
         >
-          <img
-            src="assets/images/quiz/verymeter.svg"
-            width="114"
-            height="114"
-            alt="Hoge actiefmeter"
-          ></img>
-          <span className={style.quizButtonText}>Heel sportief</span>
+          <span className={style.quizButtonText}>
+            Thuis{" "}
+            <span role="img" aria-label="huis">
+              🏠
+            </span>
+          </span>
         </button>
       </div>
     </div>
