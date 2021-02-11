@@ -1,20 +1,64 @@
+.card__link {
+    position: relative;
+    
+} 
+.card__color {
+    height: 48.5rem;
+    background: var(--lightGrey);
+    width: 2rem;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -1rem;
+    box-shadow: var(--cardShadowSecond);
+    border-radius: 1rem 0 0 1rem;
+}
+
 .projectCardContainer {
     height: 48.5rem;
     width: 34rem;
+    /* width: 100%; */
     margin-top: 4rem;
     background-color: var(--cardGrey);
-    border-radius: 1rem;
-    box-shadow: -.5rem .5rem 0 0 #C4C4C4, -.4rem .5rem #C4C4C4, -.5rem 0 0 0 #C4C4C4;
+    border-radius: 0 1rem 1rem 0;
+    /*box-shadow: -.5rem .5rem 0 0 #C4C4C4, -.4rem .5rem #C4C4C4, -.5rem 0 0 0 #C4C4C4;*/
     border: solid 1px #C4C4C4;
-
+    background: var(--cardGrey);
+    box-shadow: var(--cardShadowSecond);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
+    border: none;
 }
 
-.projectCardContainer__Green { box-shadow: -.5rem .5rem 0 0 var(--durfGreen), -.4rem .5rem var(--durfGreen), -.5rem 0 0 0 var(--durfGreen); }
+/* .projectCardContainer::before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 3rem;
+    border-radius: 1rem 0 0 1rem;
+    background: var(--dark);
+    z-index: -1;
+    left: -1rem;
+} */
 
-.projectCardContainer__Yellow { box-shadow: -.5rem .5rem 0 0 var(--durfYellow), -.4rem .5rem var(--durfYellow), -.5rem 0 0 0 var(--durfYellow); }
+/* .projectCardContainer__Green { box-shadow: -.5rem .5rem 0 0 var(--durfGreen), -.4rem .5rem var(--durfGreen), -.5rem 0 0 0 var(--durfGreen); }
+
+.projectCardContainer__Yellow { box-shadow: -.5rem .5rem 0 0 var(--durfYellow), -.4rem .5rem var(--durfYellow), -.5rem 0 0 0 var(--durfYellow); } */
+
+.projectCardContainer__Green {
+    background: var(--durfGreen);
+}
+
+.projectCardContainer__Yellow {
+    background: var(--durfYellow);
+}
+
+/* .projectCardContainer__image {
+    width: 100%;
+    height: auto;
+} */
 
 .projectCard__titleWrap {
     display: flex;
@@ -121,6 +165,7 @@
     font-size: 2.4rem;
     font-weight: var(--weightSemiBold);
     padding: 1rem;
+    padding-right: 3rem;
     right: 0;
     top: 0;
 
@@ -136,8 +181,8 @@
 .preview {
     margin: 0 2rem;
     height: 10rem;
-    margin-right: 7rem;
     word-break: break-all;
+    line-height: 1.25;
 }
 
 .projectCardTags {

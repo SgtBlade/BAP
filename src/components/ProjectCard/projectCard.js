@@ -32,13 +32,14 @@ const ProjectCard = ({project}) => {
     if(uiStore.currentUser){ if(!voted)vote(id); }
   }
   return useObserver(() => (
-    <Link style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
-      <div className={`${style.projectCardContainer} ${project.isInFundingStage ? style.projectCardContainer__Green : project.archived ? style.projectCardContainer__Yellow : ''}`}>
-  
+    <Link className={style.card__link} style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
+      <span className={`${style.card__color} ${project.isInFundingStage ? style.projectCardContainer__Green : project.archived ? style.projectCardContainer__Yellow : ''}`}></span>
+      <div className={`${style.projectCardContainer}`}>
+
         {project.pictures[0] ?
-        <img alt={'cover'} width={340} height={188} src={project.pictures[0].url} />
+        <img className={style.projectCardContainer__image} alt={'cover'} width={340} height={188} src={project.pictures[0].url} />
         :
-        <img alt={'cover'} width={340} height={188} src={'/assets/project/cardPlaceholder.jpg'} />
+        <img className={style.projectCardContainer__image} alt={'cover'} width={340} height={188} src={'/assets/project/cardPlaceholder.jpg'} />
         }
         <div className={style.projectCard__titleWrap}>
             <p className={style.projectCard__title}>{project.title}d</p>

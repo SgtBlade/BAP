@@ -13,6 +13,7 @@
 
   --smallShadow: 0 0.2rem rgba(0, 0, 0, 0.15);
   --cardShadow: 0 0.45rem rgba(0, 0, 0, 0.15);
+  --cardShadowSecond: 0 0.45rem rgba(217, 217, 217, 1);
   --tagShadow: 0 0.35rem rgba(0, 0, 0, 0.15);
 
   --fontSmall: 1.4rem;
