@@ -1,18 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
 import moduleStyle from "./home.module.css";
 import globalStyle from "../globalStyles/main.module.css";
 import ProjectPreview from "../../components/ProjectPreview/projectPreview";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../consts";
+import { useObserver } from "mobx-react-lite";
 import { useStores } from "../../hooks/useStores";
 
 const style = { ...moduleStyle, ...globalStyle };
 
 const Home = () => {
-  const {uiStore} = useStores();
+  const {uiStore, projectStore} = useStores();
+  const [spotlightProjects, setSpotlightProjects] = useState(undefined)
+  const [loading, setLoading] = useState(true)
 
 
-  return (
+  const getSpotlightProjects = () => {
+    if(projectStore.initialized){
+    let projectsTmp = projectStore.getApprovedProjects(projectStore.projects)
+    if(projectsTmp.length === 0) setSpotlightProjects(false)
+    else {
+        let featuredProjects = projectStore.getFeaturedProjects(projectsTmp);
+        if(featuredProjects.length > 0) setSpotlightProjects(featuredProjects)
+        else setSpotlightProjects(projectsTmp)
+    }
+    setLoading(false)}
+  else setTimeout(() => {console.log('retrying to fetch the project'); getSpotlightProjects()}, 1200)
+}
+
+if(spotlightProjects === undefined)getSpotlightProjects()
+
+console.log(spotlightProjects)
+
+  return useObserver(() => (
     <main className={style.homeMain}>
       <h1 className="hidden">Durf2030 - Home</h1>
       <section
@@ -44,7 +64,7 @@ const Home = () => {
           </div>
         </div>
         <div className={`${style.introProjectCard}`}>
-          <ProjectPreview type="funding"></ProjectPreview>
+          {!loading ? spotlightProjects ? spotlightProjects[0] ? <ProjectPreview project={spotlightProjects[0]}/> : '' : '' : '' }
         </div>
       </section>
 
@@ -136,13 +156,13 @@ const Home = () => {
         <div className={style.highlightsCards}>
           {/* Hier komen 3 projecten */}
           <div className={style.highlightsCardBig}>
-            <ProjectPreview type="funding"></ProjectPreview>
-            <Link className={`${style.introButton} ${style.mainButton}`} to="/">
+          {!loading ? spotlightProjects ? spotlightProjects[0] ? <ProjectPreview project={spotlightProjects[0]}/> : '' : '' : '' }
+            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.discovery}>
               Toon alle projecten
             </Link>
           </div>
-          <ProjectPreview type="voting"></ProjectPreview>
-          <ProjectPreview type="funding"></ProjectPreview>
+          {!loading ? spotlightProjects ? spotlightProjects[1] ? <ProjectPreview project={spotlightProjects[1]}/> : '' : '' : ''}
+          {!loading ? spotlightProjects ? spotlightProjects[2] ? <ProjectPreview project={spotlightProjects[2]}/> : '' : '' : ''}
         </div>
       </section>
       <section
@@ -248,7 +268,7 @@ const Home = () => {
         ></img>
       </section>
     </main>
-  );
+  ));
 };
 
 export default Home;

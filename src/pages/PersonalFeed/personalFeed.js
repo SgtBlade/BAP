@@ -73,7 +73,7 @@ const PersonalFeed = () => {
             {spotlightProjects ?
                 <>
                 <div className={style.feedContainer__head__image__container}>
-                    <img className={style.feedContainer__head__image} src={spotlightProjects[activeSpotlight].pictures[0] ? spotlightProjects[activeSpotlight].pictures[0].url : 'https://bap-eight.vercel.app/assets/project/cardPlaceholderLarge.jpg'} alt="project"/>
+                    <img height={268} width={478} className={style.feedContainer__head__image} src={spotlightProjects[activeSpotlight].pictures[0] ? spotlightProjects[activeSpotlight].pictures[0].url : 'https://bap-eight.vercel.app/assets/project/cardPlaceholderLarge.jpg'} alt="project"/>
                 </div>
                     <div className={style.feedContainer__head__box}>
                         <h2 className={style.head__uitgelicht}>Uitgelicht door DURF2030</h2>
@@ -149,15 +149,15 @@ const PersonalFeed = () => {
             </div>
             <div className={style.body__projects}>
                 <div className={style.body__projects__container}>
-                {projects === undefined ?
+                {loading ?
                 <div className={style.loadingScreen}>
-                    <p>Even geduld, we zijn op zoek naar dit project</p>
+                    <p>Even geduld, we halen even de projecten erbij.</p>
                     <img height={150} alt={'loading'} src={'/assets/project/loading2.svg'}/>
                 </div>
                 :
                 projects.map((project, index) => {
                     if(!project.approved && project.ownerID !== uiStore.currentUser.id) return ''
-                    else return <ProjectCard key={`Project_${index}`} project={project} projectIndex={index}/>
+                    else return <ProjectCard key={`Project_${index}`} project={project}/>
                 })
                 }
                 
