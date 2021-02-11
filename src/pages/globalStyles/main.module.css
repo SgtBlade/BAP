@@ -76,7 +76,7 @@
 .Familie,
 .Gezin,
 .Koppel,
-.Kind .Sociaal {
+.Kind, .Sociaal {
   background-color: #230e7d !important;
 }
 
