@@ -17,9 +17,9 @@ const QuestionThree = ({
   onReveiveButtonText(prevButtonText, nextButtonText);
 
   // send the picked answer to the parent component
-  const questionThreeAnswer = answer => {
-    onPickedQuestionThreeAnswer(answer);
-  };
+  //   const questionThreeAnswer = answer => {
+  //     onPickedQuestionThreeAnswer(answer);
+  //   };
 
   //toggle answers (remove answer if already in array, add answer if not)
   const toggleAnswer = value => {

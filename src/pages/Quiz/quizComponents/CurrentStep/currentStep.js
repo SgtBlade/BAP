@@ -14,7 +14,7 @@ import globalStyle from "../../../globalStyles/main.module.css";
 
 const style = { ...moduleStyle, ...globalStyle };
 
-let tags = [];
+// let tags = [];
 // const calcAnswers = answer => {
 //   tags.push(answer);
 //   console.log(tags);
