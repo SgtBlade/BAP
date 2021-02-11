@@ -9,18 +9,20 @@ import { useStores } from "../../hooks/useStores";
 const ProjectCard = ({project}) => {
   const {uiStore, projectStore} = useStores();
   const [upvotes, setUpvotes] = useState(project.upvotes.length)
-  let currentuserId = uiStore.currentUser ? uiStore.currentUser ?? '' : '';
+  let currentuserId = uiStore.currentUser ? uiStore.currentUser.id ?? '' : '';
   const [voted, setVoted] = useState(project.upvotes.includes(currentuserId) || project.downvotes.includes(currentuserId) ? true : false);
   
 
+  //Get the time difference between 2 dates
   const getTime = (date) => {
     let date1 = new Date(date);
     let date2 = new Date(Date.now());
     let difference = date1.getTime() - date2.getTime();
     return Math.ceil(difference / (1000 * 3600 * 24));
   }
-
+  //Vote for a project
   const vote = (id) => {
+    //upvote the project locally in case there's a network connection (firebase will automaticly push if network is fixed)
     projectStore.projects.filter(proj => proj.id === id)[0].addUpvote(id);
     projectStore.upvoteProject(id);
     setUpvotes(upvotes+1);

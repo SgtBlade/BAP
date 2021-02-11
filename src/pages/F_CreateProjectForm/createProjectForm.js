@@ -46,6 +46,7 @@ const CreateProjectForm = () => {
   }
 
 
+  //switch function to return the right component
   const returnPage = (number) => {
     switch (number) {
       case 1:

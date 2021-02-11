@@ -45,16 +45,23 @@ class Project {
     this.featured = featured;
   }
 
+  //change the owner id, used because owner id is unknown at start of creating new project
   setOwnerID = (id) => this.ownerID = id;
 
+  //Change id for same reason as above
   changeID = (id) => this.id = id;
 
+  //Push picture to the picture array
   addPictue = (pic) => this.pictures.push(pic)
 
+  //Set the description, used to change from data to an url in project service
   setDescription = (desc) => this.description = desc;
 
+  //instead of saving the whole array can be set, also used in project service
   setPictures = (picArr) => this.pictures = picArr;
 
+  //The description is saved to a storage database because it can become large in size
+  //We need to get it and convert it from a file to the text again
   convertDescriptionToData = async () => {
     var descriptionFile = new XMLHttpRequest();
     descriptionFile.open("GET",this.description,true);
@@ -67,6 +74,7 @@ class Project {
      return true;
   }
 
+  
   addUpvote = (id) => { this.upvotes.push(id); }
 
   addDownvote = (id) => { this.downvotes.push(id); }
@@ -77,9 +85,12 @@ class Project {
 
   setYesNo = (obj) => this.questions = obj;
 
+  //changing the whole object at once because it's more efficient than searching for what to change
   setMultipleChoice = (obj) => this.multipleChoice = obj
 
   setApproved = (bool) => this.approved = bool;
+
+  setTitle = (value) => this.title = value;
 
 }
 

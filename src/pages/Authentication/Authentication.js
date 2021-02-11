@@ -15,7 +15,7 @@ import Home from "../Home/home.js";
 import CreateProjectForm from "../F_CreateProjectForm/createProjectForm";
 import Discovery from "../Discovery/Discovery.js";
 import Quiz from "../Quiz/quiz.js";
-import ProjectEdit from "../ProjectEdit/projectEdit.js";
+//import ProjectEdit from "../ProjectEdit/projectEdit.js";
 import { useStores } from "../../hooks/useStores.js";
 import Adminpanel from "../Adminpanel/adminpanel.js";
 
@@ -29,16 +29,19 @@ const Authentication = () => {
       <div>
         <Switch>
 
-
-          <Route exact path={ROUTES.projecten}></Route>
-
           <Route exact path={ROUTES.overons}>
             <ProjectDetail />
           </Route>
 
+        {/*
           <Route exact path={ROUTES.projectBewerken.path}>
+            {true ?
             <ProjectEdit />
+            :
+            <Redirect to={ROUTES.discovery}/>
+          }
           </Route>
+        */}
 
           <Route exact path={ROUTES.projectDetail.path}>
               <ProjectDetail />

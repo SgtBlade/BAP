@@ -12,8 +12,8 @@ const RegisterForm = () => {
   const { uiStore } = useStores();
   const [email, setEmail] = useState("migueleken@hotmail.com");
   const [password, setPassword] = useState("test12345");
-  const [name, setName] = useState("de pelsmaeker");
-  const [lname, setLname] = useState("miguel");
+  const [name, setName] = useState("Miguel");
+  const [lname, setLname] = useState("De Pelsmaeker");
   const [bio, setBio] = useState("testing the fish in the pond when it is still hot");
   const [picture, setPicture] = useState('');
 

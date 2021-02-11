@@ -74,7 +74,7 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
     ,
     imageCompress: {
       quality: 0.4, // default
-      maxWidth: 720, // default
+      maxWidth: 620, // default
       maxHeight: 405, // default
       imageType: 'image/jpeg', // default
       debug: false, // default
