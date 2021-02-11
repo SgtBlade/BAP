@@ -1,0 +1,330 @@
+.hidden { display: none;}
+
+button {
+    transition: .25s;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: scale(.95);
+}
+
+.editContainer__sectionTitle {
+    margin-bottom: 1.5rem;
+    color: var(--durfGreen);
+    font-weight: var(--weightSemiBold);
+
+}
+
+.editContainer__algemeen{
+    width: 85vw;
+    margin: auto;
+    margin-top: 2.5rem;
+}
+
+.project__title {
+    font-size: 4.8rem;
+    font-family: "Montserrat";
+    font-weight: var(--weightBlack);
+    margin-bottom: 2.5rem;
+}
+
+.project__title__input {
+    width: 100%;
+    border: none;
+    border-bottom: .5rem solid var(--dark);
+    padding: 1rem;
+    font-size: 2.4rem;
+}
+
+.editContainer__algemeen__container {
+    margin-top: 10rem;
+}
+
+.project__subtitle{
+    font-size: 2.4rem;  
+    font-family: "Montserrat";
+    font-weight: var(--weightBlack);
+    margin-bottom: 2.5rem;
+}
+
+.editContainer__algemeen__container {
+    display: flex;
+
+}
+
+.editContainer__algemeen__box {
+    width: 50%;
+}
+
+.project__subtitle__input, .collaborateurs__groupname, .shortBio__text {
+    width: 80%;
+    border: none;
+    border-bottom: .5rem solid var(--dark);
+    padding: 1rem;
+    font-size: 1.6rem;
+    background-color: transparent;
+}
+
+.editContainer__algemeen__tags {
+    display: flex;
+    flex-flow:column;
+    align-items: center;
+    justify-content: center;
+}
+
+.editContainer__algemeen__tags__container {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+}
+
+.editContainer__algemeen__tag {
+    padding: 1.25rem 3.5rem;
+    background: var(--lightGrey);
+    border-radius: 50rem;
+    font-weight: var(--weightBlack);
+    font-size: 1.6rem;
+    display: inline-block;
+    margin-right: 1.5rem;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.editContainer__algemeen__tag__delete, .content__image__box__delete {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 1rem;
+    color: var(--dark);
+    background-color: var(--durfRed);
+    position: absolute;
+    z-index: 1;
+    border-radius: 2rem;
+    top: -.5rem;
+    right: -1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat";
+    font-weight: var(--weightSemiBold);
+    color: white;
+    border:none;
+
+}
+
+.collaborateurs__delete__spacingLeft {
+    margin-left: 1.5rem;
+}
+
+.editContainer__collaborateurs, .editContainer__questionsForOthers {
+    background-color: var(--lightGrey);
+    padding: 5rem 0;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+.editContainer__collaborateurs__container, .editContainer__content, 
+.editContainer__questionsForOthers__container, .editContainer__options,
+.editContainer__buttons {
+    width: 85vw;
+    margin: auto;
+}
+
+.collaborateurs__collaborateur {
+    display: flex;
+    align-items: center;
+}
+
+.collaborateurs__email{
+    margin-right: 1rem;
+}
+.collaborateurs__delete {
+    padding: .5rem 1rem;
+    color: var(--dark);
+    background-color: var(--durfRed);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat";
+    color: white;
+    font-weight: var(--weightSemiBold);
+    font-size: 1.6rem;
+    border: none;
+}
+
+.content__ligging {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.ligging__dropdown {
+    margin-left: 1.5rem;
+}
+
+.content__images{
+    margin-bottom:  5rem;
+}
+
+.content__images__container {
+    display: flex;
+    overflow-x: auto;
+    padding: 2.5rem 0; 
+}
+
+.content__image__box {
+    position: relative;
+    margin-right: 1.5rem;
+}
+
+.content__images__add {
+    text-transform: uppercase;
+    font-weight: var(--weightSemiBold);
+}
+
+.content__shortBio {
+    margin-bottom: 5rem;
+}
+
+.questionsForOthers__question {
+    margin-bottom: 2.5rem;
+}
+
+.questionsForOthers__question__type {
+    margin-bottom: .5rem;
+    font-family: "Roboto Mono";
+    text-transform: uppercase;
+}
+
+.questionsForOthers__question__container {
+    display: flex;
+    align-items: center;
+}
+
+.project__subtitle__question {
+    margin-bottom: 0;
+    margin-right: 1.5rem;
+}
+
+.questionsForOthers__question__options {
+    padding-left: 1.5rem;
+}
+
+.questionsForOthers__question__option, .questionsForOthers__question__container, .questionsForOthers__question__total {
+    display: flex;
+    align-items: center;
+}
+
+.questionsForOthers__question__platform__input, .questionsForOthers__question__platform__url {
+    width: 30%;
+    border: none;
+    border-bottom: .5rem solid var(--dark);
+    padding: 1rem;
+    font-size: 1.6rem;
+    background-color: transparent;
+}
+
+.questionsForOthers__question__label__platform, .questionsForOthers__question__label__platform__url,
+.questionsForOthers__question__label__total,.questionsForOthers__question__label__what,
+.editContainer__options__questions
+{
+    margin-bottom: .5rem;
+    font-size: 1.6rem;
+    font-weight: var(--weightSemiBold);
+    margin-top: 1rem;
+}
+
+.questionsForOthers__question__label__total, .questionsForOthers__question__platform__number {
+    width: 20%;
+}
+
+.questionsForOthers__question__label__what, .questionsForOthers__question__platform__description {
+    width: 80%;
+}
+
+
+.questionsForOthers__question__label__platform {
+    width: 30%;
+}
+
+.questionsForOthers__question__platform__url, .questionsForOthers__question__label__platform__url  {
+    width: 50rem;
+    margin-left: 1.5rem;
+}
+
+.editContainer__options {
+    margin-bottom: 5rem;
+
+}
+
+.editContainer__options__container {
+    margin-bottom: 2.5rem;
+}
+
+.editContainer__options__button {
+    padding: 1.5rem 2.5rem;
+    font-size: 1.8rem;
+    font-weight: var(--weightSemiBold);
+    border: .25rem solid;
+    background-color: transparent;
+    color: black;
+    border-radius: .5rem;
+}
+
+.editContainer__options__positive {
+    border-color: var(--durfGreenDarker);
+    background-color: var(--durfGreenDarker);
+    color: white;
+    margin-right: 1.5rem;
+}
+
+.editContainer__options__negative {
+    border-color: var(--durfRed);
+    background-color: var(--durfRed);
+    color: white;
+}
+
+.editContainer__options__active {
+    border-color: black;
+}
+
+.editContainer__buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5rem;
+    align-items: center;
+
+}
+
+.buttons__annuleren {
+    border: none; 
+    background: transparent;
+    color: var(--durfBlue);
+    font-size: 1.8rem;
+    font-weight: var(--weightSemiBold);
+    margin-right: 1.5rem;;
+}
+
+.buttons__annuleren:hover {
+    text-decoration: underline;
+}
+
+.buttons__save {
+    border: .25rem solid var(--durfGreenDarker);
+    border-color: var(--durfGreenDarker);
+    background-color: var(--durfGreenDarker);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: var(--weightSemiBold);
+    padding: 1.5rem 2.5rem;
+    border-radius: .5rem;
+}
+
+
+
+
+
+
+
