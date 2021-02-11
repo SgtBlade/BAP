@@ -205,3 +205,7 @@
     border-radius: 2rem;
     margin-right: .5rem;
 }
+
+.previewMargin {
+    margin-top: 4rem !important;
+}
