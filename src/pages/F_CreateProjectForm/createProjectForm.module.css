@@ -73,7 +73,7 @@
   border: none;
   border-bottom: solid 5px var(--dark);
   padding: 1rem 1rem 0.5rem 0;
-  font-weight: var(--weightSemiBold);
+  font-weight: var(--weightSemiBold) !important;
   font-weight: 700;
   font-size: 1.8rem;
   width: 100%;

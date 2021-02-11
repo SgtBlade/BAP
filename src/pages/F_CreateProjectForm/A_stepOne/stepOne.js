@@ -565,10 +565,12 @@ const CreateProjectFormStepOne = ({
 
         <Select 
         className={`${style.dropdown}`}
+        defaultValue={projectData.location ? {label: projectData.location, value: projectData.location} : ''}
         onChange={(e) => setLocation(e.value)}
         options={LOCATIONS}
         name={"location"}
-        id={"location"}/>
+        id={"location"}
+        />
       </label>
 
 

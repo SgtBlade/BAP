@@ -203,6 +203,11 @@ class UserService {
         });
   }
 
+  updateTags = (tags) => {
+    let userRef = this.db.collection('users').doc(this.auth.uid);
+    userRef.update({ interestedTags: tags });
+  }
+
   requestVerificationMail = (mail) => {
     //Basic action settings for where the mail should redirect you to
     var actionCodeSettings = { url: RESPONSE.loginURL, handleCodeInApp: true, };
@@ -235,6 +240,32 @@ class UserService {
       console.log(`${key} => ${value}`);
     }
   }
+
+  getAllUsers = async (onChange) => {
+    console.log('test')
+    this.db
+      .collection('users')
+      .withConverter(userConverter)
+      .onSnapshot(async snapshot => {
+        snapshot.docChanges().forEach(async change => {
+          if (change.type === "added" || change.type === "removed") {
+            const userObj = change.doc.data();
+            console.log(userObj)
+            onChange([change.type, userObj]);
+          }
+        });
+      });
+  };
+
+  deleteById = (id) => {
+
+    this.db
+    .collection("users")
+    .doc(id)
+    .delete();
+
+  }
+
 
 }
 

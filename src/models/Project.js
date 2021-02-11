@@ -79,6 +79,8 @@ class Project {
 
   setMultipleChoice = (obj) => this.multipleChoice = obj
 
+  setApproved = (bool) => this.approved = bool;
+
 }
 
 const projectConverter = {

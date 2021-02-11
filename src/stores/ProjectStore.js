@@ -20,6 +20,8 @@ class ProjectStore {
 
   getApprovedProjects = (projectsArr) => {return projectsArr.filter(project => project.approved === true)}
 
+  getUnApprovedProjects = (projectsArr) => {return projectsArr.filter(project => project.approved === false)}
+
   getFeaturedProjects = (projectsArr) => {return projectsArr.filter(project => project.featured === true)}
 
   getProjectByIdFromServer = async (id) => this.currentProject = await this.projectService.getProjectById(id);
@@ -40,16 +42,25 @@ class ProjectStore {
   //DB Functions
   get getProjects() { return this.projects;}
 
+  approveProject = (projectId) => this.projectService.approveProject(projectId)
+
   getProjectsFromDatabase = async () => {await this.projectService.getAllProjects(this.onProjectsChange); this.initialized = true}; 
   
   addProject = (project) => this.projects.push((project))
 
-  removeProject = (project) =>  {this.projects.splice(this.projects.findIndex(item => item.id === project.id), 1);}
+  removeProjectFromDB = (project) =>  {
+    this.projectService.removeProject(project);
+  }
+
+  removeProject = (project) => this.projects.splice(this.projects.findIndex(item => item.id === project.id), 1);
+
+  
 
   onProjectsChange = proj => {
     const incomingProject = proj[1];
+    console.log(proj[0])
     if(proj[0] === 'removed') this.removeProject(incomingProject)
-    else this.addProject(incomingProject)
+    else if(this.projects.filter(proj => proj.id !== incomingProject.id))this.addProject(incomingProject)
   };
 
 
@@ -115,7 +126,6 @@ class ProjectStore {
       this.currentProjectDescription = 'Loading';
       this.currentProject = newProject;
 
-      //TURN ON
       if(newProject !== undefined)this.projectService.convertDescriptionToData(this.currentProject.description, this.updateDescription)
       return newProject;
   }

@@ -175,7 +175,7 @@ const ProjectDetail = () => {
             </p>
             <div className={style.shareContainer}>
               <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=600');}} href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}><img src="/assets/socials/facebook-small.svg" alt="facebook share"/></a>
-              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=300');}} href={`https://twitter.com/intent/tweet?title=${'Durf2030 - '}&text=${project.previewText}&url=${window.location.href}`} ><img src="/assets/socials/twitter-small.svg" alt="twitter share"/></a>
+              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=300');}} href={`https://twitter.com/intent/tweet?title=${'Durf2030 - ' + project.previewText}&text=${project.previewText}&url=${window.location.href}`} ><img src="/assets/socials/twitter-small.svg" alt="twitter share"/></a>
               <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); navigator.clipboard.writeText(window.location.href)}} href={window.location.href}><img className={style.urlCopy} src="/assets/socials/share-small.svg" alt="share"/></a>
             </div>
             {project.isFundingStage ? 

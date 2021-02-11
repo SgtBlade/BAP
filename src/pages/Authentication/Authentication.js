@@ -17,6 +17,7 @@ import Discovery from "../Discovery/Discovery.js";
 import Quiz from "../Quiz/quiz.js";
 import ProjectEdit from "../ProjectEdit/projectEdit.js";
 import { useStores } from "../../hooks/useStores.js";
+import Adminpanel from "../Adminpanel/adminpanel.js";
 
 
 const Authentication = () => {
@@ -92,6 +93,17 @@ const Authentication = () => {
 
           <Route exact path={ROUTES.quiz}>
             <Quiz />
+          </Route>
+
+          <Route exact path={ROUTES.adminpanel}>
+            {uiStore.currentUser ? 
+              uiStore.currentUser.role === 1 ?
+              <Adminpanel/>
+              :
+              <Redirect to={ROUTES.home}/>
+              :
+              <Redirect to={ROUTES.home}/>
+            }
           </Route>
 
           <Redirect to={ROUTES.home}/>

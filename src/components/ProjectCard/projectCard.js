@@ -31,7 +31,6 @@ const ProjectCard = ({project}) => {
     e.preventDefault();
     if(uiStore.currentUser){ if(!voted)vote(id); }
   }
-  console.log(`${ROUTES.projectDetail.to}${project.id}`)
   return useObserver(() => (
     <Link style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
       <div className={`${style.projectCardContainer} ${project.isInFundingStage ? style.projectCardContainer__Green : project.archived ? style.projectCardContainer__Yellow : ''}`}>
