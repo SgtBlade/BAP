@@ -1,3 +1,32 @@
+
+.wrap {
+    background: transparent;
+}
+
+.wrap::before {
+    content: '';
+    width: 38.2rem;
+    height: 38.2rem;
+    border: 2rem solid var(--durfRed);
+    border-radius: 1.5rem;
+    transform: rotate(45deg);
+    position: absolute;
+    bottom: -10rem;
+    left: -54rem;
+    z-index: -1;
+}
+
+.wrap::after {
+    content: '';
+    background-image: url('/assets/uiElementen/centerPartCreateProject.svg');
+    position: absolute;
+    width: 24.25rem;
+    height: 40rem;
+    background-repeat: no-repeat;
+    top: 32.5%; 
+    bottom: 0;
+    right: -22%;
+}
 .midsection {
     margin-top: 7.5rem;
     padding: 4.4rem 8rem;
