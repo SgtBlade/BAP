@@ -94,6 +94,8 @@ const Authentication = () => {
             <Quiz />
           </Route>
 
+          <Redirect to={ROUTES.home}/>
+
         </Switch>
         <Footer />
       </div>

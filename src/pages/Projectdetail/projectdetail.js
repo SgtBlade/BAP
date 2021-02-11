@@ -33,7 +33,7 @@ const ProjectDetail = () => {
     } else {setProject(proj); setVoted(proj.upvotes.includes(uiStore.currentUser.id) || proj.downvotes.includes(uiStore.currentUser.id) ? true : false)}}
     else setTimeout(() => {console.log('retrying to fetch the project'); getProject()}, 1200)
   }
-  if(project === undefined)getProject();
+  if(project === undefined){document.querySelector("#root").scrollTop = 0;getProject();}
 
 
   const uploadComment = async () => {
@@ -378,14 +378,14 @@ const ProjectDetail = () => {
       </div>
       {project.allowComments ?
       <section className={style.reacties}>
+      <div className={style.reactiesContainer}>
           <h2 className={style.reactiesTitle}>Reacties</h2>
           
             
             {project.comments.map((comment, index) => {
 
               return ( 
-                <div key={`commentNr${index}`} className={style.reactiesContainer}>
-                        <div className={style.reactie}>
+                        <div key={`commentNr${index}`}  className={style.reactie}>
                           <div className={style.reactiePerson}>
                             <div className={style.reactiePerson__box}>
                               <img className={style.reactiePerson__image} src={comment.image} alt="profiel afbeelding"/>
@@ -406,9 +406,9 @@ const ProjectDetail = () => {
                           </div>
                           <p className={style.reactie__text}>{comment.content}</p>
                         </div>
-                      </div>
                     ) 
             })}
+            </div>
            {uiStore.currentUser ? 
            <div className={`${style.reactiesContainer} ${style.reactieInputWrapper}`}>
 

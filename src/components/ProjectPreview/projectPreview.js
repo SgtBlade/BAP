@@ -3,6 +3,8 @@ import style from "./projectPreview.module.css";
 import COLORS from "./../../pages/globalStyles/colors.js";
 import tagStyle from '../../pages/globalStyles/main.module.css'
 import { useStores } from "../../hooks/useStores";
+import { ROUTES } from "../../consts";
+import { Link } from "react-router-dom";
 
 const ProjectPreview = ({project}) => {
   const {uiStore, projectStore} = useStores();
@@ -19,7 +21,6 @@ const ProjectPreview = ({project}) => {
       color = COLORS.durfYellow;
       textColor = "black";
       typeText = "Afgerond";}
-
     else if (project.failed){
       color = COLORS.durfRed;
       textColor = "white";
@@ -55,6 +56,7 @@ const ProjectPreview = ({project}) => {
   }
 
   return (
+    <Link style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
     <article className={style.projectCard}>
       <span
         className={style.borderLeft}
@@ -162,6 +164,7 @@ const ProjectPreview = ({project}) => {
         </div>
       </div>
     </article>
+    </Link>
   );
 };
 

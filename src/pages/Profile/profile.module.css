@@ -86,7 +86,18 @@
     padding: 1rem 2rem;
     border-bottom-left-radius: .75rem; 
     box-shadow: var(--smallShadow);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--weightSemiBold);
+    cursor: pointer;
 }
+
+.profileEdit img { 
+    margin-right: 1rem;
+}
+
 .profileTags {
     width: 60vw;
     align-items: center;
@@ -124,7 +135,6 @@
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
-    justify-content: space-between;
     right: 0;
    
 }
@@ -181,7 +191,35 @@
     row-gap: 5rem
 }
 
+.notFoundWrap, .loadingScreen {
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
 
+.notFound__title {
+    font-weight: var(--weightBlack);
+    font-size: 2.4rem;
+}
 
+.notFound__url {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: var(--weightSemiBold);
+    color: black;
+}
 
+.notFound__url:hover:before {
+    content: '> '
+} 
 
+.notFound__urlWrap {
+    display: flex;
+    flex-flow: column;
+}
+
+.loadingScreen p {
+    font-weight: var(--weightSemiBold);
+}

@@ -116,7 +116,7 @@ class ProjectStore {
       this.currentProject = newProject;
 
       //TURN ON
-      //if(newProject !== undefined)this.projectService.convertDescriptionToData(this.currentProject.description, this.updateDescription)
+      if(newProject !== undefined)this.projectService.convertDescriptionToData(this.currentProject.description, this.updateDescription)
       return newProject;
   }
   
