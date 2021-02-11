@@ -77,7 +77,7 @@ const QuestionFour = ({ onReveiveButtonText, onPickedQuestionFourAnswer }) => {
   // }
 
   const logAnswers = () => {
-    console.log(selectedAnswers);
+   
   };
 
   return (

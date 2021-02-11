@@ -12,10 +12,10 @@ const Adminpanel = () => {
   const [projects, setProjects] = useState();
   const [users, getUsers] = useState(uiStore.allUsers)
 
-  const getProjectsByFilter = () => {
+  const getProjectsByFilter = (type = projectType) => {
     if(projectStore.initialized){
       let projectsTmp = [];
-      switch(projectType){
+      switch(type){
         case 'unApproved':
           projectsTmp = projectStore.getUnApprovedProjects(projectStore.projects)
           break;
@@ -135,7 +135,7 @@ const Adminpanel = () => {
                 projects.map(project => {
                 
                   return (<div key={project.id} className={style.projectsApproval__project}>
-                              <p onClick={() => {deleteProject(project)}} className={`${style.projectsApproval__project__decline} ${style.projectsApproval__project__button} ${style.projectsApproval__project__button__double}`}>Afkeuren</p>
+                              <p onClick={() => {deleteProject(project)}} className={`${style.projectsApproval__project__decline} ${style.projectsApproval__project__button} ${style.projectsApproval__project__button__double}`}>Verwijderen</p>
                               <ProjectCard project={project}/>  
                           </div>)
                 })

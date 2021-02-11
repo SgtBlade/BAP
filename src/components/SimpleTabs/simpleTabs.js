@@ -81,7 +81,7 @@ export default function CustomizedTabs(data) {
     
     let buttonOneDisplay = 'hidden';
     let buttonTwoDisplay = 'hidden';
-    let quillHeight = '50rem';
+    let quillHeight = '100vh';
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

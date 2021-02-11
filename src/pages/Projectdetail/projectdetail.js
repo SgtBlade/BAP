@@ -95,10 +95,13 @@ const ProjectDetail = () => {
 
       <div className={style.breadcrumb}>
         <p className={style.breadcrumb__content}><Link className={style.breadcrumb__content__link} to={ROUTES.discovery}>Projecten</Link> - {project.title}</p>
+        {uiStore.currentUser.id === project.ownerID?
         <Link className={style.editProject} to={`${ROUTES.projectBewerken.to}${project.id}`}>
           <img alt={'edit'} src='/assets/icons/edit-1.svg' className={style.editProject__image}/>
           Bewerk het project
         </Link>
+        :
+        ''}
       </div>
       <div className={style.projectDetail__container}>
         <div className={style.projectDetail__head}>
@@ -246,7 +249,7 @@ const ProjectDetail = () => {
                     <p className={style.yesno__question}>
                       {question.value}
                     </p>
-                    {question.yes.includes(uiStore.currentUser.id) || question.no.includes(uiStore.currentUser.id) || !uiStore.currentUser?
+                    {question.yes.includes(uiStore.currentUser ? uiStore.currentUser.id ?? '': '') || question.no.includes(uiStore.currentUser ? uiStore.currentUser.id ?? '': '') || !uiStore.currentUser?
                     
 
                     question.yes.length + question.no.length === 0 ?
@@ -362,7 +365,7 @@ const ProjectDetail = () => {
                 <h3 className={`${style.questionsSubtitle} ${style.sectionTitle}`}>Doe mee aan onze discussies</h3>
 
                 {project.discussions.map ((disc, index) => {
-                  return <a key={`contact${index}`} href={disc.url} target={'_blank'} rel="noopener noreferrer" className={style.questionsContainer__discussion__link}>
+                  return <a key={`contact${index}`} href={`https://${disc.url}`} targer={'_blank'} className={style.questionsContainer__discussion__link}>
                          Doe mee aan de discussie ({disc.name}) ►</a>
                 })}
                 
@@ -395,11 +398,12 @@ const ProjectDetail = () => {
                               <p className={style.information__owner}>Projecteigenaar</p> :''}
                               <p className={style.information__level}>Level {comment.level}</p>
                             </div>
-                            {comment.id === uiStore.currentUser.id ?
+                            {uiStore.currentUser ?
+                              comment.id === uiStore.currentUser.id ?
                               <button onClick={() => {projectStore.deleteComment(project.id, comment); project.deleteComment(index); setForceRefresh(!forceRefresh)}} className={style.reactiePerson__rapport}>
                                 verwijder
                               </button>
-                              :''}
+                              :'': ''}
                               
                           </div>
                           <p className={style.reactie__text}>{comment.content}</p>
@@ -446,9 +450,25 @@ const ProjectDetail = () => {
 
         <style>
           {`
+
+          .ql-container, .quill {
+            display: flex;
+            justify-content: center;
+            alignpitems: center;
+            width: 100%;
+          }
+
+          .ql-container.ql-snow {
+            border: solid 1px #E3E3E3E3;
+          }
+          .ql-container {
+            max-width: 96rem;
+            font-size: 1.6rem;
+            border: none;
+          }
           .ql-video {
-            width: 50%;
-            height: 70%;
+            aspect-ratio: 16/9;
+            width: 60%;
             margin-left: auto;
             margin-right: auto;
           }

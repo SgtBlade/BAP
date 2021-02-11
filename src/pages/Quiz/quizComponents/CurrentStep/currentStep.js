@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../../../consts";
+import { useStores } from "../../../../hooks/useStores";
 
 import ProgressBar from "../Progressbar/progressbar";
 import QuestionOne from "../../A_QuestionOne/questionOne";
@@ -21,7 +22,8 @@ const style = { ...moduleStyle, ...globalStyle };
 // };
 
 // create an empty array with room for all the question answers
-const selectedTags = [[], [], [], []];
+let selectedTags = [[], [], [], []];
+
 
 // get the answer(s) from  specific questions
 // Q1
@@ -46,7 +48,13 @@ const pickedQuestionFourAnswers = answer => {
 };
 
 const CurrentStep = ({ onSetStep }) => {
+  const {uiStore} = useStores();
   const [curStep, setCurStep] = useState(1);
+
+
+  const submitTags = e => {
+    uiStore.updateTags(selectedTags)
+  }
 
   const [prevButtonText, setPrevButtonText] = useState("Prev rendered yet");
   const [nextButtonText, setNextButtonText] = useState("Next not rendered yey");
@@ -96,6 +104,7 @@ const CurrentStep = ({ onSetStep }) => {
         );
         break;
       case 5:
+        selectedTags = [...new Set(selectedTags.flat(2))]
         stepComponent = (
           <Results
             onReveiveButtonText={receivedButtonText}
@@ -169,6 +178,7 @@ const CurrentStep = ({ onSetStep }) => {
         ) : (
           <Link
             className={`${style.introButton} ${style.mainButton}`}
+            onClick={submitTags}
             to={ROUTES.feed}
           >
             Verdergaan met geselecteerde tags
