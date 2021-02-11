@@ -42,13 +42,13 @@
 .mainButton:hover {
   background: var(--durfGreen);
   border: solid 0.2rem var(--durfGreen);
-  transform: scale(.95);
+  transform: scale(0.95);
 }
 
 .previousButton:hover,
 .altButton:hover {
   background: var(--lightGrey);
-  transform: scale(.95);
+  transform: scale(0.95);
 }
 
 .linkButton {
@@ -71,23 +71,30 @@
   cursor: not-allowed;
 }
 
-
 .Vriendengroepvrienden,
+.Vrienden,
 .Familie,
 .Gezin,
 .Koppel,
-.Sociaal{
-  background-color: #230E7D !important;
+.Kind .Sociaal {
+  background-color: #230e7d !important;
 }
 
-.LGTBQIA, .Godsdienst,
+.LGTBQIA,
+.Godsdienst,
 .Diversiteit {
-background-color: #F4812E !important;
+  background-color: #f4812e !important;
 }
 
-.Theater, .Dans, .Spelen, .Knutselen, .Ontspanning, .Muziek, .Sport, .Actief,
-.Kind {
-background-color: #FFED00 !important;
+.Theater,
+.Dans,
+.Spelen,
+.Knutselen,
+.Ontspanning,
+.Muziek,
+.Sport,
+.Actief {
+  background-color: #ffed00 !important;
 }
 
 .Dieren,
@@ -95,25 +102,26 @@ background-color: #FFED00 !important;
 .Landbouw,
 .Gezondheid,
 .Milieu,
-.Educatie{
-background-color: #54BBAB !important;
+.Educatie {
+  background-color: #54bbab !important;
 }
 
 .Architectuur,
 .Fotografie,
-.Mode{
-background-color: #01081F !important;
+.Kunst,
+.Literatuur .Mode {
+  background-color: #01081f !important;
 }
 
 .Eten,
 .Drinken {
-background-color: #E62336 !important;
+  background-color: #e62336 !important;
 }
 
 .Commercieel,
-.winkels,
+.Winkels,
 .Technologie,
 .Economie,
 .Ambacht {
-  background-color: #D02C75 !important;
+  background-color: #d02c75 !important;
 }

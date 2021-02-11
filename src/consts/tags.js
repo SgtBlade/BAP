@@ -56,7 +56,7 @@ const TAGS = {
   Economie: {
     Color: "#D02C75",
     Commercieel: "Commercieel",
-    winkels: "winkels",
+    Winkels: "Winkels",
     Technologie: "Technologie",
     Economie: "Economie",
     Ambacht: "Ambacht",
