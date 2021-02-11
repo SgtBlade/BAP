@@ -362,8 +362,8 @@
 .image {
   margin-right: 2.5rem;
   transition: 0.5s;
-  width: 75%;
-  height: auto;
+  width: auto;
+  height: 37.2rem;
 }
 
 .image:hover {

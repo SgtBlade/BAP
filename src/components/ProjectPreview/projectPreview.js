@@ -55,6 +55,11 @@ const ProjectPreview = ({project}) => {
     setVoted(true);}
   }
 
+  const validateVote = (e, id) => {
+    e.preventDefault();
+    if(uiStore.currentUser){ if(!voted)vote(id); }
+  }
+
   return (
     <Link style={{color: 'black', marginRight: '5rem'}} to={`${ROUTES.projectDetail.to}${project.id}`}>
     <article className={style.projectCard}>
@@ -123,7 +128,7 @@ const ProjectPreview = ({project}) => {
                 {voted?
                   <img width={18} height={18} alt={'vote thumb'} src={'/assets/icons/votedSmall.svg'}/>
                   : 
-                  <img onClick={vote} width={18} height={18} alt={'vote thumb'} src={'/assets/icons/voteSmall.svg'}/> 
+                  <img onClick={validateVote} width={18} height={18} alt={'vote thumb'} src={'/assets/icons/voteSmall.svg'}/> 
                 }
                 <p className={style.projectCard__voting__amount}>{project.upvotes.length}</p>
               </div>
@@ -142,7 +147,7 @@ const ProjectPreview = ({project}) => {
                 {voted?
                   <img width={18} height={18} alt={'vote thumb'} src={'/assets/icons/votedSmall.svg'}/>
                   : 
-                  <img onClick={vote} width={18} height={18} alt={'vote thumb'} src={'/assets/icons/voteSmall.svg'}/> 
+                  <img onClick={validateVote} width={18} height={18} alt={'vote thumb'} src={'/assets/icons/voteSmall.svg'}/> 
                 }
                 <p className={style.projectCard__voting__amount}>{project.upvotes.length}</p>
               </div>

@@ -47,7 +47,7 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
           <p 
           onClick={() => {setDeadline(true);if(errors.value['deadline'])removeFromErrorArray('deadline')}} 
           className={`${deadline === true ? '' : style.notSelected} ${style.buttons}`}>JA, is er een deadline</p>
-          <input type="date" value={date} onChange={e => handleDateChange(e.currentTarget.value)}/>
+          {deadline ? <input className={style.deadlineInput} type="date" value={date} onChange={e => handleDateChange(e.currentTarget.value)}/> : ''}
         </div>
         <p 
         onClick={() => {setDeadline(false);if(errors.value['deadline'])removeFromErrorArray('deadline')}} 

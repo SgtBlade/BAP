@@ -22,9 +22,11 @@ class UiStore {
   }
 
   uploadProject = async (data) => {
-    this.isLoading = true;
-    this.projectService.uploadProject(data, this.currentUser.id)
-    .then(() => {this.isLoading = false;})
+
+      this.isLoading = true;
+      return await this.projectService.uploadProject(data, this.rootStore.uiStore.currentUser.id)
+                  .then((res) => {this.isLoading = false; return res})
+    
   }
 
   seed = () => {

@@ -98,14 +98,14 @@ class ProjectService {
     project.changeID(docId)
     await this.uploadImages(data.pictures, docId, userID)
     .then(pics => project.setPictures(pics));
-    this.uploadDescription(data.description, docId, userID)
+    return await this.uploadDescription(data.description, docId, userID)
     .then(res => project.setDescription(res))
     .then(() => {
                   //Once the description is uploaded, upload the rest of the data
                   docRef
                       .withConverter(projectConverter)
                       .set(project)
-                      .then(() => {
+                      .then((result) => {
                         if(data.coWorkerRequests) {
                           data.coWorkerRequests.forEach(coWorker => {                             
                           this.db.collection("users").where('mail', '==', coWorker.toLowerCase())
@@ -123,12 +123,8 @@ class ProjectService {
                       });
                 })
                 .then(() => {
-                  console.log(project)
-                  
-                return true;
+                return project;
                 })
-
-    return true;
 
     
   }
@@ -136,7 +132,7 @@ class ProjectService {
   uploadImages = async (images, projectID, userID) => {
     let Urls = [];
     //Loop through all images
-    if(images.length === 0) Urls.push('/assets/project/cardPlaceholderLarge.jpg')
+    if(images.length === 0) Urls.push({url: '/assets/project/cardPlaceholderLarge.jpg', path: false})
     await images.forEach((async image => {
     
       const storageRef = this.storage.ref();

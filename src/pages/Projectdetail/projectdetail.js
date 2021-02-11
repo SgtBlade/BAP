@@ -6,11 +6,6 @@ import { Link, useParams, Redirect } from "react-router-dom";
 import SimpleTabs from './../../components/SimpleTabs/simpleTabs.js';
 import style from "./projectdetail.module.css";
 import Tagstyle from '../globalStyles/main.module.css'
-//import Tag from "../../components/Tag/tag.js";
-//import COLORS from "../globalStyles/colors";
-
-//import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
-//import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 const ProjectDetail = () => {
   const { id } = useParams();
   const {projectStore, uiStore} = useStores();
@@ -232,7 +227,9 @@ const ProjectDetail = () => {
       <div id="questions" className={style.questions}>
         <section className={style.questionsContainer}>
             
-
+            {project.requirements.length === 0 && project.multipleChoice.length === 0 && project.questions.length === 0 && project.discussions.length === 0 ?
+            ''
+            :
             <div className={style.questionsContainer__box}>
             <h2 className={style.questionsTitle}>Samenwerken</h2>
             <p className={style.questionsInleiding}>Naast financieële steun, kan je ook op andere manieren helpen.
@@ -374,6 +371,7 @@ const ProjectDetail = () => {
               
 
             </div>
+          }
         </section>
       </div>
       {project.allowComments ?

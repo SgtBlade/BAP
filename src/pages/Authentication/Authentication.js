@@ -43,7 +43,7 @@ const Authentication = () => {
           
 
           <Route exact path={ROUTES.startproject}>
-            {uiStore.currentUser ? 
+            {true ? 
             <CreateProjectForm />
             :
             <Redirect to={ROUTES.discovery}/>
