@@ -1,16 +1,17 @@
 import React from "react";
-//import { useObserver } from "mobx-react-lite";
 import moduleStyle from "./home.module.css";
 import globalStyle from "../globalStyles/main.module.css";
-//import COLORS from "../globalStyles/colors";
-//import ProjectCard from "../../components/ProjectCard/projectCard";
 import ProjectPreview from "../../components/ProjectPreview/projectPreview";
 import { Link } from "react-router-dom";
-//import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
+import { ROUTES } from "../../consts";
+import { useStores } from "../../hooks/useStores";
 
 const style = { ...moduleStyle, ...globalStyle };
 
 const Home = () => {
+  const {uiStore} = useStores();
+
+
   return (
     <main className={style.homeMain}>
       <h1 className="hidden">Durf2030 - Home</h1>
@@ -31,12 +32,15 @@ const Home = () => {
             </p>
           </div>
           <div className={style.introButtonContainer}>
-            <Link className={`${style.introButton} ${style.mainButton}`} to="/">
+            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.feed}>
               Bekijk de projecten
             </Link>
-            <Link className={`${style.introButton} ${style.altButton}`} to="/">
-              Heb jij een idee?
-            </Link>
+            {uiStore.currentUser ?
+            <Link className={`${style.introButton} ${style.altButton}`} to={ROUTES.startproject}> Heb jij een idee? </Link>
+            :
+            <Link className={`${style.introButton} ${style.altButton}`} to={ROUTES.login}> Heb jij een idee? </Link>
+            }
+            
           </div>
         </div>
         <div className={`${style.introProjectCard}`}>
@@ -228,9 +232,13 @@ const Home = () => {
             financiële kan halen? Maak dan nu een account aan en ontdek de vele
             voordelen van het DURF platform en ondersteuning!
           </p>
-          <Link className={`${style.introButton} ${style.mainButton}`} to="/">
-            Ik heb een project!
-          </Link>
+
+          {uiStore.currentUser ?
+            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.startproject}> Ik heb een project! </Link>
+            :
+            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.login}> Ik heb een project! </Link>
+            }
+          
         </div>
         <img
           src="assets/images/project.svg"

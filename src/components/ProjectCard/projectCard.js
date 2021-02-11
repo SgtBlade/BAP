@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import { useStores } from "../../hooks/useStores";
 
-const ProjectCard = ({project}) => {
+const ProjectCard = ({project, projectIndex}) => {
   const {uiStore, projectStore} = useStores();
   const [upvotes, setUpvotes] = useState(project.upvotes.length)
   let currentuserId = uiStore.currentUser.id ?? '';
@@ -21,7 +21,7 @@ const ProjectCard = ({project}) => {
   }
 
   const vote = (id) => {
-    project.addUpvote(id);
+    projectStore[projectIndex].addUpvote(id);
     projectStore.upvoteProject(id);
     setUpvotes(upvotes+1);
     setVoted(true);

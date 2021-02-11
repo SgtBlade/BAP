@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./loginForm.module.css";
+import { NavLink } from "react-router-dom";
+import { ROUTES } from "../../consts";
 
 
 const LoginForm = () => {
@@ -22,16 +24,16 @@ const LoginForm = () => {
         <form className={style.form} onSubmit={handleLoginSubmit}> 
           <p className={`alertwindow ${style.negative}`}></p>
           <legend className={style.formTitle}>Meld je hier aan</legend>  
-          
+          <NavLink exact className={style.register} to={ROUTES.registreer}>Nog geen account?</NavLink>
           {response[0] ? 
           <p className={style[response[1]]}> {response[2]}</p>
             : ''
           }
           <div className={style.inputFieldsContrainer}>
-            <label class={style.label} htmlFor="email">E-mail: 
+            <label className={style.label} htmlFor="email">E-mail: 
               <input id="email" value={email} onChange={e => setEmail(e.currentTarget.value)} className={style.input} type={"email"} placeholder="Vul hier je e-mail in"/> 
             </label> 
-            <label class={style.label} htmlFor="password">Wachtwoord: 
+            <label className={style.label} htmlFor="password">Wachtwoord: 
               <input id="password" value={password} onChange={e => setPassword(e.currentTarget.value)} className={style.input} type={"password"} /> 
               </label> 
             <button className={style.confirmButton} type="submit">Meld me aan</button> 

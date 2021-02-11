@@ -77,17 +77,17 @@
 .Gezin,
 .Koppel,
 .Sociaal{
-  background-color: #230E7D
+  background-color: #230E7D !important;
 }
 
 .LGTBQIA, .Godsdienst,
 .Diversiteit {
-background-color: #F4812E;
+background-color: #F4812E !important;
 }
 
 .Theater, .Dans, .Spelen, .Knutselen, .Ontspanning, .Muziek, .Sport, .Actief,
 .Kind {
-background-color: #FFED00;
+background-color: #FFED00 !important;
 }
 
 .Dieren,
@@ -96,18 +96,18 @@ background-color: #FFED00;
 .Gezondheid,
 .Milieu,
 .Educatie{
-background-color: #54BBAB;
+background-color: #54BBAB !important;
 }
 
 .Architectuur,
 .Fotografie,
 .Mode{
-background-color: #01081F;
+background-color: #01081F !important;
 }
 
 .Eten,
 .Drinken {
-background-color: #E62336;
+background-color: #E62336 !important;
 }
 
 .Commercieel,
@@ -115,5 +115,5 @@ background-color: #E62336;
 .Technologie,
 .Economie,
 .Ambacht {
-  background-color: #D02C75;
+  background-color: #D02C75 !important;
 }

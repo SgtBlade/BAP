@@ -4,6 +4,8 @@ import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
 import style from "./registerForm.module.css";
 import { RESPONSE } from "../../consts/responses";
+import { NavLink } from "react-router-dom";
+import { ROUTES } from "../../consts";
 
 
 const RegisterForm = () => {
@@ -89,6 +91,7 @@ const RegisterForm = () => {
         <form className={style.form} onSubmit={handleCreateSubmit}>
           <p className={`alertwindow ${style.negative}`}></p>
           <legend className={style.formTitle}>Registreer</legend>
+          <NavLink exact className={style.login} to={ROUTES.login}>Heeft u al een account?</NavLink>
           <br></br>
 
           <label className={style.label} htmlFor="lname"> Voornaam: <input id="lname" value={lname} onChange={e => setLname(e.currentTarget.value)} className={style.input} type={"text"} placeholder="Type hier uw voornaam"/> </label>          
