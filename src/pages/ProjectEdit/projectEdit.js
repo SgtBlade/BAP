@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import { useStores } from "../../hooks/useStores";
-import {useParams} from "react-router-dom";
+import {Redirect, useParams} from "react-router-dom";
 //import { ROUTES } from "../../consts";
 import style from "./projectEdit.module.css";
 import { Select } from "@material-ui/core";
 import ReactQuill from 'react-quill';
+import { useObserver } from "mobx-react-lite";
+import { ROUTES } from "../../consts";
 
 //import { useObserver } from "mobx-react-lite";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
@@ -12,38 +14,95 @@ import ReactQuill from 'react-quill';
 
 const ProjectEdit = () => {
     const { id } = useParams();
-    const {projectStore, uiStore} = useStores();
-    const [project, setProject] = useState(projectStore.currentProject ? projectStore.currentProject.id === id ? projectStore.currentProject : undefined : undefined)
+    const {projectStore} = useStores();
+    const [project, setProject] = useState(undefined)
     
-    //The booleans to know if we need to show the "form" to add the things the user want
-    // const [allowYesNo, setAllowYesNo] = useState(projectData.questions ? projectData.questions.length > 0 ? true: false : false);
-    // const [allowMultipleChoice, setAllowMultipleChoice] = useState(projectData.multipleChoice ? projectData.multipleChoice.length > 0 ? true: false : false);
-    // const [allowRequirements, setAllowRequirements] = useState(projectData.requirements ? projectData.requirements.length > 0 ? true: false : false);
-    // const [allowDiscussion, setAllowDiscussion] = useState(projectData.discussions ? projectData.discussions.length > 0 ? true: false : false);
-
-    //The actual data variables
-    // const [questions, setQuestions] = useState(projectData.questions ?? [])
-    // const [multipleChoice, setMultiplechoice] = useState(projectData.multipleChoice ?? [])
-    // const [requirements, setRequirements] = useState(projectData.requirements ?? [])
-    // const [discussions, setDiscussions] = useState(projectData.discussions ?? [])
+    const [budget, setbudget] = useState(undefined)
+    const [collectedMoney, setcollectedMoney] = useState(undefined)
+    const [upvotes, setupvotes] = useState(undefined)
+    const [downvotes, setdownvotes] = useState(undefined)
+    const [deadlineDate, setdeadlineDate] = useState(undefined)
+    const [creationDate, setcreationDate] = useState(undefined)
+    const [title, settitle] = useState(undefined)
+    const [location, setlocation] = useState(undefined)
+    const [personalIntroduction, setpersonalIntroduction] = useState(undefined)
+    const [publicOwner, setpublicOwner] = useState(undefined)
+    const [description, setdescription] = useState(undefined)
+    const [tags, settags] = useState(undefined)
+    const [updates, setupdates] = useState(undefined)
+    const [previewText, setpreviewText] = useState(undefined)
+    const [questions, setquestions] = useState(undefined)
+    const [requirements, setrequirements] = useState(undefined)
+    const [pictures, setpictures] = useState(undefined)
+    const [multipleChoice, setmultipleChoice] = useState(undefined)
+    const [contact, setcontact] = useState(undefined)
+    const [coWorkers, setcoWorkers] = useState(undefined)
+    const [discussions, setdiscussions] = useState(undefined)
+    const [comments, setcomments] = useState(undefined)
+    const [allowComments, setallowComments] = useState(undefined)
+    const [allowQuestions, setallowQuestions] = useState(undefined)
+    const [isInFundingStage, setisInFundingStage] = useState(undefined)
+    const [archived, setarchived] = useState(undefined)
+    const [approved, setapproved] = useState(undefined)
+    const [deadline, setdeadline] = useState(undefined)
+    const [featured, setfeatured] = useState(undefined)
+    
 
     const getProject = async () => {
         if(projectStore.initialized){
             const proj = await projectStore.getProjectById(id);
             if(proj === undefined){setProject(false)}
-            else if(proj.approved === false) {
-                if(uiStore.currentUser)
-                    if(uiStore.currentUser.id === proj.ownerID)setProject(proj)
-                    else setProject(false)
-                else setProject(false)
-            }else setProject(proj)}
+            else setProject(proj);
+            console.log(proj)}
         else setTimeout(() => {console.log('test'); getProject()}, 1000)
     }
+
     if(project === undefined)getProject();
+    else if(project && budget === undefined) {
 
+        setbudget(project.budget); console.log(budget)
+        setcollectedMoney(project.collectedMoney); console.log(collectedMoney)
+        setupvotes(project.upvotes); console.log(upvotes)
+        setdownvotes(project.downvotes); console.log(downvotes)
+        setdeadlineDate(project.deadlineDate); console.log(deadlineDate)
+        setcreationDate(project.creationDate); console.log(creationDate)
+        settitle(project.title); console.log(title)
+        setlocation(project.location); console.log(location)
+        setpersonalIntroduction(project.personalIntroduction); console.log(personalIntroduction)
+        setpublicOwner(project.publicOwner); console.log(publicOwner)
+        setdescription(project.description); console.log(description)
+        settags(project.tags); console.log(tags)
+        setupdates(project.updates); console.log(updates)
+        setpreviewText(project.previewText); console.log(previewText)
+        setquestions(project.questions); console.log(questions)
+        setrequirements(project.requirements); console.log(requirements)
+        setpictures(project.pictures); console.log(pictures)
+        setmultipleChoice(project.multipleChoice); console.log(multipleChoice)
+        setcontact(project.contact); console.log(contact)
+        setcoWorkers(project.coWorkers); console.log(coWorkers)
+        setdiscussions(project.discussions); console.log(discussions)
+        setcomments(project.comments); console.log(comments)
+        setallowComments(project.allowComments); console.log(allowComments)
+        setallowQuestions(project.allowQuestions); console.log(allowQuestions)
+        setisInFundingStage(project.isInFundingStage); console.log(isInFundingStage)
+        setarchived(project.archived); console.log(archived)
+        setapproved(project.approved); console.log(approved)
+        setdeadline(project.deadline); console.log(deadline)
+        setfeatured(project.featured); console.log(featured)
+        
+    }
+    
+    return useObserver(() => (
+        project === undefined ?
+            <div className={style.loadingScreen}>
+              <p>Even geduld, we zijn op zoek naar dit project</p>
+              <img height={150} alt={'loading'} src={'/assets/project/loading2.svg'}/>
+            </div>
+            :
+            project === false ?
+              <Redirect to={ROUTES.discovery} />
+            :
 
-
-    return (
         <section className={style.edit}>
             <h1 className={style.hidden}>Bewerken van Project</h1>
             
@@ -51,11 +110,11 @@ const ProjectEdit = () => {
                 <article className={style.editContainer__algemeen}>
                     <h2 className={style.editContainer__sectionTitle}>Algemene informatie</h2>
                     <p className={style.project__title}>Jouw super coole projectnaam</p>
-                    <input type='text' className={style.project__title__input} placeholder="Projectnaam" value=""/>
+                    <input type='text' className={style.project__title__input} placeholder="Projectnaam" />
                     <div className={style.editContainer__algemeen__container}>
                         <div className={style.editContainer__algemeen__box}>
                             <p className={style.project__subtitle}>Het budget</p>
-                            <input type='text' className={style.project__subtitle__input} placeholder="1500" value=""/>
+                            <input type='text' className={style.project__subtitle__input} placeholder="1500" />
                         </div>
                         <div className={style.editContainer__algemeen__box}>
                             <p className={style.project__subtitle}>De tags</p>
@@ -89,7 +148,6 @@ const ProjectEdit = () => {
                                 </div>
                                 <Select 
                                 placeholder={'Kies een tag'}
-                                isClearable={true}
                                 className={style.tags__dropdown}
                                 // className={`${style.dropdown} ${filterTag !== '' ? style.dropdownActive : ''}`}
                                 // onChange={(e) => {filter({location: e ? e.value:  ''});setFilterLocation(e ? e.value:  ''); }}
@@ -174,7 +232,7 @@ const ProjectEdit = () => {
                     </div>
                     <div className={style.content__shortBio}>
                         <p className={style.project__subtitle}>Dit is de korte omschrijving van je project</p>
-                        <input type="text" className={style.shortBio__text} placeholder="Korte omschrijving van je project" value=""/>
+                        <input type="text" className={style.shortBio__text} placeholder="Korte omschrijving van je project" />
                     </div>
 
                     <div className={style.content__shortBio}>
@@ -189,7 +247,7 @@ const ProjectEdit = () => {
 
                     <div className={style.content__shortBio}>
                         <p className={style.project__subtitle}>Zo zullen de mensen je leren kennen</p>
-                        <input type="text" className={style.shortBio__text} placeholder="Informatie over jezelf / je groep / je organisatie" value=""/>
+                        <input type="text" className={style.shortBio__text} placeholder="Informatie over jezelf / je groep / je organisatie" />
                     </div>
 
                 </article>
@@ -257,8 +315,8 @@ const ProjectEdit = () => {
                                 </p>
                             </div>
                             <div className={style.questionsForOthers__question__container}>
-                                <input className={style.questionsForOthers__question__platform__input} placeholder="Platformnaam" value="" />
-                                <input className={style.questionsForOthers__question__platform__url} placeholder="Platform link (vb: https://google.be" value=""/>
+                                <input className={style.questionsForOthers__question__platform__input} placeholder="Platformnaam"  />
+                                <input className={style.questionsForOthers__question__platform__url} placeholder="Platform link (vb: https://google.be" />
                             </div>
                         </div>
                     </div>
@@ -307,7 +365,9 @@ const ProjectEdit = () => {
                 </div>
             </div>
         </section>
-    )
+
+        
+    ))
 };
 
 export default ProjectEdit;

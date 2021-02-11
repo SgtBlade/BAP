@@ -14,6 +14,7 @@ const Profile = () => {
   const [user, setUser] = useState(undefined);
   const { uiStore, projectStore } = useStores();
 
+  //fetch the right user and set it for this page
   const fetchUser = async () => {
       let usr = await uiStore.getUserById(id);
       if(usr === undefined)setUser('NOT FOUND')
@@ -21,13 +22,14 @@ const Profile = () => {
       setLoading(false)
   }
 
+  //scroll to top on arrival as sometimes you aren't
   if(user === undefined){document.querySelector("#root").scrollTop = 0;fetchUser();}
   
 
   return useObserver(() => (
     user === 'NOT FOUND' || loading ?
       loading ?
-
+    //check if it's loading, can't find one or found one
       <div className={style.loadingScreen}>
         <p>Even geduld, we zijn op zoek naar deze gebruiker</p>
         <img height={150} alt={'loading'} src={'/assets/project/loading2.svg'}/>

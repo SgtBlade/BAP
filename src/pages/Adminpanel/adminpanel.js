@@ -12,6 +12,7 @@ const Adminpanel = () => {
   const [projects, setProjects] = useState();
   const [users, getUsers] = useState(uiStore.allUsers)
 
+  //Simple filter to get the right projects for the selected filter option
   const getProjectsByFilter = (type = projectType) => {
     if(projectStore.initialized){
       let projectsTmp = [];
@@ -30,15 +31,17 @@ const Adminpanel = () => {
       else setTimeout(() => {getProjectsByFilter()}, 1000)
   }
 
-
+  //just to load the projects on first load, 
   if(projects === undefined)getProjectsByFilter();
 
+  //function to approve a project to be public
   const approveProject = (projId) => {
     projectStore.projects.filter(proj => proj.id === projId)[0].setApproved(true);
     projectStore.approveProject(projId);
     getProjectsByFilter();
   }
 
+  //function sequence to completely delete a project
   const deleteProject = async (project) => {
     if(window.confirm('Bent u zeker dat u dit project wil verwijderen?')){
     let projTmp = projects
@@ -49,6 +52,7 @@ const Adminpanel = () => {
 
   //const checkUsers = async () => { if(uiStore.allUsers.length === 0)await uiStore.getAllUsers(); }
 
+  //completely delete a user after confirming
   const deleteUser = (id) => { if(window.confirm('Bent u zeker dat u deze gebruiker wil verwijderen?')){ uiStore.deleteUser(id); } }
   
   return useObserver(() => (

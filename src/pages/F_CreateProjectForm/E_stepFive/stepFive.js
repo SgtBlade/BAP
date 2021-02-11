@@ -21,7 +21,8 @@ const CreateProjectFormStepFive = ({navData, errors, removeFromErrorArray, addTo
 
   const validation = () => {
     
-
+    //Check if there are no errors and continue
+    //most variables are yes/no on this page so not much validation needed
     if(Object.keys(errors.value).length === 0) {
       mergeProjectData({
         deadline: deadline,

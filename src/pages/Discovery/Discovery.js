@@ -18,6 +18,7 @@ const Discovery = () => {
   const [projects, setProjects] = useState(projectStore.projects);
   const [originalProjects, setOriginalProjects] = useState(projects);
 
+  //filter by what state the current project is in
   const filter = async ({sort = filterSort, type = filterType, location = filterLocation}) => {
     let projectstmp = projectStore.getProjects;
 
@@ -39,6 +40,7 @@ const Discovery = () => {
   }
 
 
+  //filter by location
   if(location !== '')projectstmp = projectStore.filterByLocation(projectstmp, location)
     switch (sort) {
         case 'Trending':
@@ -63,6 +65,7 @@ const Discovery = () => {
     setOriginalProjects(projectstmp)
   }
 
+  //filter where person can type what he wants to search for
   const inputFilter = async (value = searchValue, searchParam = searchParameter) => {
     
     let tmp = originalProjects;
@@ -75,7 +78,7 @@ const Discovery = () => {
     if(searchParam === 'Tags' && value !== ''){
       tmp = tmp.filter(project => project.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase())))
     }
-    if(searchParam === 'All' && value !== ''){
+    if(searchParam === 'All' && value !== ''){//filtering on all 3 items and then merging the arrays
       let tmp1 = tmp.filter(project => project.title.toLowerCase().includes(value.toLowerCase()))
       let tmp2 = tmp.filter(project => project.coWorkers.some(coworker => (`${coworker.name} ${coworker.surname}`).toLowerCase().includes(value.toLowerCase())))
       let tmp3 = tmp.filter(project => project.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase())))

@@ -132,10 +132,13 @@ class UiStore {
   resetPassword = (email, func) => this.userService.sendPasswordResetMail(email, func)
 
 
+  //Simple remove user by id from the local variable
   removeUser = (user) => this.allUsers.splice(this.allUsers.findIndex(item => item.id === user.id), 1);
 
-  addUser = (user) => {this.allUsers.push(user); console.log(user)}
+  //add user to the local variable
+  addUser = (user) => {this.allUsers.push(user);}
 
+  //Looks if something changes about the user and act accordingly
   onAllUsersChange = usr => {
     const incomingUser = usr[1];
     console.log(usr[0])
@@ -143,9 +146,7 @@ class UiStore {
     else if(this.allUsers.filter(usr => usr.id !== incomingUser.id))this.addUser(incomingUser)
   };
 
-  updateTags = (tags) => {
-    if(this.currentUser){this.userService.updateTags(this.currentUser.id, tags); this.currentUser.setTags(tags)}
-  }
+  updateTags = (tags) => { if(this.currentUser){this.userService.updateTags(this.currentUser.id, tags); this.currentUser.setTags(tags)} }
 
   getAllUsers = () => {return this.userService.getAllUsers(this.onAllUsersChange)}
 }

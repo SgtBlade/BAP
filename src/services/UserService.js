@@ -14,6 +14,7 @@ class UserService {
     this.requests = [];
   }
 
+  //getting a user by its id
   getUserById = async (id) => {
     //Basic database query to get user and convert to user object
     let user = await this.db
@@ -28,6 +29,7 @@ class UserService {
     return user;
   }
 
+  //create a new user -> happens in multiple steps
   addUser = async (user, data, changeLoadingTo, updateUser) => {
     //create new user object to prepare for pushing to the firestore
     const newUser = new User({
@@ -44,6 +46,7 @@ class UserService {
     this.addImageToStorage(newUser, data.image, changeLoadingTo, updateUser);
   };
 
+  //after the profile image was added to the storage continue adding the user
   continueUserCreation = (newUser, result, updateUser, changeLoadingTo) => {
 
     //if the previous action was succesful, continue to create the new user
@@ -91,6 +94,7 @@ class UserService {
     changeLoadingTo(false)
   }
 
+  //simple firebase login, not much to say here
   loginUser = (email, password) => {
 
     //First part of the if is for when the user visits to verify his email
@@ -136,6 +140,7 @@ class UserService {
         });
   }
 
+  //add the uploaded image to the storage
   addImageToStorage = async (user, file, changeLoadingTo, updateUser) => {
 
     //Look if there's a file, if not -> set a default image
@@ -188,6 +193,7 @@ class UserService {
 
   }
 
+  //In case user forgot his password
   sendPasswordResetMail = (mail, sendResponse) => {
     //Basic action settings for where the mail should redirect you to
     var actionCodeSettings = { url: RESPONSE.resetPasswordURL, handleCodeInApp: true, };
@@ -203,11 +209,13 @@ class UserService {
         });
   }
 
+  //Update the tag object in 
   updateTags = (id, tags) => {
     let userRef = this.db.collection('users').doc(id);
     userRef.update({ interestedTags: tags });
   }
 
+  //request a to send a verification email to the given mail
   requestVerificationMail = (mail) => {
     //Basic action settings for where the mail should redirect you to
     var actionCodeSettings = { url: RESPONSE.loginURL, handleCodeInApp: true, };
@@ -241,6 +249,7 @@ class UserService {
     }
   }
 
+  //get all users, is used for the admin panel
   getAllUsers = async (onChange) => {
     console.log('test')
     this.db
@@ -257,13 +266,15 @@ class UserService {
       });
   };
 
+  //delete a user from the storage
+  //user will still be in firebase Authentication but we
+  //cant delete from there as we do not have admin rights,
+  //to do this you need a separate app/platform/site
   deleteById = (id) => {
-
     this.db
     .collection("users")
     .doc(id)
     .delete();
-
   }
 
 

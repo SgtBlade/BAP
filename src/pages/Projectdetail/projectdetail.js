@@ -6,16 +6,18 @@ import { Link, useParams, Redirect } from "react-router-dom";
 import SimpleTabs from './../../components/SimpleTabs/simpleTabs.js';
 import style from "./projectdetail.module.css";
 import Tagstyle from '../globalStyles/main.module.css'
+import Comment from "./comments/comments";
 const ProjectDetail = () => {
   const { id } = useParams();
   const {projectStore, uiStore} = useStores();
   const [project, setProject] = useState(undefined)
-  const [comment, setComment] = useState('')
   const [forceRefresh, setForceRefresh] = useState(false)
   const [voted, setVoted] = useState(false)
   const [participation, setParticipation] = useState(false)
   
   
+  //get the right project and set it as the active one
+  //alos set some base values to see if the person has liked it yet
   const getProject = async () => {
     if(projectStore.initialized){
     const proj = await projectStore.getProjectById(id);
@@ -30,31 +32,21 @@ const ProjectDetail = () => {
   }
   if(project === undefined){document.querySelector("#root").scrollTop = 0;getProject();}
 
-
-  const uploadComment = async () => {
-    if(validateComment){
-      projectStore.uploadComment(project.id, {id: uiStore.currentUser.id, name: `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`, level: uiStore.currentUser.level, content: comment, date: Date.now(), image: uiStore.currentUser.picture})
-      project.addComment({id: uiStore.currentUser.id, name: `${uiStore.currentUser.name} ${uiStore.currentUser.surname}`, level: uiStore.currentUser.level, content: comment, date: Date.now(), image: uiStore.currentUser.picture})
-    }
-    setComment('')
-  }
-
-  //Written as a function in case there needs to be more validation later
-  const validateComment = () => {
-    if(comment.length >= 3)return true;
-    else return false
-  }
-
+  //yes no question vote function sequence,
+  //we push the whole object as that's better to use for updating the database
+  //forcerefresh because the project and its values are nested, this means mobx wont trigger
   const voteYesNo = async (index, yesNo) => {
+    if(uiStore.currentUser){
     let questions = project.questions;
     if(yesNo)questions[index].yes.push(uiStore.currentUser.id)
     else questions[index].no.push(uiStore.currentUser.id)
 
     projectStore.voteYesNo(project.id, questions)
     project.setYesNo(questions)
-    setForceRefresh(!forceRefresh)
+    setForceRefresh(!forceRefresh)}
   }
 
+  //up/down- voting the project
   const vote = (type) => {
     if(uiStore.currentUser){
     if(type){project.addUpvote(id);projectStore.upvoteProject(id);}
@@ -62,6 +54,7 @@ const ProjectDetail = () => {
     setVoted(true)}
   }
 
+  //voting for mutliplechoice question// works more or less the same as the yes/no
   const voteMultipleChoice = (questionIndex, optionIndex) => {
       if(uiStore.currentUser){
         let tmpQsts = project.multipleChoice;
@@ -177,8 +170,8 @@ const ProjectDetail = () => {
               {project.previewText}
             </p>
             <div className={style.shareContainer}>
-              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=600');}} href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}><img src="/assets/socials/facebook-small.svg" alt="facebook share"/></a>
-              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=300');}} href={`https://twitter.com/intent/tweet?title=${'Durf2030 - ' + project.previewText}&text=${project.previewText}&url=${window.location.href}`} ><img src="/assets/socials/twitter-small.svg" alt="twitter share"/></a>
+              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=600');}} href={`https://www.facebook.com/sharer/sharer.php?href=${window.location.href}`}><img src="/assets/socials/facebook-small.svg" alt="facebook share"/></a>
+              <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); window.open(e.currentTarget.href,'popup','width=600,height=300');}} href={`https://twitter.com/intent/tweet?title=${'Durf2030 - ' + project.title}&text=${project.previewText}&url=${window.location.href}`} ><img src="/assets/socials/twitter-small.svg" alt="twitter share"/></a>
               <a className={style.shareContainer__link} onClick={e => {e.preventDefault(); navigator.clipboard.writeText(window.location.href)}} href={window.location.href}><img className={style.urlCopy} src="/assets/socials/share-small.svg" alt="share"/></a>
             </div>
             {project.isFundingStage ? 
@@ -249,7 +242,7 @@ const ProjectDetail = () => {
                       {question.value}
                     </p>
                     {question.yes.includes(uiStore.currentUser ? uiStore.currentUser.id ?? '': '') || question.no.includes(uiStore.currentUser ? uiStore.currentUser.id ?? '': '') || !uiStore.currentUser?
-                    
+                    //looking if the user can vote, has voted before or is not logged in
 
                     question.yes.length + question.no.length === 0 ?
 
@@ -259,6 +252,7 @@ const ProjectDetail = () => {
                           <button className={`${style.answerButtons} ${style.answerButtons__primary}`}>
                           {Math.round(  ((question.yes.length/(question.yes.length + question.no.length))*100 ))}%
                           </button>
+                          
                           
                           stemde op Ja en 
 
@@ -364,7 +358,7 @@ const ProjectDetail = () => {
                 <h3 className={`${style.questionsSubtitle} ${style.sectionTitle}`}>Doe mee aan onze discussies</h3>
 
                 {project.discussions.map ((disc, index) => {
-                  return <a key={`contact${index}`} href={`https://${disc.url}`} targer={'_blank'} className={style.questionsContainer__discussion__link}>
+                  return <a key={`contact${index}`} href={`${disc.url.includes('https://') || disc.url.includes('http://')  ? '' : 'https://'}${disc.url}`} targer={'_blank'} className={style.questionsContainer__discussion__link}>
                          Doe mee aan de discussie ({disc.name}) ►</a>
                 })}
                 
@@ -376,75 +370,9 @@ const ProjectDetail = () => {
           }
         </section>
       </div>
-      {project.allowComments ?
-      <section className={style.reacties}>
-      <div className={style.reactiesContainer}>
-          <h2 className={style.reactiesTitle}>Reacties</h2>
-          
-            
-            {project.comments.map((comment, index) => {
 
-              return ( 
-                        <div key={`commentNr${index}`}  className={style.reactie}>
-                          <div className={style.reactiePerson}>
-                            <div className={style.reactiePerson__box}>
-                              <img className={style.reactiePerson__image} src={comment.image} alt="profiel afbeelding"/>
-                              <div className={style.reactiePerson__information}>
-                                <p className={style.information__name}>{comment.name}</p>
-                                <p className={style.information__timepast}>{new Date(comment.date).toISOString().split('T')[0]}</p>
-                              </div>
-                              {project.ownerID === comment.id ?
-                              <p className={style.information__owner}>Projecteigenaar</p> :''}
-                              <p className={style.information__level}>Level {comment.level}</p>
-                            </div>
-                            {uiStore.currentUser ?
-                              comment.id === uiStore.currentUser.id ?
-                              <button onClick={() => {projectStore.deleteComment(project.id, comment); project.deleteComment(index); setForceRefresh(!forceRefresh)}} className={style.reactiePerson__rapport}>
-                                verwijder
-                              </button>
-                              :'': ''}
-                              
-                          </div>
-                          <p className={style.reactie__text}>{comment.content}</p>
-                        </div>
-                    ) 
-            })}
-            </div>
-           {uiStore.currentUser ? 
-           <div className={`${style.reactiesContainer} ${style.reactieInputWrapper}`}>
+      <Comment project={project} setForceRefresh={setForceRefresh} forceRefresh={forceRefresh} voted={voted} vote={vote}/>
 
-              <label className={style.reactieInputLabel}>
-                <input
-                className={style.reactieInput}
-                type="text"
-                value={comment}
-                onChange={e => setComment(e.currentTarget.value)}
-                onKeyUp={e => { if (e.keyCode === 13) uploadComment() }}
-                />
-                <p onClick={uploadComment} className={style.reactieButton}>reactie versturen</p> 
-              </label>
-
-           </div>
-           :''}
-
-          {voted || !uiStore.currentUser ? 
-          '':
-          <div className={style.extraQuestion}>
-            <p className={style.extraQuestion__title}>Mag dit project verwezenlijkt worden?</p>
-            <div className={style.extraQuestion__buttons}>
-              <button onClick={() => {vote(true)}} className={`${style.votingButtons} ${style.votingButtons__primary}`}>
-                <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__love}`} src="/assets/icons/love.svg" alt="icon like"/>
-                JA
-              </button>
-              <button onClick={() => {vote(false)}} className={`${style.votingButtons} ${style.votingButtons__secondary}`}>
-                <img className={`${style.votingButtons__icons} ${style.votingButtons__icons__dislike}`} src="/assets/icons/dislike.svg" alt="alt icon dislike"/>
-                Nee
-              </button>
-            </div>
-          </div>
-            }
-        </section>
-        :''}
 
 
         <style>

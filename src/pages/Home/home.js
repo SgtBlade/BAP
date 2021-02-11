@@ -14,6 +14,12 @@ const Home = () => {
   const [spotlightProjects, setSpotlightProjects] = useState(undefined);
   const [loading, setLoading] = useState(true);
 
+
+  //getting the spotlighted items
+  //first checking if the project store has started yet as it would be empty if you just arrived
+  //Then checking to see if there are any approved projects, if no we just stop
+  //once that's done we look for featured projects but use regular onces in case no featured ones are found
+  //the timeout is to refresh the function untill the project store has started, (its not an infinite loop)
   const getSpotlightProjects = () => {
     if (projectStore.initialized) {
       let projectsTmp = projectStore.getApprovedProjects(projectStore.projects);
@@ -31,6 +37,7 @@ const Home = () => {
       }, 1200);
   };
 
+  //check if there are any spotlight items yet then set them
   if (spotlightProjects === undefined) getSpotlightProjects();
 
   console.log(spotlightProjects);

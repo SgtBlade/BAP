@@ -39,6 +39,7 @@ const ProjectPreview = ({project}) => {
 
 
 
+  //calculate time between 2 dates
   const getTime = (date) => {
     let date1 = new Date(date);
     let date2 = new Date(Date.now());
@@ -46,6 +47,7 @@ const ProjectPreview = ({project}) => {
     return Math.ceil(difference / (1000 * 3600 * 24));
   }
 
+  //upvote the project
   const vote = () => {
     let id = project.id
     if(!voted && uiStore.currentUser){
@@ -55,6 +57,7 @@ const ProjectPreview = ({project}) => {
     setVoted(true);}
   }
 
+  //validate if the user can vote
   const validateVote = (e, id) => {
     e.preventDefault();
     if(uiStore.currentUser){ if(!voted)vote(id); }
