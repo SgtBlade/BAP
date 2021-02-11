@@ -99,12 +99,43 @@ export default function CustomizedTabs(data) {
         buttonTwoDisplay = 'hidden';
     };
 
+    const getMonthName = (month) => {
+        switch(month) {
+            case 0:
+                return 'januari';
+            case 1:
+                return 'januari';
+            case 2:
+                return 'januari';
+            case 3:
+                return 'januari';
+            case 4:
+                return 'januari';
+            case 5:
+                return 'januari';
+            case 6:
+                return 'januari';
+            case 7:
+                return 'januari';
+            case 8:
+                return 'januari';
+            case 9:
+                return 'januari';
+            case 10:
+                return 'januari';
+            case 11:
+                return 'januari';
+            default:
+                return 'januari';
+        }
+    }
+
     return (
         <div className={style.tabs__container}>
             <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
             <StyledTab label="Project" {...a11yProps(0)}/>
             <StyledTab label="FAQ" {...a11yProps(1)}/>
-            <StyledTab label="Updates 11" {...a11yProps(2)}/>
+            <StyledTab label={`Updates ${data.project.updates.length}`} {...a11yProps(2)}/>
             <StyledTab label="Over ons" {...a11yProps(3)}/>
             </StyledTabs>
             <TabPanel value={value} index={0}>
@@ -128,23 +159,19 @@ export default function CustomizedTabs(data) {
                 Item two
             </TabPanel>
             <TabPanel value={value} index={2}>
+            {data.project.updates.length > 0 ? 
                 <div className={style.updates}>
-                    <div className={style.update}>
-                        <span className={style.update__bol}></span>
-                        <p className={style.date}>23 november 2021</p>
-                        <p className={style.description}>Dit is de beschrijving voor de update voor een project. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div className={style.update}>
-                        <span className={style.update__bol}></span>
-                        <p className={style.date}>23 november 2021</p>
-                        <p className={style.description}>Dit is de beschrijving voor de update voor een project. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
-                    <div className={style.update}>
-                        <span className={style.update__bol}></span>
-                        <p className={style.date}>23 november 2021</p>
-                        <p className={style.description}>Dit is de beschrijving voor de update voor een project. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    </div>
+                    {data.project.updates.map((update, index) => {
+                        let date = new Date(update.date)
+                        return (<div key={`updateNr${index}`} className={style.update}>
+                                    <span className={style.update__bol}></span>
+                                    <p className={style.date}>{date.getDate()} {getMonthName(date.getMonth())} {(date.getFullYear())}</p>
+                                    <p className={style.description}>{update.content}</p>
+                                </div>)
+                    })}
                 </div>
+                :''
+                }
             </TabPanel>
             <TabPanel value={value} index={3}>
                 {data.project.personalIntroduction}

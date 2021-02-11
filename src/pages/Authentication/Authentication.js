@@ -44,7 +44,7 @@ const Authentication = () => {
             }
           </Route>
 
-          <Route exact path={ROUTES.profiel}>
+          <Route exact path={ROUTES.profiel.path}>
             <Person />
           </Route>
 

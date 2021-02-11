@@ -200,7 +200,7 @@ const Discovery = () => {
       <div className={`${style.ProjectWrap} ${projects.length === 0 ? style.projectWrapCenter : ''}`}>
           {projects.map((project, index) => {
             if(!project.approved && project.ownerID !== uiStore.currentUser.id) return ''
-            else return <ProjectCard key={`Project_${index}`} project={project}/>
+            else return <ProjectCard key={`Project_${index}`} project={project} projectIndex={index} />
           })}
             {projects.length === 0 ? 
             <p className={style.ProjectWrap__noResults}>Geen projecten gevonden</p>

@@ -20,6 +20,8 @@ class ProjectStore {
 
   getApprovedProjects = (projectsArr) => {return projectsArr.filter(project => project.approved = true)}
 
+  getFeaturedProjects = (projectsArr) => {return projectsArr.filter(project => project.featured = true)}
+
   getProjectByIdFromServer = async (id) => this.currentProject = await this.projectService.getProjectById(id);
 
   //FILTERS

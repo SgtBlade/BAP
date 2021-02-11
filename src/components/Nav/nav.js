@@ -30,13 +30,22 @@ const Nav = () => {
           <NavLink exact className={`${style.link} ${style.nav__button}`} activeClassName={style.active} to={ROUTES.startproject}>Start een project</NavLink>
         </li>
         <li>
-          <NavLink exact className={style.linkImage} activeClassName={style.activeImage} to={ROUTES.profiel}>
-            <img className={style.nav__profilePicture} src={uiStore.currentUser.picture} alt="profiel"/>
-          </NavLink>
+          {uiStore.currentUser ?
+            <NavLink exact className={style.linkImage} activeClassName={style.activeImage} to={`${ROUTES.profiel.to}${uiStore.currentUser.id}`}>
+              <img className={style.nav__profilePicture} src={uiStore.currentUser.picture} alt="profiel"/>
+            </NavLink>
+            :
+            <NavLink exact className={style.link} activeClassName={style.active} to={ROUTES.login}>Aanmelden</NavLink>
+          }
         </li>
-        <li>
-          <NavLink exact className={`${style.link} ${style.nav__button}`} activeClassName={style.active} to={ROUTES.discovery}>Discovery</NavLink>
-        </li>
+
+        {uiStore.currentUser ?
+            <p onClick={uiStore.logOut}  className={style.link} >Afmelden</p>
+            :
+           ''
+          }
+
+
       </ul>
     </nav>
   );
