@@ -136,14 +136,16 @@ const CreateProjectFormStepTwo = ({navData, errors, removeFromErrorArray, addToE
             </label>  
 
         </div>
+        <div className={style.quill__container}>
           <ReactQuill 
           theme={'snow'}
           onChange={handleChange}
           onBlur={e => validation(description)}
           value={description}
           modules={modules} 
-          style={{height: '80vh', marginTop: '2rem', marginBottom: '6rem'}}
+          style={{zIndex: 2, height: '80vh', marginTop: '2rem', marginBottom: '6rem'}}
           />
+        </div>
 
         
         <NavButtons errors={errors} validate={validation} currentStep={navData.currentStep} STEPS={navData.STEPS}/>
