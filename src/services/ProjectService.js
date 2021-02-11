@@ -58,11 +58,32 @@ class ProjectService {
       });
   };
 
-  deleteProjectById = async (projectId) => {
+
+  removeProject = async (project) => {
+
     this.db
     .collection("projects")
-    .doc(projectId)
+    .doc(project.id)
     .delete();
+
+    //Folders can't be removed from firebase so we have to delete file by file
+    var storageRef = this.storage.ref();
+    var listRef = storageRef.child(`projects/${project.ownerID}/${project.id}`);
+    // Find all the prefixes and items.
+    listRef.listAll()
+      .then((res) => {
+        res.items.forEach((itemRef) => {
+          itemRef.delete()
+          .then(() => {
+          })
+          .catch((error) => {
+            // Uh-oh, an error occurred!
+          });
+          // All the items under listRef.
+        });
+      }).catch((error) => {
+        // Uh-oh, an error occurred!
+      });
   }
 
   addToProjectArray = (projectID, array, values) => {
@@ -132,30 +153,36 @@ class ProjectService {
   uploadImages = async (images, projectID, userID) => {
     let Urls = [];
     //Loop through all images
-    if(images.length === 0) Urls.push({url: '/assets/project/cardPlaceholderLarge.jpg', path: false})
-    await images.forEach((async image => {
+
+    return new Promise(async (resolve) => {
+      if(images.length === 0) resolve({url: '/assets/project/cardPlaceholderLarge.jpg', path: false})
+      else {
+        await images.forEach((async (image, index) => {
     
-      const storageRef = this.storage.ref();
-      const name = v4();
+          const storageRef = this.storage.ref();
+          const name = v4();
+    
+          //convert then upload
+          await this.blobToBase64(image).then(async res => {
+    
+            let ImageRef = storageRef.child(`projects/${userID}/${projectID}/${name}`).putString(res, 'data_url');
+            await ImageRef.on("state_changed", {
+              error: error => console.log(error),
+              complete: () => {
+                  //once you have the url push it to the array to collect them & push later
+                  ImageRef.snapshot.ref.getDownloadURL()
+                  .then(downloadURL => {
 
-      //convert then upload
-      await this.blobToBase64(image).then(async res => {
-
-        let ImageRef = storageRef.child(`projects/${userID}/${projectID}/${name}`).putString(res, 'data_url');
-        await ImageRef.on("state_changed", {
-          error: error => console.log(error),
-          complete: () => {
-              //once you have the url push it to the array to collect them & push later
-              ImageRef.snapshot.ref.getDownloadURL()
-              .then(downloadURL => {
-                Urls.push({url: downloadURL, path: `projects/${userID}/${projectID}/${name}`})
-              });
-          }
-        });
-
-      })
-    }))
-    return await Urls;
+                    Urls.push({url: downloadURL, path: `projects/${userID}/${projectID}/${name}`})
+                    if(index === images.length-1)resolve(Urls)
+                  });
+              }
+            });
+    
+          })
+        }))
+      }
+    })
     
   }
 
@@ -288,6 +315,11 @@ class ProjectService {
   voteMultiplechoice = (projectId, questionObj) => {
     let projectRef = this.db.collection('projects').doc(projectId);
     projectRef.update({ multipleChoice: questionObj });
+  }
+
+  approveProject = (projectId) => {
+    let projectRef = this.db.collection('projects').doc(projectId);
+    projectRef.update({ approved: true });
   }
 }
 

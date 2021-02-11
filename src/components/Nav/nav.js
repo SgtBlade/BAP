@@ -38,6 +38,10 @@ const Nav = () => {
             <NavLink exact className={style.link} activeClassName={style.active} to={ROUTES.login}>Aanmelden</NavLink>
           }
         </li>
+        {uiStore.currentUser.role === 1 ?
+            <li> <NavLink exact className={`${style.link} ${style.nav__button}`} activeClassName={style.active} to={ROUTES.adminpanel}>Admin</NavLink>  </li>
+
+            :''}
 
         {uiStore.currentUser ?
             <p onClick={uiStore.logOut}  className={style.link} >Afmelden</p>

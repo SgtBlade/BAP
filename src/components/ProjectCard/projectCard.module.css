@@ -21,6 +21,7 @@
     justify-content: flex-start;
     align-items: center;
     margin: 1.5rem 2rem;
+    margin-top: 2rem;
 }
 
 .projectCard__title {
@@ -136,6 +137,7 @@
     margin: 0 2rem;
     height: 10rem;
     margin-right: 7rem;
+    word-break: break-all;
 }
 
 .projectCardTags {

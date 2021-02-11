@@ -13,6 +13,7 @@ const ROUTES = {
   projectEdit: "/feed",
   discovery: "/discovery",
   quiz: "/quiz",
+  adminpanel: '/admin'
 };
 
 export { ROUTES };

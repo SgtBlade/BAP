@@ -8,7 +8,7 @@ import { ROUTES } from '../../../consts';
 
 
 const CreateProjectFormStepSix = ({projectData}) => {
-  const { uiStore, projectStore } = useStores();
+  const { uiStore } = useStores();
   const [hasUploaded, setHasUploaded] = useState(false);
   const [res, setRes] = useState(undefined)
 
@@ -18,7 +18,7 @@ const CreateProjectFormStepSix = ({projectData}) => {
     //though it should be impossible to reach this step without being logged in
     if(uiStore.currentUser){
     let result = await uiStore.uploadProject(projectData);
-    if(result.id){setRes(result); projectStore.addProject(result)}
+    if(result.id){setRes(result);}
     else {setRes(false);}}else setTimeout(() => {uploadProject()}, 1200)
   }
   

@@ -31,6 +31,8 @@ class User {
   
   addProjectVote = (id) => { this.votes.push(id) }
 
+  setTags = (tags) => {this.interestedTags = tags}
+
 }
 
 const userConverter = {

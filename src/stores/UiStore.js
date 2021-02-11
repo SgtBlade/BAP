@@ -14,11 +14,11 @@ class UiStore {
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
     this.userService = new UserService(this.rootStore.firebase);
     this.projectService = new ProjectService(this.rootStore.firebase);
+    this.allUsers = [];
   }
 
-  test = async () => {
-    this.isLoading = true;
-    await setTimeout(() => {this.isLoading = false;  return true; }, 2000)
+  deleteUser = (id) => {
+    this.userService.deleteById(id)
   }
 
   uploadProject = async (data) => {
@@ -131,6 +131,19 @@ class UiStore {
   //First function of password reset sequence that goes to UserService.js
   resetPassword = (email, func) => this.userService.sendPasswordResetMail(email, func)
 
+
+  removeUser = (user) => this.allUsers.splice(this.allUsers.findIndex(item => item.id === user.id), 1);
+
+  addUser = (user) => {this.allUsers.push(user); console.log(user)}
+
+  onAllUsersChange = usr => {
+    const incomingUser = usr[1];
+    console.log(usr[0])
+    if(usr[0] === 'removed') this.removeUser(incomingUser)
+    else if(this.allUsers.filter(usr => usr.id !== incomingUser.id))this.addUser(incomingUser)
+  };
+
+  getAllUsers = () => {return this.userService.getAllUsers(this.onAllUsersChange)}
 }
 
 decorate(UiStore, {
@@ -142,8 +155,10 @@ decorate(UiStore, {
   verifyLogin: action,
   onAuthStateChanged: action,
   createAccount: action,
-  test: action,
   uploadDescription: action,
+  allUsers: observable,
+  addUser: action,
+  removeUser: action
 });
 
 export default UiStore;

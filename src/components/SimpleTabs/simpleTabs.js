@@ -98,33 +98,32 @@ export default function CustomizedTabs(data) {
         buttonOneDisplay = 'visible';
         buttonTwoDisplay = 'hidden';
     };
-
     const getMonthName = (month) => {
         switch(month) {
             case 0:
                 return 'januari';
             case 1:
-                return 'januari';
+                return 'februari';
             case 2:
-                return 'januari';
+                return 'maart';
             case 3:
-                return 'januari';
+                return 'april';
             case 4:
-                return 'januari';
+                return 'mei';
             case 5:
-                return 'januari';
+                return 'juni';
             case 6:
-                return 'januari';
+                return 'juli';
             case 7:
-                return 'januari';
+                return 'augustus';
             case 8:
-                return 'januari';
+                return 'september';
             case 9:
-                return 'januari';
+                return 'oktober';
             case 10:
-                return 'januari';
+                return 'november';
             case 11:
-                return 'januari';
+                return 'december';
             default:
                 return 'januari';
         }
@@ -156,7 +155,10 @@ export default function CustomizedTabs(data) {
 
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item two
+                <dl>
+                    <dt><strong>Hoeveel vogels zijn er?</strong></dt>
+                    <dd>-Er zijn 12 vogels</dd>
+                </dl>
             </TabPanel>
             <TabPanel value={value} index={2}>
             {data.project.updates.length > 0 ? 
