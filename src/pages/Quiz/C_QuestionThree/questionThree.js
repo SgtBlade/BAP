@@ -11,7 +11,7 @@ const QuestionThree = ({
   const [selectedAnswers, setSelectedAnswers] = useState([]);
 
   // set prev & next button text
-  const prevButtonText = "Vorige Vraag: Favorite locatie";
+  const prevButtonText = "Vorige Vraag: Favoriete locatie";
   const nextButtonText = "Volgende vraag: Ik ben...";
   // pass the button text to the parent component
   onReveiveButtonText(prevButtonText, nextButtonText);
@@ -32,6 +32,8 @@ const QuestionThree = ({
     } else {
       setSelectedAnswers([...selectedAnswers, value]);
     }
+    // send answers to parrent component
+    onPickedQuestionThreeAnswer(selectedAnswers);
   };
 
   const logAnswers = () => {
