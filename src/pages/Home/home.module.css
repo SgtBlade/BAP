@@ -28,6 +28,7 @@
     "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.2;
   font-weight: var(--weightBlack);
+  color: var(--durfGreenDarker);
 }
 
 .introTitleHighlight {
@@ -43,10 +44,6 @@
   line-height: 1.5;
 }
 
-.introTitle {
-  color: var(--durfGreenDarker);
-}
-
 .introTextContainer {
   padding: 2rem;
   flex: 1 1 auto;
@@ -58,8 +55,13 @@
   max-width: 50ch;
 }
 
+.introButtonContainer {
+  display: flex;
+}
+
 .introButton {
   margin-top: 3rem;
+  line-height: 1.4;
 }
 
 .introButton + .introButton {
@@ -298,6 +300,7 @@
   font-weight: var(--weightBlack);
   font-size: var(--fontUltra);
   margin: 3rem 0;
+  line-height: 1.4;
 }
 
 .highlightsTitleHighlight {
@@ -358,11 +361,16 @@
   max-width: 50ch;
 }
 
+.callToActionImage {
+  max-width: 100%;
+}
+
 @media only screen and (max-width: 1036px) {
   .introTextContainer {
     flex: none;
     min-width: auto;
     margin: 0 auto;
+    max-width: 100%;
   }
 
   .introProjectCard {
@@ -371,10 +379,15 @@
 }
 
 @media only screen and (max-width: 850px) {
+  .introTitle {
+    font-size: var(--fontUltra);
+  }
+
   .how,
   .highlights,
   .pillars {
     padding: 1rem;
+    max-width: 100%;
   }
 
   .howSections {

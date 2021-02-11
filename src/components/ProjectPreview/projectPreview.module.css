@@ -93,7 +93,7 @@
 .projectCard__time {
   font-size: 1.4rem;
   color: #767676;
-  
+
   font-weight: 200;
 }
 
@@ -101,11 +101,12 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
 .projectCard__tag {
   font-size: 1.8rem;
-  
+
   font-weight: 200;
   display: flex;
   align-items: center;
@@ -154,7 +155,7 @@
 
 .projectCard__description {
   font-size: 1.6rem;
-  
+
   font-weight: 200;
   height: 100%;
 }

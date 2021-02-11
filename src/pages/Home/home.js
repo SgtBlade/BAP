@@ -341,6 +341,7 @@ const Home = () => {
         </div>
         <img
           src="assets/images/project.svg"
+          className={style.callToActionImage}
           alt="regiseurshanden die recht tegenover elkaar staan en een visie weergeven"
           width="485"
           height="445"
