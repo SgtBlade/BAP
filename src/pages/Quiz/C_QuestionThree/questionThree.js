@@ -44,6 +44,10 @@ const QuestionThree = ({
     <div>
       <p className={style.questionTitle} onClick={() => logAnswers()}>
         Ik spendeer mijn vrije tijd met...
+        <span className={style.questionTitleInfo}>
+          {" "}
+          (meerdere opties mogelijk)
+        </span>
       </p>
       <div className={style.answers}>
         <button

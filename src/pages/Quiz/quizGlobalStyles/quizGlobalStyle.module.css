@@ -8,3 +8,9 @@
   font-size: var(--fontMedium);
   font-weight: var(--weightBlack);
 }
+
+.questionTitleInfo {
+  font-size: var(--fontSmall);
+  font-weight: var(--weightSemiBold);
+  padding-left: 1rem;
+}

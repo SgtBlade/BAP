@@ -83,7 +83,10 @@ const QuestionFour = ({ onReveiveButtonText, onPickedQuestionFourAnswer }) => {
   return (
     <div>
       <p className={style.questionTitle} onClick={() => logAnswers()}>
-        Ik ben...
+        Ik ben...{" "}
+        <span className={style.questionTitleInfo}>
+          (meerdere opties mogelijk)
+        </span>
       </p>
       <div className={style.answers}>
         <button

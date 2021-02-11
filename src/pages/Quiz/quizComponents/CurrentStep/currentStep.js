@@ -5,10 +5,7 @@ import QuestionOne from "../../A_QuestionOne/questionOne";
 import QuestionTwo from "../../B_QuestionTwo/questionTwo";
 import QuestionThree from "../../C_QuestionThree/questionThree";
 import QuestionFour from "../../D_QuestionFour/questionFour";
-
-/*
 import Results from "../../E_Results/results";
-*/
 
 import moduleStyle from "./currentStep.module.css";
 import globalStyle from "../../../globalStyles/main.module.css";
@@ -97,7 +94,9 @@ const CurrentStep = ({ onSetStep }) => {
         );
         break;
       case 5:
-        stepComponent = "Results";
+        stepComponent = (
+          <Results onReveiveButtonText={receivedButtonText}></Results>
+        );
         break;
       default:
         stepComponent =
