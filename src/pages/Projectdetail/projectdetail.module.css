@@ -409,7 +409,7 @@
 .questionsTitle {
   font-weight: var(--weightBlack);
   font-size: 3.6rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0rem;
 
 }
 
@@ -435,8 +435,17 @@
 }
 
 .questionsContainer__yesno, .questionsContainer__multipleChoice, .questionsContainer__volunteer, .questionsContainer__discussion {
-  margin-bottom: 5rem;
   
+  
+}
+
+.questionsContainer__volunteer, .questionsContainer__discussion {
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+
+.questionsContainer__volunteer p:first-of-type{
+  margin-top: .5rem;
 }
 
 .yesno__container, .yesno__answers {
@@ -447,7 +456,8 @@
 
 .yesno__container {
   flex-flow: row wrap;
-  
+  border-bottom: solid 1px white;
+  padding: 2rem 0;
 }
 
 .yesno__results {
@@ -752,7 +762,7 @@
 
 .multipleChoice__question {
   font-weight: var(--weightSemiBold);
-  font-size: 1.8rem;
+  font-size: 2.4rem;
 }
 
 .multipleChoice__form {
@@ -765,4 +775,25 @@
   width: auto;
   margin-top: .5rem;
   margin-right: 2rem;
+}
+
+.questionsSubtitle__detail {
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
+}
+
+.multipleChoice__response {
+  list-style: disc;
+  margin-left: 3rem;
+}
+
+.multipleChoice__response li{
+  margin-top: 1rem;
+  font-weight: var(--weightSemiBold);
+  font-size: 1.6rem;
+}
+
+.sectionTitle {
+  font-weight: var(--weightBlack);
+  font-size: 3.6rem;
 }

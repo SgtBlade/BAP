@@ -300,3 +300,21 @@
 .tags__dropdown {
     width: 25rem;
 }
+
+.noProjects {
+    font-size: 3.2rem;
+    font-weight: var(--weightBlack);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingScreen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}

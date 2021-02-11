@@ -72,9 +72,9 @@ const ProjectDetail = () => {
         let tmpQsts = project.multipleChoice;
         tmpQsts[questionIndex].answers.push({id: uiStore.currentUser.id, vote: optionIndex})
         console.log(tmpQsts)
-        //projectStore.voteMultiplechoice(id, tmpQsts);
-        //project.setMultipleChoice(id, tmpQsts);
-        //setForceRefresh(!forceRefresh);
+        projectStore.voteMultiplechoice(id, tmpQsts);
+        project.setMultipleChoice(tmpQsts);
+        setForceRefresh(!forceRefresh);
       }
   }
 
@@ -100,6 +100,10 @@ const ProjectDetail = () => {
 
       <div className={style.breadcrumb}>
         <p className={style.breadcrumb__content}><Link className={style.breadcrumb__content__link} to={ROUTES.discovery}>Projecten</Link> - {project.title}</p>
+        <Link className={style.editProject} to={`${ROUTES.projectBewerken.to}${project.id}`}>
+          <img src='/assets/icons/edit-1.svg' className={style.editProject__image}/>
+          Bewerk het project
+        </Link>
       </div>
       <div className={style.projectDetail__container}>
         <div className={style.projectDetail__head}>
@@ -191,8 +195,9 @@ const ProjectDetail = () => {
                 </div>
               </div>
               :
-              voted ?
-                  <p className={style.votingTitle}>Wij danken u voor uw mening</p>
+              voted || !uiStore.currentUser ?
+                  !uiStore.currentUser? ''
+                  :<p className={style.votingTitle}>Wij danken u voor uw mening</p>
                 :
                 <div>
                   <p className={style.votingTitle}>Mag dit project uitgewerkt worden?</p>
@@ -237,28 +242,34 @@ const ProjectDetail = () => {
             {project.questions ?
                           project.questions.length > 0 ?
               <article className={style.questionsContainer__yesno}>
-                <h3 className={style.questionsSubtitle}>Geef je mening</h3>
-
+                <h3 className={`${style.questionsSubtitle} ${style.sectionTitle}`}>Geef je mening</h3>
+                {!uiStore.currentUser ? <p className={style.questionsSubtitle__detail}>U moet aangemeld zijn om te stemmen</p> : ''}
                 {project.questions.map((question, index) => {
                   return (<div key={`yesNo${index}`} className={style.yesno__container}>
                     <p className={style.yesno__question}>
                       {question.value}
                     </p>
-                    {question.yes.includes(uiStore.currentUser.id) || question.no.includes(uiStore.currentUser.id) ?
+                    {question.yes.includes(uiStore.currentUser.id) || question.no.includes(uiStore.currentUser.id) || !uiStore.currentUser?
                     
-                      <div className={style.yesno__results}>
-                        
-                        <button className={`${style.answerButtons} ${style.answerButtons__primary}`}>
-                        {Math.round(  ((question.yes.length/(question.yes.length + question.no.length))*100 ))}%
-                        </button>
-                        
-                         stemde op Ja en 
 
-                         <button className={`${style.answerButtons} ${style.answerButtons__secondary}`}>
-                         {Math.round(((question.no.length/(question.yes.length + question.no.length))*100))}% 
+                    question.yes.length + question.no.length === 0 ?
+
+                      <div className={style.yesno__results}> <p>Er heeft nog niemand gestemd op deze vraag</p> </div>
+                      :
+                        <div className={style.yesno__results}>
+                          <button className={`${style.answerButtons} ${style.answerButtons__primary}`}>
+                          {Math.round(  ((question.yes.length/(question.yes.length + question.no.length))*100 ))}%
                           </button>
+                          
+                          stemde op Ja en 
+
+                          <button className={`${style.answerButtons} ${style.answerButtons__secondary}`}>
+                          {Math.round(((question.no.length/(question.yes.length + question.no.length))*100))}% 
+                            </button>
+                          stemde Nee
+                          </div>
+                        
                          
-                        stemde Nee</div>
                     :
                     <div className={style.yesno__answers}>
                       <button onClick={() => {if(uiStore.currentUser)voteYesNo(index, true)}} className={`${style.answerButtons} ${style.answerButtons__primary}`}>
@@ -283,17 +294,44 @@ const ProjectDetail = () => {
                 
                 {project.multipleChoice.map((multiQuestion, questionIndex) => {
 
-                  return (<div key={`MultiQUestion_${questionIndex}`} className={style.multipleChoice__container} >
+                  return (<div key={`MultiQUestion_${questionIndex}`} className={style.yesno__container} >
                             <p className={style.multipleChoice__question}>
                               {multiQuestion.question}
                             </p>
-                            <form className={style.multipleChoice__form}>
-                              {multiQuestion.options.map((option, optionIndex) => {
-                                return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
-                                          <p onClick={() => voteMultipleChoice(questionIndex, optionIndex)} className={style.form__select__content}>{option.value}</p>
-                                        </label> )
-                              })}
-                            </form>
+                            <div className={style.multipleChoice__form}>
+                              
+                              {uiStore.currentUser ? 
+                                  multiQuestion.answers.filter(option => option.id === uiStore.currentUser.id).length > 0 ?
+
+                                  <ul className={style.multipleChoice__response}>
+                                    {multiQuestion.options.map((option, optionIndex) => {
+                                      return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
+                                                <li>{Math.round((multiQuestion.answers.filter(option => option.vote === optionIndex).length/multiQuestion.answers.length)*100)}% koos voor: {option.value}</li>
+                                              </label> )
+                                    })}
+                                  </ul>
+                                  :
+                                  multiQuestion.options.map((option, optionIndex) => {
+                                    return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
+                                              <p onClick={() => voteMultipleChoice(questionIndex, optionIndex)} className={style.form__select__content}>{option.value}</p>
+                                            </label> )
+                                  })
+
+                              :
+
+                              <ul className={style.multipleChoice__response}>
+                                  {multiQuestion.options.map((option, optionIndex) => {
+                                    return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
+                                              <li>{Math.round((multiQuestion.answers.filter(option => option.vote === optionIndex).length/multiQuestion.answers.length)*100)}% koos voor: {option.value}</li>
+                                            </label> )
+                                  })}
+                              </ul>
+
+                              }
+
+
+                              
+                            </div>
                           </div>)
                 })}
                 
@@ -306,14 +344,16 @@ const ProjectDetail = () => {
                         {project.requirements ?
                           project.requirements.length > 0 ?
                           <article className={style.questionsContainer__volunteer}>
-                            <h3 className={style.questionsSubtitle}>Wij hebben onderstaande dingen nog nodig:</h3>
+                            <h3 className={`${style.sectionTitle}`}>Benodigdheden</h3>
+                            <p className={style.questionsSubtitle}>Wij hebben onderstaande dingen nog nodig:</p>
                             <ul>
                             {project.requirements.map((req, index) => {
                               return <li key={`req${index}`} className={style.participationItem}><span>{req.count}x</span> {req.name}</li>
                             })}</ul>
                             <p className={`${style.questionsSubtitle} ${style.requirementsSignup}`}>Geef je op als vrijwilliger</p>
                             {participation ? <p className={style.multipleChoice__question}>Bedankt voor u aan te melden!</p> : ''}
-                            {uiStore.currentUser ?<button onClick={() => {projectStore.sendContactDetails(project.ownerID); setParticipation(true)}} className={style.volunteerButton}> Meld je aan als vrijwilliger </button> :''}
+                            {!uiStore.currentUser ? <p className={style.questionsSubtitle__detail}>U moet aangemeld zijn om u te kunnen opgeven</p> : ''}
+                            <button onClick={() => {projectStore.sendContactDetails(project.ownerID); setParticipation(true)}} className={style.volunteerButton}> Meld je aan als vrijwilliger </button>
                           </article>
                           :''
                         :''}
@@ -322,7 +362,7 @@ const ProjectDetail = () => {
 
             {project.discussions.length > 0 ?
               <article className={style.questionsContainer__discussion}>
-                <h3 className={style.questionsSubtitle}>Doe mee aan onze discussies</h3>
+                <h3 className={`${style.questionsSubtitle} ${style.sectionTitle}`}>Doe mee aan onze discussies</h3>
 
                 {project.discussions.map ((disc, index) => {
                   return <a key={`contact${index}`} href={disc.url} target={'_blank'} rel="noopener noreferrer" className={style.questionsContainer__discussion__link}>
@@ -386,7 +426,7 @@ const ProjectDetail = () => {
            </div>
            :''}
 
-          {voted ? 
+          {voted || !uiStore.currentUser ? 
           '':
           <div className={style.extraQuestion}>
             <p className={style.extraQuestion__title}>Mag dit project verwezenlijkt worden?</p>
