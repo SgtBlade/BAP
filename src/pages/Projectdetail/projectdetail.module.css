@@ -664,6 +664,7 @@
   border-radius: .5rem;
   padding: 1rem;
   color: var(--dark);
+  cursor: pointer;
 
 }
 

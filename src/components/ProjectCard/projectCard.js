@@ -44,7 +44,7 @@ const ProjectCard = ({project}) => {
         <img className={style.projectCardContainer__image} alt={'cover'} width={340} height={188} src={'/assets/project/cardPlaceholder.jpg'} />
         }
         <div className={style.projectCard__titleWrap}>
-            <p className={style.projectCard__title}>{project.title}d</p>
+            <p className={style.projectCard__title}>{project.title}</p>
             {project.archived ? 
               <p className={`${style.projectcard__status} ${style.projectcard__FinishedStatus}`}>Afgerond</p>
             : project.isInFundingStage ?
