@@ -229,15 +229,14 @@ const ProjectDetail = () => {
       </div>
       <div id="questions" className={style.questions}>
         <section className={style.questionsContainer}>
-            
+          <h2 className={style.questionsTitle}>Samenwerken</h2>
+          <p className={style.questionsInleiding}>Naast financieële steun, kan je ook op andere manieren helpen.
+            Geef ons jouw mening, of schrijf je in als vrijwilliger.
+            </p>
             {project.requirements.length === 0 && project.multipleChoice.length === 0 && project.questions.length === 0 && project.discussions.length === 0 ?
             ''
             :
             <div className={style.questionsContainer__box}>
-            <h2 className={style.questionsTitle}>Samenwerken</h2>
-            <p className={style.questionsInleiding}>Naast financieële steun, kan je ook op andere manieren helpen.
-            Geef ons jouw mening, of schrijf je in als vrijwilliger.
-            </p>
             
             {project.questions ?
                           project.questions.length > 0 ?
