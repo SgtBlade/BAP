@@ -4,8 +4,9 @@ import ProgressBar from "../Progressbar/progressbar";
 import QuestionOne from "../../A_QuestionOne/questionOne";
 import QuestionTwo from "../../B_QuestionTwo/questionTwo";
 import QuestionThree from "../../C_QuestionThree/questionThree";
-/*
 import QuestionFour from "../../D_QuestionFour/questionFour";
+
+/*
 import Results from "../../E_Results/results";
 */
 
@@ -20,18 +21,29 @@ const style = { ...moduleStyle, ...globalStyle };
 //   console.log(tags);
 // };
 
+// create an empty array with room for all the question answers
+const selectedTags = [[], [], [], []];
+
 // get the answer(s) from  specific questions
 // Q1
 const pickedQuestionOneAnswers = answer => {
   console.log(answer);
+  selectedTags[0] = answer;
 };
 //Q2
 const pickedQuestionTwoAnswers = answer => {
   console.log(answer);
+  selectedTags[1] = answer;
 };
 //Q3
 const pickedQuestionThreeAnswers = answer => {
   console.log(answer);
+  selectedTags[2] = answer;
+};
+//Q4
+const pickedQuestionFourAnswers = answer => {
+  console.log(answer);
+  selectedTags[3] = answer;
 };
 
 const CurrentStep = ({ onSetStep }) => {
@@ -77,7 +89,12 @@ const CurrentStep = ({ onSetStep }) => {
         );
         break;
       case 4:
-        stepComponent = "QuestionFour";
+        stepComponent = (
+          <QuestionFour
+            onReveiveButtonText={receivedButtonText}
+            onPickedQuestionFourAnswer={pickedQuestionFourAnswers}
+          ></QuestionFour>
+        );
         break;
       case 5:
         stepComponent = "Results";
@@ -94,6 +111,7 @@ const CurrentStep = ({ onSetStep }) => {
   useEffect(() => {
     console.log("useEffect Triggered");
     updateButtonText();
+    console.log(selectedTags);
   });
 
   const updateButtonText = () => {
