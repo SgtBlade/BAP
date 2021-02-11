@@ -441,10 +441,10 @@
   margin-bottom: 1.5rem;
 }
 
-.questionsContainer__yesno, .questionsContainer__multipleChoice, .questionsContainer__volunteer, .questionsContainer__discussion {
+/* .questionsContainer__yesno, .questionsContainer__multipleChoice, .questionsContainer__volunteer, .questionsContainer__discussion {
   
   
-}
+} */
 
 .questionsContainer__volunteer, .questionsContainer__discussion {
   margin-top: 4rem;

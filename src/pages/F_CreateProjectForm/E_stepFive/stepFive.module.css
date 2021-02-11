@@ -1,3 +1,28 @@
+.wrap::after {
+    content: '';
+    width: 15rem;
+    height: 15rem;
+    border: 2rem solid var(--durfRed);
+    background-color: var(--durfRed);
+    position: absolute;
+    left: -17.5vw;
+    bottom: -2.5vw;
+    border-radius: 50rem;
+    z-index: -1;
+}
+
+.wrap::before {
+    content: '';
+    position: absolute;
+    width: 21rem;
+    height: 21.4rem;
+    background-image: url('/assets/uiElementen/stepFiveCenterElement.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 15%;
+    right: -15.75vw;
+}
+
 .articleWrap {
     display: flex;
     flex-flow: column;

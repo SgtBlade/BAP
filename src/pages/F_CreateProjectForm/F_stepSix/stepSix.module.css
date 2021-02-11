@@ -7,6 +7,30 @@
     align-items: center;
 }
 
+.wrap::after {
+    content: '';
+    width: 61rem;
+    height: 61rem;
+    background: url('/assets/uiElementen/ellipseYellowDetail.svg');
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: -30rem;
+    left: -30rem;
+    z-index: -1;
+}
+
+.wrap::before {
+    content: '';
+    position: absolute;
+    width: 21rem;
+    height: 30rem;
+    background-image: url('/assets/uiElementen/stepSixCenterElement.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 15%;
+    right: -15.75vw;
+}
+
 .uploadWrap {
     display: flex;
     justify-content:center;

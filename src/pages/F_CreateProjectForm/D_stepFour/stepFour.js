@@ -84,7 +84,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
   return useObserver(() => (
     <div className={style.wrap}>
       
-      <p className={`${parentStyle.inputTitle}`}>Wil je nog dingen te weten komen?</p>
+      <p className={`${parentStyle.inputTitle} ${style.inputTitle__yellowBackground}`}>Wil je nog dingen te weten komen?</p>
       <p className={`${parentStyle.inputSubtitle} ${style.subtitle}`}>Hier kan je kiezen uit verschillende opties om een korte bevraging(en) te maken of in aanraking te komen met potentiele vrijwilligers.</p>
 
       <div className={style.boxWrapper}>

@@ -168,9 +168,9 @@
     font-family: Montserrat;
 }
 
-.multipleChoice {
+/* .multipleChoice {
 
-}
+} */
 
 .multipleChoice__list {
     width: 30%;
@@ -201,4 +201,19 @@
 
 .discussionField {
     grid-template-columns: 2fr 10fr 1fr;
+}
+
+.inputTitle__yellowBackground {
+    position: relative;
+}
+.inputTitle__yellowBackground::before {
+    content: '';
+    background-color: var(--durfYellow);
+    width: 4.4rem;
+    height: 4.4rem;
+    position: absolute;
+    left: -1rem;
+    bottom: .45rem;
+    border-radius: .5rem;
+    z-index: -1;
 }
