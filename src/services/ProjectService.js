@@ -14,6 +14,7 @@ class ProjectService {
     this.storage = firebase.storage();
   }
 
+  //Simple query to get all projects that have been approved
   getArchivedProjects = async (onChange) => {
     this.db
       .collection('projects')
@@ -29,6 +30,7 @@ class ProjectService {
       });
   };
 
+  //Query to only get the projects that have not been approved yet
   getProjects = async (onChange) => {
     this.db
       .collection('projects')
@@ -44,13 +46,17 @@ class ProjectService {
       });
   };
 
+  //Query to get all projects at once
+  //once they are fetched they're added to the store with the onChange
   getAllProjects = async (onChange) => {
     this.db
       .collection('projects')
       .withConverter(projectConverter)
       .onSnapshot(async snapshot => {
         snapshot.docChanges().forEach(async change => {
-          if (change.type === "added" || change.type === "removed") {
+          //Looking what type it is and sending it to the other function
+          //the type is used to know if we have to add/edit or delete from the store
+          if (change.type === "added" || change.type === "removed" || change.type === 'modified') {
             const projectObj = change.doc.data();
             onChange([change.type, projectObj]);
           }
@@ -58,7 +64,7 @@ class ProjectService {
       });
   };
 
-
+  //remove a project completely with the files linked to it
   removeProject = async (project) => {
 
     this.db
@@ -86,6 +92,7 @@ class ProjectService {
       });
   }
 
+  //Update any value of project 
   addToProjectArray = (projectID, array, values) => {
     let projectRef = this.db.collection("projects").doc(projectID);
     projectRef.update({
@@ -93,6 +100,7 @@ class ProjectService {
     });
   }
 
+  //get a project by id
   getProjectById = async (id) => {
     //Basic database query to get project and convert to project object
     let project = await this.db
@@ -106,6 +114,7 @@ class ProjectService {
     return project;
   }
 
+  //Begin upload process of a project, this happens with multiple functions
   uploadProject = async (data, userID) => {
     
     //Prepare a new document and get the id of it
@@ -150,6 +159,9 @@ class ProjectService {
     
   }
 
+  //Upload all images from an array to the storage & return the download urls
+  //used this type of promise because it needs to wait before uploading the project untill
+  //all images are uploaded
   uploadImages = async (images, projectID, userID) => {
     let Urls = [];
     //Loop through all images
@@ -186,6 +198,7 @@ class ProjectService {
     
   }
 
+  //uploading the given description to a file in the storage
   uploadDescription = (file, projectID, userID) => {
       //Create a reference and push the data, once its done, return the url of the file
       const storageRef = this.storage.ref();
@@ -248,6 +261,7 @@ class ProjectService {
     });
   }
 
+  //converting the description txt file to something that we can read with javascript
   convertDescriptionToData = async (url, setDescription) => {
     //Send a request to the url to get the txt file, update the file with the function once it's fetched
     try{
@@ -262,6 +276,7 @@ class ProjectService {
      catch (e) {}
   }
 
+  //simple upvote of project by pushing the user's id to it
   upvoteProject = (id, user) => {
     let projectRef = this.db.collection('projects').doc(id);
     projectRef.update({
@@ -274,6 +289,7 @@ class ProjectService {
       });
   }
 
+  //simple downvote of project by pushing the user's id to it
   downvoteProject = (id, user) => {
     let projectRef = this.db.collection('projects').doc(id);
     projectRef.update({
@@ -286,6 +302,7 @@ class ProjectService {
       });
   }
 
+  //Upload a commment to the database by pushing the data to the array
   uploadComment = (projectId, commentData) => {
     let projectRef = this.db.collection('projects').doc(projectId);
     projectRef.update({
@@ -293,7 +310,7 @@ class ProjectService {
     });
 
   }
-
+  //same as above but remove from the array
   deleteComment = (projectId, comment) => {
     console.log('test')
     let projectRef = this.db.collection('projects').doc(projectId);
@@ -301,22 +318,25 @@ class ProjectService {
       comments: this.fieldValue.arrayRemove(comment)
     })
   }
-
+  //sending a notification to share the contact details with the other person
   sendContactDetails = (ownerId) => {
     let projectRef = this.db.collection('users').doc(ownerId);
     projectRef.update({ notifications: this.fieldValue.arrayUnion({type: 'participation', title: 'Hallo, ik heb interesse om mee te werken aan dit project, u kan mij op onderstaande manieren berijken', mail: this.auth.currentUser.email}) })
   }
 
+  //update the yes-no question object on the array
   voteYesNo = (projectId, questions) => {
     let projectRef = this.db.collection('projects').doc(projectId);
     projectRef.update({ questions: questions });
   }
 
+  //update the multiplechoice question object
   voteMultiplechoice = (projectId, questionObj) => {
     let projectRef = this.db.collection('projects').doc(projectId);
     projectRef.update({ multipleChoice: questionObj });
   }
 
+  //set approval to true of the project
   approveProject = (projectId) => {
     let projectRef = this.db.collection('projects').doc(projectId);
     projectRef.update({ approved: true });

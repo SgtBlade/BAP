@@ -1,45 +1,76 @@
 .nav {
-    width: 85%;
-    display: flex;
-    padding: 2.5rem 0;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
+  max-width: 120.4rem;
+  display: flex;
+  padding: 2.5rem 0;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
 }
 
 .nav__links {
-    display: flex;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5vw;
+  align-items: center;
+  flex: auto;
+  justify-content: space-evenly;
 }
 
 .link {
-    
-    font-weight: 500;
-    font-size: 1.8rem;
-    margin: 0 2.5rem;
-    color: black;
-    cursor: pointer;
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: black;
+  cursor: pointer;
+  padding: 1rem;
 }
 
 .nav__button {
-    padding: 1rem 1.5rem;
-    background-color: rgba(196,196,196, 0.29);
-    border-radius: .5rem;
-    color: var(--durfGreen);
-    font-weight: var(--weightSemiBold);
+  padding: 1rem 1.5rem;
+  background-color: rgba(196, 196, 196, 0.29);
+  border-radius: 0.5rem;
+  color: var(--durfGreen);
+  font-weight: var(--weightSemiBold);
 }
 
-.nav__profilePicture{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 2.5rem;
-    border: none;
+.nav__profilePicture {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2.5rem;
+  border: none;
 }
 
 .active {
-    color: var(--durfGreenDarker);
+  color: var(--durfGreenDarker);
 }
 
 .activeImage > .nav__profilePicture {
-    border: .35rem solid var(--durfGreen);
+  border: 0.35rem solid var(--durfGreen);
+}
+
+@media only screen and (max-width: 1036px) {
+  .nav {
+    flex-flow: column;
+  }
+
+  .nav__links {
+    margin-left: 0;
+  }
+
+  .nav__links li {
+    margin: 2rem;
+  }
+
+  .link {
+    padding: 2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .nav__links {
+    justify-content: space-between;
+    background: var(--cardGrey);
+    flex-flow: row wrap;
+    border-bottom: 0.2rem solid var(--durfGreen);
+    padding-bottom: 2rem;
+  }
 }

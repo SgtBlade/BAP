@@ -31,6 +31,7 @@ class User {
   
   addProjectVote = (id) => { this.votes.push(id) }
 
+  //Set whole tags array at once, used for the tag quiz
   setTags = (tags) => {this.interestedTags = tags}
 
 }

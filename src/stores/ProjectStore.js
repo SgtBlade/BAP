@@ -48,23 +48,23 @@ class ProjectStore {
   
   addProject = (project) => this.projects.push((project))
 
-  removeProjectFromDB = (project) =>  {
-    this.projectService.removeProject(project);
-  }
+  removeProjectFromDB = (project) =>  { this.projectService.removeProject(project); }
 
   removeProject = (project) => this.projects.splice(this.projects.findIndex(item => item.id === project.id), 1);
 
   
-
+  //On change function that is triggered when something happens to
+  //a project in firebse (update, added, removed)
   onProjectsChange = proj => {
     const incomingProject = proj[1];
     console.log(proj[0])
     if(proj[0] === 'removed') this.removeProject(incomingProject)
-    else if(this.projects.filter(proj => proj.id !== incomingProject.id))this.addProject(incomingProject)
+    else if(proj[0] === 'modified') this.projects[this.projects.indexOf(this.projects.filter(proj => proj.id === incomingProject.id)[0])] = incomingProject;
+    else this.addProject(incomingProject)
   };
 
 
-
+  //seed in case you want tot test things
   seed = async () => {
     let test = new Project({
       allowComments: true,
@@ -121,6 +121,7 @@ class ProjectStore {
     this.initialized = true
   }
 
+  //get local project id and update the description variable
   getProjectById = async (id) => {
       const newProject = await this.projects.filter(proj => proj.id === id)[0];
       this.currentProjectDescription = 'Loading';
@@ -130,6 +131,7 @@ class ProjectStore {
       return newProject;
   }
   
+  //Project interaction functions
   upvoteProject = (id) => this.projectService.upvoteProject(id, this.rootStore.uiStore.currentUser);
 
   downvoteProject = (id) => this.projectService.downvoteProject(id, this.rootStore.uiStore.currentUser);
@@ -145,7 +147,6 @@ class ProjectStore {
   voteYesNo = (projectId, questions) => this.projectService.voteYesNo(projectId, questions)
   
   voteMultiplechoice = (projectId, questionObj) => this.projectService.voteMultiplechoice(projectId, questionObj)
-
 
 }
 

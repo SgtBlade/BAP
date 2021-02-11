@@ -16,11 +16,13 @@ const PersonalFeed = () => {
     const [activeSpotlight, setActiveSpotlight] = useState(0)
     const [firstLoad, setFirstLoad] = useState(false);
   
+    //same as on home, check if project store was initialized & fetch the projects if it is
     const getProject = async () => {
         if(projectStore.initialized){setProjects(projectStore.projects); getSpotlightProjects()}
         else setTimeout(() => {console.log('retrying to fetch the project'); getProject()}, 1200)
     }
 
+    //get the projects, use regular ones if there are no spotlighted projects available
     const getSpotlightProjects = () => {
         let projectsTmp = projectStore.getApprovedProjects(projectStore.projects)
         if(projectsTmp.length === 0) setSpotlightProjects(false)
@@ -33,14 +35,14 @@ const PersonalFeed = () => {
 
     }
 
+    //get projects in case there are none yet
   if(projects === undefined)getProject()
-
+    //filter to look for popular or recommended projects
     const filter = async ({sort = filterSort}) => {
         let projectstmp = projectStore.getProjects;
     
         switch (sort) {
             case 'Populair':
-                console.log('aaaa');
                 projectstmp = projectstmp.slice().sort((a, b) => (a.upvotes < b.upvotes) ? 1 : -1)
                 break;
 
@@ -56,6 +58,8 @@ const PersonalFeed = () => {
         setProjects([...projectstmp])
     }
 
+    //set some values on first load
+    //it wouldn't work in the usestate, we tried
     if(!firstLoad) {
         setFirstLoad(true);
         filter('Aanbevolen');

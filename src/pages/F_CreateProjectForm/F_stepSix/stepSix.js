@@ -22,7 +22,7 @@ const CreateProjectFormStepSix = ({projectData}) => {
     else {setRes(false);}}else setTimeout(() => {uploadProject()}, 1200)
   }
   
-
+  //check if it has started uploading yet
   if(!hasUploaded){uploadProject(); setHasUploaded(true)}
 
 
