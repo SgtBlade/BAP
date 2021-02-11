@@ -2,6 +2,19 @@
     min-height: 80vh;
 }
 
+.wrap::after {
+    content: '';
+    width: 22.335rem;
+    height: 32.677rem;
+    position: absolute;
+    left: -30rem;
+    bottom: -10rem;
+    border: 1rem solid var(--durfYellow);
+    border-radius: 1rem;
+    z-index: -1;
+    
+}
+
 .checkbox {
     display: flex;
     flex-flow: column;
@@ -10,4 +23,20 @@
 
 .checkbox label {
     margin-top: 1rem;
+}
+
+.quill__container{
+    position: relative;
+}
+
+.quill__container::after {
+    content: '';
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50rem;
+    background-color: var(--durfGreen);
+    position: absolute;
+    top: 0rem;
+    right: -5rem;
+    z-index: -1;
 }
