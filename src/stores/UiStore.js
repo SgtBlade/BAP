@@ -69,6 +69,9 @@ class UiStore {
     this.currentUser = await (this.userService.getUserById(id))
   }
 
+  //Get a user by his Id
+  getUserById = async (id) => {return await (this.userService.getUserById(id))}
+
   //First function of login sequence that goes to UserService.js
   verifyLogin = async (email, password) => this.userService.loginUser(email, password)
 

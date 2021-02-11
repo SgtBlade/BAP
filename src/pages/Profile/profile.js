@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
+import { Link, useParams, Redirect } from "react-router-dom";
 import style from "./profile.module.css";
 import Tag from "../../components/Tag/tag.js";
 import COLORS from "../globalStyles/colors";
@@ -8,12 +9,27 @@ import ProjectPreview from "../../components/ProjectPreview/projectPreview.js";
 //import { Switch, Route, Redirect, useHistory, Link } from "react-router-dom";
 
 const Profile = () => {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(undefined);
   const { uiStore, /*projectStore*/ } = useStores();
 
-  console.log(uiStore.currentUser);
+  const fetchUser = async () => {
+      let usr = await uiStore.getUserById(id);
+      setUser(usr)
+      console.log(usr)
+      console.log(uiStore.currentUser)
+
+  }
+
+  if(user === undefined)fetchUser();
+  
 
   return useObserver(() => (
-    <article className={style.profile}>
+    loading ?
+      <p>test</p>
+      :
+      <article className={style.profile}>
       <h1 className={`${style.profileName} ${style.hidden}`}>
         {uiStore.currentUser.surname} {uiStore.currentUser.name}
       </h1>
@@ -237,6 +253,7 @@ const Profile = () => {
         </div>
       </section>
     </article>
+    
   ));
 };
 

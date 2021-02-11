@@ -101,7 +101,7 @@ const ProjectDetail = () => {
       <div className={style.breadcrumb}>
         <p className={style.breadcrumb__content}><Link className={style.breadcrumb__content__link} to={ROUTES.discovery}>Projecten</Link> - {project.title}</p>
         <Link className={style.editProject} to={`${ROUTES.projectBewerken.to}${project.id}`}>
-          <img src='/assets/icons/edit-1.svg' className={style.editProject__image}/>
+          <img alt={'edit'} src='/assets/icons/edit-1.svg' className={style.editProject__image}/>
           Bewerk het project
         </Link>
       </div>
