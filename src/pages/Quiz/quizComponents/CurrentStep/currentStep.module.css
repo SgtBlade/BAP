@@ -1,5 +1,6 @@
 .currentQuestionTitle {
   font-weight: var(--weightSemiBold);
+  color: var(--durfBlue);
 }
 
 .stepQuestionContainer {
@@ -8,7 +9,24 @@
 }
 
 .quizStepButtons {
-  margin: 1rem 0 4rem 0;
+  margin: 1rem auto 3rem auto;
+  max-width: 96rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skipButton {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 1.5rem;
+  color: #767676;
+  cursor: pointer;
+  font-weight: var(--weightSemiBold);
+  font-size: var(--fontRegular);
+}
+
+.skipButton:hover {
+  color: var(--durfBlue);
 }

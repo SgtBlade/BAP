@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import style from "./questionOne.module.css";
+import moduleStyle from "./questionOne.module.css";
+import quizGlobalStyle from "../quizGlobalStyles/quizGlobalStyle.module.css";
+
+const style = { ...moduleStyle, ...quizGlobalStyle };
 
 const QuestionOne = ({ onReveiveButtonText, onPickedQuestionOneAnswer }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
 
   // set prev & next button text
-  const prevButtonText = "Vorige vraag - geen";
+  const prevButtonText = "";
   const nextButtonText = "Volgende vraag: Favoriete locatie";
   // pass the button text to the parent component
   onReveiveButtonText(prevButtonText, nextButtonText);

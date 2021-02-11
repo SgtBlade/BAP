@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import style from "./questionTwo.module.css";
+import moduleStyle from "./questionTwo.module.css";
+import quizGlobalStyle from "../quizGlobalStyles/quizGlobalStyle.module.css";
+
+const style = { ...moduleStyle, ...quizGlobalStyle };
 
 const QuestionTwo = ({ onReveiveButtonText, onPickedQuestionTwoAnswer }) => {
   const [selectedAnswer, setSelectedAnswer] = useState();
@@ -25,16 +28,16 @@ const QuestionTwo = ({ onReveiveButtonText, onPickedQuestionTwoAnswer }) => {
             setSelectedAnswer(1);
             questionTwoAnswer("Sociaal");
           }}
-          className={`${style.quizButton} ${style.quizButtonGrey} ${
+          className={`${style.quizButton} ${style.quizButtonRed} ${
             selectedAnswer === 1 ? style.active : ""
           }`}
         >
-          <span className={style.quizButtonText}>
+          <p className={style.quizButtonText}>
             'T Café{" "}
-            <span role="img" aria-label="bier">
+            <span className={style.buttonEmoji} role="img" aria-label="bier">
               🍻
             </span>
-          </span>
+          </p>
         </button>
         <button
           type="button"
@@ -42,15 +45,15 @@ const QuestionTwo = ({ onReveiveButtonText, onPickedQuestionTwoAnswer }) => {
             setSelectedAnswer(2);
             questionTwoAnswer(["Natuur", "Milieu"]);
           }}
-          className={`${style.quizButton} ${style.quizButtonOrange}
+          className={`${style.quizButton} ${style.quizButtonGreen}
           ${selectedAnswer === 2 ? `${style.active}` : ""}`}
         >
-          <span className={style.quizButtonText}>
+          <p className={style.quizButtonText}>
             De natuur{" "}
-            <span role="img" aria-label="boom">
+            <span className={style.buttonEmoji} role="img" aria-label="boom">
               🌳
             </span>
-          </span>
+          </p>
         </button>
         <button
           type="button"
@@ -59,15 +62,15 @@ const QuestionTwo = ({ onReveiveButtonText, onPickedQuestionTwoAnswer }) => {
 
             questionTwoAnswer(["Architectuur", "Commercieel"]);
           }}
-          className={`${style.quizButton} ${style.quizButtonGreen}
+          className={`${style.quizButton} ${style.quizButtonBlue}
           ${selectedAnswer === 3 ? `${style.active}` : ""}`}
         >
-          <span className={style.quizButtonText}>
+          <p className={style.quizButtonText}>
             De stad{" "}
-            <span role="img" aria-label="stad">
+            <span className={style.buttonEmoji} role="img" aria-label="stad">
               🏙
             </span>
-          </span>
+          </p>
         </button>
         <button
           type="button"
@@ -75,15 +78,15 @@ const QuestionTwo = ({ onReveiveButtonText, onPickedQuestionTwoAnswer }) => {
             setSelectedAnswer(4);
             questionTwoAnswer("Ontspanning");
           }}
-          className={`${style.quizButton} ${style.quizButtonRed}
+          className={`${style.quizButton} ${style.quizButtonYellow}
           ${selectedAnswer === 4 ? `${style.active}` : ""}`}
         >
-          <span className={style.quizButtonText}>
+          <p className={style.quizButtonText}>
             Thuis{" "}
-            <span role="img" aria-label="huis">
+            <span className={style.buttonEmoji} role="img" aria-label="huis">
               🏠
             </span>
-          </span>
+          </p>
         </button>
       </div>
     </div>

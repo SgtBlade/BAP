@@ -41,11 +41,8 @@ const CurrentStep = ({ onSetStep }) => {
   let nextButtonVar;
 
   const receivedButtonText = (prev, next) => {
-    console.log(`${prev} - ${next}`);
-    console.log(`prev B4: ${prevButtonVar}  - next B4: ${nextButtonVar}`);
     prevButtonVar = prev;
     nextButtonVar = next;
-    console.log(`prev now: ${prevButtonVar} - next now: ${nextButtonVar}`);
   };
 
   const swapStepComponent = currentStep => {
@@ -84,15 +81,13 @@ const CurrentStep = ({ onSetStep }) => {
     return stepComponent;
   };
 
-  //trigger update after every render
+  // trigger update after (every) render
   useEffect(() => {
     console.log("useEffect Triggered");
     updateButtonText();
   });
 
   const updateButtonText = () => {
-    console.log(`prev: ${prevButtonVar}`);
-    console.log(`next: ${nextButtonVar}`);
     setPrevButtonText(prevButtonVar);
     setNextButtonText(nextButtonVar);
   };
@@ -111,17 +106,23 @@ const CurrentStep = ({ onSetStep }) => {
       </div>
 
       <div className={style.quizStepButtons}>
-        <button
-          className={style.previousButton}
-          type="button"
-          // onSetStep passes step info to quiz component, setCurStep changes the actual step
-          onClick={() => {
-            onSetStep(curStep - 1);
-            setCurStep(curStep - 1);
-          }}
-        >
-          {`${prevButtonText}`}
-        </button>
+        {prevButtonText ? (
+          <button
+            className={style.previousButton}
+            type="button"
+            // onSetStep passes step info to quiz component, setCurStep changes the actual step
+            onClick={() => {
+              onSetStep(curStep - 1);
+              setCurStep(curStep - 1);
+            }}
+          >
+            {`${prevButtonText}`}
+          </button>
+        ) : (
+          <button className={style.skipButton} onClick={() => setCurStep(5)}>
+            Sla de vragenreeks over
+          </button>
+        )}
         <button
           type="button"
           className={style.mainButton}
