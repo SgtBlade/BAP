@@ -1,0 +1,41 @@
+.answers {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonEmoji {
+  font-size: var(--fontBig);
+}
+
+.quizButton {
+  display: flex;
+  flex: 1 1;
+  width: 20%;
+  margin: 0 2rem;
+  flex-flow: column;
+  padding: 5.5rem 2rem;
+  background: white;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 1rem;
+  border: 0 solid #d9d9d9;
+  box-shadow: var(--cardShadow);
+  background: #f6f6f6;
+  transition: all 0.3s ease;
+  justify-content: center;
+  aspect-ratio: 10/9;
+}
+
+.active {
+  transform: scale(1.05);
+}
+
+.quizButton:focus {
+  outline: 0.1rem solid #d9d9d9;
+  box-shadow: 0 0.45rem #d9d9d9, 0rem 0rem 0 0.6rem #d9d9d9;
+}
+
+.quizButton.active {
+  background: var(--durfGreen);
+}

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "../Progressbar/progressbar";
 import QuestionOne from "../../A_QuestionOne/questionOne";
 import QuestionTwo from "../../B_QuestionTwo/questionTwo";
-/*
 import QuestionThree from "../../C_QuestionThree/questionThree";
+/*
 import QuestionFour from "../../D_QuestionFour/questionFour";
 import Results from "../../E_Results/results";
 */
@@ -27,6 +27,10 @@ const pickedQuestionOneAnswers = answer => {
 };
 //Q2
 const pickedQuestionTwoAnswers = answer => {
+  console.log(answer);
+};
+//Q3
+const pickedQuestionThreeAnswers = answer => {
   console.log(answer);
 };
 
@@ -65,7 +69,12 @@ const CurrentStep = ({ onSetStep }) => {
         );
         break;
       case 3:
-        stepComponent = "QuestionThree";
+        stepComponent = (
+          <QuestionThree
+            onReveiveButtonText={receivedButtonText}
+            onPickedQuestionThreeAnswer={pickedQuestionThreeAnswers}
+          ></QuestionThree>
+        );
         break;
       case 4:
         stepComponent = "QuestionFour";
