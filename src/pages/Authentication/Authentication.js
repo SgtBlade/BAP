@@ -96,8 +96,8 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.adminpanel}>
-            {true ? 
-              true ?
+            {uiStore.currentUser ? 
+              uiStore.currentUser.role === 1 ?
               <Adminpanel/>
               :
               <Redirect to={ROUTES.home}/>
