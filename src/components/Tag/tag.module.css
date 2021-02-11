@@ -1,25 +1,25 @@
 .tag {
-    padding: 1.25rem 3.5rem;
-    background: var(--lightGrey);
-    border-radius: 50rem;
-    font-weight: var(--weightBlack);
-    font-size: 1.6rem;
-    box-shadow: var(--tagShadow);
-    display: inline-block;
-    width: auto;
+  padding: 1.25rem 3.5rem;
+  background: var(--lightGrey);
+  border-radius: 50rem;
+  font-weight: var(--weightSemiBold);
+  font-size: 1.6rem;
+  box-shadow: var(--tagShadow);
+  display: inline-block;
+  width: auto;
 }
 
 .tagContent {
-    display: flex;
-    align-items: center;
-    padding-top:.25rem
+  display: flex;
+  align-items: center;
+  padding-top: 0.25rem;
 }
 
 .tagColor {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50rem;
-    margin-right: 1rem;
-    display: inline-block;
-    background-color: black;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50rem;
+  margin-right: 1rem;
+  display: inline-block;
+  background-color: black;
 }

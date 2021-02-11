@@ -95,7 +95,10 @@ const CurrentStep = ({ onSetStep }) => {
         break;
       case 5:
         stepComponent = (
-          <Results onReveiveButtonText={receivedButtonText}></Results>
+          <Results
+            onReveiveButtonText={receivedButtonText}
+            receivedTags={selectedTags}
+          ></Results>
         );
         break;
       default:
