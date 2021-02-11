@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../../../consts";
 
 import ProgressBar from "../Progressbar/progressbar";
 import QuestionOne from "../../A_QuestionOne/questionOne";
@@ -152,17 +154,26 @@ const CurrentStep = ({ onSetStep }) => {
             Sla de vragenreeks over
           </button>
         )}
-        <button
-          type="button"
-          className={style.mainButton}
-          onClick={() => {
-            onSetStep(curStep + 1);
-            setCurStep(curStep + 1);
-            // sendAnswers("test");
-          }}
-        >
-          {`${nextButtonText}`}
-        </button>
+        {nextButtonText ? (
+          <button
+            type="button"
+            className={style.mainButton}
+            onClick={() => {
+              onSetStep(curStep + 1);
+              setCurStep(curStep + 1);
+              // sendAnswers("test");
+            }}
+          >
+            {`${nextButtonText}`}
+          </button>
+        ) : (
+          <Link
+            className={`${style.introButton} ${style.mainButton}`}
+            to={ROUTES.feed}
+          >
+            Verdergaan met geselecteerde tags
+          </Link>
+        )}
         {/* currentvraagstap */}
 
         {/* previous & next button */}

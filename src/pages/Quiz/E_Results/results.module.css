@@ -2,4 +2,5 @@
   font-size: var(--fontBig);
   font-weight: var(--weightBlack);
   text-align: center;
+  margin-bottom: 2rem;
 }
