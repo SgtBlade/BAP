@@ -39,7 +39,7 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
     <div className={style.wrap}>
 
           <label className={`${style.midsection__item}`} htmlFor={'personalIntroduction'}>
-            <p className={`${parentStyle.inputTitle}`}>Hoe moeten de mensen jou / je groep / je organisatie leren kennen?</p>
+            <p className={`${parentStyle.inputTitle} ${style.inputTitle__yellowBackground}`}>Hoe moeten de mensen jou / je groep / je organisatie leren kennen?</p>
             <p className={`${parentStyle.inputSubtitle}`}>Geef een korte uitleg over jezelf / je groep / je organisatie.</p>
             {errors.value['personalIntroduction'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['personalIntroduction'])}</p> : ''}
             
@@ -63,7 +63,6 @@ const CreateProjectFormStepThree = ({navData, errors, removeFromErrorArray, addT
               <p className={`${parentStyle.inputSubtitle}`}>Geef aan of jij de organisator bent of dit maakt onder naam van.</p>
               {errors.value['contact'] ? <p className={`${parentStyle.inputSubtitle} ${parentStyle.error}`}>{(errors.value['contact'])}</p> : ''}
 
-              <p onClick={e => {console.log(contact); console.log(projectData)}}>LOG</p>
 
               <label className={`${style.labelSmall} ${!contact ? style.active : ''}`} htmlFor={'contact'}>
                 <input

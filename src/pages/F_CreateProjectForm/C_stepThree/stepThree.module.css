@@ -3,6 +3,31 @@
     flex-flow: column;
 }
 
+.wrap::before {
+    content: '';
+    background-color: var(--durfGreen);
+    width: 18rem;
+    height: 18rem;
+    border-radius: 1rem;
+    position: absolute;
+    top: 25%;
+    bottom: 50%;
+    right: -17.5vw;
+}
+
+.wrap::after {
+    content: '';
+    width: 15rem;
+    height: 15rem;
+    border: 2rem solid var(--durfRed);
+    position: absolute;
+    left: -17.5vw;
+    bottom: -2.5vw;
+    border-radius: 50rem;
+    z-index: -1;
+
+}
+
 
 .inputWrap {
     display: flex;
@@ -47,4 +72,19 @@ input[type='radio'] {
 input[type='radio']:checked {
     background:var(--dark);
     border: .2rem solid  #C4C4C4;
+}
+
+.inputTitle__yellowBackground {
+    position: relative;
+}
+.inputTitle__yellowBackground::before {
+    content: '';
+    background-color: var(--durfYellow);
+    width: 4.4rem;
+    height: 4.4rem;
+    position: absolute;
+    left: -2rem;
+    bottom: .45rem;
+    border-radius: .5rem;
+    z-index: -1;
 }

@@ -299,7 +299,8 @@ const ProjectDetail = () => {
                                   <ul className={style.multipleChoice__response}>
                                     {multiQuestion.options.map((option, optionIndex) => {
                                       return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
-                                                <li>{Math.round((multiQuestion.answers.filter(option => option.vote === optionIndex).length/multiQuestion.answers.length)*100)}% koos voor: {option.value}</li>
+                                                  {multiQuestion.answers.length === 0 ? optionIndex === 0 ? <li>Er zijn nog geen stemmen voor deze vraag</li> : ''
+                                                  :<li>{Math.round(((multiQuestion.answers.filter(option => option.vote === optionIndex).length)/multiQuestion.answers.length)*100)}% koos voor: {option.value}</li>}
                                               </label> )
                                     })}
                                   </ul>
@@ -315,8 +316,9 @@ const ProjectDetail = () => {
                               <ul className={style.multipleChoice__response}>
                                   {multiQuestion.options.map((option, optionIndex) => {
                                     return ( <label key={`${multiQuestion.question}_Option${optionIndex}`} className={style.form__select}>
-                                              <li>{Math.round((multiQuestion.answers.filter(option => option.vote === optionIndex).length/multiQuestion.answers.length)*100)}% koos voor: {option.value}</li>
-                                            </label> )
+                                    {multiQuestion.answers.length === 0 ? optionIndex === 0 ? <li>Er zijn nog geen stemmen voor deze vraag</li> : ''
+                                    :<li>{Math.round(((multiQuestion.answers.filter(option => option.vote === optionIndex).length)/multiQuestion.answers.length)*100)}% koos voor: {option.value}</li>}
+                                    </label> )
                                   })}
                               </ul>
 

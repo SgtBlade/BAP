@@ -20,6 +20,8 @@ const CreateProjectFormStepSix = ({projectData}) => {
     let result = await uiStore.uploadProject(projectData);
     if(result.id){setRes(result);}
     else {setRes(false);}}else setTimeout(() => {uploadProject()}, 1200)
+
+    uiStore.unlockBadge('firstProjectCreation.svg')
   }
   
   //check if it has started uploading yet

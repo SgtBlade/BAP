@@ -2,12 +2,14 @@ import "firebase/firestore";
 import "firebase/auth";
 import 'firebase/storage'; 
 import User, { userConverter } from "../models/User";
+import firebaseParent from 'firebase/app'; 
 import { RESPONSE } from "../consts/responses";
 
 class UserService {
   constructor(firebase) {
     this.db = firebase.firestore();
     this.auth = firebase.auth();
+    this.fieldValue = firebaseParent.firestore.FieldValue;
     this.storage = firebase.storage();
     //Array to track amount of requests I sent to the database
     //Could be useful for further development
@@ -277,7 +279,15 @@ class UserService {
     .delete();
   }
 
+  //Simple add to array to unlock badge
+  unlockBadge = (userID, badgeUrl) => {
+    let projectRef = this.db.collection('users').doc(userID);
+    projectRef.update({
+      unlockedBadges: this.fieldValue.arrayUnion(badgeUrl)
+    });
+  }
 
+  
 }
 
 export default UserService;
