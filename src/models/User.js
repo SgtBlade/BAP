@@ -31,6 +31,8 @@ class User {
   
   addProjectVote = (id) => { this.votes.push(id) }
 
+  addBadge = (badgeUrl) => this.unlockedBadges.push(badgeUrl)
+
   //Set whole tags array at once, used for the tag quiz
   setTags = (tags) => {this.interestedTags = tags}
 

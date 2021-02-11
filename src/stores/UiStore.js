@@ -149,6 +149,17 @@ class UiStore {
   updateTags = (tags) => { if(this.currentUser){this.userService.updateTags(this.currentUser.id, tags); this.currentUser.setTags(tags)} }
 
   getAllUsers = () => {return this.userService.getAllUsers(this.onAllUsersChange)}
+
+  unlockBadge =(badgeUrl) => {
+    if(this.currentUser)
+      if(!this.currentUser.unlockedBadges.includes(badgeUrl)){
+        this.currentUser.addBadge(badgeUrl);
+        this.userService.unlockBadge(badgeUrl);
+      }
+    
+  }
+
+
 }
 
 decorate(UiStore, {
