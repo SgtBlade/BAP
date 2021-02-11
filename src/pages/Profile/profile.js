@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useStores } from "../../hooks/useStores";
 import { useObserver } from "mobx-react-lite";
-import { Link, useParams, Redirect } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import style from "./profile.module.css";
 import Tag from "../../components/Tag/tag.js";
 import COLORS from "../globalStyles/colors";
@@ -18,8 +18,10 @@ const Profile = () => {
       let usr = await uiStore.getUserById(id);
       setUser(usr)
       console.log(usr)
+      console.log(user)
       console.log(uiStore.currentUser)
 
+    setLoading(true)
   }
 
   if(user === undefined)fetchUser();
@@ -27,7 +29,10 @@ const Profile = () => {
 
   return useObserver(() => (
     loading ?
-      <p>test</p>
+      <div>
+        <p>We hebben deze gebruiker niet kunnen vinden</p>
+        <Link/>
+      </div>
       :
       <article className={style.profile}>
       <h1 className={`${style.profileName} ${style.hidden}`}>
