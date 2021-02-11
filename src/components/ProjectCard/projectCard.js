@@ -77,7 +77,7 @@ const ProjectCard = ({project}) => {
         }
         {project.deadline ?  getTime(project.deadlineDate) > 0 && !project.archived ? <p className={style.countDown}>{getTime(project.deadlineDate)} dagen resterend</p> : '' :'' }
         
-        <p className={`${style.preview} ${deadline ? style.previewMargin : ''}`}>
+        <p className={`${style.preview} ${project.deadline ? style.previewMargin : ''}`}>
           {project.previewText}
         </p>
   
