@@ -223,3 +223,48 @@
 .loadingScreen p {
     font-weight: var(--weightSemiBold);
 }
+
+
+
+@media only screen and (max-width: 1366px) {
+    .profileHeader {
+        flex-flow: column;
+        align-items: initial;
+    }
+    .profileData {
+        width: 60vw;
+        margin-bottom: 10rem;
+    }
+    .profileTags {
+        width: 85vw;
+        padding: 0;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 1240px) {
+    .profileProjects__container {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .profileData {
+        width: 100vw;
+        margin-bottom: 10rem;
+    }
+    .profileVisual {
+        right: 5rem;
+    }
+
+    .profileProjects__container {
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .profileData {
+        justify-content: center;
+        align-items: center;
+        padding-left: 1.5rem; 
+        padding-right: 1.5rem;
+    }
+}
