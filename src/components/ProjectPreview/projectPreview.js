@@ -112,8 +112,8 @@ const ProjectPreview = ({project}) => {
               </div>
               <progress
                 className={`${style.projectCard__funding__progressBar}`}
-                value="50"
-                max="100"
+                value={project.collectedMoney}
+                max={project.budget}
               />
               {project.deadline ?  getTime(project.deadlineDate) > 0 && !project.archived ? <p className={style.projectCard__time}>{getTime(project.deadlineDate)} dagen resterend</p> : '' :'' }
             </div>
