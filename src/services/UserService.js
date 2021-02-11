@@ -203,8 +203,8 @@ class UserService {
         });
   }
 
-  updateTags = (tags) => {
-    let userRef = this.db.collection('users').doc(this.auth.uid);
+  updateTags = (id, tags) => {
+    let userRef = this.db.collection('users').doc(id);
     userRef.update({ interestedTags: tags });
   }
 

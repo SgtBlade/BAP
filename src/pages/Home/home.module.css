@@ -70,7 +70,7 @@
   padding: 2rem;
   width: 100%;
   flex: 1;
-  min-width: 50rem;
+  min-width: 45rem;
   max-width: 50%;
   position: relative;
 }
@@ -144,6 +144,7 @@
 }
 
 .howTitle {
+  padding-left: 1rem;
   margin-top: 8rem;
   font-weight: var(--weightBlack);
   font-size: var(--fontUltra);
@@ -165,6 +166,8 @@
   display: flex;
   flex-wrap: wrap;
   margin: 6rem 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .howSection {
@@ -183,7 +186,7 @@
 
 .howSectionTextContainer {
   border-radius: 1rem;
-  padding: 3rem 1rem 3rem 2rem;
+  padding: 3rem 1.5rem 3rem 1.5rem;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -208,6 +211,7 @@
   margin-top: 6rem;
   margin-bottom: 4rem;
   position: relative;
+  padding: 1rem;
 }
 
 .pillarsHeader {
@@ -323,6 +327,7 @@
 }
 
 .callToAction::before {
+  max-height: 100rem;
   content: "";
   width: 35vw;
   height: 35vw;
@@ -351,4 +356,80 @@
   margin-top: 3rem;
   line-height: 1.4;
   max-width: 50ch;
+}
+
+@media only screen and (max-width: 1036px) {
+  .introTextContainer {
+    flex: none;
+    min-width: auto;
+    margin: 0 auto;
+  }
+
+  .introProjectCard {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .how,
+  .highlights,
+  .pillars {
+    padding: 1rem;
+  }
+
+  .howSections {
+    flex-flow: row wrap;
+  }
+  .howSection {
+    min-width: 25rem;
+    margin-bottom: 3rem;
+  }
+
+  .pillars {
+    margin-top: 0.5rem;
+    flex-flow: column;
+  }
+
+  .pillarsHeader {
+    margin-bottom: 2rem;
+  }
+
+  .callToAction {
+    padding: 1rem;
+    flex-flow: column-reverse;
+    align-items: center;
+  }
+
+  .callToAction::before {
+    border-width: 4rem;
+  }
+
+  .highlightsCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .pillarsSections {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2rem 2rem;
+  }
+
+  .howTitleHighlight {
+    padding: 0;
+  }
+
+  .callToAction::before {
+    border-width: 4rem;
+    width: 30rem;
+    height: 30rem;
+    left: -8rem;
+  }
+
+  .introProjectCard {
+    min-width: 100%;
+  }
 }

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-// import { useStores } from "../../hooks/useStores";
 // import { useObserver } from "mobx-react-lite";
 
 import moduleStyle from "./quiz.module.css";
 import globalStyle from "../globalStyles/main.module.css";
 
 import CurrentStep from "./quizComponents/CurrentStep/currentStep";
-
 const style = { ...moduleStyle, ...globalStyle };
 
 const Quiz = () => {
@@ -15,8 +13,8 @@ const Quiz = () => {
   const receivedStep = step => {
     // receive step from child component
     setStepNum(step);
-    console.log(step);
   };
+
 
   return (
     <div className={style.container}>

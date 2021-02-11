@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import moduleStyle from "./home.module.css";
 import globalStyle from "../globalStyles/main.module.css";
 import ProjectPreview from "../../components/ProjectPreview/projectPreview";
@@ -10,27 +10,30 @@ import { useStores } from "../../hooks/useStores";
 const style = { ...moduleStyle, ...globalStyle };
 
 const Home = () => {
-  const {uiStore, projectStore} = useStores();
-  const [spotlightProjects, setSpotlightProjects] = useState(undefined)
-  const [loading, setLoading] = useState(true)
-
+  const { uiStore, projectStore } = useStores();
+  const [spotlightProjects, setSpotlightProjects] = useState(undefined);
+  const [loading, setLoading] = useState(true);
 
   const getSpotlightProjects = () => {
-    if(projectStore.initialized){
-    let projectsTmp = projectStore.getApprovedProjects(projectStore.projects)
-    if(projectsTmp.length === 0) setSpotlightProjects(false)
-    else {
+    if (projectStore.initialized) {
+      let projectsTmp = projectStore.getApprovedProjects(projectStore.projects);
+      if (projectsTmp.length === 0) setSpotlightProjects(false);
+      else {
         let featuredProjects = projectStore.getFeaturedProjects(projectsTmp);
-        if(featuredProjects.length > 0) setSpotlightProjects(featuredProjects)
-        else setSpotlightProjects(projectsTmp)
-    }
-    setLoading(false)}
-  else setTimeout(() => {console.log('retrying to fetch the project'); getSpotlightProjects()}, 1200)
-}
+        if (featuredProjects.length > 0) setSpotlightProjects(featuredProjects);
+        else setSpotlightProjects(projectsTmp);
+      }
+      setLoading(false);
+    } else
+      setTimeout(() => {
+        console.log("retrying to fetch the project");
+        getSpotlightProjects();
+      }, 1200);
+  };
 
-if(spotlightProjects === undefined)getSpotlightProjects()
+  if (spotlightProjects === undefined) getSpotlightProjects();
 
-console.log(spotlightProjects)
+  console.log(spotlightProjects);
 
   return useObserver(() => (
     <main className={style.homeMain}>
@@ -40,7 +43,7 @@ console.log(spotlightProjects)
       >
         <div className={style.introTextContainer}>
           <div className={style.introText}>
-            <h2 className={`${style.title} ${style.introTitle}`}>
+            <h2 className={`${style.introTitle}`}>
               Voor de{" "}
               <span className={style.introTitleHighlight}>durvers.</span>
             </h2>
@@ -52,19 +55,45 @@ console.log(spotlightProjects)
             </p>
           </div>
           <div className={style.introButtonContainer}>
-            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.feed}>
+            <Link
+              className={`${style.introButton} ${style.mainButton}`}
+              to={ROUTES.feed}
+            >
               Bekijk de projecten
             </Link>
-            {uiStore.currentUser ?
-            <Link className={`${style.introButton} ${style.altButton}`} to={ROUTES.startproject}> Heb jij een idee? </Link>
-            :
-            <Link className={`${style.introButton} ${style.altButton}`} to={ROUTES.login}> Heb jij een idee? </Link>
-            }
-            
+            {uiStore.currentUser ? (
+              <Link
+                className={`${style.introButton} ${style.altButton}`}
+                to={ROUTES.startproject}
+              >
+                {" "}
+                Heb jij een idee?{" "}
+              </Link>
+            ) : (
+              <Link
+                className={`${style.introButton} ${style.altButton}`}
+                to={ROUTES.login}
+              >
+                {" "}
+                Heb jij een idee?{" "}
+              </Link>
+            )}
           </div>
         </div>
         <div className={`${style.introProjectCard}`}>
-          {!loading ? spotlightProjects ? spotlightProjects[0] ? <ProjectPreview project={spotlightProjects[0]}/> : '' : '' : '' }
+          {!loading ? (
+            spotlightProjects ? (
+              spotlightProjects[0] ? (
+                <ProjectPreview project={spotlightProjects[0]} />
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
         </div>
       </section>
 
@@ -156,13 +185,52 @@ console.log(spotlightProjects)
         <div className={style.highlightsCards}>
           {/* Hier komen 3 projecten */}
           <div className={style.highlightsCardBig}>
-          {!loading ? spotlightProjects ? spotlightProjects[0] ? <ProjectPreview project={spotlightProjects[0]}/> : '' : '' : '' }
-            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.discovery}>
+            {!loading ? (
+              spotlightProjects ? (
+                spotlightProjects[0] ? (
+                  <ProjectPreview project={spotlightProjects[0]} />
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
+            <Link
+              className={`${style.introButton} ${style.mainButton}`}
+              to={ROUTES.discovery}
+            >
               Toon alle projecten
             </Link>
           </div>
-          {!loading ? spotlightProjects ? spotlightProjects[1] ? <ProjectPreview project={spotlightProjects[1]}/> : '' : '' : ''}
-          {!loading ? spotlightProjects ? spotlightProjects[2] ? <ProjectPreview project={spotlightProjects[2]}/> : '' : '' : ''}
+          {!loading ? (
+            spotlightProjects ? (
+              spotlightProjects[1] ? (
+                <ProjectPreview project={spotlightProjects[1]} />
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
+          {!loading ? (
+            spotlightProjects ? (
+              spotlightProjects[2] ? (
+                <ProjectPreview project={spotlightProjects[2]} />
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
         </div>
       </section>
       <section
@@ -253,12 +321,23 @@ console.log(spotlightProjects)
             voordelen van het DURF platform en ondersteuning!
           </p>
 
-          {uiStore.currentUser ?
-            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.startproject}> Ik heb een project! </Link>
-            :
-            <Link className={`${style.introButton} ${style.mainButton}`} to={ROUTES.login}> Ik heb een project! </Link>
-            }
-          
+          {uiStore.currentUser ? (
+            <Link
+              className={`${style.introButton} ${style.mainButton}`}
+              to={ROUTES.startproject}
+            >
+              {" "}
+              Ik heb een project!{" "}
+            </Link>
+          ) : (
+            <Link
+              className={`${style.introButton} ${style.mainButton}`}
+              to={ROUTES.login}
+            >
+              {" "}
+              Ik heb een project!{" "}
+            </Link>
+          )}
         </div>
         <img
           src="assets/images/project.svg"

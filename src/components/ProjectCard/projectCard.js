@@ -9,7 +9,7 @@ import { useStores } from "../../hooks/useStores";
 const ProjectCard = ({project}) => {
   const {uiStore, projectStore} = useStores();
   const [upvotes, setUpvotes] = useState(project.upvotes.length)
-  let currentuserId = uiStore.currentUser.id ?? '';
+  let currentuserId = uiStore.currentUser ? uiStore.currentUser ?? '' : '';
   const [voted, setVoted] = useState(project.upvotes.includes(currentuserId) || project.downvotes.includes(currentuserId) ? true : false);
   
 

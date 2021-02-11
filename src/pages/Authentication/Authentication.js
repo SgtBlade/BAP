@@ -28,6 +28,8 @@ const Authentication = () => {
       <Nav />
       <div>
         <Switch>
+
+
           <Route exact path={ROUTES.projecten}></Route>
 
           <Route exact path={ROUTES.overons}>
@@ -44,7 +46,7 @@ const Authentication = () => {
           
 
           <Route exact path={ROUTES.startproject}>
-            {true ? 
+            {uiStore.currentUser ? 
             <CreateProjectForm />
             :
             <Redirect to={ROUTES.discovery}/>
@@ -56,8 +58,11 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.registreer}>
-            {uiStore.currentUser ? 
-              <Redirect to={ROUTES.discovery}/>
+            {uiStore.currentUser ?
+               uiStore.currentUser.interestedTags.length === 0?
+               <Redirect to={ROUTES.quiz}/>
+                :
+                <Redirect to={ROUTES.discovery}/>
               :
               <RegisterForm />
             }
@@ -92,7 +97,10 @@ const Authentication = () => {
           </Route>
 
           <Route exact path={ROUTES.quiz}>
-            <Quiz />
+            {uiStore.currentUser ?
+              <Quiz />
+              :
+              ''}
           </Route>
 
           <Route exact path={ROUTES.adminpanel}>

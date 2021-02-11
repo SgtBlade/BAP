@@ -8,7 +8,7 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.firebase = rootStore.firebase;
-    this.currentUser = false//this.seed();
+    this.currentUser = false;
     this.verifiedUser = false;
     this.isLoading = false;
     this.authService = new AuthService( this.rootStore.firebase, this.onAuthStateChanged);
@@ -119,7 +119,7 @@ class UiStore {
     });
     //reset to initial state
     this.verifiedUser = false;
-    this.currentUser = undefined;
+    this.currentUser = false;
   }
 
   //log amount of requests sent to server
@@ -142,6 +142,10 @@ class UiStore {
     if(usr[0] === 'removed') this.removeUser(incomingUser)
     else if(this.allUsers.filter(usr => usr.id !== incomingUser.id))this.addUser(incomingUser)
   };
+
+  updateTags = (tags) => {
+    if(this.currentUser){this.userService.updateTags(this.currentUser.id, tags); this.currentUser.setTags(tags)}
+  }
 
   getAllUsers = () => {return this.userService.getAllUsers(this.onAllUsersChange)}
 }

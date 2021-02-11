@@ -253,7 +253,7 @@ const CreateProjectFormStepFour = ({removeFromErrorArray, addToErrorArray, error
             return (<div className={style.requirementsField} key={`requirements_${index}`}>
 
                         <label className={`${style.midsection__item}`} htmlFor={`reqName${index}`}>
-                                <p className={`${parentStyle.inputSubtitle}`}>Naam:</p>
+                                <p className={`${parentStyle.inputSubtitle}`}>Beschrijving:</p>
                                 <input min={1}
                                 onChange={e => updateRequirements(e.currentTarget.value, index)}
                                 className={`${parentStyle.input}`} 
