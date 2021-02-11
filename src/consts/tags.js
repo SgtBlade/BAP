@@ -2,11 +2,12 @@
 const TAGS = {
   Gemeenschap_Groepen: {
     Color: "#230E7D",
-    Vrienden: "Vriendengroep/vrienden",
+    Vrienden: "Vrienden",
     Familie: "Familie",
     Gezin: "Gezin",
     Koppel: "Koppel",
     Sociaal: "Sociaal",
+    Kind: "Kind",
   },
   Diversiteit: {
     Color: "#F4812E",
@@ -25,7 +26,6 @@ const TAGS = {
     Muziek: "Muziek",
     Sport: "Sport",
     Actief: "Actief",
-    Kind: "Kind",
   },
 
   Milieu__welzijn: {
@@ -44,6 +44,7 @@ const TAGS = {
     Fotografie: "Fotografie",
     Mode: "Mode",
     Literatuur: "Literatuur",
+    Kunst: "Kunst",
   },
 
   Consumeren: {
